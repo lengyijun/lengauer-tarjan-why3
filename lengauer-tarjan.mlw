@@ -60,10 +60,8 @@ theory Graph
   let rec ghost dfs1 (roots : FS.fset vertex) (mp : fmap vertex int) (sn : int) : (fmap vertex int, int) = 
     requires{FS.subset roots vertices}
     requires{FS.subset mp.domain vertices}
-    requires{size mp <= FS.cardinal vertices}
     requires{forall x. mem x mp -> find x mp < sn}
     requires{forall x y. x <> y -> mem x mp -> mem y mp -> find x mp <> find y mp }
-    returns{(mp1, _) -> FS.cardinal vertices >= size mp1 >= size mp}
     returns{(mp1, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
     returns{(mp1, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
     returns{(mp1, _) -> FS.subset mp.domain mp1.domain}
