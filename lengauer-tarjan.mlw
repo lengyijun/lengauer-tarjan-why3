@@ -1,0 +1,50 @@
+theory Graph
+
+  use export list.List
+  use export list.Append
+  use export list.Length
+  use export int.Int
+  use export set.Fset
+
+  (* the graph is defined by a set of vertices and a set of edges *)
+  type vertex
+  constant vertices: fset vertex
+  constant edges: fset (vertex, vertex)
+
+  predicate edge (x y: vertex) = mem (x,y) edges
+
+  (* edges are well-formed *)
+  axiom edges_def:
+    forall x y: vertex.
+    mem (x, y) edges -> mem x vertices /\ mem y vertices
+
+  (** direct predecessors *)
+  function preds vertex: fset vertex
+
+  axiom preds_def: forall v:vertex. forall u:vertex.
+   mem (u,v) edges <-> mem u (preds v)
+
+  (** direct successors *)
+  function succs vertex: fset vertex
+
+  axiom succs_def: forall v:vertex. forall u:vertex.
+   mem (u,v) edges <-> mem v (succs u)
+
+  val constant root: vertex
+    ensures { mem result vertices }
+
+  (* paths *)
+  clone export graph.Path
+     with type vertex = vertex, predicate edge = edge
+
+  lemma path_in_vertices:
+    forall v1 v2: vertex, l: list vertex.
+    mem v1 vertices -> path v1 l v2 -> mem v2 vertices
+
+  predicate (-*->) (x y : vertex) = exists l. path x l y
+
+  predicate (-+->) (x y : vertex) = x -*-> y /\ x <> y
+
+  lemma jiting : forall x. x -*-> x
+
+end
