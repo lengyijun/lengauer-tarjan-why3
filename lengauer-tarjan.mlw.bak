@@ -1,8 +1,3 @@
-(*
-reference: 
-  the tiger book(ml) 19.2
-
-*)
 theory Graph
 
   use export list.List
@@ -83,9 +78,9 @@ theory Graph
         dfs1 roots' mp' sn'
 
     
-  let ghost dfsnum () : (fmap vertex int) 
+  let ghost dfs2 () : (fmap vertex int) 
     ensures{find root result = 0} 
-    ensures{FS.subset result.domain vertices}
+    ensures{subset result.domain vertices}
     ensures{forall x y. x <> y -> mem x result -> mem y result -> find x result <> find y result }
     = 
     let (mp , _ ) = dfs1 (succs root) (empty[root <- 0]) 1 in

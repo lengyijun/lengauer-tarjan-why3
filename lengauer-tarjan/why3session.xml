@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.5.2" timelimit="100" steplimit="0" memlimit="10000"/>
+<prover id="1" name="Alt-Ergo" version="2.4.0" alternative="FPA" timelimit="100" steplimit="0" memlimit="10000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="lengauer-tarjan.mlw"/>
+<theory name="Graph" proved="true">
+ <goal name="root&#39;vc" expl="VC for root" proved="true">
+ <proof prover="0"><result status="valid" time="0.019705" steps="1"/></proof>
+ </goal>
+ <goal name="path_in_vertices" proved="true">
+ <proof prover="0"><result status="valid" time="0.037955" steps="83"/></proof>
+ </goal>
+ <goal name="dfs1&#39;vc" expl="VC for dfs1" proved="true">
+ <transf name="split_goal_right" proved="true" >
+  <goal name="dfs1&#39;vc.0" expl="variant decrease" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.037775" steps="57"/></proof>
+  <proof prover="1"><result status="valid" time="0.028884" steps="56"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.1" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.034307" steps="99"/></proof>
+  <proof prover="1"><result status="valid" time="0.071233" steps="95"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.2" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.045932" steps="69"/></proof>
+  <proof prover="1"><result status="valid" time="0.035990" steps="67"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.3" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.027468" steps="29"/></proof>
+  <proof prover="1"><result status="valid" time="0.046801" steps="29"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.4" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.046422" steps="153"/></proof>
+  <proof prover="1"><result status="valid" time="0.052185" steps="184"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.5" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.120125" steps="344"/></proof>
+  <proof prover="1"><result status="valid" time="0.138584" steps="496"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.6" expl="variant decrease" proved="true">
+  <proof prover="0"><result status="valid" time="0.036232" steps="86"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.047827" steps="92"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.7" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.020942" steps="38"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.033894" steps="37"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.8" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.017020" steps="20"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.031280" steps="20"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.9" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.026924" steps="20"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.032264" steps="20"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.10" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="100.000000" steps="698476"/></proof>
+  <transf name="introduce_premises" proved="true" >
+   <goal name="dfs1&#39;vc.10.0" expl="precondition" proved="true">
+   <proof prover="0"><result status="valid" time="0.039535" steps="32"/></proof>
+   <proof prover="1" obsolete="true"><result status="timeout" time="100.000000" steps="426282"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="dfs1&#39;vc.11" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.043600" steps="50"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.037202" steps="48"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.12" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.087321" steps="224"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.068368" steps="137"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.13" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.073196" steps="151"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.047314" steps="155"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.14" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.042883" steps="131"/></proof>
+  <proof prover="1" obsolete="true"><result status="timeout" time="100.000000" steps="496350"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.15" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.134654" steps="628"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.214212" steps="663"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.16" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.026553" steps="62"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.030924" steps="55"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.17" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="26.666878" steps="182998"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.18" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.034188" steps="79"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.042259" steps="78"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="dfs2&#39;vc" expl="VC for dfs2" proved="true">
+ <proof prover="0"><result status="valid" time="0.062906" steps="812"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>
