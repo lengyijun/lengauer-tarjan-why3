@@ -4,90 +4,163 @@
 <why3session shape_version="6">
 <prover id="0" name="Alt-Ergo" version="2.5.2" timelimit="100" steplimit="0" memlimit="10000"/>
 <prover id="1" name="Alt-Ergo" version="2.4.0" alternative="FPA" timelimit="100" steplimit="0" memlimit="10000"/>
-<prover id="2" name="CVC5" version="1.0.8" timelimit="100" steplimit="0" memlimit="10000"/>
-<file format="whyml" proved="true">
+<file format="whyml">
 <path name=".."/><path name="lengauer-tarjan.mlw"/>
-<theory name="Graph" proved="true">
+<theory name="Graph">
  <goal name="root&#39;vc" expl="VC for root" proved="true">
  <proof prover="0"><result status="valid" time="0.019705" steps="1"/></proof>
  </goal>
  <goal name="path_in_vertices" proved="true">
- <proof prover="0"><result status="valid" time="0.037955" steps="83"/></proof>
+ <proof prover="0"><result status="valid" time="0.037955" steps="82"/></proof>
  </goal>
  <goal name="dfs1&#39;vc" expl="VC for dfs1" proved="true">
  <transf name="split_goal_right" proved="true" >
-  <goal name="dfs1&#39;vc.0" expl="variant decrease" proved="true">
-  <proof prover="0"><result status="valid" time="0.037775" steps="66"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.028884" steps="56"/></proof>
+  <goal name="dfs1&#39;vc.0" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.021784" steps="4"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.034307" steps="83"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.071233" steps="95"/></proof>
+  <goal name="dfs1&#39;vc.1" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.013087" steps="14"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.045932" steps="61"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.035990" steps="67"/></proof>
+  <goal name="dfs1&#39;vc.2" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.022703" steps="4"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.046422" steps="130"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.052185" steps="184"/></proof>
+  <goal name="dfs1&#39;vc.3" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.022757" steps="20"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.120125" steps="327"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.138584" steps="496"/></proof>
+  <goal name="dfs1&#39;vc.4" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.022931" steps="26"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.5" expl="variant decrease" proved="true">
-  <proof prover="0"><result status="valid" time="0.036232" steps="93"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.047827" steps="92"/></proof>
+  <goal name="dfs1&#39;vc.5" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.020452" steps="2"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.020942" steps="32"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.033894" steps="37"/></proof>
+  <goal name="dfs1&#39;vc.6" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.026564" steps="4"/></proof>
   </goal>
   <goal name="dfs1&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.017020" steps="18"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.031280" steps="20"/></proof>
+  <proof prover="0"><result status="valid" time="0.043600" steps="2"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="100.000000" steps="698476"/></proof>
+  <goal name="dfs1&#39;vc.8" expl="variant decrease" proved="true">
+  <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.028884" steps="56"/></proof>
   <transf name="introduce_premises" proved="true" >
-   <goal name="dfs1&#39;vc.8.0" expl="precondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.039535" steps="26"/></proof>
-   <proof prover="1" obsolete="true"><result status="timeout" time="100.000000" steps="426282"/></proof>
+   <goal name="dfs1&#39;vc.8.0" expl="variant decrease" proved="true">
+   <transf name="subst" proved="true" arg1="mp">
+    <goal name="dfs1&#39;vc.8.0.0" expl="variant decrease" proved="true">
+    <transf name="subst" proved="true" arg1="sn">
+     <goal name="dfs1&#39;vc.8.0.0.0" expl="variant decrease" proved="true">
+     <proof prover="0"><result status="valid" time="0.060573" steps="149"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
   <goal name="dfs1&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.043600" steps="44"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.037202" steps="48"/></proof>
+  <proof prover="0"><result status="valid" time="0.016187" steps="42"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.10" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.073196" steps="126"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.047314" steps="155"/></proof>
+  <goal name="dfs1&#39;vc.10" expl="precondition" proved="true">
+  <proof prover="0" obsolete="true"><undone/></proof>
+  <transf name="introduce_premises" proved="true" >
+   <goal name="dfs1&#39;vc.10.0" expl="precondition" proved="true">
+   <transf name="subst" proved="true" arg1="sn">
+    <goal name="dfs1&#39;vc.10.0.0" expl="precondition" proved="true">
+    <transf name="subst" proved="true" arg1="o1">
+     <goal name="dfs1&#39;vc.10.0.0.0" expl="precondition" proved="true">
+     <transf name="subst" proved="true" arg1="mp">
+      <goal name="dfs1&#39;vc.10.0.0.0.0" expl="precondition" proved="true">
+      <proof prover="0"><result status="valid" time="0.039428" steps="130"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
-  <goal name="dfs1&#39;vc.11" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.042883" steps="107"/></proof>
-  <proof prover="1" obsolete="true"><result status="timeout" time="100.000000" steps="496350"/></proof>
+  <goal name="dfs1&#39;vc.11" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.113029" steps="424"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.12" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.134654" steps="556"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.214212" steps="663"/></proof>
+  <goal name="dfs1&#39;vc.12" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.148790" steps="923"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.13" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.026553" steps="50"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.030924" steps="55"/></proof>
+  <goal name="dfs1&#39;vc.13" expl="loop variant decrease" proved="true">
+  <proof prover="0"><result status="valid" time="0.033512" steps="65"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.14" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.376350" steps="40153"/></proof>
+  <goal name="dfs1&#39;vc.14" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.038759" steps="64"/></proof>
   </goal>
-  <goal name="dfs1&#39;vc.15" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.034188" steps="58"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.042259" steps="78"/></proof>
+  <goal name="dfs1&#39;vc.15" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.064333" steps="373"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.16" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.020672" steps="48"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.17" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.032407" steps="72"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.18" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.030111" steps="78"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.19" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.095957" steps="660"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.20" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.016771" steps="48"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.21" expl="loop variant decrease" proved="true">
+  <proof prover="0"><result status="valid" time="0.037759" steps="41"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.22" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.044985" steps="40"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.23" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.020834" steps="32"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.24" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.023568" steps="32"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.25" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.027445" steps="46"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.26" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.027793" steps="52"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.27" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.021125" steps="50"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.28" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.022457" steps="32"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.29" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.034208" steps="40"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.30" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.020158" steps="38"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.31" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.016683" steps="14"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.32" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.033833" steps="14"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.33" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.038108" steps="40"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.34" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.020085" steps="14"/></proof>
+  </goal>
+  <goal name="dfs1&#39;vc.35" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.021736" steps="14"/></proof>
   </goal>
  </transf>
  </goal>
- <goal name="dfsnum&#39;vc" expl="VC for dfsnum" proved="true">
- <proof prover="0"><result status="valid" time="0.062906" steps="694"/></proof>
+ <goal name="dfs2&#39;vc" expl="VC for dfs2" proved="true">
+ <proof prover="0"><result status="valid" time="0.134822" steps="447"/></proof>
+ </goal>
+ <goal name="dfsnum_property">
+ <proof prover="0"><undone/></proof>
  </goal>
 </theory>
 </file>

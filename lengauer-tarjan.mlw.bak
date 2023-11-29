@@ -1,3 +1,8 @@
+(*
+reference: 
+  the tiger book(ml) 19.2
+
+*)
 theory Graph
 
   use export list.List
@@ -6,12 +11,16 @@ theory Graph
   use export int.Int
   use set.Fset as FS
   use export fmap.Fmap
+  use ref.Ref
+
 
 
   (* the graph is defined by a set of vertices and a set of edges *)
   type vertex
 
-  constant vertices: FS.fset vertex
+  clone set.SetImp as VS with type elt = vertex
+
+  constant vertices: VS.set
   constant edges: FS.fset (vertex, vertex)
 
   predicate edge (x y: vertex) = FS.mem (x,y) edges
@@ -21,17 +30,17 @@ theory Graph
     forall x y: vertex.
     FS.mem (x, y) edges -> FS.mem x vertices /\ FS.mem y vertices
 
+
   (** direct predecessors *)
-  function preds vertex: FS.fset vertex
+  function preds vertex: VS.set
 
   axiom preds_def: forall v:vertex. forall u:vertex.
    FS.mem (u,v) edges <-> FS.mem u (preds v)
 
   (** direct successors *)
-  function succs vertex: FS.fset vertex
-
-  axiom succs_def: forall v:vertex. forall u:vertex.
-   FS.mem (u,v) edges <-> FS.mem v (succs u)
+  val succs (u : vertex): VS.set
+    ensures {FS.subset result vertices}
+    ensures { forall v:vertex. FS.mem (u,v) edges <-> FS.mem v result }
 
   val constant root: vertex
     ensures { FS.mem result vertices }
@@ -44,21 +53,65 @@ theory Graph
     forall v1 v2: vertex, l: list vertex.
     FS.mem v1 vertices -> path v1 l v2 -> FS.mem v2 vertices
 
-  predicate (-*->) (x y : vertex) = exists l. path x l y
 
-  predicate (-+->) (x y : vertex) = x -*-> y /\ x <> y
+  val constant addd (k : vertex) (v : int) (mp : fmap vertex int): fmap vertex int
+    ensures{ result = add k v mp}
+
+  val mmem (k : vertex) (mp : fmap vertex int) : bool
+    ensures {result <-> mem k mp}
+
+  let rec dfs1 (roots : VS.set) (mp : ref (fmap vertex int)) (sn : ref int) = 
+    requires{FS.subset roots vertices}
+    requires{FS.subset !mp.domain vertices}
+    requires{forall x. mem x (!mp) -> find x (!mp) < !sn}
+    requires{forall x y. x <> y -> mem x !mp -> mem y !mp -> find x !mp <> find y !mp }
+    (*
+    ensures{ forall x y. x <> y -> mem x !mp -> mem y !mp -> find x !mp <> find y !mp }
+    ensures{ forall x. mem x !mp -> find x !mp < !sn}
+    ensures{ FS.subset (old !mp).domain (!mp).domain}
+    ensures{ FS.subset (!mp).domain vertices}
+    ensures{ forall x. mem x (old !mp) -> find x (old !mp) = find x !mp}
+    ensures{ !sn >= (old !sn)}
+    *)
+    variant{VS.cardinal vertices - size !mp}
+    while not VS.is_empty roots do
+      variant { VS.cardinal roots }
+      let x = VS.choose_and_remove roots in 
+        if not mmem x !mp then begin
+          mp := addd x !sn !mp;
+          sn := !sn + 1;
+          dfs1 (succs x) mp sn;
+        end
+    done
+
+  val constant create : (fmap vertex int)
+    ensures {result = empty }
+
+
+  let function dfs2() : fmap vertex int = let mmp = addd root 0 create in let sn = (ref 1) in let _ =  dfs1 (succs root) (ref mmp) sn in mmp 
+ 
+  constant dfsnum : fmap vertex int = dfs2()
+
+  lemma dfsnum_property : 
+    find root dfsnum = 0  /\
+    FS.subset dfsnum.domain vertices /\
+    forall x y. x <> y -> mem x dfsnum -> mem y dfsnum -> find x dfsnum <> find y dfsnum
+
+
+    
+    
+  predicate (-*->) (x y : vertex) = find x dfsnum <= find y dfsnum
+
+  predicate (-+->) (x y : vertex) = find x dfsnum < find y dfsnum
+
+
+end
 
 (*
-  lemma jiting : forall x. x -*-> x
-*)
-
-  let rec ghost dfs1 (roots : FS.fset vertex) (mp : fmap vertex int) (sn : int) : (fmap vertex int, int) = 
     requires{FS.subset roots vertices}
     requires{FS.subset mp.domain vertices}
-    requires{size mp <= FS.cardinal vertices}
     requires{forall x. mem x mp -> find x mp < sn}
     requires{forall x y. x <> y -> mem x mp -> mem y mp -> find x mp <> find y mp }
-    returns{(mp1, _) -> FS.cardinal vertices >= size mp1 >= size mp}
     returns{(mp1, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
     returns{(mp1, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
     returns{(mp1, _) -> FS.subset mp.domain mp1.domain}
@@ -66,24 +119,4 @@ theory Graph
     returns{(mp1, _) -> forall x. mem x mp -> find x mp = find x mp1}
     returns{(_, sn1) -> sn1 >= sn}
     variant{FS.cardinal vertices - size mp}
-    if FS.is_empty roots then
-      (mp, sn)
-    else
-      let x = FS.pick roots in
-      if mem x mp then
-        (mp, sn)
-      else
-        let roots' = FS.remove x roots in
-        let (mp', sn') = dfs1 (succs x) mp[x<-sn] (sn + 1) in
-        dfs1 roots' mp' sn'
-
-    
-  let ghost dfs2 () : (fmap vertex int) 
-    ensures{find root result = 0} 
-    ensures{subset result.domain vertices}
-    ensures{forall x y. x <> y -> mem x result -> mem y result -> find x result <> find y result }
-    = 
-    let (mp , _ ) = dfs1 (succs root) (empty[root <- 0]) 1 in
-    mp
-
-end
+*)
