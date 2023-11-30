@@ -9,7 +9,6 @@ theory Graph
   use export list.Append
   use export list.Length
   use export int.Int
-  use set.Fset as FS
   use export fmap.Fmap
   use ref.Ref
 
@@ -18,32 +17,34 @@ theory Graph
   (* the graph is defined by a set of vertices and a set of edges *)
   type vertex
 
-  clone set.SetImp as VS with type elt = vertex
 
-  constant vertices: VS.set
-  constant edges: FS.fset (vertex, vertex)
+  clone set.SetApp as SV with type elt = vertex
+  clone set.SetApp as SE with type elt = (vertex, vertex)
 
-  predicate edge (x y: vertex) = FS.mem (x,y) edges
+  constant vertices: SV.set
+  constant edges: SE.set
+
+  predicate edge (x y: vertex) = SE.mem (x,y) edges
 
   (* edges are well-formed *)
   axiom edges_def:
     forall x y: vertex.
-    FS.mem (x, y) edges -> FS.mem x vertices /\ FS.mem y vertices
+    SE.mem (x, y) edges -> SV.mem x vertices /\ SV.mem y vertices
 
 
   (** direct predecessors *)
-  function preds vertex: VS.set
+  function preds vertex: SV.fset vertex
 
   axiom preds_def: forall v:vertex. forall u:vertex.
-   FS.mem (u,v) edges <-> FS.mem u (preds v)
+   SE.mem (u,v) edges <-> SV.mem u (preds v)
 
   (** direct successors *)
-  val succs (u : vertex): VS.set
-    ensures {FS.subset result vertices}
-    ensures { forall v:vertex. FS.mem (u,v) edges <-> FS.mem v result }
+  val function succs (u : vertex): SV.set
+    ensures {SE.subset result vertices}
+    ensures { forall v:vertex. SE.mem (u,v) edges <-> SV.mem v result }
 
   val constant root: vertex
-    ensures { FS.mem result vertices }
+    ensures { SV.mem result vertices }
 
   (* paths *)
   clone export graph.Path
@@ -51,7 +52,7 @@ theory Graph
 
   lemma path_in_vertices:
     forall v1 v2: vertex, l: list vertex.
-    FS.mem v1 vertices -> path v1 l v2 -> FS.mem v2 vertices
+    SV.mem v1 vertices -> path v1 l v2 -> SV.mem v2 vertices
 
 
   val constant addd (k : vertex) (v : int) (mp : fmap vertex int): fmap vertex int
@@ -59,47 +60,41 @@ theory Graph
 
   val mmem (k : vertex) (mp : fmap vertex int) : bool
     ensures {result <-> mem k mp}
-
-  let rec dfs1 (roots : VS.set) (mp : ref (fmap vertex int)) (sn : ref int) = 
-    requires{FS.subset roots vertices}
-    requires{FS.subset !mp.domain vertices}
-    requires{forall x. mem x (!mp) -> find x (!mp) < !sn}
-    requires{forall x y. x <> y -> mem x !mp -> mem y !mp -> find x !mp <> find y !mp }
-    (*
-    ensures{ forall x y. x <> y -> mem x !mp -> mem y !mp -> find x !mp <> find y !mp }
-    ensures{ forall x. mem x !mp -> find x !mp < !sn}
-    ensures{ FS.subset (old !mp).domain (!mp).domain}
-    ensures{ FS.subset (!mp).domain vertices}
-    ensures{ forall x. mem x (old !mp) -> find x (old !mp) = find x !mp}
-    ensures{ !sn >= (old !sn)}
-    *)
-    variant{VS.cardinal vertices - size !mp}
-    while not VS.is_empty roots do
-      variant { VS.cardinal roots }
-      let x = VS.choose_and_remove roots in 
-        if not mmem x !mp then begin
-          mp := addd x !sn !mp;
-          sn := !sn + 1;
-          dfs1 (succs x) mp sn;
-        end
-    done
+  
+     
+  let rec constant dfs1 (roots : SV.set) (mp : (fmap vertex int)) (sn : int) : (fmap vertex int, int) = 
+    variant{SV.cardinal vertices - size mp}
+    if not SV.is_empty roots then
+      (mp , sn)
+    else
+      let x = SV.choose roots in 
+        if mmem x mp then 
+          (mp, sn)
+        else
+        let mp' = addd x sn mp in
+        let sn' = sn + 1 in
+        let (mp'', sn'') = dfs1 (succs x) mp' sn' in
+        let roots' = SV.remove x roots in
+        dfs1 roots' mp'' sn''
+        
 
   val constant create : (fmap vertex int)
     ensures {result = empty }
 
-
-  let function dfs2() : fmap vertex int = let mmp = addd root 0 create in let sn = (ref 1) in let _ =  dfs1 (succs root) (ref mmp) sn in mmp 
  
-  constant dfsnum : fmap vertex int = dfs2()
+ (*
+  let constant dfsnum : fmap vertex int = let mmp = addd root 0 create in let sn = 1 in let _ =  dfs1 (succs root)  mmp sn in mmp 
+*)
 
+  val constant dfsnum_N : (fmap vertex int , int)
+    ensures { result =  let mmp = addd root 0 create in  dfs1 (succs root)  mmp 1 }
+  
   lemma dfsnum_property : 
+  let (dfsnum, _ ) = dfsnum_N in 
     find root dfsnum = 0  /\
-    FS.subset dfsnum.domain vertices /\
+    SE.subset dfsnum.domain vertices /\
     forall x y. x <> y -> mem x dfsnum -> mem y dfsnum -> find x dfsnum <> find y dfsnum
 
-
-    
-    
   predicate (-*->) (x y : vertex) = find x dfsnum <= find y dfsnum
 
   predicate (-+->) (x y : vertex) = find x dfsnum < find y dfsnum
