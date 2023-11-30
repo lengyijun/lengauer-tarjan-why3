@@ -21,7 +21,7 @@ theory Graph
   clone set.SetApp as SV with type elt = vertex
   clone set.SetApp as SE with type elt = (vertex, vertex)
 
-  constant vertices: SV.set
+  val constant vertices: SV.set
   constant edges: SE.set
 
   predicate edge (x y: vertex) = SE.mem (x,y) edges
@@ -39,7 +39,7 @@ theory Graph
    SE.mem (u,v) edges <-> SV.mem u (preds v)
 
   (** direct successors *)
-  val function succs (u : vertex): SV.set
+  val constant succs (u : vertex): SV.set
     ensures {SE.subset result vertices}
     ensures { forall v:vertex. SE.mem (u,v) edges <-> SV.mem v result }
 
@@ -58,9 +58,15 @@ theory Graph
   val constant addd (k : vertex) (v : int) (mp : fmap vertex int): fmap vertex int
     ensures{ result = add k v mp}
 
-  val mmem (k : vertex) (mp : fmap vertex int) : bool
+  val constant mmem (k : vertex) (mp : fmap vertex int) : bool
     ensures {result <-> mem k mp}
-  
+
+  val constant rremove (x : vertex)(roots : SV.set) : SV.set
+    ensures {result = SV.remove x roots }
+ 
+  val constant create : (fmap vertex int)
+    ensures {result = empty }
+ 
      
   let rec constant dfs1 (roots : SV.set) (mp : (fmap vertex int)) (sn : int) : (fmap vertex int, int) = 
     variant{SV.cardinal vertices - size mp}
@@ -72,22 +78,15 @@ theory Graph
           (mp, sn)
         else
         let mp' = addd x sn mp in
-        let sn' = sn + 1 in
-        let (mp'', sn'') = dfs1 (succs x) mp' sn' in
-        let roots' = SV.remove x roots in
-        dfs1 roots' mp'' sn''
-        
+        let sn' = sn + 1 in 
+       let roots' = rremove x roots in
+        dfs1 roots' mp' sn'
 
-  val constant create : (fmap vertex int)
-    ensures {result = empty }
 
- 
- (*
-  let constant dfsnum : fmap vertex int = let mmp = addd root 0 create in let sn = 1 in let _ =  dfs1 (succs root)  mmp sn in mmp 
-*)
+
 
   val constant dfsnum_N : (fmap vertex int , int)
-    ensures { result =  let mmp = addd root 0 create in  dfs1 (succs root)  mmp 1 }
+    ensures { result =  let mmp = addd root 0 create in  dfs1 vertices mmp 1 }
   
   lemma dfsnum_property : 
   let (dfsnum, _ ) = dfsnum_N in 

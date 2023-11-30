@@ -3,8 +3,7 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
 <prover id="0" name="Alt-Ergo" version="2.5.2" timelimit="100" steplimit="0" memlimit="10000"/>
-<prover id="1" name="Alt-Ergo" version="2.4.0" alternative="FPA" timelimit="100" steplimit="0" memlimit="10000"/>
-<file format="whyml" proved="true">
+<file format="whyml">
 <path name=".."/><path name="lengauer-tarjan.mlw"/>
 <theory name="Graph">
  <goal name="root&#39;vc" expl="VC for root">
@@ -14,31 +13,6 @@
  <proof prover="0" obsolete="true"><result status="valid" time="0.037955" steps="82"/></proof>
  </goal>
  <goal name="dfs1&#39;vc" expl="VC for dfs1">
- <transf name="split_goal_right" >
-  <goal name="dfs1&#39;vc.0" expl="precondition">
-  <proof prover="0" obsolete="true"><result status="valid" time="0.043600" steps="2"/></proof>
-  </goal>
-  <goal name="dfs1&#39;vc.1" expl="variant decrease">
-  <proof prover="0" obsolete="true"><result status="valid" time="0.016187" steps="42"/></proof>
-  </goal>
-  <goal name="dfs1&#39;vc.2" expl="variant decrease">
-  <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
-  <proof prover="1" obsolete="true"><result status="valid" time="0.028884" steps="56"/></proof>
-  <transf name="introduce_premises" >
-   <goal name="dfs1&#39;vc.2.0" expl="variant decrease">
-   <transf name="subst" arg1="mp">
-    <goal name="dfs1&#39;vc.2.0.0" expl="variant decrease">
-    <transf name="subst" arg1="sn">
-     <goal name="dfs1&#39;vc.2.0.0.0" expl="variant decrease">
-     <proof prover="0" obsolete="true"><result status="valid" time="0.060573" steps="149"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
  </goal>
  <goal name="dfsnum_property">
  <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
