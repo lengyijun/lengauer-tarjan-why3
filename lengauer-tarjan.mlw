@@ -69,24 +69,31 @@ theory Graph
  
      
   let rec constant dfs1 (roots : SV.set) (mp : (fmap vertex int)) (sn : int) : (fmap vertex int, int) = 
+    requires{SV.subset roots vertices}
+    requires{SV.subset mp.domain vertices}
+    requires{forall x. mem x mp -> find x mp < sn}
+    requires{forall x y. x <> y -> mem x mp -> mem y mp -> find x mp <> find y mp }
+    returns{(mp1, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
+    returns{(mp1, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
+    returns{(mp1, _) -> SV.subset mp.domain mp1.domain}
+    returns{(mp1, _) -> SV.subset mp1.domain vertices}
+    returns{(mp1, _) -> forall x. mem x mp -> find x mp = find x mp1}
+    returns{(_, sn1) -> sn1 >= sn}
     variant{SV.cardinal vertices - size mp}
-    if not SV.is_empty roots then
+    if SV.is_empty roots then
       (mp , sn)
     else
       let x = SV.choose roots in 
         if mmem x mp then 
           (mp, sn)
         else
-        let mp' = addd x sn mp in
-        let sn' = sn + 1 in 
-       let roots' = rremove x roots in
-        dfs1 roots' mp' sn'
+          let mp' = addd x sn mp in
+          let sn' = sn + 1 in 
+          let roots' = rremove x roots in
+          dfs1 roots' mp' sn'
 
 
-
-
-  val constant dfsnum_N : (fmap vertex int , int)
-    ensures { result =  let mmp = addd root 0 create in  dfs1 vertices mmp 1 }
+  let constant dfsnum_N : (fmap vertex int , int) = dfs1 vertices (addd root 0 create ) 1 
   
   lemma dfsnum_property : 
   let (dfsnum, _ ) = dfsnum_N in 
@@ -102,16 +109,3 @@ theory Graph
 
 end
 
-(*
-    requires{FS.subset roots vertices}
-    requires{FS.subset mp.domain vertices}
-    requires{forall x. mem x mp -> find x mp < sn}
-    requires{forall x y. x <> y -> mem x mp -> mem y mp -> find x mp <> find y mp }
-    returns{(mp1, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
-    returns{(mp1, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
-    returns{(mp1, _) -> FS.subset mp.domain mp1.domain}
-    returns{(mp1, _) -> FS.subset mp1.domain vertices}
-    returns{(mp1, _) -> forall x. mem x mp -> find x mp = find x mp1}
-    returns{(_, sn1) -> sn1 >= sn}
-    variant{FS.cardinal vertices - size mp}
-*)
