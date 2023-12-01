@@ -109,7 +109,7 @@
  <proof prover="0"><result status="valid" time="0.051667" steps="508"/></proof>
  </goal>
  <goal name="dfsnum_property" proved="true">
- <proof prover="0"><result status="valid" time="7.665948" steps="55232"/></proof>
+ <proof prover="0"><result status="valid" time="7.665948" steps="55234"/></proof>
  </goal>
 </theory>
 </file>
