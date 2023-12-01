@@ -3,16 +3,30 @@ reference:
   the tiger book(ml) 19.2
 
 *)
+
+(* a wrapper of fmap *)
+module MMap
+  use export fmap.Fmap
+
+  val constant addd (k : 'k) (v : 'v) (mp : fmap 'k 'v): fmap 'k 'v
+    ensures{ result = add k v mp}
+
+  val constant mmem (k : 'k) (mp : fmap 'k 'v) : bool
+    ensures {result <-> mem k mp}
+
+  val constant create : (fmap 'k 'v)
+    ensures {result = empty }
+ 
+end
+
 theory Graph
 
-  use export list.List
-  use export list.Append
-  use export list.Length
-  use export int.Int
-  use export fmap.Fmap
+  use list.List
+  use list.Append
+  use list.Length
+  use int.Int
   use ref.Ref
-
-
+  use MMap
 
   (* the graph is defined by a set of vertices and a set of edges *)
   type vertex
@@ -20,6 +34,11 @@ theory Graph
 
   clone set.SetApp as SV with type elt = vertex
   clone set.SetApp as SE with type elt = (vertex, vertex)
+
+(*
+  clone MMap as MVI with type key = vertex, type value = int
+  clone MMap as MIV with type key = int, type value = vertex
+*)
 
   val constant vertices: SV.set
   constant edges: SE.set
@@ -54,49 +73,40 @@ theory Graph
     forall v1 v2: vertex, l: list vertex.
     SV.mem v1 vertices -> path v1 l v2 -> SV.mem v2 vertices
 
-
-  val constant addd (k : vertex) (v : int) (mp : fmap vertex int): fmap vertex int
-    ensures{ result = add k v mp}
-
-  val constant mmem (k : vertex) (mp : fmap vertex int) : bool
-    ensures {result <-> mem k mp}
-
   val constant rremove (x : vertex)(roots : SV.set) : SV.set
     ensures {result = SV.remove x roots }
  
-  val constant create : (fmap vertex int)
-    ensures {result = empty }
- 
-     
-  let rec constant dfs1 (roots : SV.set) (dfsnum : (fmap vertex int)) (sn : int) : (fmap vertex int, int) = 
+  let rec constant dfs1 (roots : SV.set) (dfsnum : fmap vertex int) (vertex_mp : fmap int vertex) (sn : int) : (fmap vertex int, fmap int vertex, int) = 
     requires{SV.subset roots vertices}
     requires{SV.subset dfsnum.domain vertices}
     requires{forall x. mem x dfsnum -> find x dfsnum < sn}
     requires{forall x y. x <> y -> mem x dfsnum -> mem y dfsnum -> find x dfsnum <> find y dfsnum }
-    returns{(mp1, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
-    returns{(mp1, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
-    returns{(mp1, _) -> SV.subset dfsnum.domain mp1.domain}
-    returns{(mp1, _) -> SV.subset mp1.domain vertices}
-    returns{(mp1, _) -> forall x. mem x dfsnum -> find x dfsnum = find x mp1}
-    returns{(_, sn1) -> sn1 >= sn}
+    returns{(mp1, _, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
+    returns{(mp1, _, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
+    returns{(mp1, _, _) -> SV.subset dfsnum.domain mp1.domain}
+    returns{(mp1, _, _) -> SV.subset mp1.domain vertices}
+    returns{(mp1, _, _) -> forall x. mem x dfsnum -> find x dfsnum = find x mp1}
+    returns{(_, _, sn1) -> sn1 >= sn}
     variant{SV.cardinal vertices - size dfsnum}
     if SV.is_empty roots then
-      (dfsnum , sn)
+      (dfsnum , vertex_mp, sn)
     else
       let x = SV.choose roots in 
         if mmem x dfsnum then 
-          (dfsnum, sn)
+          (dfsnum, vertex_mp, sn)
         else
           let dfsnum' = addd x sn dfsnum in
+          let vertex_mp' = addd sn x vertex_mp in
           let sn' = sn + 1 in 
+          let (dfsnum'', vertex_mp'', sn'') = dfs1 (succs x) dfsnum' vertex_mp' sn' in
           let roots' = rremove x roots in
-          dfs1 roots' dfsnum' sn'
+          dfs1 roots' dfsnum'' vertex_mp'' sn''
 
 
-  let constant dfsnum_N : (fmap vertex int , int) = dfs1 vertices (addd root 0 create ) 1 
+  let constant dfsnum_N : (fmap vertex int , fmap int vertex, int) = dfs1 vertices (addd root 0 create ) (addd 0 root create) 1 
   
   lemma dfsnum_property : 
-  let (dfsnum, _ ) = dfsnum_N in 
+  let (dfsnum, _ , _) = dfsnum_N in 
     find root dfsnum = 0  /\
     SE.subset dfsnum.domain vertices /\
     forall x y. x <> y -> mem x dfsnum -> mem y dfsnum -> find x dfsnum <> find y dfsnum
