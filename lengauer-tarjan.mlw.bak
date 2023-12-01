@@ -76,45 +76,45 @@ theory Graph
   val constant rremove (x : vertex)(roots : SV.set) : SV.set
     ensures {result = SV.remove x roots }
  
-  let rec constant dfs1 (roots : SV.set) (dfsnum : fmap vertex int) (vertex_mp : fmap int vertex) (sn : int) : (fmap vertex int, fmap int vertex, int) = 
+  let rec constant dfs1 (current_parent : vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
     requires{SV.subset roots vertices}
-    requires{SV.subset dfsnum.domain vertices}
-    requires{forall x. mem x dfsnum -> find x dfsnum < sn}
-    requires{forall x y. x <> y -> mem x dfsnum -> mem y dfsnum -> find x dfsnum <> find y dfsnum }
-    returns{(mp1, _, _) -> forall x y. x <> y -> mem x mp1 -> mem y mp1 -> find x mp1 <> find y mp1 }
-    returns{(mp1, _, sn1) -> forall x. mem x mp1 -> find x mp1 < sn1}
-    returns{(mp1, _, _) -> SV.subset dfsnum.domain mp1.domain}
-    returns{(mp1, _, _) -> SV.subset mp1.domain vertices}
-    returns{(mp1, _, _) -> forall x. mem x dfsnum -> find x dfsnum = find x mp1}
-    returns{(_, _, sn1) -> sn1 >= sn}
-    variant{SV.cardinal vertices - size dfsnum}
+    requires{SV.subset dfsnum_parent.domain vertices}
+    requires{forall x. mem x dfsnum_parent -> let (a, _) = find x dfsnum_parent in a < sn}
+    requires{forall x y. x <> y -> mem x dfsnum_parent -> mem y dfsnum_parent -> let (a, _) = find x dfsnum_parent in let (b, _) = find y dfsnum_parent in a <> b}
+    ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
+    ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
+    ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
+    ensures{ SV.subset dfsnum1.domain vertices}
+    ensures{ forall x. mem x dfsnum_parent -> find x dfsnum_parent = find x dfsnum1}
+    ensures{ sn1 >= sn}
+    variant{SV.cardinal vertices - size dfsnum_parent}
     if SV.is_empty roots then
-      (dfsnum , vertex_mp, sn)
+      (dfsnum_parent , vertex_mp, sn)
     else
       let x = SV.choose roots in 
-        if mmem x dfsnum then 
-          (dfsnum, vertex_mp, sn)
+        if mmem x dfsnum_parent then 
+          (dfsnum_parent, vertex_mp, sn)
         else
-          let dfsnum' = addd x sn dfsnum in
+          let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
           let vertex_mp' = addd sn x vertex_mp in
           let sn' = sn + 1 in 
-          let (dfsnum'', vertex_mp'', sn'') = dfs1 (succs x) dfsnum' vertex_mp' sn' in
+          let (dfsnum_parent'', vertex_mp'', sn'') = dfs1 x (succs x) dfsnum_parent' vertex_mp' sn' in
           let roots' = rremove x roots in
-          dfs1 roots' dfsnum'' vertex_mp'' sn''
+          dfs1 current_parent roots' dfsnum_parent'' vertex_mp'' sn''
 
 
-  let constant dfsnum_N : (fmap vertex int , fmap int vertex, int) = dfs1 vertices (addd root 0 create ) (addd 0 root create) 1 
+  let constant dfsnum_N : (fmap vertex int , fmap int vertex, int) = dfs1 root vertices (addd root (0, root) create) (addd 0 root create) 1 
   
   lemma dfsnum_property : 
-  let (dfsnum, _ ) = dfsnum_N in 
-    find root dfsnum = 0  /\
-    SE.subset dfsnum.domain vertices /\
-    forall x y. x <> y -> mem x dfsnum -> mem y dfsnum -> find x dfsnum <> find y dfsnum
+  let (dfsnum_parent, _ , _) = dfsnum_N in 
+    find root dfsnum_parent = (0, root)  /\
+    SE.subset dfsnum_parent.domain vertices /\
+    forall x y. x <> y -> mem x dfsnum_parent -> mem y dfsnum_parent -> find x dfsnum_parent <> find y dfsnum_parent
 
 (*
-  predicate (-*->) (x y : vertex) = find x dfsnum <= find y dfsnum
+  predicate (-*->) (x y : vertex) = find x dfsnum_parent <= find y dfsnum_parent
 
-  predicate (-+->) (x y : vertex) = find x dfsnum < find y dfsnum
+  predicate (-+->) (x y : vertex) = find x dfsnum_parent < find y dfsnum_parent
 *)
 
 end
