@@ -35,11 +35,6 @@ theory Graph
   clone set.SetApp as SV with type elt = vertex
   clone set.SetApp as SE with type elt = (vertex, vertex)
 
-(*
-  clone MMap as MVI with type key = vertex, type value = int
-  clone MMap as MIV with type key = int, type value = vertex
-*)
-
   val constant vertices: SV.set
   constant edges: SE.set
 
@@ -76,17 +71,24 @@ theory Graph
   val constant rremove (x : vertex)(roots : SV.set) : SV.set
     ensures {result = SV.remove x roots }
  
-  let rec constant dfs1 (current_parent : vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
+  let rec constant dfs (current_parent : vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
+    requires{exists i p. mapsto current_parent (i, p) dfsnum_parent /\ i < sn}
     requires{SV.subset roots vertices}
     requires{SV.subset dfsnum_parent.domain vertices}
     requires{forall x. mem x dfsnum_parent -> let (a, _) = find x dfsnum_parent in a < sn}
     requires{forall x y. x <> y -> mem x dfsnum_parent -> mem y dfsnum_parent -> let (a, _) = find x dfsnum_parent in let (b, _) = find y dfsnum_parent in a <> b}
+    requires{forall x. SV.mem x roots -> edge current_parent x}
+    requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
+    requires{forall x. x <> root -> mem x dfsnum_parent -> let (i,p) = find x dfsnum_parent in (mem p dfsnum_parent /\ let (j, _) = find p dfsnum_parent in j < i)}
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
     ensures{ SV.subset dfsnum1.domain vertices}
     ensures{ forall x. mem x dfsnum_parent -> find x dfsnum_parent = find x dfsnum1}
+    ensures{ forall x. mem x vertex_mp -> find x vertex_mp = find x vertex_mp1} (* unprovable, do we need it ? *)
     ensures{ sn1 >= sn}
+    ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
+    ensures{forall x. x <> root -> mem x dfsnum1 -> let (i,p) = find x dfsnum1 in (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
     variant{SV.cardinal vertices - size dfsnum_parent}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
@@ -98,23 +100,40 @@ theory Graph
           let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
           let vertex_mp' = addd sn x vertex_mp in
           let sn' = sn + 1 in 
-          let (dfsnum_parent'', vertex_mp'', sn'') = dfs1 x (succs x) dfsnum_parent' vertex_mp' sn' in
+          let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (succs x) dfsnum_parent' vertex_mp' sn' in
           let roots' = rremove x roots in
-          dfs1 current_parent roots' dfsnum_parent'' vertex_mp'' sn''
+          dfs current_parent roots' dfsnum_parent'' vertex_mp'' sn''
 
 
-  let constant dfsnum_N : (fmap vertex (int, vertex) , fmap int vertex, int) = dfs1 root vertices (addd root (0, root) create) (addd 0 root create) 1 
-  
-  lemma dfsnum_property : 
-  let (dfsnum_parent, _ , _) = dfsnum_N in 
+  let constant dfsnum_N : (fmap vertex (int, vertex) , fmap int vertex, int) = dfs root (succs root) (addd root (0, root) create) (addd 0 root create) 1 
+
+  let constant dfsnum_parent : fmap vertex (int, vertex) = let (dfsnum_parent, _ , _) = dfsnum_N in dfsnum_parent
+
+  let constant n : int = let (_, _, n) = dfsnum_N in n
+
+  let constant vertex_mp : fmap int vertex = let (_, vertex_mp, _) = dfsnum_N in vertex_mp
+
+  lemma dfsnum_property_a : 
     find root dfsnum_parent = (0, root)  /\
     SE.subset dfsnum_parent.domain vertices /\
     forall x y. x <> y -> mem x dfsnum_parent -> mem y dfsnum_parent -> let (a , _) = find x dfsnum_parent in let (b, _) = find y dfsnum_parent in a <> b
 
-(*
-  predicate (-*->) (x y : vertex) = find x dfsnum_parent <= find y dfsnum_parent
+  lemma dfsnum_property_b : 
+    forall x i p j pp. x <> root -> mapsto x (i, p) dfsnum_parent -> mapsto p (j, pp) dfsnum_parent -> j < i
 
-  predicate (-+->) (x y : vertex) = find x dfsnum_parent < find y dfsnum_parent
+
+  inductive (-+->) (x y : vertex) = 
+    | Direct : forall x y. (exists i. mapsto y (i, x) dfsnum_parent) -> x -+-> y        (* TODO: root ? *)
+    | Ccons : forall x y i p. mapsto y (i , p) dfsnum_parent /\ y -+-> p -> x -+-> y
+
+  predicate (-*->) (x y : vertex) = x = y \/ x -+-> y
+
+(*
+  termination problem
+  predicate (-+->) (x y : vertex) 
+  =
+  variant {1}
+  (exists i. mapsto y (i, x) dfsnum_parent) \/ (exists i p. mapsto y (i , p) dfsnum_parent /\ y -+-> p )
 *)
 
 end
