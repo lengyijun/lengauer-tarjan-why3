@@ -99,6 +99,9 @@ theory Graph
     ensures {result = SV.remove x roots }
  
   let rec constant dfs (current_parent : vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
+    requires{current_parent = root \/ exists p. path root p current_parent}
+    requires{forall x. SV.mem x roots -> x = root \/ exists p. path root p x}
+    requires{forall x. mem x dfsnum_parent -> x = root \/ exists p. path root p x}
     requires{exists i p. mapsto current_parent (i, p) dfsnum_parent /\ i < sn}
     requires{SV.subset roots vertices}
     requires{SV.subset dfsnum_parent.domain vertices}
@@ -116,6 +119,7 @@ theory Graph
     ensures{ sn1 >= sn}
     ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
     ensures{forall x. x <> root -> mem x dfsnum1 -> let (i,p) = find x dfsnum1 in (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
+    ensures{forall x. mem x dfsnum1 -> (x = root \/ exists p. path root p x)}
     variant{SV.cardinal vertices - size dfsnum_parent}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
@@ -153,9 +157,20 @@ theory Graph
   lemma dfsnum_property_b : 
     forall x i p j pp. x <> root -> mapsto x (i, p) dfsnum_parent -> mapsto p (j, pp) dfsnum_parent -> j < i
 
+  lemma dfsnum_property_e : 
+    forall x. mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent
+
+  (* helper of dfsnum_property_c *)
+  (* TODO: an induction {variant = dfsnum x} is enough, but I don't know how to express it *)
+  lemma dfsnum_property_d : 
+    forall x p. path root p x -> mem x dfsnum_parent 
+
+  lemma dfsnum_property_c : 
+    forall x. mem x dfsnum_parent <-> (x = root \/ exists p. path root p x)
+
 
   inductive (-+->) (x y : vertex) = 
-    | Direct : forall x y. (exists i. mapsto y (i, x) dfsnum_parent) -> x -+-> y        (* TODO: root ? *)
+    | Direct : forall x y. y <> root -> (exists i. mapsto y (i, x) dfsnum_parent) -> x -+-> y
     | Ccons : forall x y i p. mapsto y (i , p) dfsnum_parent /\ y -+-> p -> x -+-> y
 
   predicate (-*->) (x y : vertex) = x = y \/ x -+-> y
@@ -164,6 +179,8 @@ theory Graph
   predicate dominate (x y : vertex) = y <> root /\ forall p. path root p y -> L.mem x p
 
   val constant idom (x : vertex) : vertex 
+    requires {mem x dfsnum_parent}
+    ensures {dominate result x}
     ensures {forall y. dominate y x -> (y = result) \/ dominate y result }
 
   predicate all_larger (l : list vertex) (w : vertex) = match l with 
@@ -171,10 +188,16 @@ theory Graph
                                                          | Cons vi l' -> (exists i j pv pw. mapsto vi (i, pv) dfsnum_parent /\ mapsto w (j, pw) dfsnum_parent /\ i > j) /\ all_larger l' w
                                                         end
 
-  predicate semi_dominate_candidate (v w : vertex) = exists p. path v p w /\ all_larger p w 
+  val constant semi_dominate_candidates (w : vertex) : SV.set
+    requires {mem w dfsnum_parent}
+    ensures { forall v. SV.mem v result <-> exists p. path v p w /\ all_larger p w } 
 
   val constant semi_dominator (x : vertex) : vertex
-    ensures {exists i p. mapsto result (i, p) dfsnum_parent /\ forall y j py. y <> result -> semi_dominate_candidate y x -> mapsto y (j, py) dfsnum_parent -> i < j }
+    requires {mem x dfsnum_parent}
+    ensures { SV.mem result (semi_dominate_candidates x)}
+    ensures {forall v. SV.mem v (semi_dominate_candidates x) -> dfsnum result <= dfsnum v}
+
+  lemma lemma2_helper : forall d w. w <> root -> dominate d w -> d -+-> w
 
   lemma lemma2 : forall w. w <> root -> idom w -+-> w
 
