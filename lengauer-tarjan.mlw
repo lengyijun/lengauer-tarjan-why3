@@ -124,6 +124,7 @@ theory Graph
     ensures{forall x. x <> root -> mem x dfsnum1 -> let (i,p) = find x dfsnum1 in (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
     ensures{forall x. mem x dfsnum1 -> (x = root \/ exists p. path root p x)}
     ensures{forall x. SV.mem x roots -> mem x dfsnum1}
+    ensures{forall x. SV.mem x (succs current_parent) -> mem x dfsnum1}
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
