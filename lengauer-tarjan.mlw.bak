@@ -22,6 +22,7 @@ end
 theory Graph
 
   use list.List
+  use list.Mem as L
   use list.Append
   use list.Length
   use int.Int
@@ -45,6 +46,36 @@ theory Graph
     forall x y: vertex.
     SE.mem (x, y) edges -> SV.mem x vertices /\ SV.mem y vertices
 
+  inductive path vertex (list vertex) vertex =
+  | Path_empty:
+      forall x y. edge x y -> path x Nil y
+  | Path_cons:
+      forall x y z: vertex, l: list vertex.
+      edge x y -> path y l z -> path x (Cons y l) z
+  (** `path v0 [v1; ...; vn-1] vn`
+     means a path from `v0` to `vn` composed of `n` edges `(vi,vi+1)`. *)
+
+  lemma path_right_extension:
+    forall x y z: vertex, l: list vertex.
+    path x l y -> edge y z -> path x (l ++ Cons y Nil) z
+
+  lemma path_right_inversion:
+    forall x z: vertex, l: list vertex. path x l z ->
+       (edge x z /\ l = Nil)
+    \/ (exists y: vertex, l': list vertex.
+        path x l' y /\ edge y z /\ l = l' ++ Cons y Nil)
+
+  lemma path_trans:
+    forall x y z: vertex, l1 l2: list vertex.
+    path x l1 y -> path y l2 z -> path x (l1 ++ (Cons y Nil) ++ l2) z
+
+  lemma empty_path:
+    forall x y: vertex. path x Nil y -> edge x y
+
+  lemma path_decomposition:
+    forall x y z: vertex, l1 l2: list vertex.
+    path x (l1 ++ Cons y l2) z -> path x l1 y /\ path y l2 z
+
 
   (** direct predecessors *)
   function preds vertex: SV.fset vertex
@@ -59,10 +90,6 @@ theory Graph
 
   val constant root: vertex
     ensures { SV.mem result vertices }
-
-  (* paths *)
-  clone export graph.Path
-     with type vertex = vertex, predicate edge = edge
 
   lemma path_in_vertices:
     forall v1 v2: vertex, l: list vertex.
@@ -109,6 +136,11 @@ theory Graph
 
   let constant dfsnum_parent : fmap vertex (int, vertex) = let (dfsnum_parent, _ , _) = dfsnum_N in dfsnum_parent
 
+  val constant dfsnum (x : vertex) : int 
+    requires{mem x dfsnum_parent}
+    ensures { result =    let (i, _) = find x dfsnum_parent in i}
+ 
+
   let constant n : int = let (_, _, n) = dfsnum_N in n
 
   let constant vertex_mp : fmap int vertex = let (_, vertex_mp, _) = dfsnum_N in vertex_mp
@@ -123,13 +155,60 @@ theory Graph
 
 
   inductive (-+->) (x y : vertex) = 
-    | Direct : forall x y. (exists i. mapsto y (i, x) dfsnum_parent) -> x -+-> y
+    | Direct : forall x y. (exists i. mapsto y (i, x) dfsnum_parent) -> x -+-> y        (* TODO: root ? *)
     | Ccons : forall x y i p. mapsto y (i , p) dfsnum_parent /\ y -+-> p -> x -+-> y
 
   predicate (-*->) (x y : vertex) = x = y \/ x -+-> y
 
+  (* strict dominate *)
+  predicate dominate (x y : vertex) = y <> root /\ forall p. path root p y -> L.mem x p
+
+  val constant idom (x : vertex) : vertex 
+    ensures {forall y. dominate y x -> (y = result) \/ dominate y result }
+
+  predicate all_larger (l : list vertex) (w : vertex) = match l with 
+                                                         | Nil -> true
+                                                         | Cons vi l' -> (exists i j pv pw. mapsto vi (i, pv) dfsnum_parent /\ mapsto w (j, pw) dfsnum_parent /\ i > j) /\ all_larger l' w
+                                                        end
+
+  predicate semi_dominate_candidate (v w : vertex) = exists p. path v p w /\ all_larger p w 
+
+  val constant semi_dominator (x : vertex) : vertex
+    ensures {exists i p. mapsto result (i, p) dfsnum_parent /\ forall y j py. y <> result -> semi_dominate_candidate y x -> mapsto y (j, py) dfsnum_parent -> i < j }
+
+  lemma lemma2 : forall w. w <> root -> idom w -+-> w
+
+  lemma lemma3 : forall w. w <> root -> semi_dominator w -+-> w
+
+  lemma lemma4 : forall w. w <> root -> idom w -*-> semi_dominator w
+
+  lemma lemma5 : forall v w. v -*-> w -> v -*-> idom w \/ idom w -*-> idom v
+
+  lemma theorem2 : forall w. w <> root 
+                          -> (forall u. semi_dominator w -+-> u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
+                          -> idom w = semi_dominator w
+                
+  lemma theorem3 : forall w u. w <> root 
+                  -> semi_dominator w -+-> u /\ u -*-> w 
+                  -> (forall x. x <> u -> semi_dominator w -+-> x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
+                  -> dfsnum (semi_dominator u) <= dfsnum (semi_dominator w) /\ idom u = idom w 
+
+  lemma corollary1 : forall w u. w <> root
+                  -> semi_dominator w -+-> u /\ u -*-> w 
+                  -> (forall x. x <> u -> semi_dominator w -+-> x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
+                  -> idom w = if semi_dominator w = semi_dominator u then semi_dominator w else idom u
+
+  val constant theorem4_helper_a (w : vertex) : SV.set
+    ensures {forall v. SV.mem v result <-> edge v w /\ dfsnum v < dfsnum w}
+
+  val constant theorem4_helper_b (w : vertex) : SV.set
+    ensures {forall u. SV.mem (semi_dominator u) result <-> dfsnum u > dfsnum w /\ (exists v. edge v w /\ u -*-> v) } 
+
+  lemma theorem4 : forall w. let z = SV.union (theorem4_helper_a w) (theorem4_helper_b w) in 
+                             SV.mem (semi_dominator w) z /\ forall x. mem x z -> x = (semi_dominator w) \/ dfsnum x > dfsnum (semi_dominator w)
+ 
 (*
-  termination 
+  termination problem
   predicate (-+->) (x y : vertex) 
   =
   variant {1}
