@@ -101,6 +101,7 @@ theory Graph
     ensures {result = SV.remove x roots }
  
   let rec constant dfs (current_parent : vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
+    requires{forall x. SV.mem x (succs current_parent) -> mem x dfsnum_parent \/ SV.mem x roots }
     requires{current_parent = root \/ exists p. path root p current_parent}
     requires{forall x. SV.mem x roots -> x = root \/ exists p. path root p x}
     requires{forall x. mem x dfsnum_parent -> x = root \/ exists p. path root p x}
@@ -122,19 +123,20 @@ theory Graph
     ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
     ensures{forall x. x <> root -> mem x dfsnum1 -> let (i,p) = find x dfsnum1 in (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
     ensures{forall x. mem x dfsnum1 -> (x = root \/ exists p. path root p x)}
-    variant{SV.cardinal vertices - size dfsnum_parent}
+    ensures{forall x. SV.mem x roots -> mem x dfsnum1}
+    variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
     else
       let x = SV.choose roots in 
+      let roots' = rremove x roots in
         if mmem x dfsnum_parent then 
-          (dfsnum_parent, vertex_mp, sn)
+          dfs current_parent roots' dfsnum_parent vertex_mp sn
         else
           let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
           let vertex_mp' = addd sn x vertex_mp in
           let sn' = sn + 1 in 
           let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (succs x) dfsnum_parent' vertex_mp' sn' in
-          let roots' = rremove x roots in
           dfs current_parent roots' dfsnum_parent'' vertex_mp'' sn''
 
 
