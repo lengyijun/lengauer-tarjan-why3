@@ -101,15 +101,11 @@ theory Graph
  
   inductive (--+->) (fmap vertex (int, vertex)) (vertex) (vertex) = 
     | DDirect : forall mp x y. y <> root -> (exists i. mapsto y (i, x) mp) -> (--+->) mp x y
-    | CCcons : forall mp x y i p. mapsto y (i , p) mp /\ (--+->) mp x p -> (--+->) mp x y
+    | CCcons : forall mp x y i p. y <> root -> mapsto y (i , p) mp /\ (--+->) mp x p -> (--+->) mp x y
 
   let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
-    requires{forall x. mem x dfsnum_parent -> x = root \/ (--+->) dfsnum_parent root x}
     requires{forall x. not L.mem x grey -> mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent}
     requires{forall x. SV.mem x (succs current_parent) -> mem x dfsnum_parent \/ SV.mem x roots }
-    requires{current_parent = root \/ exists p. path root p current_parent}
-    requires{forall x. SV.mem x roots -> x = root \/ exists p. path root p x}
-    requires{forall x. mem x dfsnum_parent -> x = root \/ exists p. path root p x}
     requires{exists i p. mapsto current_parent (i, p) dfsnum_parent /\ i < sn}
     requires{SV.subset roots vertices}
     requires{SV.subset dfsnum_parent.domain vertices}
@@ -118,6 +114,8 @@ theory Graph
     requires{forall x. SV.mem x roots -> edge current_parent x}
     requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
     requires{forall x. x <> root -> mem x dfsnum_parent -> let (i,p) = find x dfsnum_parent in (mem p dfsnum_parent /\ let (j, _) = find p dfsnum_parent in j < i)}
+    requires{current_parent = root \/ (--+->) dfsnum_parent root current_parent}
+    requires{forall x. mem x dfsnum_parent -> x = root \/ (--+->) dfsnum_parent root x}
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
@@ -127,10 +125,11 @@ theory Graph
     ensures{ sn1 >= sn}
     ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
     ensures{forall x. x <> root -> mem x dfsnum1 -> let (i,p) = find x dfsnum1 in (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
-    ensures{forall x. mem x dfsnum1 -> (x = root \/ exists p. path root p x)}
     ensures{forall x. SV.mem x roots -> mem x dfsnum1}
     ensures{forall x. SV.mem x (succs current_parent) -> mem x dfsnum1}
     ensures{forall x. not L.mem x grey -> mem x dfsnum1 -> forall y. SV.mem y (succs x) -> mem y dfsnum1}
+    ensures{forall x y. (--+->) dfsnum_parent x y -> (--+->) dfsnum1 x y}
+    ensures{current_parent = root \/ (--+->) dfsnum1 root current_parent}
     ensures{forall x. mem x dfsnum1 -> x = root \/ (--+->) dfsnum1 root x}
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
@@ -144,6 +143,7 @@ theory Graph
           let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
           let vertex_mp' = addd sn x vertex_mp in
           let sn' = sn + 1 in 
+          assert {forall x y. (--+->) dfsnum_parent x y -> (--+->) dfsnum_parent' x y};
           let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (Cons x grey) (succs x) dfsnum_parent' vertex_mp' sn' in
           dfs current_parent grey roots' dfsnum_parent'' vertex_mp'' sn''
 
