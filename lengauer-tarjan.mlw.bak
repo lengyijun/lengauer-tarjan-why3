@@ -37,25 +37,26 @@ theory Graph
   clone set.SetApp as SE with type elt = (vertex, vertex)
 
   val constant vertices: SV.set
-  constant edges: SE.set
 
-  predicate edge (x y: vertex) = SE.mem (x,y) edges
+  predicate edge (x y: vertex)
 
   (* edges are well-formed *)
   axiom edges_def:
     forall x y: vertex.
-    SE.mem (x, y) edges -> SV.mem x vertices /\ SV.mem y vertices
+    edge x y -> SV.mem x vertices /\ SV.mem y vertices
 
+(* in order to induction in dfsnum_property_d *)
   inductive path vertex (list vertex) vertex =
   | Path_empty:
       forall x y. edge x y -> path x Nil y
   | Path_cons:
       forall x y z: vertex, l: list vertex.
-      edge x y -> path y l z -> path x (Cons y l) z
+      path x l y -> edge y z -> path x (l ++ Cons y Nil) z 
   (** `path v0 [v1; ...; vn-1] vn`
      means a path from `v0` to `vn` composed of `n` edges `(vi,vi+1)`. *)
 
-  lemma path_right_extension:
+(*
+  lemma path_left_extension:
     forall x y z: vertex, l: list vertex.
     path x l y -> edge y z -> path x (l ++ Cons y Nil) z
 
@@ -67,26 +68,26 @@ theory Graph
 
   lemma path_trans:
     forall x y z: vertex, l1 l2: list vertex.
-    path x l1 y -> path y l2 z -> path x (l1 ++ (Cons y Nil) ++ l2) z
-
-  lemma empty_path:
-    forall x y: vertex. path x Nil y -> edge x y
+    path x l1 y -> path y l2 z -> path x (l1 ++ (Cons y l2)) z
 
   lemma path_decomposition:
     forall x y z: vertex, l1 l2: list vertex.
     path x (l1 ++ Cons y l2) z -> path x l1 y /\ path y l2 z
+*)
 
+  lemma empty_path:
+    forall x y: vertex. path x Nil y -> edge x y
 
   (** direct predecessors *)
   function preds vertex: SV.fset vertex
 
   axiom preds_def: forall v:vertex. forall u:vertex.
-   SE.mem (u,v) edges <-> SV.mem u (preds v)
+   edge u v <-> SV.mem u (preds v)
 
   (** direct successors *)
   val constant succs (u : vertex): SV.set
     ensures {SE.subset result vertices}
-    ensures { forall v:vertex. SE.mem (u,v) edges <-> SV.mem v result }
+    ensures { forall v:vertex. edge u v <-> SV.mem v result }
 
   val constant root: vertex
     ensures { SV.mem result vertices }
@@ -98,45 +99,60 @@ theory Graph
   val constant rremove (x : vertex)(roots : SV.set) : SV.set
     ensures {result = SV.remove x roots }
  
-  let rec constant dfs (current_parent : vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
-    requires{current_parent = root \/ exists p. path root p current_parent}
-    requires{forall x. SV.mem x roots -> x = root \/ exists p. path root p x}
-    requires{forall x. mem x dfsnum_parent -> x = root \/ exists p. path root p x}
+  inductive (--+->) (fmap vertex (int, vertex)) (vertex) (list vertex) (vertex) = 
+    | DDirect : forall mp x y. y <> root -> (exists i. mapsto y (i, x) mp) -> (--+->) mp x Nil y
+    | CCcons : forall mp x y i p l. y <> root -> mapsto y (i , p) mp /\ (--+->) mp x l p -> (--+->) mp x (l ++ Cons p Nil) y
+
+  lemma span_cutoff: forall mp x l y. (--+->) mp x l y -> forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
+
+  let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
+    requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
+    requires{forall x p i. x <> root -> mapsto x (i, p) dfsnum_parent -> edge p x}
+    requires{forall x. not L.mem x grey -> mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent}
+    requires{forall x. SV.mem x (succs current_parent) -> mem x dfsnum_parent \/ SV.mem x roots }
     requires{exists i p. mapsto current_parent (i, p) dfsnum_parent /\ i < sn}
     requires{SV.subset roots vertices}
     requires{SV.subset dfsnum_parent.domain vertices}
     requires{forall x. mem x dfsnum_parent -> let (a, _) = find x dfsnum_parent in a < sn}
     requires{forall x y. x <> y -> mem x dfsnum_parent -> mem y dfsnum_parent -> let (a, _) = find x dfsnum_parent in let (b, _) = find y dfsnum_parent in a <> b}
     requires{forall x. SV.mem x roots -> edge current_parent x}
-    requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
     requires{forall x. x <> root -> mem x dfsnum_parent -> let (i,p) = find x dfsnum_parent in (mem p dfsnum_parent /\ let (j, _) = find p dfsnum_parent in j < i)}
+    requires{current_parent = root \/ exists l. (--+->) dfsnum_parent root l current_parent}
+    requires{forall x. mem x dfsnum_parent -> x = root \/ exists l. (--+->) dfsnum_parent root l x}
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
     ensures{ SV.subset dfsnum1.domain vertices}
     ensures{ forall x. mem x dfsnum_parent -> find x dfsnum_parent = find x dfsnum1}
-    ensures{ forall x. mem x vertex_mp -> find x vertex_mp = find x vertex_mp1} (* unprovable, do we need it ? *)
+    (* ensures{ forall x. mem x vertex_mp -> find x vertex_mp = find x vertex_mp1}  unprovable, do we need it ? *)
     ensures{ sn1 >= sn}
     ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
     ensures{forall x. x <> root -> mem x dfsnum1 -> let (i,p) = find x dfsnum1 in (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
-    ensures{forall x. mem x dfsnum1 -> (x = root \/ exists p. path root p x)}
-    variant{SV.cardinal vertices - size dfsnum_parent}
+    ensures{forall x. SV.mem x roots -> mem x dfsnum1}
+    ensures{forall x. SV.mem x (succs current_parent) -> mem x dfsnum1}
+    ensures{forall x. not L.mem x grey -> mem x dfsnum1 -> forall y. SV.mem y (succs x) -> mem y dfsnum1}
+    ensures{forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum1 x l y}
+    ensures{current_parent = root \/ exists l. (--+->) dfsnum1 root l current_parent}
+    ensures{forall x. mem x dfsnum1 -> x = root \/ exists l. (--+->) dfsnum1 root l x}
+    ensures{forall x p i. x <> root -> mapsto x (i, p) dfsnum1 -> edge p x}
+    variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
     else
       let x = SV.choose roots in 
+      let roots' = rremove x roots in
         if mmem x dfsnum_parent then 
-          (dfsnum_parent, vertex_mp, sn)
+          dfs current_parent grey roots' dfsnum_parent vertex_mp sn
         else
           let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
           let vertex_mp' = addd sn x vertex_mp in
           let sn' = sn + 1 in 
-          let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (succs x) dfsnum_parent' vertex_mp' sn' in
-          let roots' = rremove x roots in
-          dfs current_parent roots' dfsnum_parent'' vertex_mp'' sn''
+          assert {forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum_parent' x l y};
+          let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (Cons x grey) (succs x) dfsnum_parent' vertex_mp' sn' in
+          dfs current_parent grey roots' dfsnum_parent'' vertex_mp'' sn''
 
 
-  let constant dfsnum_N : (fmap vertex (int, vertex) , fmap int vertex, int) = dfs root (succs root) (addd root (0, root) create) (addd 0 root create) 1 
+  let constant dfsnum_N : (fmap vertex (int, vertex) , fmap int vertex, int) = dfs root (Cons root Nil) (succs root) (addd root (0, root) create) (addd 0 root create) 1 
 
   let constant dfsnum_parent : fmap vertex (int, vertex) = let (dfsnum_parent, _ , _) = dfsnum_N in dfsnum_parent
 
@@ -158,29 +174,37 @@ theory Graph
     forall x i p j pp. x <> root -> mapsto x (i, p) dfsnum_parent -> mapsto p (j, pp) dfsnum_parent -> j < i
 
   lemma dfsnum_property_e : 
-    forall x. mem x dfsnum_parent -> forall y. mem y (succs x) -> mem y dfsnum_parent
+    forall x. mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent
 
   (* helper of dfsnum_property_c *)
   lemma dfsnum_property_d : 
     forall x p. path root p x -> mem x dfsnum_parent 
 
+  lemma dfsnum_property_f : 
+    forall x p i. x <> root -> mapsto x (i, p) dfsnum_parent -> edge p x
+
+ (* path on the spanning tree *)
+  predicate (-+->) (x : vertex) (l : list vertex) (y : vertex) = (--+->) dfsnum_parent x l y
+
+  predicate (-*->) (x y : vertex) = x = y \/ exists l. (-+->) x l y
+
   lemma dfsnum_property_c : 
-    forall x. mem x dfsnum_parent <-> (x = root \/ exists p. path root p x)
+    forall x. mem x dfsnum_parent <-> (x = root \/ exists l. (-+->) root l x)
 
-
-  inductive (-+->) (x y : vertex) = 
-    | Direct : forall x y. y <> root -> (exists i. mapsto y (i, x) dfsnum_parent) -> x -+-> y
-    | Ccons : forall x y i p. mapsto y (i , p) dfsnum_parent /\ y -+-> p -> x -+-> y
-
-  predicate (-*->) (x y : vertex) = x = y \/ x -+-> y
+  lemma just_special_path : 
+    forall x y l. (-+->) y l x -> path y l x
 
   (* strict dominate *)
-  predicate dominate (x y : vertex) = y <> root /\ forall p. path root p y -> L.mem x p
+  predicate dominate (x y : vertex) = mem x dfsnum_parent /\ mem y dfsnum_parent /\ y <> root /\ forall p. path root p y -> L.mem x (Cons root p)
 
   val constant idom (x : vertex) : vertex 
-    requires {mem x dfsnum_parent}
+    requires { x <> root /\ mem x dfsnum_parent}
     ensures {dominate result x}
     ensures {forall y. dominate y x -> (y = result) \/ dominate y result }
+
+  lemma lemma2_helper : forall d w. dominate d w -> exists l. (-+->) d l w
+
+  lemma lemma2 : forall w. w <> root -> exists l. (-+->) (idom w) l w
 
   predicate all_larger (l : list vertex) (w : vertex) = match l with 
                                                          | Nil -> true
@@ -196,27 +220,23 @@ theory Graph
     ensures { SV.mem result (semi_dominate_candidates x)}
     ensures {forall v. SV.mem v (semi_dominate_candidates x) -> dfsnum result <= dfsnum v}
 
-  lemma lemma2_helper : forall d w. w <> root -> dominate d w -> d -+-> w
-
-  lemma lemma2 : forall w. w <> root -> idom w -+-> w
-
-  lemma lemma3 : forall w. w <> root -> semi_dominator w -+-> w
+  lemma lemma3 : forall w. w <> root -> exists l. (-+->) (semi_dominator w) l w
 
   lemma lemma4 : forall w. w <> root -> idom w -*-> semi_dominator w
 
   lemma lemma5 : forall v w. v -*-> w -> v -*-> idom w \/ idom w -*-> idom v
 
   lemma theorem2 : forall w. w <> root 
-                          -> (forall u. semi_dominator w -+-> u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
+                          -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
                           -> idom w = semi_dominator w
                 
   lemma theorem3 : forall w u. w <> root 
-                  -> semi_dominator w -+-> u /\ u -*-> w 
-                  -> (forall x. x <> u -> semi_dominator w -+-> x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
+                  -> exists l. (-+->) (semi_dominator w) l u /\ u -*-> w 
+                  -> (forall x. x <> u ->  (-+->) (semi_dominator w) l x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
                   -> dfsnum (semi_dominator u) <= dfsnum (semi_dominator w) /\ idom u = idom w 
 
   lemma corollary1 : forall w u. w <> root
-                  -> semi_dominator w -+-> u /\ u -*-> w 
+                  -> exists l. (-+->) (semi_dominator w) l u /\ u -*-> w 
                   -> (forall x. x <> u -> semi_dominator w -+-> x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
                   -> idom w = if semi_dominator w = semi_dominator u then semi_dominator w else idom u
 
