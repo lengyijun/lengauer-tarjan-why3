@@ -105,6 +105,7 @@ theory Graph
 
   let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
     requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
+    requires{forall x p i. x <> root -> mapsto x (i, p) dfsnum_parent -> edge p x}
     requires{forall x. not L.mem x grey -> mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent}
     requires{forall x. SV.mem x (succs current_parent) -> mem x dfsnum_parent \/ SV.mem x roots }
     requires{exists i p. mapsto current_parent (i, p) dfsnum_parent /\ i < sn}
@@ -131,6 +132,7 @@ theory Graph
     ensures{forall x y. (--+->) dfsnum_parent x y -> (--+->) dfsnum1 x y}
     ensures{current_parent = root \/ (--+->) dfsnum1 root current_parent}
     ensures{forall x. mem x dfsnum1 -> x = root \/ (--+->) dfsnum1 root x}
+    ensures{forall x p i. x <> root -> mapsto x (i, p) dfsnum1 -> edge p x}
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
