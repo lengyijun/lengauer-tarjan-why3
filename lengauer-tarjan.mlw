@@ -37,14 +37,13 @@ theory Graph
   clone set.SetApp as SE with type elt = (vertex, vertex)
 
   val constant vertices: SV.set
-  constant edges: SE.set
 
-  predicate edge (x y: vertex) = SE.mem (x,y) edges
+  predicate edge (x y: vertex)
 
   (* edges are well-formed *)
   axiom edges_def:
     forall x y: vertex.
-    SE.mem (x, y) edges -> SV.mem x vertices /\ SV.mem y vertices
+    edge x y -> SV.mem x vertices /\ SV.mem y vertices
 
 (* in order to induction in dfsnum_property_d *)
   inductive path vertex (list vertex) vertex =
@@ -83,12 +82,12 @@ theory Graph
   function preds vertex: SV.fset vertex
 
   axiom preds_def: forall v:vertex. forall u:vertex.
-   SE.mem (u,v) edges <-> SV.mem u (preds v)
+   edge u v <-> SV.mem u (preds v)
 
   (** direct successors *)
   val constant succs (u : vertex): SV.set
     ensures {SE.subset result vertices}
-    ensures { forall v:vertex. SE.mem (u,v) edges <-> SV.mem v result }
+    ensures { forall v:vertex. edge u v <-> SV.mem v result }
 
   val constant root: vertex
     ensures { SV.mem result vertices }
@@ -166,7 +165,6 @@ theory Graph
     forall x. mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent
 
   (* helper of dfsnum_property_c *)
-  (* TODO: an induction {variant = dfsnum x} is enough, but I don't know how to express it *)
   lemma dfsnum_property_d : 
     forall x p. path root p x -> mem x dfsnum_parent 
 
