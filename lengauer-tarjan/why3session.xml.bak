@@ -578,7 +578,7 @@
  <proof prover="0"><undone/></proof>
  </goal>
  <goal name="corollary1">
- <proof prover="0"><undone/></proof>
+ <proof prover="0"><result status="timeout" time="100.000000" steps="530044"/></proof>
  </goal>
  <goal name="theorem4">
  <proof prover="0"><undone/></proof>
