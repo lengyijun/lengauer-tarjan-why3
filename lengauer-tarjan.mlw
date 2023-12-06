@@ -195,8 +195,13 @@ theory Graph
   lemma just_special_path : 
     forall x y l. (-+->) y l x -> path y l x
 
+  lemma dfsnum_property_g : 
+    forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
+
   (* strict dominate *)
   predicate dominate (x y : vertex) = mem x dfsnum_parent /\ mem y dfsnum_parent /\ y <> root /\ forall p. path root p y -> L.mem x (Cons root p)
+
+  lemma strict_dominate : forall x y. dominate x y -> x <> y
 
   predicate idom (idominator : vertex) (y : vertex) = mem idominator dfsnum_parent /\ mem y dfsnum_parent /\ y <> root /\ forall x. dominate x y -> (x = idominator \/ dominate x idominator)
 
