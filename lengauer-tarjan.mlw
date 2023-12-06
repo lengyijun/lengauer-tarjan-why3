@@ -31,53 +31,7 @@ theory Graph
   use ref.Ref
   use MMap
   use set.Fset as SS
-
-  (* the graph is defined by a set of vertices and a set of edges *)
-  type vertex
-
-
-  clone set.SetApp as SV with type elt = vertex
-  clone set.SetApp as SE with type elt = (vertex, vertex)
-
-  val constant vertices: SV.set
-
-  predicate edge (x y: vertex)
-
-  (* edges are well-formed *)
-  axiom edges_def:
-    forall x y: vertex.
-    edge x y -> SV.mem x vertices /\ SV.mem y vertices
-
-(* in order to induction in dfsnum_property_d *)
-  inductive path vertex (list vertex) vertex =
-  | Path_empty:
-      forall x y. edge x y -> path x Nil y
-  | Path_cons:
-      forall x y z: vertex, l: list vertex.
-      path x l y -> edge y z -> path x (l ++ Cons y Nil) z 
-  (** `path v0 [v1; ...; vn-1] vn`
-     means a path from `v0` to `vn` composed of `n` edges `(vi,vi+1)`. *)
-
-  lemma path_left_extension:
-    forall x y z: vertex, l: list vertex.
-    edge x y -> path y l z -> path x (Cons y l) z
-
-  lemma path_right_inversion:
-    forall x z: vertex, l: list vertex. path x l z ->
-       (edge x z /\ l = Nil)
-    \/ (exists y: vertex, l': list vertex.
-        edge x y /\ path y l' z /\ l = Cons y l')
-
-  lemma path_trans:
-    forall x y z: vertex, l1 l2: list vertex.
-    path y l2 z -> path x l1 y -> path x (l1 ++ (Cons y l2)) z
-
-  lemma empty_path:
-    forall x y: vertex. path x Nil y -> edge x y
-
-  lemma path_decomposition:
-    forall l1 [@induction] x y z l2.
-    path x (l1 ++ Cons y l2) z -> path x l1 y /\ path y l2 z
+  use dominator.Graph
 
   (** direct predecessors *)
   function preds vertex: SV.fset vertex
@@ -89,9 +43,6 @@ theory Graph
   val constant succs (u : vertex): SV.set
     ensures {SE.subset result vertices}
     ensures { forall v:vertex. edge u v <-> SV.mem v result }
-
-  val constant root: vertex
-    ensures { SV.mem result vertices }
 
   lemma path_in_vertices:
     forall v1 v2: vertex, l: list vertex.
@@ -198,12 +149,6 @@ theory Graph
   lemma dfsnum_property_g : 
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
-  (* strict dominate *)
-  predicate dominate (x y : vertex) = mem x dfsnum_parent /\ mem y dfsnum_parent /\ y <> root /\ forall p. path root p y -> L.mem x (Cons root p)
-
-  lemma strict_dominate : forall x y. dominate x y -> x <> y
-
-  predicate idom (idominator : vertex) (y : vertex) = mem idominator dfsnum_parent /\ mem y dfsnum_parent /\ y <> root /\ forall x. dominate x y -> (x = idominator \/ dominate x idominator)
 
 predicate precedes (x y: 'a) (s: list 'a) =
   exists s1 s2. s = s1 ++ (Cons x s2) /\ L.mem y (Cons x s2)
@@ -283,14 +228,6 @@ lemma precedes_trans:
   lemma acycle_path_exists_a : forall x y p. path x p y -> not simplelist p -> exists p1. simplelist p1 /\ path x p1 y /\ length p1 < length p
 
   lemma acycle_path_exists_b : forall x y p. path x p y -> exists p1. simplelist p1 /\ path x p1 y
-
-
-(*
-https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
-*)
-  lemma idom_exists : forall y. mem y dfsnum_parent /\ y <> root -> exists idominator. idom idominator y
-
-  lemma idom_unique : forall n m1 m2. idom m1 n -> idom m2 n -> m1 = m2
 
   lemma lemma2_helper_a : forall d w. dominate d w -> exists l. (-+->) root l w
 

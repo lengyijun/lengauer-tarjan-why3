@@ -1,0 +1,117 @@
+
+(* definition of graph and dominator *)
+module Graph
+    use list.List
+    use list.Reverse
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.NumOcc
+    use list.Elements as E
+    use int.Int
+    use ref.Ref
+    use set.Fset as SS
+
+  type vertex
+
+  clone set.SetApp as SV with type elt = vertex
+  clone set.SetApp as SE with type elt = (vertex, vertex)
+
+
+  val constant vertices: SV.set
+
+  val constant root: vertex
+    ensures { SV.mem result vertices }
+
+  predicate edge (x y: vertex)
+
+  (* edges are well-formed *)
+  axiom edges_def:
+    forall x y: vertex.
+    edge x y -> SV.mem x vertices /\ SV.mem y vertices
+
+  inductive path vertex (list vertex) vertex =
+  | Path_empty:
+      forall x y. edge x y -> path x Nil y
+  | Path_cons:
+      forall x y z: vertex, l: list vertex.
+      path x l y -> edge y z -> path x (l ++ Cons y Nil) z 
+  (** `path v0 [v1; ...; vn-1] vn`
+     means a path from `v0` to `vn` composed of `n` edges `(vi,vi+1)`. *)
+
+  lemma path_left_extension:
+    forall x y z: vertex, l: list vertex.
+    edge x y -> path y l z -> path x (Cons y l) z
+
+  lemma path_right_inversion:
+    forall x z: vertex, l: list vertex. path x l z ->
+       (edge x z /\ l = Nil)
+    \/ (exists y: vertex, l': list vertex.
+        edge x y /\ path y l' z /\ l = Cons y l')
+
+  lemma path_trans:
+    forall x y z: vertex, l1 l2: list vertex.
+    path y l2 z -> path x l1 y -> path x (l1 ++ (Cons y l2)) z
+
+  lemma empty_path:
+    forall x y: vertex. path x Nil y -> edge x y
+
+  lemma path_decomposition:
+    forall l1 [@induction] x y z l2.
+    path x (l1 ++ Cons y l2) z -> path x l1 y /\ path y l2 z
+
+  (* strict dominate *)
+  predicate dominate (x y : vertex) = (exists p. path root p y) /\ y <> root /\ forall p. path root p y -> L.mem x (Cons root p)
+
+  lemma root_dominate_all : forall x. (exists p. path root p x) -> x <> root -> dominate root x
+
+  lemma dominate_em : forall x y. dominate x y \/ not dominate x y
+
+(*
+  (* do we need this ? *)
+  lemma dominator_split : forall x y . dominate x y -> forall p. path root p y -> exists l1 l2. p = l1 ++ (Cons x l2) /\ not L.mem x l2
+
+  lemma mutual_dominate_conflict: forall x y. dominate x y -> dominate y x -> False
+
+  lemma strict_dominate : forall x y. dominate x y -> x <> y
+*)
+
+  predicate idom (idominator : vertex) (y : vertex) = exists p. path root p y /\ 
+                        dominate idominator y /\
+                        exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not dominate x y)
+
+(*
+https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
+*)
+
+  predicate p1(n : int) = forall p1 p2 y.
+                            length p1 <= n -> 
+                            path root (p1 ++ p2) y -> 
+                            (forall x. L.mem x p2 -> not dominate x y) ->
+                            y <> root -> 
+                            exists idominator. dominate idominator y /\ exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p1) /\ (forall x. L.mem x l2 -> not dominate x y)
+
+  clone int.SimpleInduction as Exists_induction with predicate p = p1
+
+  lemma idom_exists_a : forall p y. path root p y -> y <> root -> exists idominator. idom idominator y
+  lemma idom_exists_b : forall y. (exists p. path root p y) -> y <> root -> exists idominator. idom idominator y
+
+  predicate p2 (n : int) = forall x y z l1 l2. 
+                                length l1 <= n -> 
+                                L.mem y l1 -> 
+                                path x (l1 ++ Cons y l2) z -> 
+                                exists l1'. path x (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' < length l1
+
+  clone int.SimpleInduction with predicate p = p2
+
+  lemma no_acycle_a : forall y z l1 l2. L.mem y l1 -> path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' < length l1
+
+  lemma no_acycle: forall y z l1 l2. path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' <= length l1
+
+  lemma idom_unique : forall n m1 m2. idom m1 n -> idom m2 n -> m1 = m2
+
+(*
+  lemma shit : forall x. idom root x
+*)
+
+end
