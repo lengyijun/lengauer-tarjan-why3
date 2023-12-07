@@ -31,7 +31,7 @@ theory Graph
   use ref.Ref
   use MMap
   use set.Fset as SS
-  use dominator.
+  use dominator.Graph
 
   (** direct predecessors *)
   function preds vertex: SV.fset vertex
@@ -57,6 +57,8 @@ theory Graph
 
   lemma span_cutoff: forall mp x l y. (--+->) mp x l y -> forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
 
+  predicate (--*->) (mp : fmap vertex (int, vertex)) (x y : vertex) =  x = y \/ exists l. (--+->) mp x l y
+
   let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
     requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
     requires{forall x p i. x <> root -> mapsto x (i, p) dfsnum_parent -> edge p x}
@@ -71,6 +73,13 @@ theory Graph
     requires{forall x i p. x <> root -> mapsto x (i,p) dfsnum_parent -> (mem p dfsnum_parent /\ let (j, _) = find p dfsnum_parent in j < i)}
     requires{current_parent = root \/ exists l. (--+->) dfsnum_parent root l current_parent}
     requires{forall x. mem x dfsnum_parent -> x = root \/ exists l. (--+->) dfsnum_parent root l x}
+    requires{
+            forall v w iv iw pv pw. mapsto v (iv, pv) dfsnum_parent 
+                                      -> mapsto w (iw, pw) dfsnum_parent 
+                                      -> iv <= iw 
+                                      -> forall p. path v p w
+                                      -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+    }
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
@@ -87,20 +96,31 @@ theory Graph
     ensures{current_parent = root \/ exists l. (--+->) dfsnum1 root l current_parent}
     ensures{forall x. mem x dfsnum1 -> x = root \/ exists l. (--+->) dfsnum1 root l x}
     ensures{forall x p i. x <> root -> mapsto x (i, p) dfsnum1 -> edge p x}
+    ensures{
+            forall v w iv iw pv pw. mapsto v (iv, pv) dfsnum1
+                                      -> mapsto w (iw, pw) dfsnum1
+                                      -> iv <= iw 
+                                      -> forall p. path v p w
+                                      -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum1 x v /\ (--*->) dfsnum1 x w
+    }
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
     else
-      let x = SV.choose roots in 
-      let roots' = rremove x roots in
-        if mmem x dfsnum_parent then 
+      let z = SV.choose roots in 
+      let roots' = rremove z roots in
+        if mmem z dfsnum_parent then 
           dfs current_parent grey roots' dfsnum_parent vertex_mp sn
         else
-          let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
-          let vertex_mp' = addd sn x vertex_mp in
+          let dfsnum_parent' = addd z (sn, current_parent) dfsnum_parent in
+          (*
+          assert {forall v iv pv. mapsto v (iv, pv) dfsnum_parent -> forall p. path v p z -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x z};
+          *)
+          assert {forall v iv pv. mapsto v (iv, pv) dfsnum_parent -> forall p. path v p z -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ L.mem x grey};
+          let vertex_mp' = addd sn z vertex_mp in
           let sn' = sn + 1 in 
           assert {forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum_parent' x l y};
-          let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (Cons x grey) (succs x) dfsnum_parent' vertex_mp' sn' in
+          let (dfsnum_parent'', vertex_mp'', sn'') = dfs z (Cons z grey) (succs z) dfsnum_parent' vertex_mp' sn' in
           dfs current_parent grey roots' dfsnum_parent'' vertex_mp'' sn''
 
 
@@ -150,85 +170,6 @@ theory Graph
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 
-predicate precedes (x y: 'a) (s: list 'a) =
-  exists s1 s2. s = s1 ++ (Cons x s2) /\ L.mem y (Cons x s2)
-
-lemma precedes_mem:
-  forall x y, s: list 'a. precedes x y s -> L.mem x s /\ L.mem y s
-
-lemma head_precedes:
-  forall x y, s: list 'a. L.mem y (Cons x s) -> precedes x y (Cons x s)
-
-lemma precedes_tail:
-  forall x y z, s: list 'a. x <> z -> (precedes x y (Cons z s) <-> precedes x y s)
-
-lemma tail_not_precedes:
-  forall x y, s: list 'a. precedes y x (Cons x s) -> not L.mem x s -> y = x
-
-lemma split_list_precedes:
-  forall x y, s1 s2: list 'a. L.mem y (s1 ++ Cons x Nil) -> precedes y x (s1 ++ Cons x s2)
-
-lemma precedes_refl:
-  forall x, s: list 'a. precedes x x s <-> L.mem x s
-
-lemma precedes_append_left:
-  forall x y, s1 s2: list 'a. precedes x y s1 -> precedes x y (s2 ++ s1)
-
-lemma precedes_append_left_iff:
-  forall x y, s1 s2: list 'a. not L.mem x s1 -> precedes x y (s1 ++ s2) <-> precedes x y s2
-
-lemma precedes_append_right:
-  forall x y, s1 s2: list 'a. precedes x y s1 -> precedes x y (s1 ++ s2)
-
-lemma precedes_append_right_iff:
-  forall x y, s1 s2: list 'a. not L.mem y s2 -> precedes x y (s1 ++ s2) <-> precedes x y s1
-
-(* simple lists *)
-
-predicate simplelist (l: list 'a) = forall x. num_occ x l <= 1
-
-lemma simplelist_tl:
-  forall x: 'a, l. simplelist (Cons x l) -> simplelist l /\ not L.mem x l
-
-lemma simplelist_split:
-  forall x: 'a, l1 [@induction] l2 l3 [@induction] l4. simplelist (l1 ++ Cons x l2)
-     -> l1 ++ Cons x l2 = l3 ++ Cons x l4 -> l1 = l3 /\ l2 = l4
-
-lemma simplelist_app_disjoint:
-  forall l1 l2: list 'a. simplelist (l1 ++ l2) -> SS.inter (E.elements l1) (E.elements l2) = SS.empty
-
-lemma simplelist_length:
-  forall s: list 'a. simplelist s -> length s = SS.cardinal (E.elements s)
-
-lemma precedes_antisym:
-  forall x y, s: list 'a. simplelist s
-    -> precedes x y s -> precedes y x s -> x = y
-
-lemma precedes_trans:
-  forall x y z, s: list 'a. simplelist s
-    -> precedes x y s -> precedes y z s -> precedes x z s
-
-  lemma not_simplelist_constains_duplicate_d : forall l : list 'a. forall z. num_occ z l >= 1 <-> exists l1 l2. l = l1 ++ Cons z l2
-
-  lemma not_simplelist_constains_duplicate_b : forall l : list 'a. not simplelist l -> exists z. num_occ z l > 1
-
-  lemma not_simplelist_constains_duplicate_c : forall l : list 'a. not simplelist l -> exists z l1 l2. l = l1 ++ l2 /\ num_occ z l1 >= 1 /\ num_occ z l2 >= 1
-
-  lemma not_simplelist_constains_duplicate_a : forall l [@induction] : list 'a. not simplelist l -> exists l1 l2 l3 z. l = l1 ++ (Cons z l2) ++ Cons z l3
-
-  lemma acycle_path_exists_d : forall x y z l2 l3. path x ((Cons z l2) ++ (Cons z l3)) y -> path x (Cons z l3) y
-
-  lemma acycle_path_exists_c : forall x y z l1 l2 l3. path x (l1 ++ (Cons z l2) ++ (Cons z l3)) y -> path x (l1 ++ Cons z l3) y
-
-  predicate p (n : int) = forall x y p. length p <= n -> path x p y -> not simplelist p -> exists p1. simplelist p1 /\ path x p1 y /\ length p1 < length p
-
-  clone int.SimpleInduction 
-    with predicate p = p, lemma base, lemma induction_step
-
-  lemma acycle_path_exists_a : forall x y p. path x p y -> not simplelist p -> exists p1. simplelist p1 /\ path x p1 y /\ length p1 < length p
-
-  lemma acycle_path_exists_b : forall x y p. path x p y -> exists p1. simplelist p1 /\ path x p1 y
-
   lemma lemma2_helper_a : forall d w. dominate d w -> exists l. (-+->) root l w
 
   lemma lemma2_helper_b : forall d w. dominate d w -> exists l. (-+->) d l w
@@ -263,6 +204,9 @@ lemma precedes_trans:
                                         -> idom idom_v v 
                                         -> v -*-> w 
                                         -> v -*-> idom_w \/ idom_w -*-> idom_v
+  lemma theorem2_a : forall w idom_w . idom idom_w w
+                          -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
+                          -> dominate (semi_dominator w) w
 
   lemma theorem2 : forall w idom_w . idom idom_w w
                           -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))

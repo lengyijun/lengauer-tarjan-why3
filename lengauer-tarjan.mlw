@@ -57,6 +57,10 @@ theory Graph
 
   lemma span_cutoff: forall mp x l y. (--+->) mp x l y -> forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
 
+  lemma concat_lemma : forall mp x l1 y l2 z. (--+->) mp y l2 z -> (--+->) mp x l1 y -> (--+->) mp x (l1 ++ Cons y l2) z
+
+  predicate (--*->) (mp : fmap vertex (int, vertex)) (x y : vertex) =  x = y \/ exists l. (--+->) mp x l y
+
   let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
     requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
     requires{forall x p i. x <> root -> mapsto x (i, p) dfsnum_parent -> edge p x}
@@ -71,6 +75,23 @@ theory Graph
     requires{forall x i p. x <> root -> mapsto x (i,p) dfsnum_parent -> (mem p dfsnum_parent /\ let (j, _) = find p dfsnum_parent in j < i)}
     requires{current_parent = root \/ exists l. (--+->) dfsnum_parent root l current_parent}
     requires{forall x. mem x dfsnum_parent -> x = root \/ exists l. (--+->) dfsnum_parent root l x}
+    requires{forall x. L.mem x grey -> (--*->) dfsnum_parent x current_parent}
+    requires{mapsto root (0, root) dfsnum_parent}
+    (*
+    requires { forall v w iv pv. 
+                                       edge v w
+                                    -> mapsto v (iv, pv) dfsnum_parent 
+                                    -> not L.mem v grey
+                                    -> exists iw pw. mapsto w (iw, pw) dfsnum_parent 
+             }
+    *)
+    requires { forall v w iv iw pv pw. 
+                                       edge v w
+                                    -> mapsto v (iv, pv) dfsnum_parent 
+                                    -> mapsto w (iw, pw) dfsnum_parent 
+                                    -> iv < iw 
+                                    -> exists l. (--+->) dfsnum_parent v l w
+            }
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
@@ -87,20 +108,38 @@ theory Graph
     ensures{current_parent = root \/ exists l. (--+->) dfsnum1 root l current_parent}
     ensures{forall x. mem x dfsnum1 -> x = root \/ exists l. (--+->) dfsnum1 root l x}
     ensures{forall x p i. x <> root -> mapsto x (i, p) dfsnum1 -> edge p x}
+    ensures{mapsto root (0, root) dfsnum1}
+    ensures{forall x. L.mem x grey -> (--*->) dfsnum1 x current_parent}
+    (*
+    ensures{ forall v w iv pv. 
+                                       edge v w
+                                    -> mapsto v (iv, pv) dfsnum1
+                                    -> not L.mem v grey
+                                    -> exists iw pw. mapsto w (iw, pw) dfsnum1
+            }
+    *)
+    ensures{ forall v w iv iw pv pw. 
+                                       edge v w
+                                    -> mapsto v (iv, pv) dfsnum1
+                                    -> mapsto w (iw, pw) dfsnum1
+                                    -> iv < iw 
+                                    -> exists l. (--+->) dfsnum1 v l w
+            }
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
     else
-      let x = SV.choose roots in 
-      let roots' = rremove x roots in
-        if mmem x dfsnum_parent then 
+      let z = SV.choose roots in 
+      let roots' = rremove z roots in
+        if mmem z dfsnum_parent then 
           dfs current_parent grey roots' dfsnum_parent vertex_mp sn
         else
-          let dfsnum_parent' = addd x (sn, current_parent) dfsnum_parent in
-          let vertex_mp' = addd sn x vertex_mp in
+          let dfsnum_parent' = addd z (sn, current_parent) dfsnum_parent in
+          let vertex_mp' = addd sn z vertex_mp in
           let sn' = sn + 1 in 
           assert {forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum_parent' x l y};
-          let (dfsnum_parent'', vertex_mp'', sn'') = dfs x (Cons x grey) (succs x) dfsnum_parent' vertex_mp' sn' in
+          assert {(--+->) dfsnum_parent' current_parent Nil z};
+          let (dfsnum_parent'', vertex_mp'', sn'') = dfs z (Cons z grey) (succs z) dfsnum_parent' vertex_mp' sn' in
           dfs current_parent grey roots' dfsnum_parent'' vertex_mp'' sn''
 
 
@@ -184,6 +223,10 @@ theory Graph
                                         -> idom idom_v v 
                                         -> v -*-> w 
                                         -> v -*-> idom_w \/ idom_w -*-> idom_v
+                                        
+  lemma theorem2_a : forall w idom_w . idom idom_w w
+                          -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
+                          -> dominate (semi_dominator w) w
 
   lemma theorem2 : forall w idom_w . idom idom_w w
                           -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
