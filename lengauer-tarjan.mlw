@@ -61,22 +61,24 @@ theory Graph
 
   predicate (--*->) (mp : fmap vertex (int, vertex)) (x y : vertex) =  x = y \/ exists l. (--+->) mp x l y
 
+  predicate wf_dfsnum_parent (dfsnum_parent : fmap vertex (int, vertex)) = 
+      mapsto root (0, root) dfsnum_parent /\
+      (forall x p ix. x <> root -> mapsto x (ix, p) dfsnum_parent -> edge p x /\ exists gp ip. (mapsto p (ip, gp) dfsnum_parent /\ ip < ix)) /\
+      SV.subset dfsnum_parent.domain vertices
+
   let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) (vertex_mp : fmap int vertex) (sn : int) : (dfsnum1 : fmap vertex (int, vertex), vertex_mp1 : fmap int vertex, sn1 : int) = 
+    requires{wf_dfsnum_parent dfsnum_parent}
     requires{forall x i. (exists p. mapsto x (i, p) dfsnum_parent) <-> mapsto i x vertex_mp}
-    requires{forall x p i. x <> root -> mapsto x (i, p) dfsnum_parent -> edge p x}
     requires{forall x. not L.mem x grey -> mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent}
     requires{forall x. SV.mem x (succs current_parent) -> mem x dfsnum_parent \/ SV.mem x roots }
     requires{exists i p. mapsto current_parent (i, p) dfsnum_parent /\ i < sn}
     requires{SV.subset roots vertices}
-    requires{SV.subset dfsnum_parent.domain vertices}
     requires{forall x. mem x dfsnum_parent -> let (a, _) = find x dfsnum_parent in a < sn}
     requires{forall x y. x <> y -> mem x dfsnum_parent -> mem y dfsnum_parent -> let (a, _) = find x dfsnum_parent in let (b, _) = find y dfsnum_parent in a <> b}
     requires{forall x. SV.mem x roots -> edge current_parent x}
-    requires{forall x i p. x <> root -> mapsto x (i,p) dfsnum_parent -> (mem p dfsnum_parent /\ let (j, _) = find p dfsnum_parent in j < i)}
     requires{current_parent = root \/ exists l. (--+->) dfsnum_parent root l current_parent}
     requires{forall x. mem x dfsnum_parent -> x = root \/ exists l. (--+->) dfsnum_parent root l x}
     requires{forall x. L.mem x grey -> (--*->) dfsnum_parent x current_parent}
-    requires{mapsto root (0, root) dfsnum_parent}
     (*
     requires { forall v w iv pv. 
                                        edge v w
@@ -95,20 +97,17 @@ theory Graph
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
-    ensures{ SV.subset dfsnum1.domain vertices}
-    ensures{ forall x. mem x dfsnum_parent -> find x dfsnum_parent = find x dfsnum1}
+    ensures{ forall x y. mapsto x y dfsnum_parent -> mapsto x y dfsnum1}
     (* ensures{ forall x. mem x vertex_mp -> find x vertex_mp = find x vertex_mp1}  unprovable, do we need it ? *)
     ensures{ sn1 >= sn}
     ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
-    ensures{forall x i p. x <> root -> mapsto x (i,p) dfsnum1 -> (mem p dfsnum1 /\ let (j, _) = find p dfsnum1 in j < i)}
     ensures{forall x. SV.mem x roots -> mem x dfsnum1}
     ensures{forall x. SV.mem x (succs current_parent) -> mem x dfsnum1}
     ensures{forall x. not L.mem x grey -> mem x dfsnum1 -> forall y. SV.mem y (succs x) -> mem y dfsnum1}
     ensures{forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum1 x l y}
     ensures{current_parent = root \/ exists l. (--+->) dfsnum1 root l current_parent}
     ensures{forall x. mem x dfsnum1 -> x = root \/ exists l. (--+->) dfsnum1 root l x}
-    ensures{forall x p i. x <> root -> mapsto x (i, p) dfsnum1 -> edge p x}
-    ensures{mapsto root (0, root) dfsnum1}
+    ensures{wf_dfsnum_parent dfsnum1}
     ensures{forall x. L.mem x grey -> (--*->) dfsnum1 x current_parent}
     (*
     ensures{ forall v w iv pv. 
