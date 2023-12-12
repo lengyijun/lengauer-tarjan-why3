@@ -94,6 +94,14 @@ theory Graph
                                     -> iv < iw 
                                     -> exists l. (--+->) dfsnum_parent v l w
             }
+    requires{ forall a ia pa.                                          
+                 L.mem a grey ->
+                 mapsto a (ia, pa) dfsnum_parent  -> 
+                 forall b ib pb.                    
+                    mapsto b (ib, pb) dfsnum_parent -> 
+                    ia < ib < sn ->                   
+                    exists l. (--+->) dfsnum_parent a l b 
+    }
     ensures{ forall x y. x <> y -> mem x dfsnum1 -> mem y dfsnum1 -> let (a, _) = find x dfsnum1 in let (b, _) = find y dfsnum1 in a <> b  }
     ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
     ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
@@ -124,6 +132,14 @@ theory Graph
                                     -> iv < iw 
                                     -> exists l. (--+->) dfsnum1 v l w
             }
+    ensures{ forall a ia pa.                                                                                                                                                    
+                 L.mem a grey ->
+                 mapsto a (ia, pa) dfsnum1        ->             
+                 forall b ib pb.                                 
+                    mapsto b (ib, pb) dfsnum1 ->           
+                    ia < ib < sn1 ->                              
+                    exists l. (--+->) dfsnum1 a l b        
+    }
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
       (dfsnum_parent , vertex_mp, sn)
