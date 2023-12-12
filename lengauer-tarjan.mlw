@@ -16,6 +16,9 @@ module MMap
 
   val constant create : (fmap 'k 'v)
     ensures {result = empty }
+
+  val ssize (x : fmap 'k 'v) : int
+    ensures {result = size x}
  
 end
 
@@ -115,6 +118,22 @@ theory Graph
       let sn_2 = size large in
       sn_2 > sn_1 /\
       (forall x y. mapsto x y small -> mapsto x y large)
+
+  predicate pc (n : int) = forall large small.
+                       (large >> small) ->
+                       forall x y l. 
+                          length l <= n ->
+                         (--+->) small x l y ->
+                         (--+->) large x l y
+
+  clone int.SimpleInduction as Inductionc with predicate p = pc
+
+  lemma unnamed_c : forall large small.
+                       (large >> small) ->
+                       forall x y l. 
+                         (--+->) small x l y ->
+                         (--+->) large x l y
+
     
   predicate pb (n : int) = forall large small.
                        (large >> small) ->
@@ -134,10 +153,7 @@ theory Graph
                          (--+->) small x l y
                             
 
-
-  
-(*
-  let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (e : env) : env = 
+  let rec constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : (fmap vertex (int, vertex))) : fmap vertex (int, vertex)= 
     requires{wf_dfsnum_parent dfsnum_parent}
     requires{forall x. not L.mem x grey -> mem x dfsnum_parent -> forall y. SV.mem y (succs x) -> mem y dfsnum_parent}
     requires{forall x. SV.mem x (succs current_parent) -> mem x dfsnum_parent \/ SV.mem x roots }
@@ -167,7 +183,7 @@ theory Graph
                  mapsto a (ia, pa) dfsnum_parent  -> 
                  forall b ib pb.                    
                     mapsto b (ib, pb) dfsnum_parent -> 
-                    ia < ib < sn ->                   
+                    ia < ib < size dfsnum_parent ->                   
                     exists l. (--+->) dfsnum_parent a l b 
     }
      requires { forall a c lac ia pa ic pc.                                     
@@ -179,68 +195,63 @@ theory Graph
                       -> ia < ib < ic                                           
                       -> exists lab. (--+->) dfsnum_parent a lab b              
               }
-    ensures{result >> e}
-    ensures{ forall x. mem x dfsnum1 -> let (a, _) = find x dfsnum1 in a < sn1}
-    ensures{ SV.subset dfsnum_parent.domain dfsnum1.domain}
-    ensures{ sn1 >= sn}
-    ensures{forall x i. (exists p. mapsto x (i, p) dfsnum1) <-> mapsto i x vertex_mp1}
-    ensures{forall x. SV.mem x roots -> mem x dfsnum1}
-    ensures{forall x. SV.mem x (succs current_parent) -> mem x dfsnum1}
-    ensures{forall x. not L.mem x grey -> mem x dfsnum1 -> forall y. SV.mem y (succs x) -> mem y dfsnum1}
-    ensures{forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum1 x l y}
-    ensures{current_parent = root \/ exists l. (--+->) dfsnum1 root l current_parent}
-    ensures{forall x. mem x dfsnum1 -> x = root \/ exists l. (--+->) dfsnum1 root l x}
-    ensures{forall x. L.mem x grey -> (--*->) dfsnum1 x current_parent}
+    ensures{result >> dfsnum_parent}
+    ensures{ SV.subset dfsnum_parent.domain result.domain}
+    ensures{forall x. SV.mem x roots -> mem x result}
+    ensures{forall x. SV.mem x (succs current_parent) -> mem x result}
+    ensures{forall x. not L.mem x grey -> mem x result -> forall y. SV.mem y (succs x) -> mem y result}
+    ensures{current_parent = root \/ exists l. (--+->) result root l current_parent}
+    ensures{forall x. mem x result -> x = root \/ exists l. (--+->) result root l x}
+    ensures{forall x. L.mem x grey -> (--*->) result x current_parent}
     (*
     ensures{ forall v w iv pv. 
                                        edge v w
-                                    -> mapsto v (iv, pv) dfsnum1
+                                    -> mapsto v (iv, pv) result
                                     -> not L.mem v grey
-                                    -> exists iw pw. mapsto w (iw, pw) dfsnum1
+                                    -> exists iw pw. mapsto w (iw, pw) result
             }
     *)
     ensures{ forall v w iv iw pv pw. 
                                        edge v w
-                                    -> mapsto v (iv, pv) dfsnum1
-                                    -> mapsto w (iw, pw) dfsnum1
+                                    -> mapsto v (iv, pv) result
+                                    -> mapsto w (iw, pw) result
                                     -> iv < iw 
-                                    -> exists l. (--+->) dfsnum1 v l w
+                                    -> exists l. (--+->) result v l w
             }
-    ensures{ forall a ia pa.                                                                                                                                                    
+    ensures{ forall a ia pa.  
                  L.mem a grey ->
-                 mapsto a (ia, pa) dfsnum1        ->             
+                 mapsto a (ia, pa) result        ->             
                  forall b ib pb.                                 
-                    mapsto b (ib, pb) dfsnum1 ->           
-                    ia < ib < sn1 ->                              
-                    exists l. (--+->) dfsnum1 a l b        
+                    mapsto b (ib, pb) result ->           
+                    ia < ib < size result ->                              
+                    exists l. (--+->) result a l b        
     }
     ensures { forall a c lac ia pa ic pc.              
-                  (--+->) dfsnum1 a lac c              
-               -> mapsto a (ia, pa) dfsnum1            
-               -> mapsto c (ic, pc) dfsnum1            
+                  (--+->) result a lac c              
+               -> mapsto a (ia, pa) result            
+               -> mapsto c (ic, pc) result            
                -> forall b ib pb.                      
-                  mapsto b (ib, pb) dfsnum1            
+                  mapsto b (ib, pb) result            
                -> ia < ib < ic                         
-               -> exists lab. (--+->) dfsnum1 a lab b  
+               -> exists lab. (--+->) result a lab b  
    }
     variant{SV.cardinal vertices - size dfsnum_parent, SV.cardinal roots}
     if SV.is_empty roots then
-      (dfsnum_parent , vertex_mp, sn)
+      dfsnum_parent
     else
       let z = SV.choose roots in 
       let roots' = rremove z roots in
         if mmem z dfsnum_parent then 
-          dfs current_parent grey roots' dfsnum_parent vertex_mp sn
+          dfs current_parent grey roots' dfsnum_parent 
         else
-          let dfsnum_parent' = addd z (sn, current_parent) dfsnum_parent in
-          let vertex_mp' = addd sn z vertex_mp in
-          let sn' = sn + 1 in 
-          assert {forall x y l. (--+->) dfsnum_parent x l y -> (--+->) dfsnum_parent' x l y};
+          let dfsnum_parent' = addd z (ssize dfsnum_parent, current_parent) dfsnum_parent in
+          assert {dfsnum_parent' >> dfsnum_parent };
           assert {(--+->) dfsnum_parent' current_parent Nil z};
-          let (dfsnum_parent'', vertex_mp'', sn'') = dfs z (Cons z grey) (succs z) dfsnum_parent' vertex_mp' sn' in
-          dfs current_parent grey roots' dfsnum_parent'' vertex_mp'' sn''
+          let dfsnum_parent'' = dfs z (Cons z grey) (succs z) dfsnum_parent' in
+          dfs current_parent grey roots' dfsnum_parent'' 
 
 
+(*
   let constant dfsnum_N : (fmap vertex (int, vertex) , fmap int vertex, int) = dfs root (Cons root Nil) (succs root) (addd root (0, root) create) (addd 0 root create) 1 
 
   let constant dfsnum_parent : fmap vertex (int, vertex) = let (dfsnum_parent, _ , _) = dfsnum_N in dfsnum_parent
