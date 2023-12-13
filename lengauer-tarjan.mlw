@@ -392,27 +392,22 @@ theory Graph
                                       -> forall p. path v p w
                                       -> exists x. L.mem x (Cons v p) /\ x -*-> v /\ x -*-> w
 
-  val constant semi_dominate_candidates (w : vertex) : SV.set
-    requires {mem w dfsnum_parent}
-    requires {w <> root}
-    ensures{forall v. SV.mem v result <-> exists p. path v p w /\ (forall x. L.mem x p -> dfsnum x > dfsnum w)} 
+  (* candidate of semidominate *)
+  predicate (++>) (v w : vertex) = w <> root /\ mem w dfsnum_parent /\ mem v dfsnum_parent /\ exists p. path v p w /\ (forall x. L.mem x p -> dfsnum x > dfsnum w)
 
-  val constant semi_dominator (x : vertex) : vertex
-    requires {mem x dfsnum_parent}
-    requires {x <> root}
-    ensures { SV.mem result (semi_dominate_candidates x)}
-    ensures {forall v. SV.mem v (semi_dominate_candidates x) -> dfsnum result <= dfsnum v}
+  (* smallest semi dominator *)
+  predicate (+>) (v w : vertex) = v ++> w /\ forall x. x ++> w -> dfsnum v <= dfsnum x
 
   lemma parent_is_candidate_of_semi_dominator :
-      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> SV.mem pw (semi_dominate_candidates w)
+      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> pw ++> w 
 
   lemma semi_dominator_less_equal_than_parent :
-      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> dfsnum (semi_dominator w) <= dfsnum pw
+      forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w <= dfsnum pw
 
   lemma semi_dominator_less_than_self :
-      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> dfsnum (semi_dominator w) < iw
+      forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w < iw
 
-  lemma lemma3 : forall w. w <> root -> exists l. (-+->) (semi_dominator w) l w
+  lemma lemma3 : forall w semi_w. semi_w +> w -> exists l. (-+->) semi_w l w
 
 (*
   lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w

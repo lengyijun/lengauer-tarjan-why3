@@ -79,9 +79,9 @@ module Graph
   lemma strict_dominate : forall x y. dominate x y -> x <> y
 *)
 
-  predicate idom (idominator : vertex) (y : vertex) = exists p. path root p y /\ 
-                        dominate idominator y /\
-                        exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not dominate x y)
+  predicate idom (idominator : vertex) (y : vertex) = dominate idominator y /\
+                        exists p. path root p y /\ 
+                          exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not dominate x y)
 
 (*
 https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
@@ -112,6 +112,9 @@ https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
   lemma no_acycle: forall y z l1 l2. path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' <= length l1
 
   lemma idom_unique : forall n m1 m2. idom m1 n -> idom m2 n -> m1 = m2
+
+  predicate (~~>) (v w: vertex) = dominate v w
+  predicate (~>)  (v w: vertex) = idom     v w
 
 (*
   lemma shit : forall x. idom root x
