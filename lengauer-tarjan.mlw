@@ -332,30 +332,89 @@ theory Graph
 
   lemma lemma2 : forall w idom_w. idom idom_w w /\ mem w dfsnum_parent -> exists l. (-+->) idom_w l w
 
+  predicate p_lemma1_helper (n : int) = forall l a ia pa t. 
+                                          length l = n ->
+                                          (forall x. L.mem x l -> mem x dfsnum_parent) ->
+                                          mapsto a (ia, pa) dfsnum_parent ->
+                                          ia < t ->
+                                          exists l1 l2 b ib pb. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
+
+  clone int.SimpleInduction as InductionLemma1Helper with predicate p = p_lemma1_helper
+
+  lemma lemma1_helper : 
+    forall l a ia pa t. 
+        (forall x. L.mem x l -> mem x dfsnum_parent) ->
+        mapsto a (ia, pa) dfsnum_parent ->
+        ia < t ->
+        exists l1 l2 b ib pb. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
+
+                              
+  lemma lemma1_helper_b : forall v w iv pv.
+                                       mapsto v (iv, pv) dfsnum_parent 
+                                    -> forall p. path v p w
+                                    -> forall x. L.mem x p -> mem x dfsnum_parent
+                                      by exists l2. path root l2 v
+                                        
+  predicate p_dfsnum_property_k (n : int) = forall v w iv pv iw pw l.
+                                       length l = n ->
+                                       mapsto v (iv, pv) dfsnum_parent ->
+                                       mapsto w (iw, pw) dfsnum_parent ->
+                                       iv < iw ->
+                                       path v l w ->
+                                       (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
+                                       exists p. (--+->) dfsnum_parent v p w
+                
+  clone int.SimpleInduction as InductionK with predicate p = p_dfsnum_property_k
+
+  lemma dfsnum_property_k : forall v w iv pv iw pw l.
+                                       mapsto v (iv, pv) dfsnum_parent ->
+                                       mapsto w (iw, pw) dfsnum_parent ->
+                                       iv < iw ->
+                                       path v l w ->
+                                       (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
+                                       exists p. (--+->) dfsnum_parent v p w
+                
+
+
+  predicate p_lemma1 (n : int) = forall v w iv iw pv pw. 
+                                         mapsto v (iv, pv) dfsnum_parent 
+                                      -> mapsto w (iw, pw) dfsnum_parent 
+                                      -> iv < iw 
+                                      -> forall p. path v p w
+                                      -> length p <= n
+                                      -> exists x. L.mem x (Cons v p) /\ x -*-> v /\ x -*-> w
+
+  clone int.SimpleInduction as InductionLemma1 with predicate p = p_lemma1
 
   lemma lemma1 : forall v w iv iw pv pw. mapsto v (iv, pv) dfsnum_parent 
                                       -> mapsto w (iw, pw) dfsnum_parent 
-                                      -> iv <= iw 
+                                      -> iv < iw 
                                       -> forall p. path v p w
                                       -> exists x. L.mem x (Cons v p) /\ x -*-> v /\ x -*-> w
 
-  predicate all_larger (l : list vertex) (w : vertex) = match l with 
-                                                         | Nil -> true
-                                                         | Cons vi l' -> (exists i j pv pw. mapsto vi (i, pv) dfsnum_parent /\ mapsto w (j, pw) dfsnum_parent /\ i > j) /\ all_larger l' w
-                                                        end
-
   val constant semi_dominate_candidates (w : vertex) : SV.set
     requires {mem w dfsnum_parent}
-    ensures { forall v. SV.mem v result <-> exists p. path v p w /\ all_larger p w } 
+    requires {w <> root}
+    ensures{forall v. SV.mem v result <-> exists p. path v p w /\ (forall x. L.mem x p -> dfsnum x > dfsnum w)} 
 
   val constant semi_dominator (x : vertex) : vertex
     requires {mem x dfsnum_parent}
+    requires {x <> root}
     ensures { SV.mem result (semi_dominate_candidates x)}
     ensures {forall v. SV.mem v (semi_dominate_candidates x) -> dfsnum result <= dfsnum v}
 
-(*
+  lemma parent_is_candidate_of_semi_dominator :
+      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> SV.mem pw (semi_dominate_candidates w)
+
+  lemma semi_dominator_less_equal_than_parent :
+      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> dfsnum (semi_dominator w) <= dfsnum pw
+
+  lemma semi_dominator_less_than_self :
+      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> dfsnum (semi_dominator w) < iw
+
   lemma lemma3 : forall w. w <> root -> exists l. (-+->) (semi_dominator w) l w
 
+(*
   lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w
 
   lemma lemma5 : forall v w idom_w idom_v. idom idom_w w 
