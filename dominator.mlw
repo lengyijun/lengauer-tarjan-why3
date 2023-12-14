@@ -116,8 +116,12 @@ https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
   predicate (~~>) (v w: vertex) = dominate v w
   predicate (~>)  (v w: vertex) = idom     v w
 
-(*
-  lemma shit : forall x. idom root x
-*)
+end
+
+module ShouldFail
+  use Graph
+
+  goal wrong1: forall x. idom root x
 
 end
+

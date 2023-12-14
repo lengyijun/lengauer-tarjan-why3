@@ -2,10 +2,12 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
+<prover id="0" name="Z3" version="4.12.2" timelimit="120" steplimit="0" memlimit="10000"/>
+<prover id="1" name="Eprover" version="2.0" timelimit="120" steplimit="0" memlimit="10000"/>
 <prover id="2" name="CVC4" version="1.8" timelimit="100" steplimit="0" memlimit="10000"/>
 <prover id="3" name="CVC5" version="1.0.8" timelimit="100" steplimit="0" memlimit="10000"/>
 <prover id="4" name="Alt-Ergo" version="2.5.2" timelimit="100" steplimit="0" memlimit="10000"/>
-<file format="whyml" proved="true">
+<file format="whyml">
 <path name=".."/><path name="dominator.mlw"/>
 <theory name="Graph" proved="true">
  <goal name="root&#39;vc" expl="VC for root" proved="true">
@@ -410,6 +412,14 @@
   </transf>
   </goal>
  </transf>
+ </goal>
+</theory>
+<theory name="ShouldFail">
+ <goal name="wrong1">
+ <proof prover="0"><result status="timeout" time="120.000000" steps="94961804"/></proof>
+ <proof prover="1"><result status="timeout" time="120.000000"/></proof>
+ <proof prover="3" timelimit="120"><result status="timeout" time="120.000000" steps="2323992"/></proof>
+ <proof prover="4" timelimit="120"><result status="timeout" time="120.000000" steps="565752"/></proof>
  </goal>
 </theory>
 </file>
