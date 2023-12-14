@@ -409,6 +409,33 @@ theory Graph
 
   lemma lemma3 : forall w semi_w. semi_w +> w -> exists l. (-+->) semi_w l w
 
+  use simplelist.Simplelist
+
+  predicate p_path_is_simplelist (n : int) =  forall dfsnum_parent.                                                         
+                      wf_dfsnum_parent dfsnum_parent ->                                           
+                      forall x y l.                                                               
+                        length l = n ->
+                        (--+->) dfsnum_parent x l y ->                                           
+                        simplelist (Cons y (Cons x l))
+
+  lemma unnamed_e : forall dfsnum_parent.                                                         
+                      wf_dfsnum_parent dfsnum_parent ->                                           
+                      forall x y l.                                                               
+                        (--+->) dfsnum_parent x l y ->                                           
+                          x <> y /\ not L.mem x l /\ not L.mem y l
+
+  clone int.SimpleInduction as InductionPathIsSimpleList with predicate p = p_path_is_simplelist
+
+  (*                                                                                            
+    extend unnamed_a                                                                              
+    used in lemma4                                                                                
+  *)                                                                                              
+  lemma unnamed_d : forall dfsnum_parent.                                                         
+                      wf_dfsnum_parent dfsnum_parent ->                                           
+                      forall x y l.                                                               
+                        (--+->) dfsnum_parent x l y ->                                           
+                         simplelist (Cons y (Cons x l))
+
 (*
   lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w
 
