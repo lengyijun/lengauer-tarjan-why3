@@ -1613,6 +1613,31 @@
   </goal>
  </transf>
  </goal>
+ <goal name="unnamed_e" proved="true">
+ <proof prover="0" timelimit="120"><result status="valid" time="3.531147" steps="22374"/></proof>
+ <proof prover="1" timelimit="120"><result status="timeout" time="120.000000" steps="21650462"/></proof>
+ </goal>
+ <goal name="InductionPathIsSimpleList.base" proved="true">
+ <proof prover="0" timelimit="120"><result status="valid" time="0.808629" steps="5593"/></proof>
+ </goal>
+ <goal name="InductionPathIsSimpleList.induction_step" proved="true">
+ <proof prover="0" timelimit="120"><result status="timeout" time="120.000000" steps="578916"/></proof>
+ <proof prover="1" timelimit="120"><result status="valid" time="9.184519" steps="2049164"/></proof>
+ </goal>
+ <goal name="unnamed_d" proved="true">
+ <transf name="introduce_premises" proved="true" >
+  <goal name="unnamed_d.0" proved="true">
+  <transf name="assert" proved="true" arg1="(p_path_is_simplelist (length l))">
+   <goal name="unnamed_d.0.0" expl="asserted formula" proved="true">
+   <proof prover="0" timelimit="120"><result status="valid" time="0.077777" steps="48"/></proof>
+   </goal>
+   <goal name="unnamed_d.0.1" proved="true">
+   <proof prover="0" timelimit="120"><result status="valid" time="0.112185" steps="406"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
 </theory>
 </file>
 </why3session>

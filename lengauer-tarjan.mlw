@@ -77,7 +77,7 @@ theory Graph
                   a <> b) /\
       let sn = size dfsnum_parent in
         (forall i. 0 <= i < sn -> exists x p. mapsto x (i, p) dfsnum_parent) /\
-        (forall x i p. mapsto x (i, p) dfsnum_parent -> i < sn) 
+        (forall x i p. mapsto x (i, p) dfsnum_parent -> 0 <= i < sn) 
 
   predicate p_node_mem (n : int) = forall dfsnum_parent.
                       wf_dfsnum_parent dfsnum_parent ->
