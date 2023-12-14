@@ -116,6 +116,20 @@ https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
   predicate (~~>) (v w: vertex) = dominate v w
   predicate (~>)  (v w: vertex) = idom     v w
 
+  lemma idom_exists_c :  forall p y.
+                            path root p y -> 
+                            y <> root -> 
+                            exists idominator. dominate idominator y /\ exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not dominate x y)
+
+  lemma idom_on_every_path : forall w idom_w. 
+                                idom_w ~> w 
+                                    <-> 
+                                (
+                                  w <> root  /\
+                                  (exists p. path root p w) /\
+                                  forall p. path root p w -> exists l1 l2. (Cons root p) = l1 ++ Cons idom_w l2 /\ forall x. L.mem x l2 -> not (x ~~> w)
+                                )
+
 end
 
 module ShouldFail
