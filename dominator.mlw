@@ -2,15 +2,11 @@
 (* definition of graph and dominator *)
 module Graph
     use list.List
-    use list.Reverse
     use list.Mem as L
     use list.Append
     use list.Length
-    use list.NumOcc
     use list.Elements as E
     use int.Int
-    use ref.Ref
-    use set.Fset as SS
 
   type vertex
 
@@ -88,7 +84,7 @@ https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
 *)
 
   predicate p1(n : int) = forall p1 p2 y.
-                            length p1 <= n -> 
+                            length p1 = n -> 
                             path root (p1 ++ p2) y -> 
                             (forall x. L.mem x p2 -> not dominate x y) ->
                             y <> root -> 
