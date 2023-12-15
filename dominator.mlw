@@ -79,6 +79,23 @@ module Graph
                         exists p. path root p y /\ 
                           exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not x ~~> y)
 
+  (** direct predecessors *)
+  function preds vertex: SV.fset vertex
+
+  axiom preds_def: forall v:vertex. forall u:vertex.
+   edge u v <-> SV.mem u (preds v)
+
+  (** direct successors *)
+  val constant succs (u : vertex): SV.set
+    ensures {SE.subset result vertices}
+    ensures { forall v:vertex. edge u v <-> SV.mem v result }
+
+(*
+  lemma path_in_vertices:
+    forall v1 v2: vertex, l: list vertex.
+    SV.mem v1 vertices -> path v1 l v2 -> SV.mem v2 vertices
+*)
+
 end
 
 
