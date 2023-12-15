@@ -5,113 +5,135 @@
 <prover id="0" name="Z3" version="4.12.2" timelimit="120" steplimit="0" memlimit="10000"/>
 <prover id="1" name="Eprover" version="2.0" timelimit="120" steplimit="0" memlimit="10000"/>
 <prover id="2" name="CVC4" version="1.8" timelimit="100" steplimit="0" memlimit="10000"/>
-<prover id="3" name="CVC5" version="1.0.8" timelimit="100" steplimit="0" memlimit="10000"/>
-<prover id="4" name="Alt-Ergo" version="2.5.2" timelimit="100" steplimit="0" memlimit="10000"/>
+<prover id="3" name="CVC5" version="1.0.8" timelimit="120" steplimit="0" memlimit="10000"/>
+<prover id="4" name="Alt-Ergo" version="2.5.2" timelimit="120" steplimit="0" memlimit="10000"/>
 <file format="whyml">
 <path name=".."/><path name="dominator.mlw"/>
 <theory name="Graph" proved="true">
  <goal name="root&#39;vc" expl="VC for root" proved="true">
- <proof prover="4"><result status="valid" time="0.022601" steps="1"/></proof>
+ <proof prover="4" timelimit="100"><result status="valid" time="0.022601" steps="1"/></proof>
  </goal>
  <goal name="path_left_extension" proved="true">
  <transf name="induction_pr" proved="true" >
   <goal name="path_left_extension.0" proved="true">
-  <proof prover="4"><result status="valid" time="0.353238" steps="3252"/></proof>
+  <proof prover="4" timelimit="100"><result status="valid" time="0.353238" steps="3252"/></proof>
   </goal>
   <goal name="path_left_extension.1" proved="true">
-  <proof prover="4"><result status="valid" time="0.051474" steps="63"/></proof>
+  <proof prover="4" timelimit="100"><result status="valid" time="0.051474" steps="63"/></proof>
   </goal>
  </transf>
  </goal>
  <goal name="path_right_inversion" proved="true">
  <transf name="induction_pr" proved="true" >
   <goal name="path_right_inversion.0" proved="true">
-  <proof prover="4"><result status="valid" time="0.017944" steps="4"/></proof>
+  <proof prover="4" timelimit="100"><result status="valid" time="0.017944" steps="4"/></proof>
   </goal>
   <goal name="path_right_inversion.1" proved="true">
-  <proof prover="3"><result status="valid" time="0.127045" steps="15022"/></proof>
+  <proof prover="3" timelimit="100"><result status="valid" time="0.127045" steps="15022"/></proof>
   </goal>
  </transf>
  </goal>
  <goal name="path_trans" proved="true">
  <transf name="induction_pr" proved="true" >
   <goal name="path_trans.0" proved="true">
-  <proof prover="4"><result status="valid" time="0.022075" steps="11"/></proof>
+  <proof prover="4" timelimit="100"><result status="valid" time="0.022075" steps="11"/></proof>
   </goal>
   <goal name="path_trans.1" proved="true">
-  <proof prover="4"><result status="valid" time="0.041841" steps="131"/></proof>
+  <proof prover="4" timelimit="100"><result status="valid" time="0.041841" steps="131"/></proof>
   </goal>
  </transf>
  </goal>
  <goal name="empty_path" proved="true">
- <proof prover="4"><result status="valid" time="0.036203" steps="34"/></proof>
+ <proof prover="4" timelimit="100"><result status="valid" time="0.036203" steps="34"/></proof>
  </goal>
  <goal name="path_decomposition" proved="true">
  <transf name="induction_ty_lex" proved="true" >
   <goal name="path_decomposition.0" proved="true">
   <transf name="split_goal_full" proved="true" >
    <goal name="path_decomposition.0.0" proved="true">
-   <proof prover="4"><result status="valid" time="0.041094" steps="105"/></proof>
+   <proof prover="4" timelimit="100"><result status="valid" time="0.041094" steps="105"/></proof>
    </goal>
    <goal name="path_decomposition.0.1" proved="true">
-   <proof prover="4"><result status="valid" time="0.030214" steps="100"/></proof>
+   <proof prover="4" timelimit="100"><result status="valid" time="0.030214" steps="100"/></proof>
    </goal>
    <goal name="path_decomposition.0.2" proved="true">
-   <proof prover="4"><result status="valid" time="0.046206" steps="255"/></proof>
+   <proof prover="4" timelimit="100"><result status="valid" time="0.046206" steps="255"/></proof>
    </goal>
    <goal name="path_decomposition.0.3" proved="true">
-   <proof prover="4"><result status="valid" time="0.039850" steps="134"/></proof>
+   <proof prover="4" timelimit="100"><result status="valid" time="0.039850" steps="134"/></proof>
    </goal>
   </transf>
   </goal>
  </transf>
  </goal>
  <goal name="root_dominate_all" proved="true">
- <proof prover="4"><result status="valid" time="0.019374" steps="73"/></proof>
+ <proof prover="4" timelimit="100"><result status="valid" time="0.019374" steps="73"/></proof>
  </goal>
  <goal name="dominate_em" proved="true">
- <proof prover="4"><result status="valid" time="0.012705" steps="2"/></proof>
+ <proof prover="4" timelimit="100"><result status="valid" time="0.012705" steps="2"/></proof>
  </goal>
+</theory>
+<theory name="IdomExistsHelper" proved="true">
  <goal name="Exists_induction.base" proved="true">
- <proof prover="3"><result status="valid" time="1.005291" steps="54243"/></proof>
+ <proof prover="3"><result status="valid" time="1.086608" steps="54243"/></proof>
  </goal>
  <goal name="Exists_induction.induction_step" proved="true">
- <transf name="unfold" proved="true" arg1="p1">
+ <transf name="introduce_premises" proved="true" >
   <goal name="induction_step.0" proved="true">
-  <transf name="introduce_premises" proved="true" >
+  <transf name="inline_goal" proved="true" >
    <goal name="induction_step.0.0" proved="true">
-   <transf name="assert" proved="true" arg1="(exists z p3. p1 = p3 ++ Cons z Nil )">
-    <goal name="induction_step.0.0.0" expl="asserted formula" proved="true">
-    <proof prover="1"><result status="valid" time="0.162620"/></proof>
-    <proof prover="3"><result status="valid" time="79.093122" steps="2490767"/></proof>
-    </goal>
-    <goal name="induction_step.0.0.1" proved="true">
-    <transf name="destruct_rec" proved="true" arg1="h">
-     <goal name="induction_step.0.0.1.0" proved="true">
-     <transf name="instantiate" proved="true" arg1="dominate_em" arg2="z, y">
-      <goal name="induction_step.0.0.1.0.0" proved="true">
-      <transf name="destruct" proved="true" arg1="Hinst">
-       <goal name="induction_step.0.0.1.0.0.0" proved="true">
-       <proof prover="4" timelimit="120"><result status="valid" time="0.093369" steps="627"/></proof>
+   <transf name="introduce_premises" proved="true" >
+    <goal name="induction_step.0.0.0" proved="true">
+    <transf name="assert" proved="true" arg1="(exists p2 z. p1 = p2 ++ Cons z Nil)">
+     <goal name="induction_step.0.0.0.0" expl="asserted formula" proved="true">
+     <proof prover="1"><result status="valid" time="0.143894"/></proof>
+     </goal>
+     <goal name="induction_step.0.0.0.1" proved="true">
+     <transf name="destruct_rec" proved="true" arg1="h">
+      <goal name="induction_step.0.0.0.1.0" proved="true">
+      <transf name="assert" proved="true" arg1="(z ~~&gt; y \/ not z ~~&gt; y)">
+       <goal name="induction_step.0.0.0.1.0.0" expl="asserted formula" proved="true">
+       <proof prover="4"><result status="valid" time="0.023675" steps="16"/></proof>
        </goal>
-       <goal name="induction_step.0.0.1.0.0.1" proved="true">
-       <transf name="instantiate" proved="true" arg1="H4" arg2="p3, (Cons z Nil), y">
-        <goal name="induction_step.0.0.1.0.0.1.0" proved="true">
-        <transf name="assert" proved="true" arg1="((exists idominator:vertex. dominate idominator y /\ (exists l1:list vertex, l2:list vertex. (l1 ++ Cons idominator l2) = Cons root p3 /\ (forall x2:vertex. mem1 x2 l2 -&gt; not dominate x2 y))))">
-         <goal name="induction_step.0.0.1.0.0.1.0.0" expl="asserted formula" proved="true">
-         <proof prover="4"><result status="valid" time="0.277571" steps="2125"/></proof>
-         </goal>
-         <goal name="induction_step.0.0.1.0.0.1.0.1" proved="true">
-         <transf name="destruct_rec" proved="true" arg1="h">
-          <goal name="induction_step.0.0.1.0.0.1.0.1.0" proved="true">
-          <transf name="exists" proved="true" arg1="idominator">
-           <goal name="induction_step.0.0.1.0.0.1.0.1.0.0" proved="true">
-           <transf name="split_goal_full" proved="true" >
-            <goal name="induction_step.0.0.1.0.0.1.0.1.0.0.0" proved="true">
-            <proof prover="4"><result status="valid" time="0.027230" steps="20"/></proof>
-            </goal>
-            <goal name="induction_step.0.0.1.0.0.1.0.1.0.0.1" proved="true">
-            <proof prover="4"><result status="valid" time="19.250781" steps="120242"/></proof>
+       <goal name="induction_step.0.0.0.1.0.1" proved="true">
+       <transf name="destruct_rec" proved="true" arg1="h">
+        <goal name="induction_step.0.0.0.1.0.1.0" proved="true">
+        <proof prover="4"><result status="valid" time="0.082202" steps="625"/></proof>
+        </goal>
+        <goal name="induction_step.0.0.0.1.0.1.1" proved="true">
+        <transf name="unfold" proved="true" arg1="p11" arg2="in" arg3="H4">
+         <goal name="induction_step.0.0.0.1.0.1.1.0" proved="true">
+         <transf name="instantiate" proved="true" arg1="H4" arg2="p2, (Cons z p21), y">
+          <goal name="induction_step.0.0.0.1.0.1.1.0.0" proved="true">
+          <transf name="assert" proved="true" arg1="((exists idominator:vertex. idominator ~~&gt; y /\ (exists l1:list vertex, l2:list vertex. (l1 ++ Cons idominator l2) = Cons root p2 /\ (forall x:vertex. mem1 x l2 -&gt; not x ~~&gt; y))))">
+           <goal name="induction_step.0.0.0.1.0.1.1.0.0.0" expl="asserted formula" proved="true">
+           <proof prover="4"><result status="valid" time="0.074660" steps="490"/></proof>
+           </goal>
+           <goal name="induction_step.0.0.0.1.0.1.1.0.0.1" proved="true">
+           <transf name="destruct_rec" proved="true" arg1="h">
+            <goal name="induction_step.0.0.0.1.0.1.1.0.0.1.0" proved="true">
+            <transf name="exists" proved="true" arg1="idominator">
+             <goal name="induction_step.0.0.0.1.0.1.1.0.0.1.0.0" proved="true">
+             <proof prover="4"><result status="valid" time="66.639767" steps="411180"/></proof>
+             <transf name="split_goal_full" proved="true" >
+              <goal name="induction_step.0.0.0.1.0.1.1.0.0.1.0.0.0" proved="true">
+              <proof prover="4"><result status="valid" time="0.020166" steps="20"/></proof>
+              </goal>
+              <goal name="induction_step.0.0.0.1.0.1.1.0.0.1.0.0.1" proved="true">
+              <proof prover="4"><result status="valid" time="70.591973" steps="411179"/></proof>
+              <transf name="exists" proved="true" arg1="l1">
+               <goal name="induction_step.0.0.0.1.0.1.1.0.0.1.0.0.1.0" proved="true">
+               <transf name="exists" proved="true" arg1="(l2 ++ Cons z Nil)">
+                <goal name="induction_step.0.0.0.1.0.1.1.0.0.1.0.0.1.0.0" proved="true">
+                <proof prover="4"><result status="valid" time="0.123800" steps="937"/></proof>
+                </goal>
+               </transf>
+               </goal>
+              </transf>
+              </goal>
+             </transf>
+             </goal>
+            </transf>
             </goal>
            </transf>
            </goal>
@@ -124,6 +146,43 @@
        </transf>
        </goal>
       </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="IdomExists" proved="true">
+ <goal name="idom_exists_c" proved="true">
+ <transf name="introduce_premises" proved="true" >
+  <goal name="idom_exists_c.0" proved="true">
+  <transf name="assert" proved="true" arg1="(p1 (length p))">
+   <goal name="idom_exists_c.0.0" expl="asserted formula" proved="true">
+   <proof prover="4"><result status="valid" time="0.018140" steps="13"/></proof>
+   </goal>
+   <goal name="idom_exists_c.0.1" proved="true">
+   <transf name="unfold" proved="true" arg1="p1" arg2="in" arg3="h">
+    <goal name="idom_exists_c.0.1.0" proved="true">
+    <transf name="instantiate" proved="true" arg1="h" arg2="p, (Nil : list vertex), y">
+     <goal name="idom_exists_c.0.1.0.0" proved="true">
+     <transf name="apply" proved="true" arg1="Hinst">
+      <goal name="idom_exists_c.0.1.0.0.0" expl="apply premises" proved="true">
+      <proof prover="4"><result status="valid" time="0.019282" steps="8"/></proof>
+      </goal>
+      <goal name="idom_exists_c.0.1.0.0.1" expl="apply premises" proved="true">
+      <proof prover="4"><result status="valid" time="0.017318" steps="12"/></proof>
+      </goal>
+      <goal name="idom_exists_c.0.1.0.0.2" expl="apply premises" proved="true">
+      <proof prover="4"><result status="valid" time="0.017057" steps="15"/></proof>
+      </goal>
+      <goal name="idom_exists_c.0.1.0.0.3" expl="apply premises" proved="true">
+      <proof prover="4"><result status="valid" time="0.013095" steps="8"/></proof>
       </goal>
      </transf>
      </goal>
@@ -138,51 +197,18 @@
  <goal name="idom_exists_a" proved="true">
  <transf name="introduce_premises" proved="true" >
   <goal name="idom_exists_a.0" proved="true">
-  <transf name="assert" proved="true" arg1="(p1 (length p))">
-   <goal name="idom_exists_a.0.0" expl="asserted formula" proved="true">
-   <proof prover="4"><result status="valid" time="0.020312" steps="13"/></proof>
-   </goal>
-   <goal name="idom_exists_a.0.1" proved="true">
-   <transf name="unfold" proved="true" arg1="p1" arg2="in" arg3="h">
-    <goal name="idom_exists_a.0.1.0" proved="true">
-    <transf name="instantiate" proved="true" arg1="h" arg2="p, (Nil : list vertex), y">
-     <goal name="idom_exists_a.0.1.0.0" proved="true">
-     <transf name="assert" proved="true" arg1="((exists idominator:vertex. dominate idominator y /\ (exists l1:list vertex, l2:list vertex. (l1 ++ Cons idominator l2) = Cons root p /\ (forall x. mem1 x l2 -&gt; not dominate x y))))">
-      <goal name="idom_exists_a.0.1.0.0.0" expl="asserted formula" proved="true">
-      <proof prover="4"><result status="valid" time="0.049826" steps="223"/></proof>
-      </goal>
-      <goal name="idom_exists_a.0.1.0.0.1" proved="true">
-      <transf name="destruct_rec" proved="true" arg1="h">
-       <goal name="idom_exists_a.0.1.0.0.1.0" proved="true">
-       <transf name="exists" proved="true" arg1="idominator">
-        <goal name="idom_exists_a.0.1.0.0.1.0.0" proved="true">
-        <transf name="unfold" proved="true" arg1="idom">
-         <goal name="idom_exists_a.0.1.0.0.1.0.0.0" proved="true">
-         <transf name="split_goal_right" proved="true" >
-          <goal name="idom_exists_a.0.1.0.0.1.0.0.0.0" proved="true">
-          <proof prover="4" timelimit="120"><result status="valid" time="0.017061" steps="12"/></proof>
-          </goal>
-          <goal name="idom_exists_a.0.1.0.0.1.0.0.0.1" proved="true">
-          <transf name="exists" proved="true" arg1="p">
-           <goal name="idom_exists_a.0.1.0.0.1.0.0.0.1.0" proved="true">
-           <transf name="split_goal_full" proved="true" >
-            <goal name="idom_exists_a.0.1.0.0.1.0.0.0.1.0.0" proved="true">
-            <proof prover="4"><result status="valid" time="0.020016" steps="12"/></proof>
-            </goal>
-            <goal name="idom_exists_a.0.1.0.0.1.0.0.0.1.0.1" proved="true">
-            <proof prover="4"><result status="valid" time="0.068171" steps="179"/></proof>
-            </goal>
-           </transf>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
+  <transf name="instantiate" proved="true" arg1="idom_exists_c" arg2="p, y">
+   <goal name="idom_exists_a.0.0" proved="true">
+   <transf name="assert" proved="true" arg1="((exists idominator:vertex. idominator ~~&gt; y /\ (exists l1:list vertex, l2:list vertex. (l1 ++ Cons idominator l2) = Cons root p /\ (forall x:vertex. mem1 x l2 -&gt; not x ~~&gt; y))))">
+    <goal name="idom_exists_a.0.0.0" expl="asserted formula" proved="true">
+    <proof prover="4"><result status="valid" time="0.037439" steps="148"/></proof>
+    </goal>
+    <goal name="idom_exists_a.0.0.1" proved="true">
+    <transf name="destruct_rec" proved="true" arg1="h">
+     <goal name="idom_exists_a.0.0.1.0" proved="true">
+     <transf name="exists" proved="true" arg1="idominator">
+      <goal name="idom_exists_a.0.0.1.0.0" proved="true">
+      <proof prover="4"><result status="valid" time="0.121799" steps="437"/></proof>
       </goal>
      </transf>
      </goal>
@@ -194,107 +220,100 @@
   </goal>
  </transf>
  </goal>
- <goal name="idom_exists_b" proved="true">
- <proof prover="4"><result status="valid" time="0.022451" steps="25"/></proof>
- </goal>
+</theory>
+<theory name="UniquePathHelper" proved="true">
  <goal name="SimpleInduction.base" proved="true">
- <proof prover="4"><result status="valid" time="0.034724" steps="71"/></proof>
+ <proof prover="4"><result status="valid" time="0.031369" steps="29"/></proof>
  </goal>
  <goal name="SimpleInduction.induction_step" proved="true">
- <transf name="unfold" proved="true" arg1="p2">
-  <goal name="induction_step.0" proved="true">
-  <transf name="introduce_premises" proved="true" >
-   <goal name="induction_step.0.0" proved="true">
-   <transf name="destruct_term" proved="true" arg1="l1">
-    <goal name="induction_step.0.0.0" proved="true">
-    <transf name="case" proved="true" arg1="(x1 = y)">
-     <goal name="induction_step.0.0.0.0" expl="true case" proved="true">
-     <proof prover="4"><result status="valid" time="0.659247" steps="3342"/></proof>
-     </goal>
-     <goal name="induction_step.0.0.0.1" expl="false case" proved="true">
-     <proof prover="2"><result status="valid" time="1.581005" steps="126810"/></proof>
-     </goal>
-    </transf>
-    </goal>
-    <goal name="induction_step.0.0.1" proved="true">
-    <proof prover="3"><result status="valid" time="0.046218" steps="11209"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
+ <proof prover="4"><result status="valid" time="0.099757" steps="473"/></proof>
  </goal>
+</theory>
+<theory name="UniquePath" proved="true">
  <goal name="no_acycle_a" proved="true">
  <transf name="introduce_premises" proved="true" >
   <goal name="no_acycle_a.0" proved="true">
-  <transf name="instantiate" proved="true" arg1="SimpleInduction" arg2="(length l1)">
-   <goal name="no_acycle_a.0.0" proved="true">
-   <proof prover="4"><result status="valid" time="0.046233" steps="146"/></proof>
+  <transf name="assert" proved="true" arg1="(p2 (length l1))">
+   <goal name="no_acycle_a.0.0" expl="asserted formula" proved="true">
+   <proof prover="4"><result status="valid" time="0.019797" steps="15"/></proof>
+   </goal>
+   <goal name="no_acycle_a.0.1" proved="true">
+   <transf name="assert" proved="true" arg1="((exists l3:list vertex, l4:list vertex. (l3 ++ Cons y l4) = l1 /\ not mem1 y l3))">
+    <goal name="no_acycle_a.0.1.0" expl="asserted formula" proved="true">
+    <proof prover="4"><result status="valid" time="0.041595" steps="142"/></proof>
+    </goal>
+    <goal name="no_acycle_a.0.1.1" proved="true">
+    <transf name="destruct_rec" proved="true" arg1="h">
+     <goal name="no_acycle_a.0.1.1.0" proved="true">
+     <transf name="exists" proved="true" arg1="l3">
+      <goal name="no_acycle_a.0.1.1.0.0" proved="true">
+      <proof prover="4"><result status="valid" time="0.034728" steps="106"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
    </goal>
   </transf>
   </goal>
  </transf>
  </goal>
  <goal name="no_acycle" proved="true">
- <proof prover="4"><result status="valid" time="0.034366" steps="50"/></proof>
+ <proof prover="4"><result status="valid" time="0.017350" steps="43"/></proof>
  </goal>
+</theory>
+<theory name="IdomUniq" proved="true">
  <goal name="idom_unique" proved="true">
- <transf name="unfold" proved="true" arg1="idom">
+ <transf name="inline_all" proved="true" >
   <goal name="idom_unique.0" proved="true">
   <transf name="introduce_premises" proved="true" >
    <goal name="idom_unique.0.0" proved="true">
    <transf name="case" proved="true" arg1="(m1 = m2)">
     <goal name="idom_unique.0.0.0" expl="true case" proved="true">
-    <proof prover="4"><result status="valid" time="0.019902" steps="20"/></proof>
+    <proof prover="4"><result status="valid" time="0.024391" steps="18"/></proof>
     </goal>
     <goal name="idom_unique.0.0.1" expl="false case" proved="true">
     <transf name="case" proved="true" arg1="(m1 = root)">
      <goal name="idom_unique.0.0.1.0" expl="false case (true case)" proved="true">
-     <transf name="case" proved="true" arg1="(m2 = root)">
-      <goal name="idom_unique.0.0.1.0.0" expl="false case (true case)" proved="true">
-      <proof prover="3"><result status="valid" time="0.073549" steps="11052"/></proof>
-      </goal>
-      <goal name="idom_unique.0.0.1.0.1" expl="false case (true case)" proved="true">
-      <proof prover="3"><result status="valid" time="8.424377" steps="491782"/></proof>
-      </goal>
-     </transf>
+     <proof prover="1"><result status="valid" time="17.053131"/></proof>
+     <proof prover="3"><result status="valid" time="59.823281" steps="1861684"/></proof>
      </goal>
      <goal name="idom_unique.0.0.1.1" expl="false case" proved="true">
      <transf name="case" proved="true" arg1="(m2 = root)">
       <goal name="idom_unique.0.0.1.1.0" expl="false case (true case)" proved="true">
-      <proof prover="2"><result status="valid" time="0.741725" steps="67629"/></proof>
+      <proof prover="1"><result status="valid" time="19.101084"/></proof>
       </goal>
       <goal name="idom_unique.0.0.1.1.1" expl="false case" proved="true">
       <transf name="assert" proved="true" arg1="(mem1 m2 p1)">
        <goal name="idom_unique.0.0.1.1.1.0" expl="asserted formula" proved="true">
-       <proof prover="4"><result status="valid" time="0.073069" steps="211"/></proof>
+       <proof prover="4"><result status="valid" time="0.033104" steps="171"/></proof>
        </goal>
        <goal name="idom_unique.0.0.1.1.1.1" expl="false case" proved="true">
        <transf name="assert" proved="true" arg1="(mem1 m1 p)">
         <goal name="idom_unique.0.0.1.1.1.1.0" expl="asserted formula" proved="true">
-        <proof prover="4"><result status="valid" time="0.096677" steps="270"/></proof>
+        <proof prover="4"><result status="valid" time="0.044817" steps="187"/></proof>
         </goal>
         <goal name="idom_unique.0.0.1.1.1.1.1" expl="false case" proved="true">
         <transf name="assert" proved="true" arg1="(not mem1 m1 l2)">
          <goal name="idom_unique.0.0.1.1.1.1.1.0" expl="asserted formula" proved="true">
-         <proof prover="2"><result status="valid" time="0.155757" steps="13960"/></proof>
-         <proof prover="3"><result status="valid" time="0.070843" steps="11392"/></proof>
+         <proof prover="2"><result status="valid" time="0.125950" steps="23045"/></proof>
+         <proof prover="3" timelimit="100"><result status="valid" time="0.082101" steps="18558"/></proof>
          </goal>
          <goal name="idom_unique.0.0.1.1.1.1.1.1" expl="false case" proved="true">
          <transf name="assert" proved="true" arg1="(mem1 m1 l1)">
           <goal name="idom_unique.0.0.1.1.1.1.1.1.0" expl="asserted formula" proved="true">
-          <proof prover="4"><result status="valid" time="0.241479" steps="898"/></proof>
+          <proof prover="4" timelimit="100"><result status="valid" time="0.550707" steps="999"/></proof>
           </goal>
           <goal name="idom_unique.0.0.1.1.1.1.1.1.1" expl="false case" proved="true">
           <transf name="assert" proved="true" arg1="(not mem1 m2 l21)">
            <goal name="idom_unique.0.0.1.1.1.1.1.1.1.0" expl="asserted formula" proved="true">
-           <proof prover="3"><result status="valid" time="0.064446" steps="11409"/></proof>
+           <proof prover="3" timelimit="100"><result status="valid" time="0.081730" steps="18753"/></proof>
            </goal>
            <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1" expl="false case" proved="true">
            <transf name="assert" proved="true" arg1="(mem1 m2 l11)">
             <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.0" expl="asserted formula" proved="true">
-            <proof prover="4"><result status="valid" time="0.198824" steps="971"/></proof>
+            <proof prover="4" timelimit="100"><result status="valid" time="0.607422" steps="1152"/></proof>
             </goal>
             <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1" expl="false case" proved="true">
             <transf name="destruct_term" proved="true" arg1="l1">
@@ -305,47 +324,84 @@
                <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0" expl="false case" proved="true">
                <transf name="assert" proved="true" arg1="(x1 = root /\ x ++ Cons m2 l2 = p)">
                 <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.0" expl="asserted formula" proved="true">
-                <proof prover="4"><result status="valid" time="0.065160" steps="260"/></proof>
+                <proof prover="4" timelimit="100"><result status="valid" time="0.217126" steps="473"/></proof>
                 </goal>
                 <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1" expl="false case" proved="true">
                 <transf name="destruct" proved="true" arg1="h">
                  <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0" expl="false case" proved="true">
                  <transf name="subst_all" proved="true" >
                   <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0" expl="false case" proved="true">
-                  <transf name="assert" proved="true" arg1="(x2 = root /\ x1 ++ Cons m1 l21 = p)">
+                  <transf name="assert" proved="true" arg1="(mem1 m1 x)">
                    <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.0" expl="asserted formula" proved="true">
-                   <proof prover="4"><result status="valid" time="0.069188" steps="269"/></proof>
+                   <proof prover="4"><result status="valid" time="0.033212" steps="43"/></proof>
                    </goal>
                    <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1" expl="false case" proved="true">
-                   <transf name="destruct_rec" proved="true" arg1="h">
+                   <transf name="remove" proved="true" arg1="h5">
                     <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0" expl="false case" proved="true">
-                    <transf name="subst_all" proved="true" >
-                     <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0" expl="false case" proved="true">
-                     <transf name="assert" proved="true" arg1="((exists l1&#39;:list vertex. path root (l1&#39; ++ Cons m1 l21) n /\ not mem1 m1 l1&#39; /\ length l1&#39; &lt;= length x1))">
-                      <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.0" expl="asserted formula" proved="true">
-                      <proof prover="4"><result status="valid" time="0.059508" steps="212"/></proof>
-                      </goal>
-                      <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1" expl="false case" proved="true">
-                      <transf name="destruct_rec" proved="true" arg1="h">
-                       <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0" expl="false case" proved="true">
-                       <transf name="assert" proved="true" arg1="(mem1 m2 l1&#39;)">
-                        <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.0" expl="asserted formula" proved="true">
-                        <proof prover="4"><result status="valid" time="1.335782" steps="4676"/></proof>
+                    <transf name="assert" proved="true" arg1="(x2 = root /\ x1 ++ Cons m1 l21= p1)">
+                     <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0" expl="asserted formula" proved="true">
+                     <proof prover="4"><result status="valid" time="0.110121" steps="483"/></proof>
+                     </goal>
+                     <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1" expl="false case" proved="true">
+                     <transf name="destruct_rec" proved="true" arg1="h">
+                      <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0" expl="false case" proved="true">
+                      <transf name="subst_all" proved="true" >
+                       <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0" expl="false case" proved="true">
+                       <transf name="assert" proved="true" arg1="(mem1 m1 x)">
+                        <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.0" expl="asserted formula" proved="true">
+                        <proof prover="4"><result status="valid" time="0.031909" steps="34"/></proof>
                         </goal>
-                        <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.1" expl="false case" proved="true">
-                        <transf name="assert" proved="true" arg1="(exists l3 l4. l1&#39; = l3 ++ Cons m2 l4 /\ not mem1 m1 l3)">
-                         <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.1.0" expl="asserted formula" proved="true">
-                         <proof prover="4"><result status="valid" time="0.056223" steps="248"/></proof>
+                        <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1" expl="false case" proved="true">
+                        <transf name="assert" proved="true" arg1="(mem1 m2 x1)">
+                         <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.0" expl="asserted formula" proved="true">
+                         <proof prover="4"><result status="valid" time="0.027337" steps="43"/></proof>
                          </goal>
-                         <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.1.1" expl="false case" proved="true">
-                         <transf name="destruct_rec" proved="true" arg1="h">
-                          <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.1.1.0" expl="false case" proved="true">
-                          <transf name="assert" proved="true" arg1="(path root (l3 ++ Cons m2 l2) n)">
-                           <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.1.1.0.0" expl="asserted formula" proved="true">
-                           <proof prover="4"><result status="valid" time="0.085839" steps="296"/></proof>
-                           </goal>
-                           <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.0.1.0.1.1.0.1" expl="false case" proved="true">
-                           <proof prover="4"><result status="valid" time="1.960371" steps="6740"/></proof>
+                         <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1" expl="false case" proved="true">
+                         <transf name="remove" proved="true" arg1="h5">
+                          <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0" expl="false case" proved="true">
+                          <transf name="remove" proved="true" arg1="h3">
+                           <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0" expl="false case" proved="true">
+                           <transf name="remove" proved="true" arg1="h2">
+                            <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0" expl="false case" proved="true">
+                            <transf name="assert" proved="true" arg1="((exists l1&#39;:list vertex. path root (l1&#39; ++ Cons m1 l21) n /\ not mem1 m1 l1&#39; /\ (length l1&#39; &lt; length x1 \/ length l1&#39; = length x1)))">
+                             <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.0" expl="asserted formula" proved="true">
+                             <proof prover="4"><result status="valid" time="0.083178" steps="317"/></proof>
+                             </goal>
+                             <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1" expl="false case" proved="true">
+                             <transf name="destruct" proved="true" arg1="h">
+                              <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0" expl="false case" proved="true">
+                              <transf name="assert" proved="true" arg1="(mem1 m2 l1&#39;)">
+                               <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.0" expl="asserted formula" proved="true">
+                               <proof prover="4"><result status="valid" time="0.902780" steps="1812"/></proof>
+                               </goal>
+                               <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.1" expl="false case" proved="true">
+                               <transf name="assert" proved="true" arg1="(exists l3 l4. l1&#39; = l3 ++ Cons m2 l4 /\ not mem1 m2 l3)">
+                                <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.1.0" expl="asserted formula" proved="true">
+                                <proof prover="1"><result status="valid" time="1.675545"/></proof>
+                                </goal>
+                                <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.1.1" expl="false case" proved="true">
+                                <transf name="destruct_rec" proved="true" arg1="h">
+                                 <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.1.1.0" expl="false case" proved="true">
+                                 <transf name="assert" proved="true" arg1="(path root (l3 ++ Cons m2 l2) n)">
+                                  <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.1.1.0.0" expl="asserted formula" proved="true">
+                                  <proof prover="4"><result status="valid" time="0.275395" steps="437"/></proof>
+                                  </goal>
+                                  <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.0.0.1.0.0.1.0.1.0.0.1.1.0.0.0.1.0.1.1.0.1" expl="false case" proved="true">
+                                  <proof prover="4"><result status="valid" time="0.978785" steps="2417"/></proof>
+                                  </goal>
+                                 </transf>
+                                 </goal>
+                                </transf>
+                                </goal>
+                               </transf>
+                               </goal>
+                              </transf>
+                              </goal>
+                             </transf>
+                             </goal>
+                            </transf>
+                            </goal>
+                           </transf>
                            </goal>
                           </transf>
                           </goal>
@@ -374,12 +430,12 @@
               </transf>
               </goal>
               <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.0.1" expl="false case" proved="true">
-              <proof prover="4"><result status="valid" time="0.026357" steps="40"/></proof>
+              <proof prover="1"><result status="valid" time="0.092454"/></proof>
               </goal>
              </transf>
              </goal>
              <goal name="idom_unique.0.0.1.1.1.1.1.1.1.1.1.1" expl="false case" proved="true">
-             <proof prover="4"><result status="valid" time="0.029516" steps="38"/></proof>
+             <proof prover="4"><result status="valid" time="0.024691" steps="39"/></proof>
              </goal>
             </transf>
             </goal>
@@ -405,52 +461,41 @@
   </goal>
  </transf>
  </goal>
- <goal name="idom_exists_c" proved="true">
- <transf name="introduce_premises" proved="true" >
-  <goal name="idom_exists_c.0" proved="true">
-  <transf name="assert" proved="true" arg1="(p1 (length p))">
-   <goal name="idom_exists_c.0.0" expl="asserted formula" proved="true">
-   <proof prover="4" timelimit="120"><result status="valid" time="0.023472" steps="15"/></proof>
-   </goal>
-   <goal name="idom_exists_c.0.1" proved="true">
-   <transf name="unfold" proved="true" arg1="p1" arg2="in" arg3="h">
-    <goal name="idom_exists_c.0.1.0" proved="true">
-    <transf name="instantiate" proved="true" arg1="h" arg2="p, (Nil : list vertex), y">
-     <goal name="idom_exists_c.0.1.0.0" proved="true">
-     <proof prover="4" timelimit="120"><result status="valid" time="0.102371" steps="698"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
  <goal name="idom_on_every_path" proved="true">
  <transf name="split_goal_full" proved="true" >
   <goal name="idom_on_every_path.0" proved="true">
-  <proof prover="4" timelimit="120"><result status="valid" time="0.026934" steps="31"/></proof>
+  <proof prover="4"><result status="valid" time="0.023687" steps="31"/></proof>
   </goal>
   <goal name="idom_on_every_path.1" proved="true">
-  <proof prover="4" timelimit="120"><result status="valid" time="0.031028" steps="34"/></proof>
+  <proof prover="4"><result status="valid" time="0.021065" steps="33"/></proof>
   </goal>
   <goal name="idom_on_every_path.2" proved="true">
   <transf name="introduce_premises" proved="true" >
    <goal name="idom_on_every_path.2.0" proved="true">
-   <transf name="assert" proved="true" arg1="((exists idominator:vertex. dominate idominator w /\ (exists l1:list vertex, l2:list vertex. (l1 ++ Cons idominator l2) = Cons root p /\ (forall x:vertex. mem1 x l2 -&gt; not dominate x w))))">
-    <goal name="idom_on_every_path.2.0.0" expl="asserted formula" proved="true">
-    <proof prover="4" timelimit="120"><result status="valid" time="0.442193" steps="1728"/></proof>
-    </goal>
-    <goal name="idom_on_every_path.2.0.1" proved="true">
-    <transf name="destruct_rec" proved="true" arg1="h">
-     <goal name="idom_on_every_path.2.0.1.0" proved="true">
-     <transf name="assert" proved="true" arg1="(idom idominator w)">
-      <goal name="idom_on_every_path.2.0.1.0.0" expl="asserted formula" proved="true">
-      <proof prover="4" timelimit="120"><result status="valid" time="0.408980" steps="1511"/></proof>
-      </goal>
-      <goal name="idom_on_every_path.2.0.1.0.1" proved="true">
-      <proof prover="4" timelimit="120"><result status="valid" time="0.071798" steps="372"/></proof>
+   <transf name="instantiate" proved="true" arg1="idom_exists_c" arg2="p, w">
+    <goal name="idom_on_every_path.2.0.0" proved="true">
+    <transf name="assert" proved="true" arg1="((exists idominator:vertex. idominator ~~&gt; w /\ (exists l1:list vertex, l2:list vertex. (l1 ++ Cons idominator l2) = Cons root p /\ (forall x:vertex. mem1 x l2 -&gt; not x ~~&gt; w))))">
+     <goal name="idom_on_every_path.2.0.0.0" expl="asserted formula" proved="true">
+     <proof prover="4"><result status="valid" time="0.050819" steps="301"/></proof>
+     </goal>
+     <goal name="idom_on_every_path.2.0.0.1" proved="true">
+     <transf name="destruct_rec" proved="true" arg1="h">
+      <goal name="idom_on_every_path.2.0.0.1.0" proved="true">
+      <transf name="assert" proved="true" arg1="(idominator ~&gt; w)">
+       <goal name="idom_on_every_path.2.0.0.1.0.0" expl="asserted formula" proved="true">
+       <proof prover="4"><result status="valid" time="0.079390" steps="390"/></proof>
+       </goal>
+       <goal name="idom_on_every_path.2.0.0.1.0.1" proved="true">
+       <transf name="assert" proved="true" arg1="(idominator = idom_w)">
+        <goal name="idom_on_every_path.2.0.0.1.0.1.0" expl="asserted formula" proved="true">
+        <proof prover="4"><result status="valid" time="0.030462" steps="19"/></proof>
+        </goal>
+        <goal name="idom_on_every_path.2.0.0.1.0.1.1" proved="true">
+        <proof prover="4"><result status="valid" time="0.040137" steps="195"/></proof>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
       </goal>
      </transf>
      </goal>
@@ -461,17 +506,17 @@
   </transf>
   </goal>
   <goal name="idom_on_every_path.3" proved="true">
-  <proof prover="4" timelimit="120"><result status="valid" time="1.338692" steps="6065"/></proof>
+  <proof prover="4"><result status="valid" time="1.349753" steps="5500"/></proof>
   </goal>
  </transf>
  </goal>
 </theory>
 <theory name="ShouldFail">
  <goal name="wrong1">
- <proof prover="0"><result status="timeout" time="120.000000" steps="118885746"/></proof>
+ <proof prover="0"><result status="timeout" time="120.000000" steps="90207541"/></proof>
  <proof prover="1"><result status="timeout" time="120.000000"/></proof>
- <proof prover="3" timelimit="120"><result status="timeout" time="120.000000" steps="3898623"/></proof>
- <proof prover="4" timelimit="120"><result status="timeout" time="120.000000" steps="1186105"/></proof>
+ <proof prover="3"><result status="timeout" time="120.000000" steps="3696308"/></proof>
+ <proof prover="4"><result status="timeout" time="120.000000" steps="273949"/></proof>
  </goal>
 </theory>
 </file>

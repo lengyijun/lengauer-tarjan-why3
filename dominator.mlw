@@ -60,11 +60,11 @@ module Graph
     path x (l1 ++ Cons y l2) z -> path x l1 y /\ path y l2 z
 
   (* strict dominate *)
-  predicate dominate (x y : vertex) = (exists p. path root p y) /\ y <> root /\ forall p. path root p y -> L.mem x (Cons root p)
+  predicate (~~>) (x y : vertex) = (exists p. path root p y) /\ y <> root /\ forall p. path root p y -> L.mem x (Cons root p)
 
-  lemma root_dominate_all : forall x. (exists p. path root p x) -> x <> root -> dominate root x
+  lemma root_dominate_all : forall x. (exists p. path root p x) -> x <> root -> root ~~> x
 
-  lemma dominate_em : forall x y. dominate x y \/ not dominate x y
+  lemma dominate_em : forall x y. x ~~> y \/ not x ~~> y
 
 (*
   (* do we need this ? *)
@@ -75,9 +75,21 @@ module Graph
   lemma strict_dominate : forall x y. dominate x y -> x <> y
 *)
 
-  predicate idom (idominator : vertex) (y : vertex) = dominate idominator y /\
+  predicate (~>) (idominator : vertex) (y : vertex) = idominator ~~> y /\
                         exists p. path root p y /\ 
-                          exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not dominate x y)
+                          exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not x ~~> y)
+
+end
+
+
+module IdomExistsHelper
+    use list.List
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.Elements as E
+    use int.Int
+    use Graph
 
 (*
 https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
@@ -86,36 +98,80 @@ https://pages.cs.wisc.edu/~fischer/cs701.f08/lectures/Lecture19.4up.pdf
   predicate p1(n : int) = forall p1 p2 y.
                             length p1 = n -> 
                             path root (p1 ++ p2) y -> 
-                            (forall x. L.mem x p2 -> not dominate x y) ->
+                            (forall x. L.mem x p2 -> not x ~~> y) ->
                             y <> root -> 
-                            exists idominator. dominate idominator y /\ exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p1) /\ (forall x. L.mem x l2 -> not dominate x y)
+                            exists idominator. idominator ~~> y /\ exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p1) /\ (forall x. L.mem x l2 -> not x ~~> y)
 
   clone int.SimpleInduction as Exists_induction with predicate p = p1
+end
 
-  lemma idom_exists_a : forall p y. path root p y -> y <> root -> exists idominator. idom idominator y
-  lemma idom_exists_b : forall y. (exists p. path root p y) -> y <> root -> exists idominator. idom idominator y
-
-  predicate p2 (n : int) = forall x y z l1 l2. 
-                                length l1 <= n -> 
-                                L.mem y l1 -> 
-                                path x (l1 ++ Cons y l2) z -> 
-                                exists l1'. path x (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' < length l1
-
-  clone int.SimpleInduction with predicate p = p2
-
-  lemma no_acycle_a : forall y z l1 l2. L.mem y l1 -> path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' < length l1
-
-  lemma no_acycle: forall y z l1 l2. path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' <= length l1
-
-  lemma idom_unique : forall n m1 m2. idom m1 n -> idom m2 n -> m1 = m2
-
-  predicate (~~>) (v w: vertex) = dominate v w
-  predicate (~>)  (v w: vertex) = idom     v w
+module IdomExists
+    use list.List
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.Elements as E
+    use int.Int
+    use Graph
+    use IdomExistsHelper
 
   lemma idom_exists_c :  forall p y.
                             path root p y -> 
                             y <> root -> 
-                            exists idominator. dominate idominator y /\ exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not dominate x y)
+                            exists idominator. idominator ~~> y /\ exists l1 l2. l1 ++ Cons idominator l2 = (Cons root p) /\ (forall x. L.mem x l2 -> not x ~~> y)
+
+  lemma idom_exists_a : forall p y. path root p y -> y <> root -> exists idominator. idominator ~> y
+
+  (*
+  lemma idom_exists_b : forall y. (exists p. path root p y) -> y <> root -> exists idominator. idominator ~> y
+  *)
+
+end
+
+module UniquePathHelper
+    use list.List
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.Elements as E
+    use int.Int
+    use Graph
+
+  predicate p2 (n : int) = forall y : vertex. forall l : list vertex. 
+                                length l <= n -> 
+                                L.mem y l -> 
+                                exists l3 l4. l3 ++ Cons y l4 = l /\ not L.mem y l3
+
+  clone int.SimpleInduction with predicate p = p2
+end
+
+module UniquePath
+    use list.List
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.Elements as E
+    use int.Int
+    use Graph
+  use UniquePathHelper
+
+  lemma no_acycle_a : forall y z l1 l2. L.mem y l1 -> path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' < length l1
+
+  lemma no_acycle: forall y z l1 l2. path root (l1 ++ Cons y l2) z -> exists l1'. path root (l1' ++ Cons y l2) z /\ not L.mem y l1' /\ length l1' <= length l1
+end
+
+module IdomUniq
+    use list.List
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.Elements as E
+    use int.Int
+    use Graph
+    use UniquePath
+    use IdomExists
+
+  lemma idom_unique : forall n m1 m2. m1 ~> n -> m2 ~> n -> m1 = m2
 
   lemma idom_on_every_path : forall w idom_w. 
                                 idom_w ~> w 
@@ -131,7 +187,7 @@ end
 module ShouldFail
   use Graph
 
-  goal wrong1: forall x. idom root x
+  goal wrong1: forall x. root ~> x
 
 end
 
