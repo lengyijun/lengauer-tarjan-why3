@@ -51,7 +51,7 @@
  <proof prover="0" timelimit="120"><result status="valid" time="0.102695" steps="676"/></proof>
  </goal>
  <goal name="SimpleInduction.induction_step" proved="true">
- <proof prover="0" timelimit="120"><result status="valid" time="2.232448" steps="16284"/></proof>
+ <proof prover="0" timelimit="120"><result status="valid" time="3.038854" steps="16284"/></proof>
  </goal>
 </theory>
 <theory name="DfsnumParentSorted" proved="true">
@@ -70,14 +70,12 @@
  </transf>
  </goal>
  <goal name="unnamed_e" proved="true">
- <proof prover="0" timelimit="120"><result status="failure" time="0.000000"/></proof>
- <proof prover="1" timelimit="120"><result status="failure" time="0.000000"/></proof>
  <transf name="split_goal_full" proved="true" >
   <goal name="unnamed_e.0" proved="true">
   <proof prover="0" timelimit="120"><result status="valid" time="0.033776" steps="191"/></proof>
   </goal>
   <goal name="unnamed_e.1" proved="true">
-  <proof prover="0" timelimit="120"><result status="valid" time="22.422682" steps="109399"/></proof>
+  <proof prover="0" timelimit="120"><result status="valid" time="22.422682" steps="109403"/></proof>
   </goal>
   <goal name="unnamed_e.2" proved="true">
   <proof prover="0" timelimit="120"><result status="valid" time="2.556890" steps="16045"/></proof>
@@ -148,7 +146,7 @@
     <proof prover="1" timelimit="120"><result status="valid" time="0.058598" steps="15902"/></proof>
     </goal>
     <goal name="induction_step.0.0.1" proved="true">
-    <proof prover="1" timelimit="120"><result status="valid" time="1.633051" steps="119916"/></proof>
+    <proof prover="1" timelimit="120"><result status="valid" time="2.083481" steps="119916"/></proof>
     </goal>
    </transf>
    </goal>
@@ -185,12 +183,8 @@
   <proof prover="0" timelimit="120"><result status="valid" time="0.022607" steps="22"/></proof>
   </goal>
   <goal name="must_on_tree.2" proved="true">
-  <proof prover="0" timelimit="120"><result status="failure" time="0.000000"/></proof>
-  <proof prover="1" timelimit="120"><result status="failure" time="0.000000"/></proof>
-  <proof prover="2" timelimit="120"><result status="valid" time="2.536785"/></proof>
   <transf name="inline_goal" proved="true" >
    <goal name="must_on_tree.2.0" proved="true">
-   <proof prover="0" timelimit="120"><result status="failure" time="0.000000"/></proof>
    <proof prover="1" timelimit="120"><result status="valid" time="2.577070" steps="116960"/></proof>
    </goal>
   </transf>
@@ -302,6 +296,174 @@
  </transf>
  </goal>
 </theory>
+<theory name="Lemma1HelperA" proved="true">
+ <goal name="InductionLemma1Helper.base" proved="true">
+ <proof prover="1" timelimit="120"><result status="valid" time="1.898852" steps="140850"/></proof>
+ <proof prover="4" timelimit="120"><result status="valid" time="0.377031" steps="576100"/></proof>
+ </goal>
+ <goal name="InductionLemma1Helper.induction_step" proved="true">
+ <transf name="inline_goal" proved="true" >
+  <goal name="induction_step.0" proved="true">
+  <transf name="introduce_premises" proved="true" >
+   <goal name="induction_step.0.0" proved="true">
+   <transf name="assert" proved="true" arg1="(exists l1 z. l = l1 ++ Cons z Nil)">
+    <goal name="induction_step.0.0.0" expl="asserted formula" proved="true">
+    <proof prover="2" timelimit="120"><result status="valid" time="0.212667"/></proof>
+    </goal>
+    <goal name="induction_step.0.0.1" proved="true">
+    <transf name="destruct_rec" proved="true" arg1="h">
+     <goal name="induction_step.0.0.1.0" proved="true">
+     <transf name="assert" proved="true" arg1="(exists iz pz . mapsto z (iz , pz) dfsnum_parent)">
+      <goal name="induction_step.0.0.1.0.0" expl="asserted formula" proved="true">
+      <proof prover="0" timelimit="120"><result status="valid" time="3.625406" steps="25141"/></proof>
+      </goal>
+      <goal name="induction_step.0.0.1.0.1" proved="true">
+      <transf name="destruct_rec" proved="true" arg1="h">
+       <goal name="induction_step.0.0.1.0.1.0" proved="true">
+       <transf name="instantiate" proved="true" arg1="H5" arg2="dfsnum_parent">
+        <goal name="induction_step.0.0.1.0.1.0.0" proved="true">
+        <transf name="assert" proved="true" arg1="((forall l2:list vertex, a1:vertex, ia1:int, pa1:vertex, t1:int. length l2 = n -&gt; (forall x:vertex. mem2 x l2 -&gt; mem x dfsnum_parent) -&gt; mapsto a1 (ia1, pa1) dfsnum_parent -&gt; ia1 &lt; t1 -&gt; (exists b:vertex, ib:int, pb:vertex, l11:list vertex, l21:list vertex. Cons a1 l2 = (l11 ++ Cons b l21) /\ mapsto b (ib, pb) dfsnum_parent /\ ib &lt; t1 /\ (forall x:vertex, ix:int, px:vertex. mem2 x l21 -&gt; mapsto x (ix, px) dfsnum_parent -&gt; ix &gt;= t1))))">
+         <goal name="induction_step.0.0.1.0.1.0.0.0" expl="asserted formula" proved="true">
+         <proof prover="1" timelimit="120"><result status="valid" time="0.069931" steps="18409"/></proof>
+         </goal>
+         <goal name="induction_step.0.0.1.0.1.0.0.1" proved="true">
+         <transf name="instantiate" proved="true" arg1="h" arg2="l1, a, ia, pa, t">
+          <goal name="induction_step.0.0.1.0.1.0.0.1.0" proved="true">
+          <transf name="assert" proved="true" arg1="(iz &lt; t \/ iz &gt;= t )">
+           <goal name="induction_step.0.0.1.0.1.0.0.1.0.0" expl="asserted formula" proved="true">
+           <proof prover="0" timelimit="120"><result status="valid" time="0.023249" steps="18"/></proof>
+           </goal>
+           <goal name="induction_step.0.0.1.0.1.0.0.1.0.1" proved="true">
+           <transf name="destruct_rec" proved="true" arg1="h">
+            <goal name="induction_step.0.0.1.0.1.0.0.1.0.1.0" proved="true">
+            <proof prover="0" timelimit="120"><result status="valid" time="0.079319" steps="460"/></proof>
+            </goal>
+            <goal name="induction_step.0.0.1.0.1.0.0.1.0.1.1" proved="true">
+            <proof prover="0" timelimit="120"><result status="valid" time="64.886166" steps="364330"/></proof>
+            </goal>
+           </transf>
+           </goal>
+          </transf>
+          </goal>
+         </transf>
+         </goal>
+        </transf>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="lemma1_helper" proved="true">
+ <transf name="introduce_premises" proved="true" >
+  <goal name="lemma1_helper.0" proved="true">
+  <transf name="assert" proved="true" arg1="(p_lemma1_helper (length l))">
+   <goal name="lemma1_helper.0.0" expl="asserted formula" proved="true">
+   <proof prover="0" timelimit="120"><result status="valid" time="0.023344" steps="16"/></proof>
+   </goal>
+   <goal name="lemma1_helper.0.1" proved="true">
+   <transf name="unfold" proved="true" arg1="p_lemma1_helper" arg2="in" arg3="h">
+    <goal name="lemma1_helper.0.1.0" proved="true">
+    <transf name="apply" proved="true" arg1="h" arg2="with" arg3="ia, pa">
+     <goal name="lemma1_helper.0.1.0.0" expl="apply premises" proved="true">
+     <proof prover="0" timelimit="120"><result status="valid" time="0.023289" steps="10"/></proof>
+     </goal>
+     <goal name="lemma1_helper.0.1.0.1" expl="apply premises" proved="true">
+     <proof prover="0" timelimit="120"><result status="valid" time="0.024837" steps="10"/></proof>
+     </goal>
+     <goal name="lemma1_helper.0.1.0.2" expl="apply premises" proved="true">
+     <proof prover="0" timelimit="120"><result status="valid" time="0.030936" steps="16"/></proof>
+     </goal>
+     <goal name="lemma1_helper.0.1.0.3" expl="apply premises" proved="true">
+     <proof prover="0" timelimit="120"><result status="valid" time="0.020845" steps="10"/></proof>
+     </goal>
+     <goal name="lemma1_helper.0.1.0.4" expl="apply premises" proved="true">
+     <proof prover="0" timelimit="120"><result status="valid" time="0.025407" steps="10"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="Lemma1HelperB">
+ <goal name="InductionLemma1.base" proved="true">
+ <transf name="inline_goal" proved="true" >
+  <goal name="base.0" proved="true">
+  <transf name="introduce_premises" proved="true" >
+   <goal name="base.0.0" proved="true">
+   <transf name="exists" proved="true" arg1="v">
+    <goal name="base.0.0.0" proved="true">
+    <proof prover="0" timelimit="120"><result status="valid" time="0.069210" steps="368"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="InductionLemma1.induction_step">
+ <transf name="inline_goal" >
+  <goal name="induction_step.0">
+  <transf name="introduce_premises" >
+   <goal name="induction_step.0.0">
+   <transf name="instantiate" arg1="lemma1_helper" arg2="dfsnum_parent">
+    <goal name="induction_step.0.0.0">
+    <transf name="assert" arg1="((forall l:list vertex, a:vertex, ia:int, pa:vertex, t:int. (forall x:vertex. mem2 x l -&gt; mem x dfsnum_parent) -&gt; mapsto a (ia, pa) dfsnum_parent -&gt; ia &lt; t -&gt; (exists b:vertex, ib:int, pb:vertex, l1:list vertex, l2:list vertex. Cons a l = (l1 ++ Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib &lt; t /\ (forall x:vertex, ix:int, px:vertex. mem2 x l2 -&gt; mapsto x (ix, px) dfsnum_parent -&gt; ix &gt;= t))))">
+     <goal name="induction_step.0.0.0.0" expl="asserted formula" proved="true">
+     <proof prover="0" timelimit="120"><undone/></proof>
+     <proof prover="1" timelimit="120"><result status="valid" time="0.072876" steps="19207"/></proof>
+     <proof prover="2" timelimit="120"><undone/></proof>
+     </goal>
+     <goal name="induction_step.0.0.0.1">
+     <transf name="instantiate" arg1="h" arg2="p, v, iv, pv, iw">
+      <goal name="induction_step.0.0.0.1.0">
+      <transf name="assert" arg1="((exists b:vertex, ib:int, pb:vertex, l1:list vertex, l2:list vertex. Cons v p = (l1 ++ Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib &lt; iw /\ (forall x:vertex, ix:int, px:vertex. mem2 x l2 -&gt; mapsto x (ix, px) dfsnum_parent -&gt; ix &gt;= iw)))">
+       <goal name="induction_step.0.0.0.1.0.0" expl="asserted formula">
+       <proof prover="0" timelimit="120"><result status="timeout" time="120.000000" steps="685227"/></proof>
+       <transf name="apply" arg1="Hinst">
+        <goal name="induction_step.0.0.0.1.0.0.0" expl="apply premises">
+        <proof prover="0" timelimit="120"><result status="timeout" time="120.000000" steps="652078"/></proof>
+        </goal>
+        <goal name="induction_step.0.0.0.1.0.0.1" expl="apply premises" proved="true">
+        <proof prover="0" timelimit="120"><result status="valid" time="0.027147" steps="20"/></proof>
+        </goal>
+        <goal name="induction_step.0.0.0.1.0.0.2" expl="apply premises" proved="true">
+        <proof prover="0" timelimit="120"><result status="valid" time="0.022969" steps="20"/></proof>
+        </goal>
+       </transf>
+       </goal>
+       <goal name="induction_step.0.0.0.1.0.1">
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="Lemma1">
+ <goal name="lemma1">
+ </goal>
+</theory>
 <theory name="LengauerTarjan">
  <goal name="dfs&#39;vc" expl="VC for dfs">
  </goal>
@@ -321,12 +483,6 @@
  </goal>
  <goal name="dfsnum_property_g">
  </goal>
- <goal name="InductionLemma1Helper.base">
- </goal>
- <goal name="InductionLemma1Helper.induction_step">
- </goal>
- <goal name="lemma1_helper">
- </goal>
  <goal name="lemma1_helper_b">
  </goal>
  <goal name="InductionK.base">
@@ -335,12 +491,6 @@
  </goal>
  <goal name="dfsnum_property_k">
  </goal>
- <goal name="InductionLemma1.base">
- </goal>
- <goal name="InductionLemma1.induction_step">
- </goal>
- <goal name="lemma1">
- </goal>
  <goal name="parent_is_candidate_of_semi_dominator">
  </goal>
  <goal name="semi_dominator_less_equal_than_parent">
@@ -348,6 +498,12 @@
  <goal name="semi_dominator_less_than_self">
  </goal>
  <goal name="lemma3">
+ </goal>
+ <goal name="InductionLemma1.induction_step">
+ </goal>
+ <goal name="lemma1_helper">
+ </goal>
+ <goal name="InductionLemma1.base">
  </goal>
 </theory>
 <theory name="Graph">

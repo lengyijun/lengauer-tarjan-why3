@@ -65,6 +65,24 @@ theory DfsnumParent
       size large > size small /\
       (forall x y. mapsto x y small -> mapsto x y large)
 
+  predicate super_wf_dfsnum_parent (dfsnum_parent : fmap vertex (int, vertex)) = 
+    wf_dfsnum_parent dfsnum_parent /\
+    (forall v w iv iw pv pw. 
+           edge v w
+        -> mapsto v (iv, pv) dfsnum_parent
+        -> mapsto w (iw, pw) dfsnum_parent
+        -> iv < iw 
+        -> exists l. (--+->) dfsnum_parent v l w
+    ) /\
+    (forall a c lac ia pa ic pc.              
+          (--+->) dfsnum_parent a lac c              
+       -> mapsto a (ia, pa) dfsnum_parent
+       -> mapsto c (ic, pc) dfsnum_parent
+       -> forall b ib pb.                      
+          mapsto b (ib, pb) dfsnum_parent
+       -> ia < ib < ic                         
+       -> exists lab. (--+->) dfsnum_parent a lab b  
+   )
 end
 
 module DfsnumParentStartMemHelper
@@ -483,6 +501,95 @@ module Lemma2
                         idom_w ~> w /\ mem w dfsnum_parent -> exists l. (--+->) dfsnum_parent idom_w l w
 end
 
+module Lemma1HelperA
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use MMap
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+
+  predicate p_lemma1_helper (n : int) = 
+      forall dfsnum_parent.
+      super_wf_dfsnum_parent dfsnum_parent ->
+      forall l a ia pa t. 
+        length l = n ->
+        (forall x. L.mem x l -> mem x dfsnum_parent) ->
+        mapsto a (ia, pa) dfsnum_parent ->
+        ia < t ->
+        exists b ib pb l1 l2. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
+
+  clone int.SimpleInduction as InductionLemma1Helper with predicate p = p_lemma1_helper
+
+  lemma lemma1_helper : 
+    forall dfsnum_parent.
+    super_wf_dfsnum_parent dfsnum_parent ->
+    forall l a ia pa t. 
+        (forall x. L.mem x l -> mem x dfsnum_parent) ->
+        mapsto a (ia, pa) dfsnum_parent ->
+        ia < t ->
+        exists b ib pb l1 l2. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
+
+end
+
+module Lemma1HelperB
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use MMap
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use Lemma1HelperA
+
+  predicate p_lemma1 (n : int) = 
+    forall dfsnum_parent.
+    super_wf_dfsnum_parent dfsnum_parent ->
+    forall v w iv iw pv pw. 
+         mapsto v (iv, pv) dfsnum_parent 
+      -> mapsto w (iw, pw) dfsnum_parent 
+      -> iv < iw 
+      -> forall p. path v p w
+      -> length p <= n
+      -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+
+  clone int.SimpleInduction as InductionLemma1 with predicate p = p_lemma1
+end
+
+module Lemma1
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use MMap
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use Lemma1HelperB
+
+  lemma lemma1 : forall dfsnum_parent.
+                      super_wf_dfsnum_parent dfsnum_parent ->
+                      forall v w iv iw pv pw. 
+                             mapsto v (iv, pv) dfsnum_parent 
+                          -> mapsto w (iw, pw) dfsnum_parent 
+                          -> iv < iw 
+                          -> forall p. path v p w
+                          -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+
+end
+
 
 module LengauerTarjan
   use list.List
@@ -629,23 +736,6 @@ module LengauerTarjan
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 
-  predicate p_lemma1_helper (n : int) = forall l a ia pa t. 
-                                          length l = n ->
-                                          (forall x. L.mem x l -> mem x dfsnum_parent) ->
-                                          mapsto a (ia, pa) dfsnum_parent ->
-                                          ia < t ->
-                                          exists l1 l2 b ib pb. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
-
-  clone int.SimpleInduction as InductionLemma1Helper with predicate p = p_lemma1_helper
-
-  lemma lemma1_helper : 
-    forall l a ia pa t. 
-        (forall x. L.mem x l -> mem x dfsnum_parent) ->
-        mapsto a (ia, pa) dfsnum_parent ->
-        ia < t ->
-        exists l1 l2 b ib pb. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
-
-                              
   lemma lemma1_helper_b : forall v w iv pv.
                                        mapsto v (iv, pv) dfsnum_parent 
                                     -> forall p. path v p w
@@ -673,21 +763,6 @@ module LengauerTarjan
                 
 
 
-  predicate p_lemma1 (n : int) = forall v w iv iw pv pw. 
-                                         mapsto v (iv, pv) dfsnum_parent 
-                                      -> mapsto w (iw, pw) dfsnum_parent 
-                                      -> iv < iw 
-                                      -> forall p. path v p w
-                                      -> length p <= n
-                                      -> exists x. L.mem x (Cons v p) /\ x -*-> v /\ x -*-> w
-
-  clone int.SimpleInduction as InductionLemma1 with predicate p = p_lemma1
-
-  lemma lemma1 : forall v w iv iw pv pw. mapsto v (iv, pv) dfsnum_parent 
-                                      -> mapsto w (iw, pw) dfsnum_parent 
-                                      -> iv < iw 
-                                      -> forall p. path v p w
-                                      -> exists x. L.mem x (Cons v p) /\ x -*-> v /\ x -*-> w
 
   (* candidate of semidominate *)
   predicate (++>) (v w : vertex) = w <> root /\ mem w dfsnum_parent /\ mem v dfsnum_parent /\ exists p. path v p w /\ (forall x. L.mem x p -> dfsnum x > dfsnum w)
