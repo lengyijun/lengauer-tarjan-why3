@@ -379,7 +379,7 @@ module DfsnumParentPathSmall2LargeHelper
   use DfsnumParent
 
   predicate pc (n : int) = forall large small.
-                       (large >> small) ->
+                       (forall x y. mapsto x y small -> mapsto x y large) ->
                        forall x y l. 
                           length l <= n ->
                          (--+->) small x l y ->
@@ -402,7 +402,7 @@ module DfsnumParentPathSmall2Large
   use DfsnumParentPathSmall2LargeHelper
  
   lemma unnamed_c : forall large small.
-                       (large >> small) ->
+                       (forall x y. mapsto x y small -> mapsto x y large) ->
                        forall x y l. 
                          (--+->) small x l y ->
                          (--+->) large x l y
@@ -615,6 +615,7 @@ module LengauerTarjan
   use dominator.Graph
   use DfsnumParent
   use DfsnumParentPathSmall2Large
+  use DfsnumParentMustOnTree
 
   let rec ghost constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : (fmap vertex (int, vertex))) : fmap vertex (int, vertex)= 
     requires{current_parent = root -> grey = Nil}
