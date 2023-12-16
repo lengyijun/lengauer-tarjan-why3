@@ -614,6 +614,7 @@ module LengauerTarjan
   use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
+  use DfsnumParentPathSmall2Large
 
   let rec ghost constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : (fmap vertex (int, vertex))) : fmap vertex (int, vertex)= 
     requires{current_parent = root -> grey = Nil}
