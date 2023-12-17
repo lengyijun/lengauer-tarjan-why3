@@ -65,6 +65,10 @@ theory DfsnumParent
        -> ia < ib < ic                         
        -> exists lab. (--+->) dfsnum_parent a lab b  
    )
+
+   predicate all_reachable (dfsnum_parent : fmap vertex (int, vertex)) = 
+      forall y. (exists p. path root p y) -> mem y dfsnum_parent
+
 end
 
 module DfsnumParentStartMemHelper
