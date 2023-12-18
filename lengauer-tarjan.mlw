@@ -654,10 +654,8 @@ module Lemma1
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.NumOcc
   use list.Elements as E
   use int.Int
-  use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
   use Lemma1HelperB
@@ -674,6 +672,123 @@ module Lemma1
 
 end
 
+
+module SetMinExists
+  use set.Fset 
+  use int.Int
+  use dominator.Graph
+
+  predicate p (s : fset vertex) = forall f : vertex -> int .
+    not is_empty s ->
+    exists v. 
+      mem v s /\
+      forall x. mem x s -> f v <= f x 
+
+  clone set.FsetInduction with type t = vertex, predicate p = p
+
+  lemma min_exists_helper : forall s . not is_empty s -> p s
+
+  lemma min_exists : forall s : fset vertex, f : vertex -> int .
+    not is_empty s ->
+    exists v. 
+      mem v s /\
+      forall x. mem x s -> f v <= f x 
+end
+
+module SemiDominate
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.Elements as E
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use Lemma1HelperB
+
+  (* candidate of semidominate *)
+  predicate (++>) (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
+        super_wf_dfsnum_parent dfsnum_parent /\
+        all_reachable dfsnum_parent /\
+        w <> root /\ 
+        mem v dfsnum_parent /\ 
+        exists p. path v p w /\ 
+          let (iw, _) = find w dfsnum_parent in 
+            forall x. 
+              L.mem x p -> 
+              let (ix, _) = find x dfsnum_parent in ix > iw
+
+  (* smallest semi dominator *)
+  predicate (+>) (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
+      (++>) dfsnum_parent v w /\ 
+      let (iv, _) = find v dfsnum_parent in 
+        forall x. 
+          (++>) dfsnum_parent x w -> 
+          let (ix, _) = find x dfsnum_parent in iv <= ix
+
+  lemma parent_is_candidate_of_semi_dominator :
+      forall dfsnum_parent w iw pw. 
+        super_wf_dfsnum_parent dfsnum_parent /\
+        all_reachable dfsnum_parent /\
+        w <> root -> 
+        mapsto w (iw, pw) dfsnum_parent -> 
+        (++>) dfsnum_parent pw w 
+
+  lemma semi_em : forall dfsnum_parent x y. 
+      (++>) dfsnum_parent x y \/ not (++>) dfsnum_parent x y
+
+  lemma min_semi_uniq : forall dfsnum_parent x a1 a2. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (+>) dfsnum_parent a1 x ->
+        (+>) dfsnum_parent a2 x ->
+        a1 = a2
+
+  lemma semi_exists : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        exists semi_x. (++>) dfsnum_parent semi_x x
+
+
+  use set.Fset as SS
+
+  lemma semi_exists_helper_a : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        let s = SS.filter dfsnum_parent.domain (fun y -> (++>) dfsnum_parent y x) in 
+          (not SS.is_empty s) /\ forall a. SS.mem a s <-> (++>) dfsnum_parent a x
+
+  use SetMinExists
+
+  lemma min_semi_exists : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        exists semi_x. (+>) dfsnum_parent semi_x x
+
+  lemma semi_dominator_less_equal_than_parent :
+     forall dfsnum_parent w iw pw semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w -> 
+        mapsto w (iw, pw) dfsnum_parent -> 
+        let (a, _) = find semi_w dfsnum_parent in 
+        let (b, _) = find pw dfsnum_parent in 
+        a <= b
+
+  lemma semi_dominator_less_than_self :
+     forall dfsnum_parent w iw pw semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w ->
+        mapsto w (iw, pw) dfsnum_parent -> 
+        let (a, _) = find semi_w dfsnum_parent in 
+        a < iw 
+
+end
 
 module LengauerTarjan
   use list.List
@@ -810,25 +925,9 @@ module LengauerTarjan
   lemma dfsnum_property_g : 
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
-  (* candidate of semidominate *)
-  predicate (++>) (v w : vertex) = w <> root /\ mem w dfsnum_parent /\ mem v dfsnum_parent /\ exists p. path v p w /\ (forall x. L.mem x p -> dfsnum x > dfsnum w)
-
-  (* smallest semi dominator *)
-  predicate (+>) (v w : vertex) = v ++> w /\ forall x. x ++> w -> dfsnum v <= dfsnum x
-
-  lemma parent_is_candidate_of_semi_dominator :
-      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> pw ++> w 
-
-  lemma semi_dominator_less_equal_than_parent :
-      forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w <= dfsnum pw
-
-  lemma semi_dominator_less_than_self :
-      forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w < iw
-
+(*
   lemma lemma3 : forall w semi_w. semi_w +> w -> exists l. (-+->) semi_w l w
 
-
-(*
   lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w
 
   lemma lemma5 : forall v w idom_w idom_v. idom idom_w w 
@@ -866,6 +965,70 @@ module LengauerTarjan
                              SV.mem (semi_dominator w) z /\ forall x. SV.mem x z -> x = (semi_dominator w) \/ dfsnum x > dfsnum (semi_dominator w)
  
 *)
+
+end
+
+module Jiqian
+
+use fmap.Fmap
+use int.Int
+
+lemma ss : forall s : fmap 'a 'b , k v.
+  mapsto k v s ->
+  add k v (remove k s) == s
+
+lemma tt : forall s1 s2 : fmap 'a 'b.
+  s1 == s2 ->
+  s1 = s2
+
+lemma gg : forall s : fmap 'a 'b, k v.
+  mapsto k v s ->
+  add k v (remove k s) = s
+end
+
+module SingintonFmap
+  use dominator.Graph
+  use Jiqian
+  use fmap.Fmap
+
+  lemma unique : forall mp : fmap 'a 'b, k1 k2.
+    size mp = 1 ->
+    mem k1 mp ->
+    mem k2 mp ->
+    k1 = k2
+
+end
+
+module FmapInductionA
+  use int.Int
+  use dominator.Graph
+  use Jiqian
+  use fmap.Fmap
+  use SingintonFmap
+
+  predicate p1 (dfsnum_parent : fmap vertex (int, vertex)) = 
+        not (is_empty dfsnum_parent) ->
+        exists v iv pv. 
+          mapsto v (iv, pv) dfsnum_parent /\
+          forall x ix px. mapsto x (ix, px) dfsnum_parent -> iv <= ix
+
+  predicate p2 (n : int) = forall x : fmap vertex (int, vertex) . size x = n + 1 -> p1 x
+
+  clone int.SimpleInduction as InductionNodeMem with predicate p = p2
+
+end
+
+module MinExists
+  use int.Int
+  use fmap.Fmap
+  use dominator.Graph
+  use FmapInductionA
+  
+  lemma min_exists : forall dfsnum_parent : fmap vertex (int, vertex).
+        not (is_empty dfsnum_parent) ->
+        exists v iv pv. 
+          mapsto v (iv, pv) dfsnum_parent /\
+          forall x ix px. mapsto x (ix, px) dfsnum_parent -> iv <= ix
 
 end
 

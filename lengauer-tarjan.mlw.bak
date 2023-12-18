@@ -65,6 +65,10 @@ theory DfsnumParent
        -> ia < ib < ic                         
        -> exists lab. (--+->) dfsnum_parent a lab b  
    )
+
+   predicate all_reachable (dfsnum_parent : fmap vertex (int, vertex)) = 
+      forall y. (exists p. path root p y) -> mem y dfsnum_parent
+
 end
 
 module DfsnumParentStartMemHelper
@@ -379,7 +383,7 @@ module DfsnumParentPathSmall2LargeHelper
   use DfsnumParent
 
   predicate pc (n : int) = forall large small.
-                       (large >> small) ->
+                       (forall x y. mapsto x y small -> mapsto x y large) ->
                        forall x y l. 
                           length l <= n ->
                          (--+->) small x l y ->
@@ -402,7 +406,7 @@ module DfsnumParentPathSmall2Large
   use DfsnumParentPathSmall2LargeHelper
  
   lemma unnamed_c : forall large small.
-                       (large >> small) ->
+                       (forall x y. mapsto x y small -> mapsto x y large) ->
                        forall x y l. 
                          (--+->) small x l y ->
                          (--+->) large x l y
@@ -516,7 +520,7 @@ module Lemma2
                         idom_w ~> w /\ mem w dfsnum_parent -> exists l. (--+->) dfsnum_parent idom_w l w
 end
 
-module Lemma1HelperA
+module Lemma1HelperAHelper
   use list.List
   use list.Mem as L
   use list.Append
@@ -539,19 +543,9 @@ module Lemma1HelperA
         exists b ib pb l1 l2. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
 
   clone int.SimpleInduction as InductionLemma1Helper with predicate p = p_lemma1_helper
-
-  lemma lemma1_helper : 
-    forall dfsnum_parent.
-    super_wf_dfsnum_parent dfsnum_parent ->
-    forall l a ia pa t. 
-        (forall x. L.mem x l -> mem x dfsnum_parent) ->
-        mapsto a (ia, pa) dfsnum_parent ->
-        ia < t ->
-        exists b ib pb l1 l2. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
-
 end
 
-module Lemma1HelperB
+module Lemma1HelperA
   use list.List
   use list.Mem as L
   use list.Append
@@ -562,18 +556,95 @@ module Lemma1HelperB
   use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
+  use Lemma1HelperAHelper
+
+  lemma lemma1_helper_a : 
+    forall dfsnum_parent l a ia pa t. 
+      super_wf_dfsnum_parent dfsnum_parent ->
+      (forall x. L.mem x l -> mem x dfsnum_parent) ->
+      mapsto a (ia, pa) dfsnum_parent ->
+      ia < t ->
+      exists b ib pb l1 l2. (Cons a l) = l1 ++ (Cons b l2) /\ mapsto b (ib, pb) dfsnum_parent /\ ib < t /\ (forall x ix px. L.mem x l2 -> mapsto x (ix, px) dfsnum_parent -> ix >= t)
+
+end
+
+module Lemma1HelperCHelper
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use JustSpecialPath
+
+  predicate p_dfsnum_property_k (n : int) =
+    forall dfsnum_parent l v iv pv w iw pw.
+      length l = n ->
+      super_wf_dfsnum_parent dfsnum_parent ->
+      all_reachable dfsnum_parent ->
+      mapsto v (iv, pv) dfsnum_parent ->
+      mapsto w (iw, pw) dfsnum_parent ->
+      iv < iw ->
+      path v l w ->
+      (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
+      exists p. (--+->) dfsnum_parent v p w
+                
+  clone int.SimpleInduction as InductionK with predicate p = p_dfsnum_property_k
+end
+
+module Lemma1HelperC
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use Lemma1HelperCHelper
+
+  lemma dfsnum_property_k : 
+    forall dfsnum_parent v w iv pv iw pw l.
+      super_wf_dfsnum_parent dfsnum_parent ->
+      all_reachable dfsnum_parent ->
+      mapsto v (iv, pv) dfsnum_parent ->
+      mapsto w (iw, pw) dfsnum_parent ->
+      iv < iw ->
+      path v l w ->
+      (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
+      exists p. (--+->) dfsnum_parent v p w
+end
+
+module Lemma1HelperB
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.Elements as E
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
   use Lemma1HelperA
+  use JustSpecialPath
+  use Lemma1HelperC
 
   predicate p_lemma1 (n : int) = 
-    forall dfsnum_parent.
-    super_wf_dfsnum_parent dfsnum_parent ->
-    forall v w iv iw pv pw. 
-         mapsto v (iv, pv) dfsnum_parent 
-      -> mapsto w (iw, pw) dfsnum_parent 
-      -> iv < iw 
-      -> forall p. path v p w
-      -> length p <= n
-      -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+    forall dfsnum_parent v iv pv w iw pw p. 
+      length p <= n ->
+      super_wf_dfsnum_parent dfsnum_parent ->
+      all_reachable dfsnum_parent ->
+      mapsto v (iv, pv) dfsnum_parent  ->
+      mapsto w (iw, pw) dfsnum_parent ->
+      iv < iw  ->
+      path v p w ->
+      exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
 
   clone int.SimpleInduction as InductionLemma1 with predicate p = p_lemma1
 end
@@ -583,16 +654,15 @@ module Lemma1
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.NumOcc
   use list.Elements as E
   use int.Int
-  use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
   use Lemma1HelperB
 
   lemma lemma1 : forall dfsnum_parent.
                       super_wf_dfsnum_parent dfsnum_parent ->
+                      all_reachable dfsnum_parent ->
                       forall v w iv iw pv pw. 
                              mapsto v (iv, pv) dfsnum_parent 
                           -> mapsto w (iw, pw) dfsnum_parent 
@@ -603,6 +673,118 @@ module Lemma1
 end
 
 
+module SetMinExists
+  use set.Fset 
+  use int.Int
+  use dominator.Graph
+
+  predicate p (s : fset vertex) = forall f : vertex -> int .
+    not is_empty s ->
+    exists v. 
+      mem v s /\
+      forall x. mem x s -> f v <= f x 
+
+  clone set.FsetInduction with type t = vertex, predicate p = p
+
+  lemma min_exists_helper : forall s . not is_empty s -> p s
+
+  lemma min_exists : forall s : fset vertex, f : vertex -> int .
+    not is_empty s ->
+    exists v. 
+      mem v s /\
+      forall x. mem x s -> f v <= f x 
+end
+
+module SemiDominate
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.Elements as E
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use Lemma1HelperB
+
+  (* candidate of semidominate *)
+  predicate (++>) (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
+        super_wf_dfsnum_parent dfsnum_parent /\
+        all_reachable dfsnum_parent /\
+        w <> root /\ 
+        mem v dfsnum_parent /\ 
+        exists p. path v p w /\ 
+          let (iw, _) = find w dfsnum_parent in 
+            forall x. 
+              L.mem x p -> 
+              let (ix, _) = find x dfsnum_parent in ix > iw
+
+  (* smallest semi dominator *)
+  predicate (+>) (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
+      (++>) dfsnum_parent v w /\ 
+      let (iv, _) = find v dfsnum_parent in 
+        forall x. 
+          (++>) dfsnum_parent x w -> 
+          let (ix, _) = find x dfsnum_parent in iv <= ix
+
+  lemma parent_is_candidate_of_semi_dominator :
+      forall dfsnum_parent w iw pw. 
+        super_wf_dfsnum_parent dfsnum_parent /\
+        all_reachable dfsnum_parent /\
+        w <> root -> 
+        mapsto w (iw, pw) dfsnum_parent -> 
+        (++>) dfsnum_parent pw w 
+
+  lemma semi_em : forall dfsnum_parent x y. 
+      (++>) dfsnum_parent x y \/ not (++>) dfsnum_parent x y
+
+  lemma jiting: forall dfsnum_parent x y.  
+       (++>) dfsnum_parent x y ->
+       mem x dfsnum_parent /\ mem y dfsnum_parent
+
+  lemma min_semi_uniq : forall dfsnum_parent x a1 a2. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (+>) dfsnum_parent a1 x ->
+        (+>) dfsnum_parent a2 x ->
+        a1 = a2
+
+  lemma semi_exists : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        exists semi_x. (++>) dfsnum_parent semi_x x
+
+
+  use set.Fset as SS
+
+  lemma semi_exists_helper_a : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        let s = SS.filter dfsnum_parent.domain (fun y -> (++>) dfsnum_parent y x) in 
+          (not SS.is_empty s) /\ forall a. SS.mem a s <-> (++>) dfsnum_parent a x
+
+  lemma semi_exists_helper_b : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        exists s. 
+          (not SS.is_empty s) /\ forall a. SS.mem a s <-> (++>) dfsnum_parent a x
+
+  use SetMinExists
+
+  lemma min_semi_exists : forall dfsnum_parent x. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        mem x dfsnum_parent ->
+        x <> root ->
+        exists semi_x. (+>) dfsnum_parent semi_x x
+
+end
+
 module LengauerTarjan
   use list.List
   use list.Mem as L
@@ -611,10 +793,11 @@ module LengauerTarjan
   use list.NumOcc
   use list.Elements as E
   use int.Int
-  use ref.Ref
   use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
+  use DfsnumParentPathSmall2Large
+  use DfsnumParentMustOnTree
 
   let rec ghost constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : (fmap vertex (int, vertex))) : fmap vertex (int, vertex)= 
     requires{current_parent = root -> grey = Nil}
@@ -737,44 +920,7 @@ module LengauerTarjan
   lemma dfsnum_property_g : 
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
-
-  lemma lemma1_helper_b : forall v w iv pv.
-                                       mapsto v (iv, pv) dfsnum_parent 
-                                    -> forall p. path v p w
-                                    -> forall x. L.mem x p -> mem x dfsnum_parent
-                                      by exists l2. path root l2 v
-                                        
-  predicate p_dfsnum_property_k (n : int) = forall v w iv pv iw pw l.
-                                       length l = n ->
-                                       mapsto v (iv, pv) dfsnum_parent ->
-                                       mapsto w (iw, pw) dfsnum_parent ->
-                                       iv < iw ->
-                                       path v l w ->
-                                       (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
-                                       exists p. (--+->) dfsnum_parent v p w
-                
-  clone int.SimpleInduction as InductionK with predicate p = p_dfsnum_property_k
-
-  lemma dfsnum_property_k : forall v w iv pv iw pw l.
-                                       mapsto v (iv, pv) dfsnum_parent ->
-                                       mapsto w (iw, pw) dfsnum_parent ->
-                                       iv < iw ->
-                                       path v l w ->
-                                       (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
-                                       exists p. (--+->) dfsnum_parent v p w
-                
-
-
-
-  (* candidate of semidominate *)
-  predicate (++>) (v w : vertex) = w <> root /\ mem w dfsnum_parent /\ mem v dfsnum_parent /\ exists p. path v p w /\ (forall x. L.mem x p -> dfsnum x > dfsnum w)
-
-  (* smallest semi dominator *)
-  predicate (+>) (v w : vertex) = v ++> w /\ forall x. x ++> w -> dfsnum v <= dfsnum x
-
-  lemma parent_is_candidate_of_semi_dominator :
-      forall w iw pw. w <> root -> mapsto w (iw, pw) dfsnum_parent -> pw ++> w 
-
+(*
   lemma semi_dominator_less_equal_than_parent :
       forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w <= dfsnum pw
 
@@ -783,8 +929,6 @@ module LengauerTarjan
 
   lemma lemma3 : forall w semi_w. semi_w +> w -> exists l. (-+->) semi_w l w
 
-
-(*
   lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w
 
   lemma lemma5 : forall v w idom_w idom_v. idom idom_w w 
@@ -822,6 +966,70 @@ module LengauerTarjan
                              SV.mem (semi_dominator w) z /\ forall x. SV.mem x z -> x = (semi_dominator w) \/ dfsnum x > dfsnum (semi_dominator w)
  
 *)
+
+end
+
+module Jiqian
+
+use fmap.Fmap
+use int.Int
+
+lemma ss : forall s : fmap 'a 'b , k v.
+  mapsto k v s ->
+  add k v (remove k s) == s
+
+lemma tt : forall s1 s2 : fmap 'a 'b.
+  s1 == s2 ->
+  s1 = s2
+
+lemma gg : forall s : fmap 'a 'b, k v.
+  mapsto k v s ->
+  add k v (remove k s) = s
+end
+
+module SingintonFmap
+  use dominator.Graph
+  use Jiqian
+  use fmap.Fmap
+
+  lemma unique : forall mp : fmap 'a 'b, k1 k2.
+    size mp = 1 ->
+    mem k1 mp ->
+    mem k2 mp ->
+    k1 = k2
+
+end
+
+module FmapInductionA
+  use int.Int
+  use dominator.Graph
+  use Jiqian
+  use fmap.Fmap
+  use SingintonFmap
+
+  predicate p1 (dfsnum_parent : fmap vertex (int, vertex)) = 
+        not (is_empty dfsnum_parent) ->
+        exists v iv pv. 
+          mapsto v (iv, pv) dfsnum_parent /\
+          forall x ix px. mapsto x (ix, px) dfsnum_parent -> iv <= ix
+
+  predicate p2 (n : int) = forall x : fmap vertex (int, vertex) . size x = n + 1 -> p1 x
+
+  clone int.SimpleInduction as InductionNodeMem with predicate p = p2
+
+end
+
+module MinExists
+  use int.Int
+  use fmap.Fmap
+  use dominator.Graph
+  use FmapInductionA
+  
+  lemma min_exists : forall dfsnum_parent : fmap vertex (int, vertex).
+        not (is_empty dfsnum_parent) ->
+        exists v iv pv. 
+          mapsto v (iv, pv) dfsnum_parent /\
+          forall x ix px. mapsto x (ix, px) dfsnum_parent -> iv <= ix
 
 end
 
