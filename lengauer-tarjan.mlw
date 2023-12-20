@@ -295,14 +295,13 @@ module Cutoff
   use DfsnumParent
   use CutoffHelper
 
-  lemma span_cutoff: forall mp x l z. 
+  lemma span_cutoff: forall mp x l z y. 
                       (--+->) mp x l z -> 
-                      forall y. 
-                        L.mem y l -> 
-                          exists l1 l2. 
-                            (--+->) mp x l1 y /\ 
-                            (--+->) mp y l2 z /\ 
-                            l = l1 ++ Cons y l2
+                      L.mem y l -> 
+                        exists l1 l2. 
+                          (--+->) mp x l1 y /\ 
+                          (--+->) mp y l2 z /\ 
+                          l = l1 ++ Cons y l2
 end
 
 module DfsnumParentMustOnTree
@@ -806,6 +805,18 @@ module SemiDominate
         (+>) dfsnum_parent semi_w w ->
         exists l. (--+->) dfsnum_parent semi_w l w
 
+  use Lemma2
+  use DfsnumParentMustOnTree
+  use Cutoff
+
+  lemma lemma4 : 
+     forall dfsnum_parent w idom_w semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        idom_w ~> w -> 
+        (+>) dfsnum_parent semi_w w ->
+        (--*->) dfsnum_parent idom_w semi_w
+
 end
 
 module LengauerTarjan
@@ -944,8 +955,6 @@ module LengauerTarjan
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 (*
-  lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w
-
   lemma lemma5 : forall v w idom_w idom_v. idom idom_w w 
                                         -> idom idom_v v 
                                         -> v -*-> w 
