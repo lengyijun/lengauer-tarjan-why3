@@ -819,6 +819,51 @@ module SemiDominate
 
 end
 
+module IdomInDfsnumParent
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use JustSpecialPath
+
+  lemma idom_in_dfsnum_parent : 
+     forall dfsnum_parent w idom_w.
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        idom_w ~~> w ->
+        mem w dfsnum_parent /\ mem idom_w dfsnum_parent 
+end
+
+module Lemma5
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use Cutoff
+  use JustSpecialPath
+  use dominator.IdomPropertyA
+  use IdomInDfsnumParent
+
+  lemma lemma5 : 
+     forall dfsnum_parent v w idom_w idom_v l. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        idom_w ~> w ->
+        idom_v ~> v ->
+        (--+->) dfsnum_parent v l w ->
+        (--*->) dfsnum_parent v idom_w \/ (--*->) dfsnum_parent idom_w idom_v
+end
+
 module LengauerTarjan
   use list.List
   use list.Mem as L
@@ -955,11 +1000,6 @@ module LengauerTarjan
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 (*
-  lemma lemma5 : forall v w idom_w idom_v. idom idom_w w 
-                                        -> idom idom_v v 
-                                        -> v -*-> w 
-                                        -> v -*-> idom_w \/ idom_w -*-> idom_v
-                                        
   lemma theorem2_a : forall w idom_w . idom idom_w w
                           -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
                           -> (semi_dominator w) ~~> w

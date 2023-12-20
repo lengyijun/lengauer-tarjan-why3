@@ -267,15 +267,19 @@ module CutoffHelper
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
 
-  predicate p1 (n : int) = forall mp x l y. 
+  predicate p1 (n : int) = forall mp x l z. 
                               length l = n -> 
-                              (--+->) mp x l y -> 
-                              forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
+                              (--+->) mp x l z -> 
+                              forall y. 
+                              L.mem y l -> 
+                              exists l1 l2. 
+                                (--+->) mp x l1 y /\ 
+                                (--+->) mp y l2 z /\ 
+                                l = l1 ++ Cons y l2
 
   clone int.SimpleInduction with predicate p = p1
 
@@ -286,13 +290,18 @@ module Cutoff
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
   use CutoffHelper
 
-  lemma span_cutoff: forall mp x l y. (--+->) mp x l y -> forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
+  lemma span_cutoff: forall mp x l z y. 
+                      (--+->) mp x l z -> 
+                      L.mem y l -> 
+                        exists l1 l2. 
+                          (--+->) mp x l1 y /\ 
+                          (--+->) mp y l2 z /\ 
+                          l = l1 ++ Cons y l2
 end
 
 module DfsnumParentMustOnTree
@@ -660,15 +669,14 @@ module Lemma1
   use DfsnumParent
   use Lemma1HelperB
 
-  lemma lemma1 : forall dfsnum_parent.
-                      super_wf_dfsnum_parent dfsnum_parent ->
-                      all_reachable dfsnum_parent ->
-                      forall v w iv iw pv pw. 
-                             mapsto v (iv, pv) dfsnum_parent 
-                          -> mapsto w (iw, pw) dfsnum_parent 
-                          -> iv < iw 
-                          -> forall p. path v p w
-                          -> exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+  lemma lemma1 : forall dfsnum_parent v iv pv w iw pw p. 
+                    super_wf_dfsnum_parent dfsnum_parent ->
+                    all_reachable dfsnum_parent ->
+                    mapsto v (iv, pv) dfsnum_parent ->
+                    mapsto w (iw, pw) dfsnum_parent ->
+                    iv < iw ->
+                    path v p w ->
+                    exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
 
 end
 
@@ -737,10 +745,6 @@ module SemiDominate
   lemma semi_em : forall dfsnum_parent x y. 
       (++>) dfsnum_parent x y \/ not (++>) dfsnum_parent x y
 
-  lemma jiting: forall dfsnum_parent x y.  
-       (++>) dfsnum_parent x y ->
-       mem x dfsnum_parent /\ mem y dfsnum_parent
-
   lemma min_semi_uniq : forall dfsnum_parent x a1 a2. 
         super_wf_dfsnum_parent dfsnum_parent ->
         all_reachable dfsnum_parent ->
@@ -766,14 +770,6 @@ module SemiDominate
         let s = SS.filter dfsnum_parent.domain (fun y -> (++>) dfsnum_parent y x) in 
           (not SS.is_empty s) /\ forall a. SS.mem a s <-> (++>) dfsnum_parent a x
 
-  lemma semi_exists_helper_b : forall dfsnum_parent x. 
-        super_wf_dfsnum_parent dfsnum_parent ->
-        all_reachable dfsnum_parent ->
-        mem x dfsnum_parent ->
-        x <> root ->
-        exists s. 
-          (not SS.is_empty s) /\ forall a. SS.mem a s <-> (++>) dfsnum_parent a x
-
   use SetMinExists
 
   lemma min_semi_exists : forall dfsnum_parent x. 
@@ -783,6 +779,91 @@ module SemiDominate
         x <> root ->
         exists semi_x. (+>) dfsnum_parent semi_x x
 
+  lemma semi_dominator_less_equal_than_parent :
+     forall dfsnum_parent w iw pw semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w -> 
+        mapsto w (iw, pw) dfsnum_parent -> 
+        let (a, _) = find semi_w dfsnum_parent in 
+        let (b, _) = find pw dfsnum_parent in 
+        a <= b
+
+  lemma semi_dominator_less_than_self :
+     forall dfsnum_parent w iw pw semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w ->
+        mapsto w (iw, pw) dfsnum_parent -> 
+        let (a, _) = find semi_w dfsnum_parent in 
+        a < iw 
+
+  use Lemma1
+
+  lemma lemma3 : 
+     forall dfsnum_parent w semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w ->
+        exists l. (--+->) dfsnum_parent semi_w l w
+
+  use Lemma2
+  use DfsnumParentMustOnTree
+  use Cutoff
+
+  lemma lemma4 : 
+     forall dfsnum_parent w idom_w semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        idom_w ~> w -> 
+        (+>) dfsnum_parent semi_w w ->
+        (--*->) dfsnum_parent idom_w semi_w
+
+end
+
+module IdomInDfsnumParent
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use JustSpecialPath
+
+  lemma idom_in_dfsnum_parent : 
+     forall dfsnum_parent w idom_w.
+        all_reachable dfsnum_parent ->
+        idom_w ~~> w ->
+        mem w dfsnum_parent /\ mem idom_w dfsnum_parent 
+end
+
+module Lemma5
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use list.Elements as E
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use Cutoff
+  use JustSpecialPath
+  use dominator.IdomPropertyA
+
+  lemma lemma5 : 
+     forall dfsnum_parent v w idom_w idom_v l. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        idom_w ~> w ->
+        idom_v ~> v ->
+        (--+->) dfsnum_parent v l w ->
+        (--*->) dfsnum_parent v idom_w \/ (--*->) dfsnum_parent idom_w idom_v
 end
 
 module LengauerTarjan
@@ -921,21 +1002,6 @@ module LengauerTarjan
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 (*
-  lemma semi_dominator_less_equal_than_parent :
-      forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w <= dfsnum pw
-
-  lemma semi_dominator_less_than_self :
-      forall w iw pw semi_w. semi_w +> w -> mapsto w (iw, pw) dfsnum_parent -> dfsnum semi_w < iw
-
-  lemma lemma3 : forall w semi_w. semi_w +> w -> exists l. (-+->) semi_w l w
-
-  lemma lemma4 : forall w idom_w. idom idom_w w -> idom_w -*-> semi_dominator w
-
-  lemma lemma5 : forall v w idom_w idom_v. idom idom_w w 
-                                        -> idom idom_v v 
-                                        -> v -*-> w 
-                                        -> v -*-> idom_w \/ idom_w -*-> idom_v
-                                        
   lemma theorem2_a : forall w idom_w . idom idom_w w
                           -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
                           -> (semi_dominator w) ~~> w

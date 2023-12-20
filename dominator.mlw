@@ -201,6 +201,41 @@ module IdomUniq
 
 end
 
+module ListHelper
+    use list.List
+    use list.Mem 
+    use list.Append
+
+    lemma shame: forall x : 'a, l1 [@induction] l3 [@induction] l2 l4. 
+          l1 ++ Cons x l2 = l3 ++ Cons x l4 ->
+          not mem x l2 ->
+          not mem x l4 ->
+          l2 = l4 /\ l1 = l3
+
+end 
+
+module IdomPropertyA
+    use list.List
+    use list.Mem as L
+    use list.Append
+    use list.Length
+    use list.Elements as E
+    use int.Int
+    use Graph
+    use IdomExists
+    use IdomUniq
+    use ListHelper
+
+    lemma idom_is_the_last : forall w idom_w l12 l1 l2 x.
+                      idom_w ~> w ->
+                      path root l12 w ->
+                      Cons root l12 = l1 ++ Cons idom_w l2 ->
+                      not L.mem idom_w l2 ->
+                      L.mem x l2 ->
+                      not x ~~> w
+
+end
+
 module ShouldFail
   use Graph
 
