@@ -267,15 +267,19 @@ module CutoffHelper
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
 
-  predicate p1 (n : int) = forall mp x l y. 
+  predicate p1 (n : int) = forall mp x l z. 
                               length l = n -> 
-                              (--+->) mp x l y -> 
-                              forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
+                              (--+->) mp x l z -> 
+                              forall y. 
+                              L.mem y l -> 
+                              exists l1 l2. 
+                                (--+->) mp x l1 y /\ 
+                                (--+->) mp y l2 z /\ 
+                                l = l1 ++ Cons y l2
 
   clone int.SimpleInduction with predicate p = p1
 
@@ -286,13 +290,19 @@ module Cutoff
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
   use CutoffHelper
 
-  lemma span_cutoff: forall mp x l y. (--+->) mp x l y -> forall z. L.mem z l -> (exists l1. (--+->) mp x l1 z) /\ (exists l2. (--+->) mp z l2 y)
+  lemma span_cutoff: forall mp x l z. 
+                      (--+->) mp x l z -> 
+                      forall y. 
+                        L.mem y l -> 
+                          exists l1 l2. 
+                            (--+->) mp x l1 y /\ 
+                            (--+->) mp y l2 z /\ 
+                            l = l1 ++ Cons y l2
 end
 
 module DfsnumParentMustOnTree
