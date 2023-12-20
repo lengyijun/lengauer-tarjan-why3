@@ -873,7 +873,7 @@
  <proof prover="0"><result status="valid" time="0.034741" steps="126"/></proof>
  </goal>
 </theory>
-<theory name="SemiDominate">
+<theory name="SemiDominate" proved="true">
  <goal name="parent_is_candidate_of_semi_dominator" proved="true">
  <proof prover="0"><result status="valid" time="0.882076" steps="3919"/></proof>
  </goal>
@@ -976,10 +976,8 @@
  <goal name="semi_dominator_less_equal_than_parent" proved="true">
  <proof prover="0"><result status="valid" time="0.091183" steps="580"/></proof>
  </goal>
- <goal name="semi_dominator_less_than_self">
- <proof prover="0"><undone/></proof>
- <proof prover="1"><undone/></proof>
- <proof prover="2"><undone/></proof>
+ <goal name="semi_dominator_less_than_self" proved="true">
+ <proof prover="0"><result status="valid" time="0.321167" steps="1904"/></proof>
  </goal>
 </theory>
 <theory name="LengauerTarjan">
@@ -2930,14 +2928,6 @@
  </transf>
  </goal>
 </theory>
-<theory name="XXX">
- <goal name="shit">
- <proof prover="0"><result status="timeout" time="120.000000" steps="1112701"/></proof>
- <proof prover="1"><result status="timeout" time="120.000000" steps="2040057"/></proof>
- <proof prover="2"><result status="timeout" time="120.000000"/></proof>
- <proof prover="4" timelimit="120" obsolete="true"><result status="failure" time="0.000000"/></proof>
- </goal>
-</theory>
 <theory name="FmapInduction">
  <goal name="Induction">
  <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="881021"/></proof>
@@ -2968,6 +2958,14 @@
   </transf>
   </goal>
  </transf>
+ </goal>
+</theory>
+<theory name="XXX">
+ <goal name="shit">
+ <proof prover="0"><result status="timeout" time="120.000000" steps="1112701"/></proof>
+ <proof prover="1"><result status="timeout" time="120.000000" steps="2040057"/></proof>
+ <proof prover="2"><result status="timeout" time="120.000000"/></proof>
+ <proof prover="4" timelimit="120" obsolete="true"><result status="failure" time="0.000000"/></proof>
  </goal>
 </theory>
 </file>
