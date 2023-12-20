@@ -1043,7 +1043,7 @@
         <proof prover="0"><result status="valid" time="0.179335" steps="1026"/></proof>
         </goal>
         <goal name="lemma4.0.1.1.0.1.1.1" proved="true">
-        <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
+        <proof prover="0"><undone/></proof>
         <transf name="assert" proved="true" arg1="(exists i_idom_w p_idom_w . mapsto idom_w (i_idom_w, p_idom_w) dfsnum_parent)">
          <goal name="lemma4.0.1.1.0.1.1.1.0" expl="asserted formula" proved="true">
          <proof prover="0"><result status="valid" time="5.051276" steps="14792"/></proof>
@@ -1068,7 +1068,7 @@
               <proof prover="0"><result status="valid" time="12.059248" steps="37449"/></proof>
               </goal>
               <goal name="lemma4.0.1.1.0.1.1.1.1.0.1.0.1.1" proved="true">
-              <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
+              <proof prover="0"><undone/></proof>
               <transf name="instantiate" proved="true" arg1="span_cutoff" arg2="dfsnum_parent, root, l, w, semi_w">
                <goal name="lemma4.0.1.1.0.1.1.1.1.0.1.0.1.1.0" proved="true">
                <transf name="destruct_rec" proved="true" arg1="Hinst">
@@ -1540,7 +1540,7 @@
     <goal name="dfs&#39;vc.27.1.1" expl="false case (precondition)" proved="true">
     <transf name="assert" proved="true" arg1="((--+-&gt;) dfsnum_parent a lac c)">
      <goal name="dfs&#39;vc.27.1.1.0" expl="asserted formula" proved="true">
-     <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
+     <proof prover="0"><undone/></proof>
      <proof prover="2"><result status="valid" time="19.821249"/></proof>
      </goal>
      <goal name="dfs&#39;vc.27.1.1.1" expl="false case (precondition)" proved="true">
@@ -1696,9 +1696,9 @@
    </transf>
    </goal>
    <goal name="dfsnum_property_e.0.1" expl="false case">
-   <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="744572"/></proof>
-   <proof prover="1" obsolete="true"><result status="failure" time="0.000000"/></proof>
-   <proof prover="2" obsolete="true"><result status="failure" time="0.000000"/></proof>
+   <proof prover="0"><undone/></proof>
+   <proof prover="1"><undone/></proof>
+   <proof prover="2"><undone/></proof>
    </goal>
   </transf>
   </goal>
@@ -2721,6 +2721,14 @@
  </transf>
  </goal>
 </theory>
+<theory name="XXX">
+ <goal name="shit">
+ <proof prover="0"><result status="timeout" time="120.000000" steps="1112701"/></proof>
+ <proof prover="1"><result status="timeout" time="120.000000" steps="2040057"/></proof>
+ <proof prover="2"><result status="timeout" time="120.000000"/></proof>
+ <proof prover="4" timelimit="120" obsolete="true"><result status="failure" time="0.000000"/></proof>
+ </goal>
+</theory>
 <theory name="FmapInduction">
  <goal name="Induction">
  <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="881021"/></proof>
@@ -2751,14 +2759,6 @@
   </transf>
   </goal>
  </transf>
- </goal>
-</theory>
-<theory name="XXX">
- <goal name="shit">
- <proof prover="0"><result status="timeout" time="120.000000" steps="1112701"/></proof>
- <proof prover="1"><result status="timeout" time="120.000000" steps="2040057"/></proof>
- <proof prover="2"><result status="timeout" time="120.000000"/></proof>
- <proof prover="4" timelimit="120" obsolete="true"><result status="failure" time="0.000000"/></proof>
  </goal>
 </theory>
 </file>
