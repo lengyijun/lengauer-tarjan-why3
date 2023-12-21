@@ -522,11 +522,7 @@
 </theory>
 <theory name="IdomPropertyA" proved="true">
  <goal name="idom_is_the_last" proved="true">
- <transf name="introduce_premises" proved="true" >
-  <goal name="idom_is_the_last.0" proved="true">
-  <proof prover="4"><result status="valid" time="0.087468" steps="424"/></proof>
-  </goal>
- </transf>
+ <proof prover="4"><result status="valid" time="0.084033" steps="425"/></proof>
  </goal>
 </theory>
 <theory name="ShouldFail">

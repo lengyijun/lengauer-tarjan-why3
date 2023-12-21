@@ -511,15 +511,6 @@
  </transf>
  </goal>
 </theory>
-<theory name="ListHelper" proved="true">
- <goal name="shame" proved="true">
- <transf name="induction_ty_lex" proved="true" >
-  <goal name="shame.0" proved="true">
-  <proof prover="4"><result status="valid" time="0.080782" steps="647"/></proof>
-  </goal>
- </transf>
- </goal>
-</theory>
 <theory name="IdomPropertyA" proved="true">
  <goal name="idom_is_the_last" proved="true">
  <proof prover="4"><result status="valid" time="0.084033" steps="425"/></proof>

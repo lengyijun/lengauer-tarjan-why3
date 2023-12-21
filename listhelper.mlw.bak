@@ -1,0 +1,58 @@
+
+module ListHelperA
+    use list.List
+    use list.Mem 
+    use list.Append
+
+    lemma shame: forall x : 'a, l1 [@induction] l3 [@induction] l2 l4. 
+          l1 ++ Cons x l2 = l3 ++ Cons x l4 ->
+          not mem x l2 ->
+          not mem x l4 ->
+          l2 = l4 /\ l1 = l3
+
+end 
+
+module ListHelperB
+    use list.List
+    use list.Mem 
+    use list.Append
+    use list.Length
+    use int.Int
+
+    lemma shame: forall l : list 'a .
+          length l >= 1 ->
+          exists z l1. l = l1 ++ Cons z Nil
+
+end 
+
+module ListHelperCHelper
+  use list.List
+  use list.Mem
+  use list.Append
+  use list.Length
+  use int.Int
+  use ListHelperB
+
+  type t
+
+  predicate p (n : int) = forall l : list t, f : t -> bool .
+      length l = n ->
+      (exists x.  mem x l /\ f x) ->
+      exists l1 y l2. l = l1 ++ Cons y l2 /\ f y /\ (forall z. mem z l2 -> not f z)
+
+  clone int.SimpleInduction with predicate p = p
+
+end
+
+module ListHelperC
+  use list.List
+  use list.Mem
+  use list.Append
+  use list.Length
+  use ListHelperCHelper
+
+  lemma ggg : forall l [@induction] : list 'a, f : 'a -> bool .
+      (exists x.  mem x l /\ f x) ->
+      exists l1 y l2. l = l1 ++ Cons y l2 /\ f y /\ (forall z. mem z l -> not f z)
+
+end

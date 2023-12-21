@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.5.2" timelimit="120" steplimit="0" memlimit="10000"/>
+<prover id="1" name="Eprover" version="2.0" timelimit="120" steplimit="0" memlimit="10000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="listhelper.mlw"/>
+<theory name="ListHelperA" proved="true">
+ <goal name="shame" proved="true">
+ <transf name="induction_ty_lex" proved="true" >
+  <goal name="shame.0" proved="true">
+  <proof prover="0"><result status="valid" time="0.074481" steps="647"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="ListHelperB" proved="true">
+ <goal name="shame" proved="true">
+ <transf name="induction_ty_lex" proved="true" >
+  <goal name="shame.0" proved="true">
+  <proof prover="0"><result status="valid" time="0.127747" steps="1765"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="ListHelperCHelper" proved="true">
+ <goal name="SimpleInduction.base" proved="true">
+ <proof prover="0"><result status="valid" time="0.007408" steps="22"/></proof>
+ </goal>
+ <goal name="SimpleInduction.induction_step" proved="true">
+ <proof prover="0"><result status="valid" time="38.596523" steps="229853"/></proof>
+ </goal>
+ <goal name="ggg" proved="true">
+ <proof prover="0"><result status="failure" time="0.000000"/></proof>
+ <transf name="introduce_premises" proved="true" >
+  <goal name="ggg.0" proved="true">
+  <transf name="instantiate" proved="true" arg1="SimpleInduction" arg2="(length l)">
+   <goal name="ggg.0.0" proved="true">
+   <proof prover="0"><result status="valid" time="0.081310" steps="653"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="ListHelperD" proved="true">
+ <goal name="SimpleInduction.base" proved="true">
+ <proof prover="0"><result status="valid" time="0.012437" steps="21"/></proof>
+ </goal>
+ <goal name="SimpleInduction.induction_step" proved="true">
+ <transf name="inline_goal" proved="true" >
+  <goal name="induction_step.0" proved="true">
+  <transf name="introduce_premises" proved="true" >
+   <goal name="induction_step.0.0" proved="true">
+   <transf name="destruct_term" proved="true" arg1="l">
+    <goal name="induction_step.0.0.0" proved="true">
+    <transf name="case" proved="true" arg1="(f @ x1)">
+     <goal name="induction_step.0.0.0.0" expl="true case" proved="true">
+     <proof prover="0"><undone/></proof>
+     <proof prover="1"><result status="valid" time="0.020743"/></proof>
+     </goal>
+     <goal name="induction_step.0.0.0.1" expl="false case" proved="true">
+     <proof prover="0"><result status="valid" time="0.153961" steps="807"/></proof>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="induction_step.0.0.1" proved="true">
+    <proof prover="0"><result status="valid" time="0.013954" steps="14"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="hhh" proved="true">
+ <transf name="introduce_premises" proved="true" >
+  <goal name="hhh.0" proved="true">
+  <transf name="instantiate" proved="true" arg1="SimpleInduction" arg2="(length l)">
+   <goal name="hhh.0.0" proved="true">
+   <proof prover="0"><result status="valid" time="0.045945" steps="299"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>
