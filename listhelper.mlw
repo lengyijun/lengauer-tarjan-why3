@@ -25,7 +25,7 @@ module ListHelperB
 
 end 
 
-module ListHelperCHelper
+module ListHelperC
   use list.List
   use list.Mem
   use list.Append
