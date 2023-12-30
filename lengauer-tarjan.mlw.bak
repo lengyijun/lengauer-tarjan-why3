@@ -11,7 +11,6 @@ theory DfsnumParent
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use export fmap.Fmap
   use set.Fset as SS
@@ -24,7 +23,9 @@ theory DfsnumParent
 
   lemma concat_lemma : forall mp x l1 y l2 z. (--+->) mp y l2 z -> (--+->) mp x l1 y -> (--+->) mp x (l1 ++ Cons y l2) z
 
-  predicate (--*->) (mp : fmap vertex (int, vertex)) (x y : vertex) =  x = y \/ exists l. (--+->) mp x l y
+  predicate (--*->) (mp : fmap vertex (int, vertex)) (x y : vertex) =  (x = y /\ mem x mp) \/ exists l. (--+->) mp x l y
+
+  lemma concat_lemma_b : forall mp x y z. (--*->) mp y z -> (--*->) mp x y -> (--*->) mp x z
 
   predicate wf_dfsnum_parent (dfsnum_parent : fmap vertex (int, vertex)) = 
       mapsto root (0, root) dfsnum_parent /\
@@ -77,7 +78,6 @@ module DfsnumParentStartMemHelper
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use export fmap.Fmap
   use set.Fset as SS
@@ -89,7 +89,7 @@ module DfsnumParentStartMemHelper
                       forall x y l.
                         length l <= n ->
                         (--+->) dfsnum_parent x l y ->
-                        mem x dfsnum_parent
+                        mem x dfsnum_parent /\ mem y dfsnum_parent
 
   clone int.SimpleInduction as InductionNodeMem with predicate p = p_node_mem
 end
@@ -109,7 +109,7 @@ module DfsnumParentStartMem
                       wf_dfsnum_parent dfsnum_parent ->
                       forall x y l.
                         (--+->) dfsnum_parent x l y ->
-                        mem x dfsnum_parent
+                        mem x dfsnum_parent /\ mem y dfsnum_parent
 end
 
 module DfsnumParentSortedHelper
@@ -144,7 +144,6 @@ module DfsnumParentSorted
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
@@ -180,7 +179,6 @@ module DfsnumParentSimplelistHelper
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
@@ -203,7 +201,6 @@ module DfsnumParentSimplelist
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -304,13 +301,44 @@ module Cutoff
                           l = l1 ++ Cons y l2
 end
 
+module CutoffBHelper
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+
+predicate p (n : int ) =  forall l2  mp x l1 z y. 
+                      length l2 = n ->
+                      (--+->) mp x (l1 ++ Cons y l2) z -> 
+                      (--+->) mp x l1 y /\ (--+->) mp y l2 z 
+
+  clone int.SimpleInduction with predicate p = p
+end
+
+module CutoffB
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use CutoffBHelper
+
+  lemma span_cutoff: forall l2 mp x l1 z y. 
+                      (--+->) mp x (l1 ++ Cons y l2) z -> 
+                      (--+->) mp x l1 y /\ (--+->) mp y l2 z 
+end
+
 module DfsnumParentMustOnTree
   use list.List
   use list.Mem as L
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -326,13 +354,33 @@ module DfsnumParentMustOnTree
                           (L.mem x l \/ x = root) <-> exists ll. (--+->) dfsnum_parent x ll y
 end
 
+module DfsnumParentMutualParent
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentStartMem
+  use DfsnumParentMustOnTree
+  use Cutoff
+  use CutoffB
+
+  lemma mutual_parent : forall dfsnum_parent a1 a2 b.
+                            wf_dfsnum_parent dfsnum_parent ->
+                            (--*->) dfsnum_parent a1 b ->
+                            (--*->) dfsnum_parent a2 b ->
+                            (--*->) dfsnum_parent a1 a2 \/ (--*->) dfsnum_parent a2 a1 
+end
+
 module JustSpecialPathHelper
   use list.List
   use list.Mem as L
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -352,7 +400,6 @@ module JustSpecialPath
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -368,7 +415,6 @@ end
 module DfsnumParentSubset
   use list.List
   use list.Mem as L
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -385,7 +431,6 @@ module DfsnumParentPathSmall2LargeHelper
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -407,7 +452,6 @@ module DfsnumParentPathSmall2Large
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -427,7 +471,6 @@ module DfsnumParentPathLarge2SmallHelper
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -450,7 +493,6 @@ module DfsnumParentPathLarge2Small
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -471,7 +513,6 @@ module ReachableInDfsNumHelper
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -493,7 +534,6 @@ module ReachableInDfsNum
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -514,7 +554,6 @@ module Lemma2
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -535,7 +574,6 @@ module Lemma1HelperAHelper
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -560,7 +598,6 @@ module Lemma1HelperA
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -583,7 +620,6 @@ module Lemma1HelperCHelper
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -611,7 +647,6 @@ module Lemma1HelperC
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -635,7 +670,6 @@ module Lemma1HelperB
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -663,7 +697,6 @@ module Lemma1
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
@@ -708,7 +741,6 @@ module SemiDominate
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.Elements as E
   use int.Int
   use dominator.Graph
   use DfsnumParent
@@ -824,10 +856,7 @@ module IdomInDfsnumParent
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.NumOcc
-  use list.Elements as E
   use int.Int
-  use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
   use DfsnumParentMustOnTree
@@ -835,6 +864,7 @@ module IdomInDfsnumParent
 
   lemma idom_in_dfsnum_parent : 
      forall dfsnum_parent w idom_w.
+        super_wf_dfsnum_parent dfsnum_parent ->
         all_reachable dfsnum_parent ->
         idom_w ~~> w ->
         mem w dfsnum_parent /\ mem idom_w dfsnum_parent 
@@ -846,7 +876,6 @@ module Lemma5
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -855,6 +884,7 @@ module Lemma5
   use Cutoff
   use JustSpecialPath
   use dominator.IdomPropertyA
+  use IdomInDfsnumParent
 
   lemma lemma5 : 
      forall dfsnum_parent v w idom_w idom_v l. 
@@ -866,13 +896,129 @@ module Lemma5
         (--*->) dfsnum_parent v idom_w \/ (--*->) dfsnum_parent idom_w idom_v
 end
 
+module Theorem2B
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use JustSpecialPath
+  use SemiDominate
+  use Lemma1
+
+  lemma theorem2_b : 
+     forall dfsnum_parent.
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        forall x p z y. path x p z -> L.mem y p -> mem x dfsnum_parent -> mem y dfsnum_parent
+end
+
+module Theorem2A
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use JustSpecialPath
+  use SemiDominate
+  use Lemma1
+  use Theorem2B
+  use DfsnumParentSorted
+  use DfsnumParentMutualParent
+
+  clone listhelper.ListHelperCHelper with type t = vertex
+  clone listhelper.ListHelperD       with type t = vertex
+
+  lemma theorem2_a : 
+     forall dfsnum_parent w semi_w i_semi_w p_semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w ->
+        mapsto semi_w (i_semi_w, p_semi_w) dfsnum_parent ->
+        (forall u semi_u. (exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w -> (++>) dfsnum_parent semi_u u -> 
+          let (i_semi_u, _) = find semi_u dfsnum_parent in i_semi_u >= i_semi_w) ->
+        semi_w ~~> w
+
+end
+                
+module Theorem2
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use SemiDominate
+  use Theorem2A
+  use dominator.IdomPropertyA
+  use JustSpecialPath
+  use DfsnumParentSorted
+
+  lemma theorem2 : 
+     forall dfsnum_parent w semi_w i_semi_w p_semi_w. 
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (+>) dfsnum_parent semi_w w ->
+        mapsto semi_w (i_semi_w, p_semi_w) dfsnum_parent ->
+        (forall u semi_u. (exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w -> (++>) dfsnum_parent semi_u u -> 
+          let (i_semi_u, _) = find semi_u dfsnum_parent in i_semi_u >= i_semi_w) ->
+        semi_w ~> w
+
+end
+
+(* used in theorem2 3 *)
+module Theorem23Helper
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use JustSpecialPath
+  use SemiDominate
+  use Lemma1
+  use Theorem2B
+  use DfsnumParentSorted
+  use DfsnumParentMutualParent
+
+  clone listhelper.ListHelperC with type t = vertex
+  clone listhelper.ListHelperD with type t = vertex
+
+  lemma theorem23helper : 
+     forall dfsnum_parent v p w.
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (exists l. (--+->) dfsnum_parent v l w) ->
+        path v p w ->
+        let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in 
+          (v = root \/ 
+            exists x y l1 q l3. 
+              l1 ++ Cons x (q ++ Cons y l3) = p ++ Cons w Nil /\
+              (forall a. L.mem a q -> dfsnum a > dfsnum y) /\
+              (forall a. L.mem a (q ++ Cons y l3) -> dfsnum a >= dfsnum v) /\
+              (forall a. L.mem a q -> not ((--*->) dfsnum_parent v y /\ (--*->) dfsnum_parent y w))
+          )
+
+end
 module LengauerTarjan
   use list.List
   use list.Mem as L
   use list.Append
   use list.Length
   use list.NumOcc
-  use list.Elements as E
   use int.Int
   use set.Fset as SS
   use dominator.Graph
@@ -1002,14 +1148,6 @@ module LengauerTarjan
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 (*
-  lemma theorem2_a : forall w idom_w . idom idom_w w
-                          -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
-                          -> (semi_dominator w) ~~> w
-
-  lemma theorem2 : forall w idom_w . idom idom_w w
-                          -> (forall u. exists l. (-+->) (semi_dominator w) l u /\ u -*-> w -> dfsnum (semi_dominator u) >= dfsnum (semi_dominator w))
-                          -> idom_w = semi_dominator w
-                
   lemma theorem3 : forall w u. w <> root 
                   -> exists l. (-+->) (semi_dominator w) l u /\ u -*-> w 
                   -> (forall x. x <> u ->  (-+->) (semi_dominator w) l x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))

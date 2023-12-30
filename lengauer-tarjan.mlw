@@ -149,11 +149,9 @@ module DfsnumParentSorted
   use DfsnumParent
   use DfsnumParentSortedHelper
 
-  lemma unnamed_a : forall dfsnum_parent.
+  lemma unnamed_a : forall dfsnum_parent x y l ix px iy py.
                       wf_dfsnum_parent dfsnum_parent ->
-                      forall x y l.
                         (--+->) dfsnum_parent x l y ->
-                        forall ix px iy py.
                         mapsto x (ix, px) dfsnum_parent -> 
                         mapsto y (iy, py) dfsnum_parent -> 
                         ix < iy /\
@@ -918,7 +916,8 @@ module Theorem2B
         forall x p z y. path x p z -> L.mem y p -> mem x dfsnum_parent -> mem y dfsnum_parent
 end
 
-module Theorem2A
+(* used in theorem2 3 *)
+module Theorem23Helper
   use list.List
   use list.Mem as L
   use list.Append
@@ -934,9 +933,50 @@ module Theorem2A
   use Theorem2B
   use DfsnumParentSorted
   use DfsnumParentMutualParent
+  use Cutoff
+  use CutoffB
 
-  clone listhelper.ListHelperCHelper with type t = vertex
-  clone listhelper.ListHelperD       with type t = vertex
+  clone listhelper.ListHelperC with type t = vertex
+  clone listhelper.ListHelperD with type t = vertex
+
+  lemma theorem23helper : 
+     forall dfsnum_parent v w p.
+        super_wf_dfsnum_parent dfsnum_parent ->
+        all_reachable dfsnum_parent ->
+        (exists l. (--+->) dfsnum_parent v l w) ->
+        path root p w ->
+        let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in 
+          (v ~~> w \/ 
+            exists x l1 y q l3. 
+              l1 ++ Cons x (q ++ Cons y l3) = Cons root p ++ Cons w Nil /\
+              path x q y /\
+              mem x dfsnum_parent /\
+              mem y dfsnum_parent /\
+              (dfsnum x < dfsnum v) /\
+              (forall a. L.mem a (q ++ Cons y l3) -> dfsnum a >= dfsnum v) /\
+              (forall a. L.mem a q -> not ((--*->) dfsnum_parent v a /\ (--*->) dfsnum_parent a w)) /\
+              ((--*->) dfsnum_parent v y /\ (--*->) dfsnum_parent y w) /\
+              (forall a. L.mem a q -> dfsnum a > dfsnum y)
+          )
+
+end
+
+module Theorem2A
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.NumOcc
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use JustSpecialPath
+  use SemiDominate
+  use Lemma1
+  use Theorem2B
+  use DfsnumParentSorted
+  use Theorem23Helper
 
   lemma theorem2_a : 
      forall dfsnum_parent w semi_w i_semi_w p_semi_w. 
@@ -944,7 +984,7 @@ module Theorem2A
         all_reachable dfsnum_parent ->
         (+>) dfsnum_parent semi_w w ->
         mapsto semi_w (i_semi_w, p_semi_w) dfsnum_parent ->
-        (forall u semi_u. (exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w -> (++>) dfsnum_parent semi_u u -> 
+        (forall u semi_u. (exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w -> (+>) dfsnum_parent semi_u u -> 
           let (i_semi_u, _) = find semi_u dfsnum_parent in i_semi_u >= i_semi_w) ->
         semi_w ~~> w
 
@@ -970,49 +1010,12 @@ module Theorem2
         all_reachable dfsnum_parent ->
         (+>) dfsnum_parent semi_w w ->
         mapsto semi_w (i_semi_w, p_semi_w) dfsnum_parent ->
-        (forall u semi_u. (exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w -> (++>) dfsnum_parent semi_u u -> 
+        (forall u semi_u. (exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w -> (+>) dfsnum_parent semi_u u -> 
           let (i_semi_u, _) = find semi_u dfsnum_parent in i_semi_u >= i_semi_w) ->
         semi_w ~> w
 
 end
 
-(* used in theorem2 3 *)
-module Theorem23Helper
-  use list.List
-  use list.Mem as L
-  use list.Append
-  use list.Length
-  use list.NumOcc
-  use int.Int
-  use dominator.Graph
-  use DfsnumParent
-  use DfsnumParentMustOnTree
-  use JustSpecialPath
-  use SemiDominate
-  use Lemma1
-  use Theorem2B
-  use DfsnumParentSorted
-  use DfsnumParentMutualParent
-
-  clone listhelper.ListHelperCHelper with type t = vertex
-  clone listhelper.ListHelperD       with type t = vertex
-
-  lemma theorem23helper : 
-     forall dfsnum_parent v p w.
-        super_wf_dfsnum_parent dfsnum_parent ->
-        all_reachable dfsnum_parent ->
-        (exists l. (--+->) dfsnum_parent v l w) ->
-        path v p w ->
-        let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in 
-          (v = root \/ 
-            exists x y l1 q l3. 
-              l1 ++ Cons x (q ++ Cons y l3) = p ++ Cons w Nil /\
-              (forall a. L.mem a q -> dfsnum a > dfsnum y) /\
-              (forall a. L.mem a (q ++ Cons y l3) -> dfsnum a >= dfsnum v) /\
-              (forall a. L.mem a q -> not ((--*->) dfsnum_parent v y /\ (--*->) dfsnum_parent y w))
-          )
-
-end
 module LengauerTarjan
   use list.List
   use list.Mem as L
