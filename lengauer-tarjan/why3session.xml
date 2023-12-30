@@ -1895,8 +1895,8 @@
                  <proof prover="0"><result status="valid" time="0.052108" steps="74"/></proof>
                  </goal>
                  <goal name="theorem2.0.1.1.1.0.0.1.0.1.1.0.1.1.0.0.3" expl="destruct premise" proved="true">
-                 <proof prover="0"><undone/></proof>
-                 <proof prover="1"><undone/></proof>
+                 <proof prover="0"><result status="failure" time="0.000000"/></proof>
+                 <proof prover="1"><result status="failure" time="0.000000"/></proof>
                  <proof prover="2"><result status="valid" time="16.250306"/></proof>
                  </goal>
                  <goal name="theorem2.0.1.1.1.0.0.1.0.1.1.0.1.1.0.0.4" expl="destruct premise" proved="true">
@@ -1936,6 +1936,10 @@
   </transf>
   </goal>
  </transf>
+ </goal>
+</theory>
+<theory name="Theorem23Helper">
+ <goal name="theorem23helper">
  </goal>
 </theory>
 <theory name="LengauerTarjan">
