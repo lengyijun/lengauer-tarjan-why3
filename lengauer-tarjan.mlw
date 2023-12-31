@@ -1016,6 +1016,65 @@ module Theorem2
 
 end
 
+module Theorem3
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use SemiDominate
+  use Theorem2A
+  use dominator.IdomPropertyA
+  use JustSpecialPath
+  use DfsnumParentSorted
+  use Lemma5
+  use Theorem23Helper
+  use Cutoff
+  use CutoffB
+
+  lemma theorem3 : 
+    forall dfsnum_parent w semi_w u semi_u.
+      super_wf_dfsnum_parent dfsnum_parent ->
+      all_reachable dfsnum_parent ->
+      w <> root ->
+      (+>) dfsnum_parent semi_w w ->
+      (+>) dfsnum_parent semi_u u ->
+      (exists l. (--+->) dfsnum_parent semi_w l u /\ (--*->) dfsnum_parent u w) ->
+      let dfsnum x = let (ix, _) = find x dfsnum_parent in ix in
+        (forall x. (exists l. (--+->) dfsnum_parent semi_w l x) /\ (--*->) dfsnum_parent x w -> forall semi_x. (+>) dfsnum_parent semi_x x -> dfsnum semi_u <= dfsnum semi_x) ->
+        dfsnum semi_u <= dfsnum semi_w /\ 
+        forall idom_u idom_w. 
+          idom_u ~> u ->
+          idom_w ~> w ->
+          idom_u = idom_w  
+end
+
+module Corollary1
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use SemiDominate
+  use Theorem2
+  use Theorem3
+  use dominator.IdomExists
+
+  lemma corollary1 : 
+    forall dfsnum_parent w semi_w u semi_u idom_u.
+      super_wf_dfsnum_parent dfsnum_parent ->
+      all_reachable dfsnum_parent ->
+      w <> root  ->
+      (+>) dfsnum_parent semi_w w ->
+      (+>) dfsnum_parent semi_u u ->
+      idom_u ~> u ->
+      (exists l. (--+->) dfsnum_parent semi_w l u /\ (--*->) dfsnum_parent u w) ->
+      let dfsnum x = let (ix, _) = find x dfsnum_parent in ix in
+        (forall x. (exists l. (--+->) dfsnum_parent semi_w l x) /\ (--*->) dfsnum_parent x w -> forall semi_x. (+>) dfsnum_parent semi_x x -> dfsnum semi_u <= dfsnum semi_x) ->
+      if semi_w = semi_u then semi_w ~> w else idom_u ~> w
+
+end
+
 module LengauerTarjan
   use list.List
   use list.Mem as L
@@ -1151,18 +1210,6 @@ module LengauerTarjan
     forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 (*
-  lemma theorem3 : forall w u. w <> root 
-                  -> exists l. (-+->) (semi_dominator w) l u /\ u -*-> w 
-                  -> (forall x. x <> u ->  (-+->) (semi_dominator w) l x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
-                  -> dfsnum (semi_dominator u) <= dfsnum (semi_dominator w) /\ idom u = idom w 
-
-  lemma corollary1 : forall w u idom_w idom_u. 
-                     idom idom_w w
-                  -> idom idom_u u
-                  -> exists l. (-+->) (semi_dominator w) l u /\ u -*-> w 
-                  -> (forall x. x <> u -> exists l. (-+->) (semi_dominator w) l x /\ x -*-> w -> dfsnum (semi_dominator u) < dfsnum (semi_dominator x))
-                  -> idom_w = if semi_dominator w = semi_dominator u then semi_dominator w else idom_u
-
   val constant theorem4_helper_a (w : vertex) : SV.set
     ensures {forall v. SV.mem v result <-> edge v w /\ dfsnum v < dfsnum w}
 
