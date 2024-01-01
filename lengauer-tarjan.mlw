@@ -148,19 +148,18 @@ module DfsnumParentSorted
   use dominator.Graph
   use DfsnumParent
   use DfsnumParentSortedHelper
+  use export DfsnumParentStartMem
 
-  lemma unnamed_a : forall dfsnum_parent x y l ix px iy py.
+  lemma unnamed_a : forall dfsnum_parent x y l.
                       wf_dfsnum_parent dfsnum_parent ->
                         (--+->) dfsnum_parent x l y ->
-                        mapsto x (ix, px) dfsnum_parent -> 
-                        mapsto y (iy, py) dfsnum_parent -> 
+                        let (ix,_) =  find x dfsnum_parent in
+                        let (iy,_) =  find y dfsnum_parent in
                         ix < iy /\
                         forall a. 
                           L.mem a l ->
                           let (ia, _) = find a dfsnum_parent in 
                           ix < ia < iy 
- 
-  use DfsnumParentStartMem
   
   lemma unnamed_e : forall dfsnum_parent.                                                         
                       wf_dfsnum_parent dfsnum_parent ->                                           
