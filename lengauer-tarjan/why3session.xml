@@ -2564,9 +2564,9 @@
                                  <proof prover="0"><result status="valid" time="0.040280" steps="80"/></proof>
                                  </goal>
                                  <goal name="theorem3.0.1.1.0.1.0.6.0.1.0.0.2.0.4.0.1.0.4.0.0.1.0.1.0.1.1.1.0.0.0.0.4" expl="asserted formula" proved="true">
-                                 <proof prover="0"><undone/></proof>
+                                 <proof prover="0"><result status="valid" time="63.668690" steps="275639"/></proof>
                                  <proof prover="1"><result status="valid" time="2.741782" steps="229607"/></proof>
-                                 <proof prover="2"><undone/></proof>
+                                 <proof prover="2"><result status="timeout" time="120.000000"/></proof>
                                  </goal>
                                 </transf>
                                 </goal>
@@ -3079,7 +3079,7 @@
  </transf>
  </goal>
 </theory>
-<theory name="Theorem4Base">
+<theory name="Theorem4Base" proved="true">
  <goal name="theorem4_a" proved="true">
  <transf name="introduce_premises" proved="true" >
   <goal name="theorem4_a.0" proved="true">
@@ -3089,7 +3089,7 @@
     <goal name="theorem4_a.0.0.0" proved="true">
     <transf name="destruct_rec" proved="true" arg1="H2">
      <goal name="theorem4_a.0.0.0.0" proved="true">
-     <proof prover="1"><result status="valid" time="18.726464" steps="410288"/></proof>
+     <proof prover="1"><result status="valid" time="15.751847" steps="536585"/></proof>
      </goal>
      <goal name="theorem4_a.0.0.0.1" proved="true">
      <transf name="assert" proved="true" arg1="((++&gt;) dfsnum_parent x w)">
@@ -3129,7 +3129,7 @@
                 <proof prover="0"><result status="valid" time="0.057038" steps="55"/></proof>
                 </goal>
                 <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.0.0.0.1" proved="true">
-                <proof prover="1"><result status="valid" time="0.650973" steps="57096"/></proof>
+                <proof prover="1"><result status="valid" time="0.399764" steps="56492"/></proof>
                 </goal>
                </transf>
                </goal>
@@ -3147,25 +3147,25 @@
                <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1" proved="true">
                <transf name="assert" proved="true" arg1="(mem2 x2 p \/ x2 = u \/ x2 = v1 \/ mem2 x2 l)">
                 <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1.0" expl="asserted formula" proved="true">
-                <proof prover="0"><result status="valid" time="0.620308" steps="1206"/></proof>
+                <proof prover="0"><result status="valid" time="0.286272" steps="1206"/></proof>
                 </goal>
                 <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1.1" proved="true">
                 <transf name="destruct_rec" proved="true" arg1="h">
                  <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1.1.0" proved="true">
-                 <proof prover="1"><result status="valid" time="0.347434" steps="39361"/></proof>
+                 <proof prover="1"><result status="valid" time="0.207862" steps="39361"/></proof>
+                 <proof prover="2"><result status="valid" time="0.640653"/></proof>
                  </goal>
                  <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1.1.1" proved="true">
-                 <proof prover="0"><result status="valid" time="0.053542" steps="105"/></proof>
+                 <proof prover="0"><result status="valid" time="0.059560" steps="105"/></proof>
+                 <proof prover="1"><result status="valid" time="0.214312" steps="39360"/></proof>
+                 <proof prover="2"><result status="valid" time="0.235240"/></proof>
                  </goal>
                  <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1.1.2" proved="true">
-                 <proof prover="0"><result status="timeout" time="120.000000" steps="233538"/></proof>
-                 <proof prover="1"><result status="valid" time="0.711099" steps="56673"/></proof>
-                 <proof prover="2"><result status="timeout" time="120.000000"/></proof>
+                 <proof prover="0"><result status="timeout" time="120.000000" steps="454928"/></proof>
+                 <proof prover="1"><result status="valid" time="0.318036" steps="56633"/></proof>
                  </goal>
                  <goal name="theorem4_a.0.0.0.1.0.0.0.0.0.4.0.1.0.1.1.3" proved="true">
-                 <proof prover="0"><result status="timeout" time="120.000000" steps="279825"/></proof>
-                 <proof prover="1"><result status="valid" time="0.394552" steps="39513"/></proof>
-                 <proof prover="2"><result status="timeout" time="120.000000"/></proof>
+                 <proof prover="1"><result status="valid" time="0.347434" steps="39513"/></proof>
                  </goal>
                 </transf>
                 </goal>
@@ -3190,7 +3190,7 @@
       </transf>
       </goal>
       <goal name="theorem4_a.0.0.0.1.1" proved="true">
-      <proof prover="1"><result status="valid" time="0.276659" steps="46729"/></proof>
+      <proof prover="1"><result status="valid" time="0.276659" steps="46730"/></proof>
       </goal>
      </transf>
      </goal>
@@ -3202,12 +3202,321 @@
   </goal>
  </transf>
  </goal>
- <goal name="theorem4_b">
+ <goal name="theorem4_b" proved="true">
+ <transf name="introduce_premises" proved="true" >
+  <goal name="theorem4_b.0" proved="true">
+  <transf name="unfold" proved="true" arg1="(+&gt;)" arg2="in" arg3="H">
+   <goal name="theorem4_b.0.0" proved="true">
+   <transf name="unfold" proved="true" arg1="(++&gt;)" arg2="in" arg3="H">
+    <goal name="theorem4_b.0.0.0" proved="true">
+    <transf name="destruct_rec" proved="true" arg1="H">
+     <goal name="theorem4_b.0.0.0.0" proved="true">
+     <transf name="destruct_term" proved="true" arg1="p">
+      <goal name="theorem4_b.0.0.0.0.0" proved="true">
+      <transf name="assert" proved="true" arg1="(exists pz p0. p = p0 ++ Cons pz Nil)">
+       <goal name="theorem4_b.0.0.0.0.0.0" expl="asserted formula" proved="true">
+       <proof prover="0"><result status="valid" time="0.111248" steps="557"/></proof>
+       </goal>
+       <goal name="theorem4_b.0.0.0.0.0.1" proved="true">
+       <transf name="remove" proved="true" arg1="h1">
+        <goal name="theorem4_b.0.0.0.0.0.1.0" proved="true">
+        <transf name="destruct_rec" proved="true" arg1="h">
+         <goal name="theorem4_b.0.0.0.0.0.1.0.0" proved="true">
+         <transf name="instantiate" proved="true" arg1="hhh" arg2="p, (fun b -&gt; (--*-&gt;) dfsnum_parent b pz)">
+          <goal name="theorem4_b.0.0.0.0.0.1.0.0.0" proved="true">
+          <transf name="destruct_rec" proved="true" arg1="Hinst">
+           <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.0" expl="destruct premise" proved="true">
+           <transf name="exists" proved="true" arg1="pz">
+            <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.0.0" proved="true">
+            <proof prover="0"><result status="valid" time="0.079185" steps="416"/></proof>
+            </goal>
+           </transf>
+           </goal>
+           <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1" proved="true">
+           <transf name="assert" proved="true" arg1="(forall b. mem2 b l1 -&gt; (dfsnum @ b) &gt; (dfsnum @ y))">
+            <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0" expl="asserted formula" proved="true">
+            <transf name="assert" proved="true" arg1="((forall b. mem2 b l1 -&gt; (dfsnum @ b) &gt; (dfsnum @ y)) \/ (exists b. mem2 b l1 /\ (dfsnum @ b) &lt;= (dfsnum @ y)))">
+             <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.0" expl="asserted formula" proved="true">
+             <proof prover="0"><result status="valid" time="0.068435" steps="61"/></proof>
+             </goal>
+             <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1" expl="asserted formula" proved="true">
+             <transf name="destruct_rec" proved="true" arg1="h1">
+              <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.0" expl="asserted formula" proved="true">
+              <proof prover="0"><result status="valid" time="0.046689" steps="61"/></proof>
+              </goal>
+              <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1" expl="asserted formula" proved="true">
+              <transf name="assert" proved="true" arg1="(b = y \/ (dfsnum @ b) &lt; (dfsnum @ y))">
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.0" expl="asserted formula" proved="true">
+               <proof prover="0"><undone/></proof>
+               <proof prover="1"><result status="valid" time="0.576627" steps="59834"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1" expl="asserted formula" proved="true">
+               <transf name="destruct_rec" proved="true" arg1="h1">
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.0" expl="asserted formula" proved="true">
+                <proof prover="0"><result status="valid" time="0.087151" steps="256"/></proof>
+                </goal>
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1" expl="asserted formula" proved="true">
+                <transf name="assert" proved="true" arg1="(exists lby l0. l0 ++ Cons b lby = l1)">
+                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.0" expl="asserted formula" proved="true">
+                 <proof prover="0"><result status="valid" time="0.074056" steps="204"/></proof>
+                 </goal>
+                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1" expl="asserted formula" proved="true">
+                 <transf name="destruct_rec" proved="true" arg1="h1">
+                  <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0" expl="asserted formula" proved="true">
+                  <transf name="assert" proved="true" arg1="(exists ib pb. mapsto b (ib ,pb) dfsnum_parent )">
+                   <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.0" expl="asserted formula" proved="true">
+                   <proof prover="1"><result status="valid" time="0.506519" steps="60946"/></proof>
+                   </goal>
+                   <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1" expl="asserted formula" proved="true">
+                   <transf name="assert" proved="true" arg1="(exists iy py. mapsto y (iy ,py) dfsnum_parent )">
+                    <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.0" expl="asserted formula" proved="true">
+                    <proof prover="0"><result status="timeout" time="120.000000" steps="560876"/></proof>
+                    <proof prover="1"><result status="valid" time="0.516765" steps="61670"/></proof>
+                    </goal>
+                    <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1" expl="asserted formula" proved="true">
+                    <transf name="destruct_rec" proved="true" arg1="h1">
+                     <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0" expl="asserted formula" proved="true">
+                     <transf name="destruct_rec" proved="true" arg1="h2">
+                      <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0" expl="asserted formula" proved="true">
+                      <transf name="instantiate" proved="true" arg1="lemma1" arg2="dfsnum_parent, b, ib, pb, y, iy, py, lby">
+                       <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0" expl="asserted formula" proved="true">
+                       <transf name="destruct_rec" proved="true" arg1="Hinst">
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.0" expl="destruct premise" proved="true">
+                        <proof prover="0"><result status="valid" time="0.050692" steps="60"/></proof>
+                        </goal>
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.1" expl="destruct premise" proved="true">
+                        <proof prover="0"><result status="valid" time="0.044449" steps="60"/></proof>
+                        </goal>
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.2" expl="destruct premise" proved="true">
+                        <proof prover="0"><result status="valid" time="0.046481" steps="60"/></proof>
+                        </goal>
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.3" expl="destruct premise" proved="true">
+                        <proof prover="0"><result status="valid" time="0.050229" steps="60"/></proof>
+                        </goal>
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.4" expl="destruct premise" proved="true">
+                        <proof prover="0"><result status="valid" time="0.315967" steps="1143"/></proof>
+                        </goal>
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.5" expl="destruct premise" proved="true">
+                        <proof prover="0"><result status="valid" time="0.101904" steps="281"/></proof>
+                        </goal>
+                        <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1.0.0.0.6" expl="asserted formula" proved="true">
+                        <proof prover="0"><result status="valid" time="15.403639" steps="58928"/></proof>
+                        </goal>
+                       </transf>
+                       </goal>
+                      </transf>
+                      </goal>
+                     </transf>
+                     </goal>
+                    </transf>
+                    </goal>
+                   </transf>
+                   </goal>
+                  </transf>
+                  </goal>
+                 </transf>
+                 </goal>
+                </transf>
+                </goal>
+               </transf>
+               </goal>
+              </transf>
+              </goal>
+             </transf>
+             </goal>
+            </transf>
+            </goal>
+            <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1" proved="true">
+            <transf name="assert" proved="true" arg1="((++&gt;) dfsnum_parent semi_w y)">
+             <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0" expl="asserted formula" proved="true">
+             <transf name="inline_goal" proved="true" >
+              <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0" expl="asserted formula" proved="true">
+              <transf name="split_vc" proved="true" >
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.0" proved="true">
+               <proof prover="0"><result status="valid" time="0.048916" steps="48"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.1" proved="true">
+               <proof prover="0"><result status="valid" time="0.073989" steps="48"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.2" proved="true">
+               <transf name="case" proved="true" arg1="(y = root)">
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.2.0" expl="true case" proved="true">
+                <transf name="subst" proved="true" arg1="y">
+                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.2.0.0" expl="true case" proved="true">
+                 <transf name="destruct_rec" proved="true" arg1="H1">
+                  <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.2.0.0.0" expl="true case" proved="true">
+                  <transf name="instantiate" proved="true" arg1="H1" arg2="root">
+                   <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.2.0.0.0.0" expl="true case" proved="true">
+                   <proof prover="0"><result status="valid" time="0.246643" steps="1582"/></proof>
+                   </goal>
+                  </transf>
+                  </goal>
+                 </transf>
+                 </goal>
+                </transf>
+                </goal>
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.2.1" expl="false case" proved="true">
+                <proof prover="0"><result status="valid" time="0.036315" steps="50"/></proof>
+                </goal>
+               </transf>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.3" proved="true">
+               <proof prover="0"><result status="valid" time="0.046441" steps="48"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.4" proved="true">
+               <proof prover="0"><result status="valid" time="24.090906" steps="112412"/></proof>
+               <transf name="exists" proved="true" arg1="l1">
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.0.0.4.0" proved="true">
+                <proof prover="0"><result status="valid" time="0.138939" steps="251"/></proof>
+                </goal>
+               </transf>
+               </goal>
+              </transf>
+              </goal>
+             </transf>
+             </goal>
+             <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1" proved="true">
+             <transf name="instantiate" proved="true" arg1="min_semi_exists" arg2="dfsnum_parent, y">
+              <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0" proved="true">
+              <transf name="destruct_rec" proved="true" arg1="Hinst">
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.0" expl="destruct premise" proved="true">
+               <proof prover="0"><result status="valid" time="0.075985" steps="50"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.1" expl="destruct premise" proved="true">
+               <proof prover="0"><result status="valid" time="0.045066" steps="50"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.2" expl="destruct premise" proved="true">
+               <proof prover="0"><result status="valid" time="0.258179" steps="1254"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.3" expl="destruct premise" proved="true">
+               <proof prover="0"><result status="valid" time="0.050241" steps="57"/></proof>
+               </goal>
+               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4" proved="true">
+               <transf name="assert" proved="true" arg1="((dfsnum @ semi_w) &gt;= (dfsnum @ semi_x))">
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.0" expl="asserted formula" proved="true">
+                <proof prover="0"><undone/></proof>
+                <proof prover="1"><result status="valid" time="0.336075" steps="54452"/></proof>
+                </goal>
+                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1" proved="true">
+                <transf name="assert" proved="true" arg1="(t4 dfsnum_parent semi_x w)">
+                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1.0" expl="asserted formula" proved="true">
+                 <proof prover="0"><result status="timeout" time="120.000000" steps="550120"/></proof>
+                 <transf name="inline_goal" proved="true" >
+                  <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1.0.0" expl="asserted formula" proved="true">
+                  <transf name="split_vc" proved="true" >
+                   <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1.0.0.0" proved="true">
+                   <proof prover="0"><result status="valid" time="0.096157" steps="205"/></proof>
+                   </goal>
+                   <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1.0.0.1" proved="true">
+                   <proof prover="0"><result status="valid" time="0.073042" steps="61"/></proof>
+                   </goal>
+                   <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1.0.0.2" proved="true">
+                   <proof prover="0"><result status="timeout" time="120.000000" steps="512360"/></proof>
+                   <proof prover="1"><result status="timeout" time="120.000000" steps="1653540"/></proof>
+                   <proof prover="2"><result status="valid" time="1.828676"/></proof>
+                   </goal>
+                  </transf>
+                  </goal>
+                 </transf>
+                 </goal>
+                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1.1" proved="true">
+                 <proof prover="0"><result status="valid" time="0.080421" steps="101"/></proof>
+                 </goal>
+                </transf>
+                </goal>
+               </transf>
+               </goal>
+              </transf>
+              </goal>
+             </transf>
+             </goal>
+            </transf>
+            </goal>
+           </transf>
+           </goal>
+          </transf>
+          </goal>
+         </transf>
+         </goal>
+        </transf>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="theorem4_b.0.0.0.0.1" proved="true">
+      <transf name="assert" proved="true" arg1="((dfsnum @ semi_w) &lt; (dfsnum @ w))">
+       <goal name="theorem4_b.0.0.0.0.1.0" expl="asserted formula" proved="true">
+       <proof prover="1"><result status="valid" time="4.990452" steps="314152"/></proof>
+       </goal>
+       <goal name="theorem4_b.0.0.0.0.1.1" proved="true">
+       <transf name="assert" proved="true" arg1="(edge semi_w w)">
+        <goal name="theorem4_b.0.0.0.0.1.1.0" expl="asserted formula" proved="true">
+        <proof prover="0"><result status="valid" time="0.050123" steps="49"/></proof>
+        <proof prover="1"><result status="valid" time="0.117314" steps="32146"/></proof>
+        <proof prover="2"><result status="valid" time="0.263275"/></proof>
+        </goal>
+        <goal name="theorem4_b.0.0.0.0.1.1.1" proved="true">
+        <proof prover="0"><result status="valid" time="0.178759" steps="884"/></proof>
+        <proof prover="1"><result status="valid" time="0.226696" steps="40243"/></proof>
+        <proof prover="2"><result status="valid" time="12.567870"/></proof>
+        <transf name="assert" proved="true" arg1="(t4 dfsnum_parent semi_w w)">
+         <goal name="theorem4_b.0.0.0.0.1.1.1.0" expl="asserted formula" proved="true">
+         <proof prover="0"><result status="valid" time="0.106052" steps="413"/></proof>
+         </goal>
+         <goal name="theorem4_b.0.0.0.0.1.1.1.1" proved="true">
+         <proof prover="0"><result status="valid" time="0.107075" steps="53"/></proof>
+         <proof prover="1"><result status="valid" time="0.199119" steps="34847"/></proof>
+         <proof prover="2"><result status="valid" time="0.223513"/></proof>
+         </goal>
+        </transf>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
  </goal>
 </theory>
-<theory name="Theorem4">
- <goal name="theorem4">
- <proof prover="0"><result status="timeout" time="120.000000" steps="214420"/></proof>
+<theory name="Theorem4" proved="true">
+ <goal name="theorem4" proved="true">
+ <proof prover="0"><result status="timeout" time="120.000000" steps="441701"/></proof>
+ <proof prover="1"><result status="timeout" time="120.000000" steps="2828886"/></proof>
+ <proof prover="2"><undone/></proof>
+ <transf name="introduce_premises" proved="true" >
+  <goal name="theorem4.0" proved="true">
+  <transf name="instantiate" proved="true" arg1="min_semi_exists" arg2="dfsnum_parent, w">
+   <goal name="theorem4.0.0" proved="true">
+   <transf name="destruct_rec" proved="true" arg1="Hinst">
+    <goal name="theorem4.0.0.0" expl="destruct premise" proved="true">
+    <proof prover="0"><result status="valid" time="0.045542" steps="38"/></proof>
+    </goal>
+    <goal name="theorem4.0.0.1" expl="destruct premise" proved="true">
+    <proof prover="0"><result status="valid" time="0.070106" steps="38"/></proof>
+    </goal>
+    <goal name="theorem4.0.0.2" expl="destruct premise" proved="true">
+    <proof prover="0"><result status="valid" time="0.059321" steps="41"/></proof>
+    </goal>
+    <goal name="theorem4.0.0.3" expl="destruct premise" proved="true">
+    <proof prover="0"><result status="valid" time="0.047405" steps="38"/></proof>
+    </goal>
+    <goal name="theorem4.0.0.4" proved="true">
+    <proof prover="0"><undone/></proof>
+    <proof prover="1"><result status="valid" time="0.302047" steps="42854"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
  </goal>
 </theory>
 <theory name="LengauerTarjan">

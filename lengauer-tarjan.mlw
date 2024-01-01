@@ -1105,7 +1105,7 @@ module Theorem4Base
       w <> root ->
       t4 dfsnum_parent x w ->
       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-      (forall a. t4 dfsnum_parent a w -> dfsnum a <= dfsnum x) ->
+      (forall a. t4 dfsnum_parent a w -> dfsnum a >= dfsnum x) ->
       (+>) dfsnum_parent semi_w w ->
       dfsnum semi_w <= dfsnum x
 
@@ -1116,7 +1116,7 @@ module Theorem4Base
       w <> root ->
       t4 dfsnum_parent x w ->
       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-      (forall a. t4 dfsnum_parent a w -> dfsnum a <= dfsnum x) ->
+      (forall a. t4 dfsnum_parent a w -> dfsnum a >= dfsnum x) ->
       (+>) dfsnum_parent semi_w w ->
       dfsnum semi_w >= dfsnum x
 
@@ -1136,7 +1136,7 @@ module Theorem4
       w <> root ->
       t4 dfsnum_parent x w ->
       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-      (forall a. t4 dfsnum_parent a w -> dfsnum a <= dfsnum x) ->
+      (forall a. t4 dfsnum_parent a w -> dfsnum a >= dfsnum x) ->
       (+>) dfsnum_parent x w
 
 end
