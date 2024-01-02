@@ -3247,7 +3247,7 @@
               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1" expl="asserted formula" proved="true">
               <transf name="assert" proved="true" arg1="(b = y \/ (dfsnum @ b) &lt; (dfsnum @ y))">
                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.0" expl="asserted formula" proved="true">
-               <proof prover="0"><undone/></proof>
+               <proof prover="0"><result status="failure" time="0.000000"/></proof>
                <proof prover="1"><result status="valid" time="0.576627" steps="59834"/></proof>
                </goal>
                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1" expl="asserted formula" proved="true">
@@ -3394,7 +3394,7 @@
                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4" proved="true">
                <transf name="assert" proved="true" arg1="((dfsnum @ semi_w) &gt;= (dfsnum @ semi_x))">
                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.0" expl="asserted formula" proved="true">
-                <proof prover="0"><undone/></proof>
+                <proof prover="0"><result status="failure" time="0.000000"/></proof>
                 <proof prover="1"><result status="valid" time="0.336075" steps="54452"/></proof>
                 </goal>
                 <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.1.1.0.4.1" proved="true">
@@ -3490,7 +3490,7 @@
  <goal name="theorem4" proved="true">
  <proof prover="0"><result status="timeout" time="120.000000" steps="441701"/></proof>
  <proof prover="1"><result status="timeout" time="120.000000" steps="2828886"/></proof>
- <proof prover="2"><undone/></proof>
+ <proof prover="2"><result status="failure" time="0.000000"/></proof>
  <transf name="introduce_premises" proved="true" >
   <goal name="theorem4.0" proved="true">
   <transf name="instantiate" proved="true" arg1="min_semi_exists" arg2="dfsnum_parent, w">
@@ -3509,7 +3509,7 @@
     <proof prover="0"><result status="valid" time="0.047405" steps="38"/></proof>
     </goal>
     <goal name="theorem4.0.0.4" proved="true">
-    <proof prover="0"><undone/></proof>
+    <proof prover="0"><result status="failure" time="0.000000"/></proof>
     <proof prover="1"><result status="valid" time="0.302047" steps="42854"/></proof>
     </goal>
    </transf>
@@ -3886,171 +3886,6 @@
  <proof prover="1" obsolete="true"><result status="timeout" time="120.000000" steps="3199292"/></proof>
  </goal>
  <goal name="dfsnum_property_h">
- </goal>
-</theory>
-<theory name="Jiqian" proved="true">
- <goal name="ss" proved="true">
- <proof prover="0"><result status="valid" time="0.041405" steps="252"/></proof>
- </goal>
- <goal name="tt" proved="true">
- <proof prover="0"><result status="valid" time="0.013701" steps="6"/></proof>
- </goal>
- <goal name="gg" proved="true">
- <proof prover="0"><result status="valid" time="0.013103" steps="14"/></proof>
- </goal>
-</theory>
-<theory name="SingintonFmap" proved="true">
- <goal name="unique" proved="true">
- <proof prover="0"><result status="valid" time="0.023282" steps="24"/></proof>
- </goal>
-</theory>
-<theory name="FmapInductionA" proved="true">
- <goal name="InductionNodeMem.base" proved="true">
- <proof prover="0"><result status="timeout" time="120.000000" steps="662405"/></proof>
- <proof prover="1"><result status="timeout" time="120.000000" steps="3072878"/></proof>
- <proof prover="2"><result status="timeout" time="120.000000"/></proof>
- <transf name="inline_goal" proved="true" >
-  <goal name="base.0" proved="true">
-  <transf name="introduce_premises" proved="true" >
-   <goal name="base.0.0" proved="true">
-   <transf name="assert" proved="true" arg1="(exists k v. mapsto k v x)">
-    <goal name="base.0.0.0" expl="asserted formula" proved="true">
-    <proof prover="0"><result status="valid" time="0.030760" steps="86"/></proof>
-    </goal>
-    <goal name="base.0.0.1" proved="true">
-    <proof prover="0"><result status="timeout" time="120.000000" steps="758443"/></proof>
-    <transf name="inline_goal" proved="true" >
-     <goal name="base.0.0.1.0" proved="true">
-     <transf name="introduce_premises" proved="true" >
-      <goal name="base.0.0.1.0.0" proved="true">
-      <transf name="destruct_rec" proved="true" arg1="h">
-       <goal name="base.0.0.1.0.0.0" proved="true">
-       <proof prover="0"><result status="timeout" time="120.000000" steps="794439"/></proof>
-       <transf name="exists" proved="true" arg1="k">
-        <goal name="base.0.0.1.0.0.0.0" proved="true">
-        <proof prover="0"><result status="timeout" time="120.000000" steps="798371"/></proof>
-        <transf name="split_vc" proved="true" >
-         <goal name="base.0.0.1.0.0.0.0.0" proved="true">
-         <transf name="destruct_term" proved="true" arg1="v">
-          <goal name="base.0.0.1.0.0.0.0.0.0" proved="true">
-          <proof prover="0"><result status="valid" time="0.030871" steps="75"/></proof>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
- <goal name="InductionNodeMem.induction_step" proved="true">
- <transf name="inline_goal" proved="true" >
-  <goal name="induction_step.0" proved="true">
-  <transf name="inline_goal" proved="true" >
-   <goal name="induction_step.0.0" proved="true">
-   <transf name="introduce_premises" proved="true" >
-    <goal name="induction_step.0.0.0" proved="true">
-    <transf name="assert" proved="true" arg1="(exists g k v. size g + 1 = size x /\ add k v g = x)">
-     <goal name="induction_step.0.0.0.0" expl="asserted formula" proved="true">
-     <proof prover="0"><result status="valid" time="0.039841" steps="193"/></proof>
-     </goal>
-     <goal name="induction_step.0.0.0.1" proved="true">
-     <transf name="destruct_rec" proved="true" arg1="h">
-      <goal name="induction_step.0.0.0.1.0" proved="true">
-      <transf name="assert" proved="true" arg1="((exists v1:vertex, iv:int, pv:vertex. mapsto v1 (iv, pv) g /\ (forall x1:vertex, ix:int, px:vertex. mapsto x1 (ix, px) g -&gt; iv &lt;= ix)))">
-       <goal name="induction_step.0.0.0.1.0.0" expl="asserted formula" proved="true">
-       <proof prover="0"><result status="valid" time="0.047697" steps="172"/></proof>
-       </goal>
-       <goal name="induction_step.0.0.0.1.0.1" proved="true">
-       <transf name="destruct_rec" proved="true" arg1="h">
-        <goal name="induction_step.0.0.0.1.0.1.0" proved="true">
-        <transf name="destruct_term" proved="true" arg1="v">
-         <goal name="induction_step.0.0.0.1.0.1.0.0" proved="true">
-         <transf name="subst" proved="true" arg1="v">
-          <goal name="induction_step.0.0.0.1.0.1.0.0.0" proved="true">
-          <transf name="assert" proved="true" arg1="(x1 &lt;= iv \/ x1 &gt; iv)">
-           <goal name="induction_step.0.0.0.1.0.1.0.0.0.0" expl="asserted formula" proved="true">
-           <proof prover="0"><result status="valid" time="0.024325" steps="14"/></proof>
-           </goal>
-           <goal name="induction_step.0.0.0.1.0.1.0.0.0.1" proved="true">
-           <transf name="destruct" proved="true" arg1="h">
-            <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.0" proved="true">
-            <transf name="exists" proved="true" arg1="k">
-             <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.0.0" proved="true">
-             <transf name="exists" proved="true" arg1="x1">
-              <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.0.0.0" proved="true">
-              <transf name="exists" proved="true" arg1="x">
-               <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.0.0.0.0" proved="true">
-               <proof prover="0"><result status="valid" time="0.187450" steps="1498"/></proof>
-               </goal>
-              </transf>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-            <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.1" proved="true">
-            <transf name="exists" proved="true" arg1="v1">
-             <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.1.0" proved="true">
-             <transf name="exists" proved="true" arg1="iv">
-              <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.1.0.0" proved="true">
-              <transf name="exists" proved="true" arg1="pv">
-               <goal name="induction_step.0.0.0.1.0.1.0.0.0.1.1.0.0.0" proved="true">
-               <proof prover="0"><result status="valid" time="0.165060" steps="1254"/></proof>
-               </goal>
-              </transf>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-           </transf>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
-</theory>
-<theory name="MinExists" proved="true">
- <goal name="min_exists" proved="true">
- <transf name="introduce_premises" proved="true" >
-  <goal name="min_exists.0" proved="true">
-  <transf name="assert" proved="true" arg1="(p2 (size dfsnum_parent - 1))">
-   <goal name="min_exists.0.0" expl="asserted formula" proved="true">
-   <proof prover="0"><result status="valid" time="0.024534" steps="38"/></proof>
-   </goal>
-   <goal name="min_exists.0.1" proved="true">
-   <proof prover="0"><result status="valid" time="0.023441" steps="92"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
  </goal>
 </theory>
 <theory name="Graph">
