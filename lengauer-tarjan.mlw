@@ -1091,6 +1091,7 @@ module Theorem4Base
   use Cutoff
   use CutoffB
 
+  (* v is candidate of semi(w), in practise *)
   predicate t4 (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
       mem v dfsnum_parent /\
       mem w dfsnum_parent /\
@@ -1138,6 +1139,28 @@ module Theorem4
       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
       (forall a. t4 dfsnum_parent a w -> dfsnum a >= dfsnum x) ->
       (+>) dfsnum_parent x w
+
+end
+
+module Cucu
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use list.Elements
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use DfsnumParentSimplelist
+  use DfsnumParentStartMem
+
+  lemma cucu : 
+    forall dfsnum_parent x l y.
+      wf_dfsnum_parent dfsnum_parent ->
+      (--+->) dfsnum_parent x l y ->
+      SV.subset (elements l) dfsnum_parent.domain
 
 end
 
@@ -1277,3 +1300,70 @@ module LengauerTarjan
 
 end
 
+module Jiting
+  use option.Option
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use DfsnumParentSimplelist
+  use DfsnumParentUnique
+  use Cucu
+  use DfsnumParentMutualParent
+
+  let rec ghost constant ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
+                                                   (semi_mp : fmap vertex vertex) 
+                                                   (u : vertex) 
+                                                   (ghost v : vertex)
+                                                   (ghost w : vertex)
+                                                   (ghost l : option (list vertex))
+                                                   (prev_res : vertex) : vertex =
+    requires{wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
+    requires{edge v w}
+    requires{match l with None -> u = v | Some l -> (--+->) dfsnum_parent u l v end}
+    requires{exists iu pu iw pw. mapsto u (iu, pu) dfsnum_parent /\ mapsto w (iw, pw) dfsnum_parent /\ iu > iw}
+    requires{forall x. x <> u -> 
+                       (--*->) dfsnum_parent u x   -> 
+                       (--*->) dfsnum_parent   x v ->  
+                       let semi_x = find x semi_mp in
+                       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                       dfsnum semi_x >= dfsnum prev_res
+           }
+    ensures{forall x. (--*->) dfsnum_parent u x   -> 
+                      (--*->) dfsnum_parent   x v ->  
+                      let semi_x = find x semi_mp in
+                      let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                      dfsnum semi_x >= dfsnum result
+           }
+    ensures{forall x ix px iw pw. 
+                      (--*->) dfsnum_parent x v       ->
+                      mapsto x (ix, px) dfsnum_parent ->
+                      mapsto w (iw, pw) dfsnum_parent ->
+                      ix > iw                         ->
+                      let semi_x = find x semi_mp in
+                      let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                      dfsnum semi_x >= dfsnum result
+           }
+    variant{1 + size dfsnum_parent - match l with None -> 0 | Some l -> length l + 1 end}
+
+    let semi_u = find u semi_mp in
+    let (i_semi_u, _) = find semi_u dfsnum_parent in
+    let (i_prev_res, _) = find prev_res dfsnum_parent in
+    let new_res = if i_semi_u < i_prev_res then semi_u else prev_res in
+    let (  _, pu) = find  u dfsnum_parent in
+    let (ipu,  _) = find pu dfsnum_parent in
+    let ( iw,  _) = find  w dfsnum_parent in
+    if ipu > iw then 
+      let new_l = match l with
+                    | None   -> Some Nil
+                    | Some l -> Some (Cons u l)
+                  end in
+      ancestor_with_lowest_semi dfsnum_parent semi_mp pu v w new_l new_res
+    else 
+      new_res
+
+end
