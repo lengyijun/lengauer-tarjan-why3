@@ -1357,6 +1357,42 @@ module LengauerTarjan
 
 end
 
+module RevertMap
+  use set.SetApp
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use fmap.Fmap as Fm
+
+  let rec lemma revert_map (dfsnum_parent : fmap vertex (int, vertex)) : fmap int vertex
+      requires{
+          forall x y. x <> y -> 
+            mem x dfsnum_parent -> 
+            mem y dfsnum_parent -> 
+            let (a, _) = find x dfsnum_parent in 
+            let (b, _) = find y dfsnum_parent in 
+            a <> b
+      }
+      ensures{forall x ix. mapsto ix x result <-> exists px. mapsto x (ix, px) dfsnum_parent}
+      variant{size dfsnum_parent}
+  =
+    if Fm.is_empty dfsnum_parent then
+      Fm.empty
+    else
+      let x = pick dfsnum_parent.domain in 
+      let (ix, _) = find x dfsnum_parent in
+      let dfsnum_parent' = Fm.remove x dfsnum_parent in
+      let smaller_res = revert_map dfsnum_parent' in
+      Fm.add ix x smaller_res
+
+end
+
 module Jiting
   use option.Option
   use list.List

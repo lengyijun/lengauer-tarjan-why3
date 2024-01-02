@@ -3810,6 +3810,46 @@
  <goal name="dfsnum_property_h">
  </goal>
 </theory>
+<theory name="RevertMap" proved="true">
+ <goal name="revert_map&#39;vc" expl="VC for revert_map" proved="true">
+ <transf name="split_goal_full" proved="true" >
+  <goal name="revert_map&#39;vc.0" expl="variant decrease" proved="true">
+  <proof prover="0"><result status="valid" time="0.045817" steps="141"/></proof>
+  </goal>
+  <goal name="revert_map&#39;vc.1" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.093925" steps="497"/></proof>
+  </goal>
+  <goal name="revert_map&#39;vc.2" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.053558" steps="232"/></proof>
+  </goal>
+  <goal name="revert_map&#39;vc.3" expl="postcondition" proved="true">
+  <transf name="introduce_premises" proved="true" >
+   <goal name="revert_map&#39;vc.3.0" expl="postcondition" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="revert_map&#39;vc.3.0.0" expl="postcondition" proved="true">
+    <proof prover="0"><result status="valid" time="0.143423" steps="846"/></proof>
+    </goal>
+    <goal name="revert_map&#39;vc.3.0.1" expl="postcondition" proved="true">
+    <transf name="case" proved="true" arg1="(x = x3)">
+     <goal name="revert_map&#39;vc.3.0.1.0" expl="true case (postcondition)" proved="true">
+     <proof prover="0"><result status="valid" time="0.044647" steps="171"/></proof>
+     </goal>
+     <goal name="revert_map&#39;vc.3.0.1.1" expl="false case (postcondition)" proved="true">
+     <transf name="instantiate" proved="true" arg1="Ensures" arg2="x, ix">
+      <goal name="revert_map&#39;vc.3.0.1.1.0" expl="false case (postcondition)" proved="true">
+      <proof prover="0"><result status="valid" time="0.113356" steps="928"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
 <theory name="Jiting" proved="true">
  <goal name="ancestor_with_lowest_semi&#39;vc" expl="VC for ancestor_with_lowest_semi" proved="true">
  <transf name="split_goal_full" proved="true" >

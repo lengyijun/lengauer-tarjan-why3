@@ -105,11 +105,13 @@ module DfsnumParentStartMem
 
   use DfsnumParentStartMemHelper
 
-  lemma start_node_mem :  forall dfsnum_parent.
-                      wf_dfsnum_parent dfsnum_parent ->
-                      forall x y l.
-                        (--+->) dfsnum_parent x l y ->
-                        mem x dfsnum_parent /\ mem y dfsnum_parent
+  let lemma start_node_mem (dfsnum_parent : fmap vertex (int, vertex))
+                           (x y : vertex)
+                           (l : list vertex)
+      requires{wf_dfsnum_parent dfsnum_parent }
+      requires{(--+->) dfsnum_parent x l y }
+      ensures{mem x dfsnum_parent /\ mem y dfsnum_parent}
+  = assert{p_node_mem (length l)}
 end
 
 module DfsnumParentSortedHelper
@@ -150,16 +152,21 @@ module DfsnumParentSorted
   use DfsnumParentSortedHelper
   use export DfsnumParentStartMem
 
-  lemma unnamed_a : forall dfsnum_parent x y l.
-                      wf_dfsnum_parent dfsnum_parent ->
-                        (--+->) dfsnum_parent x l y ->
-                        let (ix,_) =  find x dfsnum_parent in
-                        let (iy,_) =  find y dfsnum_parent in
-                        ix < iy /\
-                        forall a. 
-                          L.mem a l ->
-                          let (ia, _) = find a dfsnum_parent in 
-                          ix < ia < iy 
+  let lemma unnamed_a (dfsnum_parent : fmap vertex (int, vertex))
+                      (x y : vertex)
+                      (l : list vertex)
+    requires{wf_dfsnum_parent dfsnum_parent}
+    requires{(--+->) dfsnum_parent x l y}
+    ensures{
+      let (ix,_) =  find x dfsnum_parent in
+      let (iy,_) =  find y dfsnum_parent in
+      ix < iy /\
+      forall a. 
+        L.mem a l ->
+        let (ia, _) = find a dfsnum_parent in 
+        ix < ia < iy 
+    }
+    = assert{p1 (length l)}
   
   lemma unnamed_e : forall dfsnum_parent.                                                         
                       wf_dfsnum_parent dfsnum_parent ->                                           
@@ -210,11 +217,13 @@ module DfsnumParentSimplelist
     extend unnamed_a                                                                              
     used in lemma4                                                                                
   *)                                                                                              
-  lemma unnamed_d : forall dfsnum_parent.                                                         
-                      wf_dfsnum_parent dfsnum_parent ->                                           
-                      forall x y l.                                                               
-                        (--+->) dfsnum_parent x l y ->                                           
-                         simplelist (Cons y (Cons x l))
+  let lemma is_simplelist (dfsnum_parent : fmap vertex (int, vertex))
+                          (x y : vertex)
+                          (l : list vertex)
+    requires{wf_dfsnum_parent dfsnum_parent}
+    requires{(--+->) dfsnum_parent x l y}
+    ensures{ simplelist (Cons y (Cons x l))}
+  = assert{p_path_is_simplelist (length l)}
 
 end
 
@@ -248,12 +257,14 @@ module DfsnumParentUnique
   use DfsnumParent
   use DfsnumParentUniqueHelper
 
-  lemma path_unique : forall dfsnum_parent.
-                      wf_dfsnum_parent dfsnum_parent ->
-                      forall l1 l2 x y.
-                        (--+->) dfsnum_parent x l1 y ->
-                        (--+->) dfsnum_parent x l2 y ->
-                        l1 = l2
+  let lemma path_unique (dfsnum_parent : fmap vertex (int, vertex))
+                        (l1 l2 : list vertex)
+                        (x y : vertex)
+    requires{wf_dfsnum_parent dfsnum_parent}
+    requires{(--+->) dfsnum_parent x l1 y}
+    requires{(--+->) dfsnum_parent x l2 y}
+    ensures{l1 = l2}
+  = assert{p_unique (length l1)}
 end
 
 module CutoffHelper
@@ -289,13 +300,19 @@ module Cutoff
   use DfsnumParent
   use CutoffHelper
 
-  lemma span_cutoff: forall mp x l z y. 
-                      (--+->) mp x l z -> 
-                      L.mem y l -> 
-                        exists l1 l2. 
-                          (--+->) mp x l1 y /\ 
-                          (--+->) mp y l2 z /\ 
-                          l = l1 ++ Cons y l2
+  let lemma span_cutoff
+        (mp: fmap vertex (int, vertex))
+        (x: vertex)
+        (l: list vertex)
+        (z y: vertex)
+    requires{(--+->) mp x l z}
+    requires{L.mem y l}
+    ensures{exists l1 l2. 
+              (--+->) mp x l1 y /\ 
+              (--+->) mp y l2 z /\ 
+              l = l1 ++ Cons y l2
+    }
+    = assert{p1 (length l)}
 end
 
 module CutoffBHelper
@@ -325,9 +342,13 @@ module CutoffB
   use DfsnumParent
   use CutoffBHelper
 
-  lemma span_cutoff: forall l2 mp x l1 z y. 
-                      (--+->) mp x (l1 ++ Cons y l2) z -> 
-                      (--+->) mp x l1 y /\ (--+->) mp y l2 z 
+  let lemma span_cutoff_b 
+        (mp: fmap vertex (int, vertex))
+        (l1 l2: list vertex)
+        (x y z: vertex)
+    requires{(--+->) mp x (l1 ++ Cons y l2) z}
+    ensures{(--+->) mp x l1 y /\ (--+->) mp y l2 z}
+    = assert{p (length l2)}
 end
 
 module DfsnumParentMustOnTree
@@ -403,9 +424,13 @@ module JustSpecialPath
   use DfsnumParent
   use JustSpecialPathHelper
 
-  lemma just_special_path : forall dfsnum_parent.
-                      wf_dfsnum_parent dfsnum_parent ->
-                      forall x y l. (--+->) dfsnum_parent x l y -> path x l y
+  let lemma just_special_path 
+      (dfsnum_parent : fmap vertex (int, vertex))
+      (x y : vertex)
+      (l : list vertex)
+  requires{ wf_dfsnum_parent dfsnum_parent }                    
+  ensures{(--+->) dfsnum_parent x l y -> path x l y}
+  = assert{p_just_special_path (length l)}
 
 end
 
@@ -455,11 +480,14 @@ module DfsnumParentPathSmall2Large
   use DfsnumParent
   use DfsnumParentPathSmall2LargeHelper
  
-  lemma unnamed_c : forall large small.
-                       (forall x y. mapsto x y small -> mapsto x y large) ->
-                       forall x y l. 
-                         (--+->) small x l y ->
-                         (--+->) large x l y
+  let lemma unnamed_c 
+      (large small: fmap vertex (int, vertex))
+      (x y : vertex)
+      (l : list vertex)
+      requires{forall x y. mapsto x y small -> mapsto x y large}
+      requires{(--+->) small x l y}
+      ensures{(--+->) large x l y}
+    = assert{pc (length l)}
 end
     
 module DfsnumParentPathLarge2SmallHelper
@@ -496,12 +524,15 @@ module DfsnumParentPathLarge2Small
   use DfsnumParent
   use DfsnumParentPathLarge2SmallHelper
 
-  lemma unnamed_b : forall large small.
-                       (large >> small) ->
-                       forall x y l. 
-                         (--+->) large x l y ->
-                         mem y small ->
-                         (--+->) small x l y
+  let lemma unnamed_b 
+      (large small: fmap vertex (int, vertex))
+      (x y : vertex)
+      (l : list vertex)
+      requires{ (large >> small) }
+      requires{ (--+->) large x l y }
+      requires{ mem y small }
+      ensures{ (--+->) small x l y }
+    = assert{pb (length l)}
 end
 
 module ReachableInDfsNumHelper
@@ -537,11 +568,15 @@ module ReachableInDfsNum
   use DfsnumParent
   use ReachableInDfsNumHelper
 
-  lemma dfsnum_property_e : 
-    forall dfsnum_parent.
-        wf_dfsnum_parent dfsnum_parent ->
-        (forall x. mem x dfsnum_parent -> forall y. edge x y -> mem y dfsnum_parent) -> 
-        forall x p. path root p x -> mem x dfsnum_parent
+  let lemma dfsnum_property_e 
+      (dfsnum_parent : fmap vertex (int, vertex))
+      (x : vertex)
+      (p : list vertex )
+      requires{ wf_dfsnum_parent dfsnum_parent }
+      requires{ forall x. mem x dfsnum_parent -> forall y. edge x y -> mem y dfsnum_parent }
+      requires{path root p x }
+      ensures{ mem x dfsnum_parent }
+  = assert{p1 (length p)}
 
 end
 
@@ -559,10 +594,14 @@ module Lemma2
   use Cutoff
   use JustSpecialPath
 
-  lemma lemma2 : forall dfsnum_parent.
-                      wf_dfsnum_parent dfsnum_parent ->
-                      forall w idom_w.
-                        idom_w ~> w /\ mem w dfsnum_parent -> exists l. (--+->) dfsnum_parent idom_w l w
+  let lemma lemma2 
+      (dfsnum_parent : fmap vertex (int, vertex))
+      (w idom_w : vertex)
+      requires{ wf_dfsnum_parent dfsnum_parent }
+      requires{ idom_w ~> w }
+      requires{ mem w dfsnum_parent }
+      ensures{exists l. (--+->) dfsnum_parent idom_w l w }
+   = assert{exists l. (--+->) dfsnum_parent root l w /\ L.mem idom_w (Cons root l)}
 end
 
 module Lemma1HelperAHelper
@@ -650,16 +689,23 @@ module Lemma1HelperC
   use DfsnumParent
   use Lemma1HelperCHelper
 
-  lemma dfsnum_property_k : 
-    forall dfsnum_parent v w iv pv iw pw l.
-      super_wf_dfsnum_parent dfsnum_parent ->
-      all_reachable dfsnum_parent ->
-      mapsto v (iv, pv) dfsnum_parent ->
-      mapsto w (iw, pw) dfsnum_parent ->
-      iv < iw ->
-      path v l w ->
-      (forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix) ->
-      exists p. (--+->) dfsnum_parent v p w
+  let lemma dfsnum_property_k 
+    (dfsnum_parent : fmap vertex (int, vertex))
+    (v w : vertex)
+    (iv : int)
+    (pv : vertex)
+    (iw : int)
+    (pw : vertex)
+    (l : list vertex)
+        requires{ super_wf_dfsnum_parent dfsnum_parent }
+        requires{ all_reachable dfsnum_parent }
+        requires{ mapsto v (iv, pv) dfsnum_parent }
+        requires{ mapsto w (iw, pw) dfsnum_parent }
+        requires{ iv < iw }
+        requires{ path v l w }
+        requires{ forall x ix px. L.mem x l -> mapsto x (ix, px) dfsnum_parent -> iv <= ix }
+        ensures{exists p. (--+->) dfsnum_parent v p w}
+    = assert{p_dfsnum_property_k (length l)}
 end
 
 module Lemma1HelperB
@@ -699,14 +745,25 @@ module Lemma1
   use DfsnumParent
   use Lemma1HelperB
 
-  lemma lemma1 : forall dfsnum_parent v iv pv w iw pw p. 
-                    super_wf_dfsnum_parent dfsnum_parent ->
-                    all_reachable dfsnum_parent ->
-                    mapsto v (iv, pv) dfsnum_parent ->
-                    mapsto w (iw, pw) dfsnum_parent ->
-                    iv < iw ->
-                    path v p w ->
-                    exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+  let lemma lemma1
+    (dfsnum_parent : fmap vertex (int, vertex))
+    (v : vertex)
+    (iv : int)
+    (pv : vertex)
+    (w : vertex)
+    (iw : int)
+    (pw : vertex)
+    (p : list vertex)
+       requires{ super_wf_dfsnum_parent dfsnum_parent }
+       requires{ all_reachable dfsnum_parent }
+       requires{ mapsto v (iv, pv) dfsnum_parent }
+       requires{ mapsto w (iw, pw) dfsnum_parent }
+       requires{ iv < iw }
+       requires{ path v p w }
+       ensures{
+          exists x. L.mem x (Cons v p) /\ (--*->) dfsnum_parent x v /\ (--*->) dfsnum_parent x w
+       }
+  = assert {p_lemma1 (length p)}
 
 end
 
@@ -1159,8 +1216,7 @@ module Cucu
     forall dfsnum_parent x l y.
       wf_dfsnum_parent dfsnum_parent ->
       (--+->) dfsnum_parent x l y ->
-      SV.subset (elements (Cons x (Cons y l))) dfsnum_parent.domain
-      (* SV.subset (elements (Cons x (Cons y l))) dfsnum_parent.domain *)
+      SV.subset (elements l) dfsnum_parent.domain
 
 end
 
@@ -1177,7 +1233,7 @@ module LengauerTarjan
   use DfsnumParentPathSmall2Large
   use DfsnumParentMustOnTree
 
-  let rec ghost constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : (fmap vertex (int, vertex))) : fmap vertex (int, vertex)= 
+  let rec ghost constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) : fmap vertex (int, vertex)= 
     requires{current_parent = root -> grey = Nil}
     requires{current_parent = root \/ (--+->) dfsnum_parent root grey current_parent}
     requires{wf_dfsnum_parent dfsnum_parent}
@@ -1268,7 +1324,7 @@ module LengauerTarjan
                                 -> mapsto v (iv, pv) dfsnum_parent
                                 -> mapsto w (iw, pw) dfsnum_parent
                                 -> iv < iw 
-                                - > exists l. (--+->) dfsnum_parent v l w
+                                -> exists l. (--+->) dfsnum_parent v l w
 
   lemma dfsnum_property_j : forall a c lac ia pa ic pc.              
                               (--+->) dfsnum_parent a lac c              
@@ -1300,20 +1356,55 @@ module LengauerTarjan
 
 end
 
+module RevertMap
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use set.Fset as SS
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use set.SetApp
+
+  let rec lemma revert_map (dfsnum_parent : fmap vertex (int, vertex)) : fmap int vertex
+      requires{
+      forall x y. x <> y -> 
+                  mem x dfsnum_parent -> 
+                  mem y dfsnum_parent -> 
+                  let (a, _) = find x dfsnum_parent in 
+                  let (b, _) = find y dfsnum_parent in 
+                  a <> b
+      }
+      ensures{forall x ix. mapsto x ix result <-> exists px. mapsto x (ix, px) dfsnum_parent}
+      variant{size dfsnum_parent}
+  =
+    if is_empty dfsnum_parent then
+      empty
+    else
+      let x = choose dfsnum_parent.domain in 
+      let (ix, px) = find x dfsnum_parent in
+      let dfsnum_parent' = remove x dfsnum_parent in
+      let smaller_res = revert_map dfsnum_parent' in
+      add ix x smaller_res
+
+end
+
 module Jiting
   use option.Option
   use list.List
   use list.Mem as L
   use list.Append
   use list.Length
-  use list.NumOcc
   use int.Int
-  use set.Fset as SS
   use dominator.Graph
   use DfsnumParent
   use DfsnumParentMustOnTree
   use DfsnumParentSimplelist
+  use DfsnumParentUnique
   use Cucu
+  use DfsnumParentMutualParent
 
   let rec ghost constant ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
                                                    (semi_mp : fmap vertex vertex) 
@@ -1359,7 +1450,7 @@ module Jiting
     let ( iw,  _) = find  w dfsnum_parent in
     if ipu > iw then 
       let new_l = match l with
-                    | None   -> Some (Cons u Nil)
+                    | None   -> Some Nil
                     | Some l -> Some (Cons u l)
                   end in
       ancestor_with_lowest_semi dfsnum_parent semi_mp pu v w new_l new_res
