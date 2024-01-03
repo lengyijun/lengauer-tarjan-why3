@@ -1140,13 +1140,6 @@ module Theorem4Base
   use dominator.Graph
   use DfsnumParent
   use SemiDominate
-  use Theorem2A
-  use dominator.IdomPropertyA
-  use JustSpecialPath
-  use DfsnumParentSorted
-  use Lemma5
-  use Cutoff
-  use CutoffB
 
   (* v is candidate of semi(w), in practise *)
   predicate t4 (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
@@ -1155,6 +1148,25 @@ module Theorem4Base
       let dfsnum x = let (ix, _) = find x dfsnum_parent in ix in
       (edge v w /\ dfsnum v < dfsnum w) \/
       (exists u v1. (+>) dfsnum_parent v u /\ dfsnum u > dfsnum w /\ edge v1 w /\ (--*->) dfsnum_parent u v1)
+end
+
+module Theorem4_B
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use SemiDominate
+  use Theorem2A
+  use dominator.IdomPropertyA
+  use JustSpecialPath
+  use DfsnumParentSorted
+  use Lemma5
+  use Cutoff
+  use CutoffB
+  use Theorem4Base
 
   lemma theorem4_a : 
     forall dfsnum_parent w x semi_w.
@@ -1185,7 +1197,8 @@ module Theorem4
   use dominator.Graph
   use DfsnumParent
   use SemiDominate
-  use Theorem4Base
+  use Theorem4_B
+  use export Theorem4Base
 
   lemma theorem4 : 
     forall dfsnum_parent w x.
