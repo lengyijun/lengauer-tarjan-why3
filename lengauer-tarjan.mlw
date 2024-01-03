@@ -1432,14 +1432,15 @@ module Jiting
                       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
                       dfsnum semi_x >= dfsnum result
            }
-    ensures{forall x ix px iw pw. 
-                      (--*->) dfsnum_parent x v       ->
-                      mapsto x (ix, px) dfsnum_parent ->
-                      mapsto w (iw, pw) dfsnum_parent ->
-                      ix > iw                         ->
-                      let semi_x = find x semi_mp in
-                      let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-                      dfsnum semi_x >= dfsnum result
+    ensures{forall x.
+              (--*->) dfsnum_parent x v       ->
+              mem x dfsnum_parent             ->
+              let (ix, _) = find x dfsnum_parent in
+              let (iw, _) = find w dfsnum_parent in
+              ix > iw                         ->
+              let semi_x = find x semi_mp in
+              let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+              dfsnum semi_x >= dfsnum result
            }
     variant{1 + size dfsnum_parent - match l with None -> 0 | Some l -> length l + 1 end}
 
