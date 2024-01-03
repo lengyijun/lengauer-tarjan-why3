@@ -1411,9 +1411,9 @@ module Jiting
   let rec ghost constant ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
                                                    (semi_mp : fmap vertex vertex) 
                                                    (u : vertex) 
+                                                   (ghost l : option (list vertex))
                                                    (ghost v : vertex)
                                                    (ghost w : vertex)
-                                                   (ghost l : option (list vertex))
                                                    (prev_res : vertex) : vertex =
     requires{wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
     requires{edge v w}
@@ -1455,7 +1455,7 @@ module Jiting
                     | None   -> Some Nil
                     | Some l -> Some (Cons u l)
                   end in
-      ancestor_with_lowest_semi dfsnum_parent semi_mp pu v w new_l new_res
+      ancestor_with_lowest_semi dfsnum_parent semi_mp pu new_l v w new_res
     else 
       new_res
 
