@@ -8,7 +8,7 @@
 <prover id="3" name="CVC4" version="1.8" timelimit="100" steplimit="0" memlimit="10000"/>
 <prover id="4" name="Z3" version="4.12.2" timelimit="100" steplimit="0" memlimit="10000"/>
 <prover id="5" name="Alt-Ergo" version="2.5.2" alternative="BV" timelimit="120" steplimit="0" memlimit="10000"/>
-<file format="whyml" proved="true">
+<file format="whyml">
 <path name=".."/><path name="lengauer-tarjan.mlw"/>
 <theory name="DfsnumParent" proved="true">
  <goal name="concat_lemma" proved="true">
@@ -2434,7 +2434,7 @@
                                    <proof prover="1"><result status="valid" time="0.801968" steps="76782"/></proof>
                                    </goal>
                                    <goal name="theorem3.0.1.1.0.1.0.6.0.1.0.0.2.0.4.0.1.0.4.0.0.1.0.1.0.1.0.1.1.0.0.1.0.1.1" expl="asserted formula" proved="true">
-                                   <proof prover="2" obsolete="true"><result status="timeout" time="120.000000"/></proof>
+                                   <proof prover="2"><undone/></proof>
                                    <transf name="destruct_rec" proved="true" arg1="h1">
                                     <goal name="theorem3.0.1.1.0.1.0.6.0.1.0.0.2.0.4.0.1.0.4.0.0.1.0.1.0.1.0.1.1.0.0.1.0.1.1.0" expl="asserted formula" proved="true">
                                     <proof prover="1"><result status="valid" time="0.645272" steps="51824"/></proof>
@@ -2442,7 +2442,7 @@
                                     <goal name="theorem3.0.1.1.0.1.0.6.0.1.0.0.2.0.4.0.1.0.4.0.0.1.0.1.0.1.0.1.1.0.0.1.0.1.1.1" expl="asserted formula" proved="true">
                                     <proof prover="0"><result status="valid" time="2.393129" steps="7483"/></proof>
                                     <proof prover="1"><result status="valid" time="0.497134" steps="53706"/></proof>
-                                    <proof prover="2" obsolete="true"><result status="timeout" time="120.000000"/></proof>
+                                    <proof prover="2"><undone/></proof>
                                     </goal>
                                    </transf>
                                    </goal>
@@ -3175,7 +3175,7 @@
               <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1" expl="asserted formula" proved="true">
               <transf name="assert" proved="true" arg1="(b = y \/ (dfsnum @ b) &lt; (dfsnum @ y))">
                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.0" expl="asserted formula" proved="true">
-               <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
+               <proof prover="0"><undone/></proof>
                <proof prover="1"><result status="valid" time="0.645557" steps="59606"/></proof>
                </goal>
                <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1" expl="asserted formula" proved="true">
@@ -3198,7 +3198,7 @@
                    <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1" expl="asserted formula" proved="true">
                    <transf name="assert" proved="true" arg1="(exists iy py. mapsto y (iy ,py) dfsnum_parent )">
                     <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.0" expl="asserted formula" proved="true">
-                    <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
+                    <proof prover="0"><undone/></proof>
                     <proof prover="1"><result status="valid" time="0.977724" steps="61442"/></proof>
                     </goal>
                     <goal name="theorem4_b.0.0.0.0.0.1.0.0.0.1.0.1.1.1.1.1.0.1.1" expl="asserted formula" proved="true">
@@ -3743,93 +3743,168 @@
  </transf>
  </goal>
 </theory>
-<theory name="Jiting" proved="true">
+<theory name="Jiting">
  <goal name="ancestor_with_lowest_semi&#39;vc" expl="VC for ancestor_with_lowest_semi" proved="true">
  <transf name="split_goal_full" proved="true" >
   <goal name="ancestor_with_lowest_semi&#39;vc.0" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.398679" steps="47560"/></proof>
+  <proof prover="1"><result status="valid" time="0.398679" steps="46303"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.061089" steps="78"/></proof>
+  <proof prover="0"><result status="valid" time="0.061089" steps="76"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.033937" steps="78"/></proof>
+  <proof prover="0"><result status="valid" time="0.877237" steps="3629"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.512097" steps="46435"/></proof>
+  <proof prover="0"><result status="valid" time="0.725583" steps="1859"/></proof>
+  <proof prover="1"><result status="timeout" time="120.000000" steps="1688815"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.675650" steps="1727"/></proof>
+  <proof prover="1"><result status="valid" time="1.317910" steps="92945"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.476916" steps="96999"/></proof>
+  <proof prover="1"><result status="valid" time="0.164433" steps="34483"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.124161" steps="34543"/></proof>
+  <proof prover="1"><result status="valid" time="0.124161" steps="40076"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.349055" steps="40230"/></proof>
+  <proof prover="1"><result status="valid" time="0.826268" steps="83086"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.425970" steps="88704"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.8" expl="variant decrease" proved="true">
+  <proof prover="1"><result status="valid" time="0.390248" steps="49954"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.9" expl="variant decrease" proved="true">
-  <proof prover="0"><result status="valid" time="1.137345" steps="3532"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.9" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.047856" steps="82"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.045758" steps="84"/></proof>
+  <proof prover="1"><result status="valid" time="0.784867" steps="53774"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.11" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.033363" steps="84"/></proof>
+  <proof prover="0"><result status="valid" time="0.453321" steps="1834"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.12" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.702631" steps="55361"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.817727" steps="1889"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.14" expl="precondition" proved="true">
+  <proof prover="0"><result status="timeout" time="120.000000" steps="474906"/></proof>
+  <proof prover="1"><result status="timeout" time="120.000000" steps="1614637"/></proof>
+  <proof prover="2"><result status="timeout" time="120.000000"/></proof>
   <transf name="introduce_premises" proved="true" >
-   <goal name="ancestor_with_lowest_semi&#39;vc.14.0" expl="precondition" proved="true">
+   <goal name="ancestor_with_lowest_semi&#39;vc.12.0" expl="precondition" proved="true">
    <transf name="case" proved="true" arg1="(x = u)">
-    <goal name="ancestor_with_lowest_semi&#39;vc.14.0.0" expl="true case (precondition)" proved="true">
-    <proof prover="1"><result status="valid" time="0.084100" steps="30951"/></proof>
+    <goal name="ancestor_with_lowest_semi&#39;vc.12.0.0" expl="true case (precondition)" proved="true">
+    <proof prover="1"><result status="valid" time="0.074974" steps="30944"/></proof>
     </goal>
-    <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1" expl="false case (precondition)" proved="true">
-    <transf name="instantiate" proved="true" arg1="Requires4" arg2="x">
-     <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0" expl="false case (precondition)" proved="true">
+    <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1" expl="false case (precondition)" proved="true">
+    <proof prover="0"><result status="timeout" time="120.000000" steps="495763"/></proof>
+    <proof prover="1"><result status="timeout" time="120.000000" steps="2886754"/></proof>
+    <proof prover="2"><result status="timeout" time="120.000000"/></proof>
+    <transf name="instantiate" proved="true" arg1="Requires3" arg2="x">
+     <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0" expl="false case (precondition)" proved="true">
      <transf name="destruct_rec" proved="true" arg1="Hinst">
-      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.0" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.071965" steps="30905"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.0" expl="destruct premise" proved="true">
+      <proof prover="1"><result status="valid" time="0.065712" steps="30898"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1" expl="destruct premise" proved="true">
+      <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1" expl="destruct premise" proved="true">
+      <proof prover="0"><result status="timeout" time="120.000000" steps="506807"/></proof>
+      <proof prover="1"><result status="timeout" time="120.000000" steps="3557064"/></proof>
+      <proof prover="2"><result status="timeout" time="120.000000"/></proof>
       <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
-       <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0" expl="destruct premise" proved="true">
+       <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1.0" expl="destruct premise" proved="true">
        <transf name="destruct_rec" proved="true" arg1="Hinst">
-        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.0" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.074436" steps="30907"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1.0.0" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.080883" steps="30900"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.1" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.238383" steps="38830"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1.0.1" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.226033" steps="38725"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.2" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.086171" steps="30907"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1.0.2" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.074800" steps="30900"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.3" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.082211" steps="30915"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1.0.3" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.107199" steps="30908"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.4" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="1.907575" steps="120537"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.1.0.4" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="1.178462" steps="116272"/></proof>
         </goal>
        </transf>
        </goal>
       </transf>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.2" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.074028" steps="30907"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.2" expl="destruct premise" proved="true">
+      <proof prover="1"><result status="valid" time="0.077880" steps="30900"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.3" expl="false case (precondition)" proved="true">
-      <proof prover="1"><result status="valid" time="0.342025" steps="37799"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.12.0.1.0.3" expl="false case (precondition)" proved="true">
+      <proof prover="1"><result status="valid" time="0.187755" steps="37692"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.13" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.074260" steps="107"/></proof>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.14" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.159064" steps="564"/></proof>
+  <transf name="introduce_premises" >
+   <goal name="ancestor_with_lowest_semi&#39;vc.14.0" expl="precondition">
+   <transf name="case" arg1="(x = u)">
+    <goal name="ancestor_with_lowest_semi&#39;vc.14.0.0" expl="true case (precondition)" proved="true">
+    <proof prover="1"><result status="valid" time="0.255633" steps="37616"/></proof>
+    </goal>
+    <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1" expl="false case (precondition)">
+    <transf name="instantiate" arg1="Requires4" arg2="x">
+     <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0" expl="false case (precondition)">
+     <transf name="destruct_rec" arg1="Hinst">
+      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.0" expl="destruct premise">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><undone/></proof>
+      <proof prover="2"><undone/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1" expl="destruct premise">
+      <transf name="instantiate" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
+       <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0" expl="destruct premise">
+       <transf name="destruct_rec" arg1="Hinst">
+        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.0" expl="destruct premise">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><undone/></proof>
+        <proof prover="2"><undone/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.1" expl="destruct premise">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><undone/></proof>
+        <proof prover="2"><undone/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.2" expl="destruct premise">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><undone/></proof>
+        <proof prover="2"><undone/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.3" expl="destruct premise">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><undone/></proof>
+        <proof prover="2"><undone/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.1.0.4" expl="destruct premise">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><undone/></proof>
+        <proof prover="2"><undone/></proof>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.2" expl="destruct premise">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><undone/></proof>
+      <proof prover="2"><undone/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.14.0.1.0.3" expl="false case (precondition)">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><undone/></proof>
+      <proof prover="2"><undone/></proof>
       </goal>
      </transf>
      </goal>
@@ -3840,61 +3915,87 @@
   </transf>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.122009" steps="34479"/></proof>
+  <proof prover="1"><result status="valid" time="0.707799" steps="69378"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.16" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.368423" steps="40469"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.16" expl="variant decrease" proved="true">
+  <proof prover="1"><result status="valid" time="0.368423" steps="46289"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.17" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.170878" steps="71280"/></proof>
+  <proof prover="1"><result status="valid" time="0.120802" steps="32858"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.18" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.586704" steps="47546"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.18" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.299306" steps="45141"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.19" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.053146" steps="78"/></proof>
+  <proof prover="0"><result status="valid" time="0.395182" steps="1856"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.20" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.040452" steps="78"/></proof>
+  <proof prover="1"><result status="valid" time="1.277198" steps="93086"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.21" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.377637" steps="46431"/></proof>
+  <proof prover="1"><result status="valid" time="0.132370" steps="34456"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.22" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.715353" steps="1723"/></proof>
+  <proof prover="0"><result status="valid" time="0.162625" steps="528"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.23" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.395588" steps="97155"/></proof>
+  <proof prover="1"><result status="valid" time="0.290799" steps="42447"/></proof>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.24" expl="variant decrease" proved="true">
+  <proof prover="1"><result status="valid" time="0.375195" steps="49944"/></proof>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.25" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.136669" steps="32791"/></proof>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.26" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.580473" steps="53578"/></proof>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.27" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.404971" steps="1830"/></proof>
+  </goal>
+  <goal name="ancestor_with_lowest_semi&#39;vc.28" expl="precondition" proved="true">
   <transf name="introduce_premises" proved="true" >
-   <goal name="ancestor_with_lowest_semi&#39;vc.23.0" expl="precondition" proved="true">
+   <goal name="ancestor_with_lowest_semi&#39;vc.28.0" expl="precondition" proved="true">
    <transf name="case" proved="true" arg1="(x = u)">
-    <goal name="ancestor_with_lowest_semi&#39;vc.23.0.0" expl="true case (precondition)" proved="true">
-    <proof prover="0"><result status="valid" time="0.047676" steps="128"/></proof>
+    <goal name="ancestor_with_lowest_semi&#39;vc.28.0.0" expl="true case (precondition)" proved="true">
+    <proof prover="1"><result status="valid" time="0.204820" steps="37448"/></proof>
     </goal>
-    <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1" expl="false case (precondition)" proved="true">
-    <transf name="instantiate" proved="true" arg1="Requires2" arg2="x">
-     <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0" expl="false case (precondition)" proved="true">
+    <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1" expl="false case (precondition)" proved="true">
+    <transf name="instantiate" proved="true" arg1="Requires3" arg2="x">
+     <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0" expl="false case (precondition)" proved="true">
      <transf name="destruct_rec" proved="true" arg1="Hinst">
-      <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0.0" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.384917" steps="38261"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.0" expl="destruct premise" proved="true">
+      <proof prover="1"><result status="valid" time="0.077290" steps="30898"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0.1" expl="false case (precondition)" proved="true">
-      <transf name="unfold" proved="true" arg1="(--*-&gt;)" arg2="in" arg3="H">
-       <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0.1.0" expl="false case (precondition)" proved="true">
-       <transf name="destruct_rec" proved="true" arg1="H">
-        <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0.1.0.0" expl="false case (precondition)" proved="true">
-        <proof prover="0"><result status="valid" time="0.043891" steps="82"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1" expl="destruct premise" proved="true">
+      <proof prover="1"><result status="valid" time="45.952306" steps="2026863"/></proof>
+      <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
+       <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1.0" expl="destruct premise" proved="true">
+       <transf name="destruct_rec" proved="true" arg1="Hinst">
+        <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1.0.0" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.110430" steps="30900"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0.1.0.1" expl="false case (precondition)" proved="true">
-        <transf name="unfold" proved="true" arg1="(--*-&gt;)" arg2="in" arg3="H1">
-         <goal name="ancestor_with_lowest_semi&#39;vc.23.0.1.0.1.0.1.0" expl="false case (precondition)" proved="true">
-         <proof prover="0"><result status="valid" time="20.814845" steps="46693"/></proof>
-         </goal>
-        </transf>
+        <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1.0.1" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.250682" steps="38797"/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1.0.2" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.078321" steps="30900"/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1.0.3" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.077979" steps="30908"/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.1.0.4" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.999508" steps="116222"/></proof>
         </goal>
        </transf>
        </goal>
       </transf>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.2" expl="destruct premise" proved="true">
+      <proof prover="1"><result status="valid" time="0.068967" steps="30900"/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.28.0.1.0.3" expl="false case (precondition)" proved="true">
+      <proof prover="1"><result status="valid" time="0.191298" steps="37759"/></proof>
       </goal>
      </transf>
      </goal>
@@ -3904,114 +4005,210 @@
    </goal>
   </transf>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.24" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.132666" steps="34516"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.25" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.335314" steps="40249"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.26" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.368992" steps="635"/></proof>
-  <proof prover="1"><result status="valid" time="0.303478" steps="42601"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.27" expl="variant decrease" proved="true">
-  <proof prover="0"><result status="valid" time="1.467880" steps="3963"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.28" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.054609" steps="84"/></proof>
-  </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.29" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.030278" steps="84"/></proof>
+  <proof prover="0"><result status="valid" time="0.030278" steps="107"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.30" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.848684" steps="55165"/></proof>
+  <proof prover="1"><result status="valid" time="0.284780" steps="40364"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.31" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.741963" steps="1885"/></proof>
+  <proof prover="0"><result status="valid" time="0.262704" steps="583"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.32" expl="precondition" proved="true">
-  <proof prover="0"><result status="timeout" time="120.000000" steps="479977"/></proof>
-  <proof prover="1"><result status="valid" time="110.276043" steps="1714265"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.32" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.748594" steps="2856"/></proof>
+  <proof prover="1"><result status="valid" time="0.543541" steps="45526"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.33" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.109534" steps="34482"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.33" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.440612" steps="46777"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.34" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.351114" steps="40518"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.34" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.524198" steps="45405"/></proof>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.35" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.313418" steps="660"/></proof>
-  <proof prover="1"><result status="valid" time="0.441795" steps="42851"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.35" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="3.114551" steps="9288"/></proof>
+  <proof prover="1"><result status="valid" time="0.441795" steps="44490"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.36" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="1.293329" steps="3040"/></proof>
+  <proof prover="0"><result status="valid" time="0.745735" steps="2449"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.37" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="1.092446" steps="2516"/></proof>
+  <proof prover="0"><result status="valid" time="0.249666" steps="550"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.38" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.515517" steps="45527"/></proof>
+  <proof prover="1"><result status="valid" time="0.515517" steps="48383"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.39" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="5.317721" steps="9617"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="ancestor_with_lowest_semi&#39;vc.39.0" expl="postcondition" proved="true">
+   <transf name="apply" proved="true" arg1="Ensures">
+    <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0" expl="apply premises" proved="true">
+    <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
+     <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0" expl="apply premises" proved="true">
+     <transf name="destruct_rec" proved="true" arg1="Hinst">
+      <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.0" expl="destruct premise" proved="true">
+      <proof prover="0"><result status="valid" time="0.040501" steps="68"/></proof>
+      <proof prover="1"><result status="valid" time="0.069983" steps="28600"/></proof>
+      <proof prover="2"><result status="valid" time="0.042520"/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.1" expl="destruct premise" proved="true">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><result status="valid" time="0.189401" steps="35529"/></proof>
+      <proof prover="2"><result status="valid" time="0.101959"/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.2" expl="destruct premise" proved="true">
+      <proof prover="0"><result status="valid" time="0.067328" steps="68"/></proof>
+      <proof prover="1"><result status="valid" time="0.101896" steps="28600"/></proof>
+      <proof prover="2"><result status="valid" time="0.039936"/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.3" expl="apply premises" proved="true">
+      <proof prover="0"><result status="valid" time="0.047725" steps="70"/></proof>
+      <proof prover="1"><result status="valid" time="0.074835" steps="28608"/></proof>
+      <proof prover="2"><result status="valid" time="0.045334"/></proof>
+      </goal>
+      <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4" expl="apply premises" proved="true">
+      <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, pu, x, v">
+       <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0" expl="apply premises" proved="true">
+       <transf name="destruct_rec" proved="true" arg1="Hinst">
+        <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.0" expl="destruct premise" proved="true">
+        <proof prover="0"><result status="valid" time="0.047123" steps="70"/></proof>
+        <proof prover="1"><result status="valid" time="0.075663" steps="28608"/></proof>
+        <proof prover="2"><result status="valid" time="0.041514"/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.1" expl="destruct premise" proved="true">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><result status="valid" time="3.720224" steps="220802"/></proof>
+        <proof prover="2"><result status="valid" time="24.411638"/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.2" expl="destruct premise" proved="true">
+        <proof prover="0"><result status="valid" time="0.081915" steps="70"/></proof>
+        <proof prover="1"><result status="valid" time="0.079411" steps="28608"/></proof>
+        <proof prover="2"><result status="valid" time="0.041842"/></proof>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3" expl="apply premises" proved="true">
+        <transf name="case" proved="true" arg1="(x = pu)">
+         <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.0" expl="apply premises (true case)" proved="true">
+         <proof prover="0"><result status="valid" time="0.098118" steps="114"/></proof>
+         <proof prover="1"><result status="valid" time="0.187642" steps="34589"/></proof>
+         <proof prover="2"><result status="valid" time="25.151615"/></proof>
+         </goal>
+         <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1" expl="apply premises (false case)" proved="true">
+         <transf name="case" proved="true" arg1="(x = u)">
+          <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1.0" expl="apply premises (false case. true case)" proved="true">
+          <proof prover="0"><result status="valid" time="0.040332" steps="76"/></proof>
+          <proof prover="1"><result status="valid" time="0.162497" steps="29373"/></proof>
+          <proof prover="2"><result status="valid" time="0.073851"/></proof>
+          </goal>
+          <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1.1" expl="apply premises (false case)" proved="true">
+          <transf name="assert" proved="true" arg1="((--+-&gt;) dfsnum_parent pu Nil u)">
+           <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1.1.0" expl="asserted formula" proved="true">
+           <proof prover="0"><result status="valid" time="0.114311" steps="335"/></proof>
+           <proof prover="1"><result status="valid" time="0.355825" steps="40394"/></proof>
+           <proof prover="2"><result status="valid" time="24.066898"/></proof>
+           </goal>
+           <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1.1.1" expl="apply premises (false case)" proved="true">
+           <transf name="assert" proved="true" arg1="(exists l1 l2. (--+-&gt;) dfsnum_parent pu (l1 ++ Cons x l2) u)">
+            <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1.1.1.0" expl="asserted formula" proved="true">
+            <proof prover="0"><undone/></proof>
+            <proof prover="1"><undone/></proof>
+            <proof prover="2"><result status="valid" time="0.807362"/></proof>
+            </goal>
+            <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.3.1.1.1.1" expl="apply premises (false case)" proved="true">
+            <proof prover="0"><result status="valid" time="0.156569" steps="432"/></proof>
+            <proof prover="1"><result status="valid" time="0.494677" steps="51273"/></proof>
+            <proof prover="2"><result status="valid" time="2.933995"/></proof>
+            </goal>
+           </transf>
+           </goal>
+          </transf>
+          </goal>
+         </transf>
+         </goal>
+        </transf>
+        </goal>
+        <goal name="ancestor_with_lowest_semi&#39;vc.39.0.0.0.4.0.4" expl="apply premises" proved="true">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><result status="valid" time="0.380295" steps="49286"/></proof>
+        <proof prover="2"><undone/></proof>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="ancestor_with_lowest_semi&#39;vc.39.0.1" expl="apply premises" proved="true">
+    <proof prover="0"><result status="valid" time="0.043627" steps="68"/></proof>
+    <proof prover="1"><result status="valid" time="0.065094" steps="28600"/></proof>
+    <proof prover="2"><result status="valid" time="0.042347"/></proof>
+    </goal>
+    <goal name="ancestor_with_lowest_semi&#39;vc.39.0.2" expl="apply premises" proved="true">
+    <proof prover="0"><result status="valid" time="0.050169" steps="83"/></proof>
+    <proof prover="1"><result status="valid" time="0.095885" steps="29197"/></proof>
+    <proof prover="2"><result status="valid" time="0.045884"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.40" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="1.077390" steps="2512"/></proof>
+  <proof prover="0"><result status="valid" time="4.655183" steps="14419"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.41" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.576578" steps="46421"/></proof>
+  <proof prover="1"><result status="valid" time="0.576578" steps="45854"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.42" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.283397" steps="737"/></proof>
+  <proof prover="0"><result status="valid" time="0.895766" steps="2046"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.43" expl="postcondition" proved="true">
-  <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="354056"/></proof>
-  <proof prover="1" obsolete="true"><result status="timeout" time="120.000000" steps="2418380"/></proof>
-  <transf name="split_vc" proved="true" >
-   <goal name="ancestor_with_lowest_semi&#39;vc.43.0" expl="postcondition" proved="true">
-   <transf name="apply" proved="true" arg1="Ensures">
-    <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0" expl="apply premises" proved="true">
-    <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
-     <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0" expl="apply premises" proved="true">
-     <transf name="destruct_rec" proved="true" arg1="Hinst">
-      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.0" expl="destruct premise" proved="true">
+  <proof prover="0"><result status="valid" time="0.276867" steps="515"/></proof>
+  <proof prover="1"><result status="valid" time="0.543127" steps="45490"/></proof>
+  <transf name="split_vc" >
+   <goal name="ancestor_with_lowest_semi&#39;vc.43.0" expl="postcondition">
+   <transf name="apply" arg1="Ensures">
+    <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0" expl="apply premises">
+    <transf name="instantiate" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
+     <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0" expl="apply premises">
+     <transf name="destruct_rec" arg1="Hinst">
+      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.0" expl="destruct premise">
       <proof prover="1"><result status="valid" time="0.058140" steps="28606"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.1" expl="destruct premise" proved="true">
+      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.1" expl="destruct premise">
       <proof prover="1"><result status="valid" time="0.276181" steps="35632"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.2" expl="destruct premise" proved="true">
+      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.2" expl="destruct premise">
       <proof prover="1"><result status="valid" time="0.055941" steps="28606"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.3" expl="apply premises" proved="true">
+      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.3" expl="apply premises">
       <proof prover="1"><result status="valid" time="0.121172" steps="28614"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4" expl="apply premises" proved="true">
-      <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, pu, x, v">
-       <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0" expl="apply premises" proved="true">
-       <transf name="destruct_rec" proved="true" arg1="Hinst">
-        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.0" expl="destruct premise" proved="true">
+      <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4" expl="apply premises">
+      <transf name="instantiate" arg1="mutual_parent" arg2="dfsnum_parent, pu, x, v">
+       <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0" expl="apply premises">
+       <transf name="destruct_rec" arg1="Hinst">
+        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.0" expl="destruct premise">
         <proof prover="0"><result status="valid" time="0.030846" steps="72"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.1" expl="destruct premise" proved="true">
+        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.1" expl="destruct premise">
         <proof prover="1"><result status="valid" time="8.669693" steps="271101"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.2" expl="destruct premise" proved="true">
+        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.2" expl="destruct premise">
         <proof prover="0"><result status="valid" time="0.038404" steps="72"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.3" expl="apply premises" proved="true">
-        <transf name="case" proved="true" arg1="(x = pu)">
-         <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.3.0" expl="apply premises (true case)" proved="true">
+        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.3" expl="apply premises">
+        <transf name="case" arg1="(x = pu)">
+         <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.3.0" expl="apply premises (true case)">
          <proof prover="0"><result status="valid" time="0.050042" steps="115"/></proof>
          </goal>
-         <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.3.1" expl="apply premises (false case)" proved="true">
+         <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.3.1" expl="apply premises (false case)">
          <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="364200"/></proof>
          <proof prover="1"><result status="valid" time="70.556418" steps="1794218"/></proof>
          <proof prover="2" obsolete="true"><result status="timeout" time="120.000000"/></proof>
          </goal>
         </transf>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.4" expl="apply premises" proved="true">
+        <goal name="ancestor_with_lowest_semi&#39;vc.43.0.0.0.4.0.4" expl="apply premises">
         <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="240877"/></proof>
         <proof prover="1"><result status="valid" time="0.585843" steps="50258"/></proof>
         </goal>
@@ -4023,10 +4220,10 @@
      </goal>
     </transf>
     </goal>
-    <goal name="ancestor_with_lowest_semi&#39;vc.43.0.1" expl="apply premises" proved="true">
+    <goal name="ancestor_with_lowest_semi&#39;vc.43.0.1" expl="apply premises">
     <proof prover="0"><result status="valid" time="0.033643" steps="70"/></proof>
     </goal>
-    <goal name="ancestor_with_lowest_semi&#39;vc.43.0.2" expl="apply premises" proved="true">
+    <goal name="ancestor_with_lowest_semi&#39;vc.43.0.2" expl="apply premises">
     <proof prover="0"><result status="valid" time="0.040242" steps="84"/></proof>
     </goal>
    </transf>
@@ -4034,86 +4231,96 @@
   </transf>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.44" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="2.394392" steps="91145"/></proof>
+  <proof prover="1"><result status="valid" time="0.790632" steps="63554"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.45" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="23.614535" steps="46663"/></proof>
+  <proof prover="0"><result status="valid" time="1.047045" steps="2513"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.46" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.981949" steps="2176"/></proof>
+  <proof prover="0"><result status="valid" time="0.314792" steps="542"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.47" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.484925" steps="45612"/></proof>
+  <proof prover="1"><result status="valid" time="0.484925" steps="48439"/></proof>
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.48" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="20.786773" steps="42682"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.49" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="1.033137" steps="2570"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.50" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.554293" steps="46201"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.51" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.230982" steps="716"/></proof>
-  </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.52" expl="postcondition" proved="true">
   <transf name="split_vc" proved="true" >
-   <goal name="ancestor_with_lowest_semi&#39;vc.52.0" expl="postcondition" proved="true">
+   <goal name="ancestor_with_lowest_semi&#39;vc.48.0" expl="postcondition" proved="true">
    <transf name="apply" proved="true" arg1="Ensures">
-    <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0" expl="apply premises" proved="true">
+    <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0" expl="apply premises" proved="true">
     <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, u, x, v">
-     <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0" expl="apply premises" proved="true">
+     <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0" expl="apply premises" proved="true">
      <transf name="destruct_rec" proved="true" arg1="Hinst">
-      <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.0" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.056138" steps="28606"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.0" expl="destruct premise" proved="true">
+      <proof prover="0"><result status="valid" time="0.050826" steps="68"/></proof>
+      <proof prover="1"><result status="valid" time="0.108147" steps="28600"/></proof>
+      <proof prover="2"><result status="valid" time="0.049322"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.1" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.241015" steps="35703"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.1" expl="destruct premise" proved="true">
+      <proof prover="0"><undone/></proof>
+      <proof prover="1"><result status="valid" time="0.228650" steps="35600"/></proof>
+      <proof prover="2"><result status="valid" time="0.157629"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.2" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.070412" steps="28606"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.2" expl="destruct premise" proved="true">
+      <proof prover="0"><result status="valid" time="0.087493" steps="68"/></proof>
+      <proof prover="1"><result status="valid" time="0.078103" steps="28600"/></proof>
+      <proof prover="2"><result status="valid" time="0.069611"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.3" expl="apply premises" proved="true">
-      <proof prover="1"><result status="valid" time="0.125707" steps="28614"/></proof>
+      <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.3" expl="apply premises" proved="true">
+      <proof prover="0"><result status="valid" time="0.044425" steps="70"/></proof>
+      <proof prover="1"><result status="valid" time="0.136382" steps="28608"/></proof>
+      <proof prover="2"><result status="valid" time="0.070956"/></proof>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4" expl="apply premises" proved="true">
+      <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4" expl="apply premises" proved="true">
       <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, pu, x, v">
-       <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0" expl="apply premises" proved="true">
+       <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0" expl="apply premises" proved="true">
        <transf name="destruct_rec" proved="true" arg1="Hinst">
-        <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.0" expl="destruct premise" proved="true">
-        <proof prover="0"><result status="valid" time="0.030044" steps="72"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.0" expl="destruct premise" proved="true">
+        <proof prover="0"><result status="valid" time="0.053206" steps="70"/></proof>
+        <proof prover="1"><result status="valid" time="0.128512" steps="28608"/></proof>
+        <proof prover="2"><result status="valid" time="0.044787"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.1" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="6.926505" steps="259012"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.1" expl="destruct premise" proved="true">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><result status="valid" time="3.718395" steps="207404"/></proof>
+        <proof prover="2"><result status="valid" time="38.136123"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.2" expl="destruct premise" proved="true">
-        <proof prover="0"><result status="valid" time="0.040808" steps="72"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.2" expl="destruct premise" proved="true">
+        <proof prover="0"><result status="valid" time="0.092339" steps="70"/></proof>
+        <proof prover="1"><result status="valid" time="0.120327" steps="28608"/></proof>
+        <proof prover="2"><result status="valid" time="0.059636"/></proof>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3" expl="apply premises" proved="true">
+        <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3" expl="apply premises" proved="true">
         <transf name="case" proved="true" arg1="(x = pu)">
-         <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.0" expl="apply premises (true case)" proved="true">
-         <proof prover="0"><result status="valid" time="0.051799" steps="115"/></proof>
+         <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.0" expl="apply premises (true case)" proved="true">
+         <proof prover="0"><result status="valid" time="0.123226" steps="114"/></proof>
+         <proof prover="1"><result status="valid" time="0.309359" steps="34666"/></proof>
+         <proof prover="2"><result status="valid" time="44.817666"/></proof>
          </goal>
-         <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1" expl="apply premises (false case)" proved="true">
+         <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1" expl="apply premises (false case)" proved="true">
          <transf name="case" proved="true" arg1="(x = u)">
-          <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.0" expl="apply premises (false case. true case)" proved="true">
-          <proof prover="0"><result status="valid" time="0.049102" steps="78"/></proof>
+          <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1.0" expl="apply premises (false case. true case)" proved="true">
+          <proof prover="0"><result status="valid" time="0.088666" steps="76"/></proof>
+          <proof prover="1"><result status="valid" time="0.197871" steps="29388"/></proof>
+          <proof prover="2"><result status="valid" time="0.067031"/></proof>
           </goal>
-          <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1" expl="apply premises (false case)" proved="true">
+          <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1.1" expl="apply premises (false case)" proved="true">
           <transf name="assert" proved="true" arg1="((--+-&gt;) dfsnum_parent pu Nil u)">
-           <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.0" expl="asserted formula" proved="true">
-           <proof prover="0"><result status="valid" time="0.238317" steps="331"/></proof>
+           <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1.1.0" expl="asserted formula" proved="true">
+           <proof prover="0"><result status="valid" time="0.193604" steps="321"/></proof>
+           <proof prover="1"><result status="valid" time="0.464793" steps="40499"/></proof>
+           <proof prover="2"><result status="valid" time="36.645507"/></proof>
            </goal>
-           <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.1" expl="apply premises (false case)" proved="true">
+           <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1.1.1" expl="apply premises (false case)" proved="true">
            <transf name="assert" proved="true" arg1="(exists l1 l2. (--+-&gt;) dfsnum_parent pu (l1 ++ Cons x l2) u)">
-            <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.1.0" expl="asserted formula" proved="true">
-            <proof prover="0" obsolete="true"><result status="failure" time="0.000000"/></proof>
-            <proof prover="1" obsolete="true"><result status="failure" time="0.000000"/></proof>
-            <proof prover="2"><result status="valid" time="1.292125"/></proof>
+            <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1.1.1.0" expl="asserted formula" proved="true">
+            <proof prover="0"><undone/></proof>
+            <proof prover="1"><undone/></proof>
+            <proof prover="2"><result status="valid" time="1.198838"/></proof>
             </goal>
-            <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.1.1" expl="apply premises (false case)" proved="true">
-            <proof prover="0"><result status="valid" time="0.274860" steps="425"/></proof>
+            <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.3.1.1.1.1" expl="apply premises (false case)" proved="true">
+            <proof prover="0"><result status="valid" time="0.265467" steps="415"/></proof>
+            <proof prover="1"><result status="valid" time="0.638251" steps="51328"/></proof>
+            <proof prover="2"><result status="valid" time="1.538657"/></proof>
             </goal>
            </transf>
            </goal>
@@ -4123,9 +4330,10 @@
          </goal>
         </transf>
         </goal>
-        <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.4" expl="apply premises" proved="true">
-        <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="385122"/></proof>
-        <proof prover="1"><result status="valid" time="0.621256" steps="50294"/></proof>
+        <goal name="ancestor_with_lowest_semi&#39;vc.48.0.0.0.4.0.4" expl="apply premises" proved="true">
+        <proof prover="0"><undone/></proof>
+        <proof prover="1"><result status="valid" time="0.564739" steps="49322"/></proof>
+        <proof prover="2"><undone/></proof>
         </goal>
        </transf>
        </goal>
@@ -4135,186 +4343,190 @@
      </goal>
     </transf>
     </goal>
-    <goal name="ancestor_with_lowest_semi&#39;vc.52.0.1" expl="apply premises" proved="true">
-    <proof prover="0"><result status="valid" time="0.040563" steps="70"/></proof>
+    <goal name="ancestor_with_lowest_semi&#39;vc.48.0.1" expl="apply premises" proved="true">
+    <proof prover="0"><result status="valid" time="0.093891" steps="68"/></proof>
+    <proof prover="1"><result status="valid" time="0.101608" steps="28600"/></proof>
+    <proof prover="2"><result status="valid" time="0.045012"/></proof>
     </goal>
-    <goal name="ancestor_with_lowest_semi&#39;vc.52.0.2" expl="apply premises" proved="true">
-    <proof prover="0"><result status="valid" time="0.038141" steps="84"/></proof>
+    <goal name="ancestor_with_lowest_semi&#39;vc.48.0.2" expl="apply premises" proved="true">
+    <proof prover="0"><result status="valid" time="0.100242" steps="83"/></proof>
+    <proof prover="1"><result status="valid" time="0.120654" steps="29267"/></proof>
+    <proof prover="2"><result status="valid" time="0.072342"/></proof>
     </goal>
    </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="ancestor_with_lowest_semi&#39;vc.53" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.415298" steps="39195"/></proof>
+  <goal name="ancestor_with_lowest_semi&#39;vc.49" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.258874" steps="409"/></proof>
   </goal>
  </transf>
  </goal>
- <goal name="preds_with_lowest_dfsnum&#39;vc" expl="VC for preds_with_lowest_dfsnum" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="preds_with_lowest_dfsnum&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.093014" steps="39717"/></proof>
+ <goal name="preds_with_lowest_dfsnum&#39;vc" expl="VC for preds_with_lowest_dfsnum">
+ <transf name="split_vc" >
+  <goal name="preds_with_lowest_dfsnum&#39;vc.0" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.1" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.374868" steps="45333"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.1" expl="variant decrease">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.131744" steps="40530"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.2" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.101153" steps="40543"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.3" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.097459" steps="67"/></proof>
-  <proof prover="1"><result status="valid" time="0.400548" steps="46030"/></proof>
-  <proof prover="2"><result status="valid" time="12.269273"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.4" expl="precondition">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
+  <proof prover="2"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.275999" steps="41553"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.5" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.456184" steps="871"/></proof>
-  <proof prover="1"><result status="valid" time="0.190169" steps="46318"/></proof>
-  <proof prover="2"><result status="valid" time="13.658039"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.6" expl="precondition">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
+  <proof prover="2"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.673022" steps="59172"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.7" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.095788" steps="41068"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.8" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.394029" steps="45649"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.9" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.276975" steps="41565"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.10" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.11" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.118537" steps="40569"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.11" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.12" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="5.474363" steps="232868"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.12" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.662732" steps="60937"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.13" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.14" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.245699" steps="41165"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.14" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.274188" steps="46612"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.15" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.16" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.640115" steps="57675"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.16" expl="assertion">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.17" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.931747" steps="64223"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.17" expl="variant decrease">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.18" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.436798" steps="48025"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.18" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.19" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.090487" steps="40997"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.19" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.20" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.207133" steps="41010"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.20" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.21" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.291806" steps="49184"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.21" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.22" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.266294" steps="42142"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.22" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.23" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.246631" steps="49265"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.23" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.24" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.552343" steps="53568"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.24" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.25" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.261295" steps="42361"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.25" expl="variant decrease">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.26" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.213668" steps="44179"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.26" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.27" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.133875" steps="40498"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.27" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.28" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.129762" steps="40511"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.28" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.29" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.262382" steps="44531"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.29" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.30" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.264423" steps="41519"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.30" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.31" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.392952" steps="45650"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.31" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.32" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.451659" steps="47274"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.32" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.33" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.149152" steps="41036"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.33" expl="postcondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.34" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="8.906437" steps="316118"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.34" expl="postcondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.35" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.154958" steps="43133"/></proof>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.35" expl="postcondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="preds_with_lowest_dfsnum&#39;vc.36" expl="postcondition" proved="true">
-  <transf name="apply" proved="true" arg1="theorem4">
-   <goal name="preds_with_lowest_dfsnum&#39;vc.36.0" expl="apply premises" proved="true">
+  <goal name="preds_with_lowest_dfsnum&#39;vc.36" expl="postcondition">
+  <transf name="apply" arg1="theorem4">
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.0" expl="apply premises">
    <proof prover="1"><result status="valid" time="0.098385" steps="42534"/></proof>
    </goal>
-   <goal name="preds_with_lowest_dfsnum&#39;vc.36.1" expl="apply premises" proved="true">
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.1" expl="apply premises">
    <proof prover="1"><result status="valid" time="0.103287" steps="42534"/></proof>
    </goal>
-   <goal name="preds_with_lowest_dfsnum&#39;vc.36.2" expl="apply premises" proved="true">
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.2" expl="apply premises">
    <proof prover="1"><result status="valid" time="0.100796" steps="42532"/></proof>
    </goal>
-   <goal name="preds_with_lowest_dfsnum&#39;vc.36.3" expl="apply premises" proved="true">
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.3" expl="apply premises">
    <proof prover="1"><result status="valid" time="0.100829" steps="42534"/></proof>
    </goal>
-   <goal name="preds_with_lowest_dfsnum&#39;vc.36.4" expl="apply premises" proved="true">
-   <transf name="inline_goal" proved="true" >
-    <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0" expl="apply premises" proved="true">
-    <transf name="introduce_premises" proved="true" >
-     <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0" expl="apply premises" proved="true">
-     <transf name="destruct_rec" proved="true" arg1="H">
-      <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.0" expl="apply premises" proved="true">
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.4" expl="apply premises">
+   <transf name="inline_goal" >
+    <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0" expl="apply premises">
+    <transf name="introduce_premises" >
+     <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0" expl="apply premises">
+     <transf name="destruct_rec" arg1="H">
+      <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.0" expl="apply premises">
       <proof prover="2"><result status="valid" time="10.620105"/></proof>
       </goal>
-      <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1" expl="apply premises" proved="true">
-      <transf name="instantiate" proved="true" arg1="Ensures1" arg2="v1">
-       <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0" expl="apply premises" proved="true">
-       <transf name="destruct_rec" proved="true" arg1="Hinst">
-        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.0" expl="destruct premise" proved="true">
+      <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1" expl="apply premises">
+      <transf name="instantiate" arg1="Ensures1" arg2="v1">
+       <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0" expl="apply premises">
+       <transf name="destruct_rec" arg1="Hinst">
+        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.0" expl="destruct premise">
         <proof prover="1"><result status="valid" time="0.102449" steps="42644"/></proof>
         </goal>
-        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.1" expl="destruct premise" proved="true">
+        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.1" expl="destruct premise">
         <proof prover="1"><result status="valid" time="0.473437" steps="51712"/></proof>
         </goal>
-        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2" expl="apply premises" proved="true">
-        <transf name="eliminate_let" proved="true" >
-         <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0" expl="apply premises" proved="true">
-         <transf name="destruct_rec" proved="true" arg1="Hinst">
-          <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.0" expl="apply premises" proved="true">
+        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2" expl="apply premises">
+        <transf name="eliminate_let" >
+         <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0" expl="apply premises">
+         <transf name="destruct_rec" arg1="Hinst">
+          <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.0" expl="apply premises">
           <proof prover="1"><result status="valid" time="1.540610" steps="83271"/></proof>
           </goal>
-          <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1" expl="apply premises" proved="true">
-          <transf name="instantiate" proved="true" arg1="Hinst" arg2="u">
-           <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0" expl="apply premises" proved="true">
-           <transf name="destruct_rec" proved="true" arg1="Hinst">
-            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.0" expl="destruct premise" proved="true">
+          <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1" expl="apply premises">
+          <transf name="instantiate" arg1="Hinst" arg2="u">
+           <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0" expl="apply premises">
+           <transf name="destruct_rec" arg1="Hinst">
+            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.0" expl="destruct premise">
             <proof prover="1"><result status="valid" time="0.649997" steps="64452"/></proof>
             </goal>
-            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.1" expl="destruct premise" proved="true">
+            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.1" expl="destruct premise">
             <proof prover="1"><result status="valid" time="0.228331" steps="46794"/></proof>
             </goal>
-            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.2" expl="apply premises" proved="true">
+            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.2" expl="apply premises">
             <proof prover="1"><result status="valid" time="4.102742" steps="170067"/></proof>
             </goal>
            </transf>
@@ -4340,222 +4552,31 @@
  </transf>
  </goal>
 </theory>
-<theory name="CalcuSemi" proved="true">
- <goal name="calcu_semi&#39;vc" expl="VC for calcu_semi" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="calcu_semi&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.333248" steps="51265"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.1" expl="assertion" proved="true">
-  <transf name="unfold" proved="true" arg1="super_wf_dfsnum_parent" arg2="in" arg3="H3">
-   <goal name="calcu_semi&#39;vc.1.0" expl="assertion" proved="true">
-   <transf name="unfold" proved="true" arg1="wf_dfsnum_parent" arg2="in" arg3="H3">
-    <goal name="calcu_semi&#39;vc.1.0.0" expl="assertion" proved="true">
-    <transf name="destruct_rec" proved="true" arg1="H3">
-     <goal name="calcu_semi&#39;vc.1.0.0.0" expl="assertion" proved="true">
-     <transf name="eliminate_let" proved="true" >
-      <goal name="calcu_semi&#39;vc.1.0.0.0.0" expl="assertion" proved="true">
-      <transf name="destruct_rec" proved="true" arg1="H5">
-       <goal name="calcu_semi&#39;vc.1.0.0.0.0.0" expl="assertion" proved="true">
-       <transf name="instantiate" proved="true" arg1="H6" arg2="i">
-        <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0" expl="assertion" proved="true">
-        <transf name="destruct_rec" proved="true" arg1="Hinst">
-         <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0.0" expl="destruct premise" proved="true">
-         <proof prover="0"><result status="valid" time="0.061672" steps="40"/></proof>
-         </goal>
-         <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0.1" expl="assertion" proved="true">
-         <proof prover="2"><result status="valid" time="18.870261"/></proof>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="calcu_semi&#39;vc.2" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="0.101023" steps="288"/></proof>
-  <proof prover="1"><result status="valid" time="0.210846" steps="44125"/></proof>
-  <transf name="split_vc" proved="true" >
-   <goal name="calcu_semi&#39;vc.2.0" expl="assertion" proved="true">
-   <proof prover="1"><result status="valid" time="0.260600" steps="44125"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="calcu_semi&#39;vc.3" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.258307" steps="44085"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.165848" steps="39809"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.069126" steps="501"/></proof>
-  <proof prover="1"><result status="valid" time="0.185116" steps="45131"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.159381" steps="42920"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.239250" steps="42953"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.080662" steps="316"/></proof>
-  <proof prover="1"><result status="valid" time="0.163771" steps="47598"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.246953" steps="43457"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.353093" steps="52660"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.11" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="3.601335" steps="14877"/></proof>
-  <proof prover="1"><result status="failure" time="0.000000"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.12" expl="variant decrease" proved="true">
-  <proof prover="0"><result status="valid" time="0.056188" steps="52"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.139336" steps="40392"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.14" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.059615" steps="52"/></proof>
-  <transf name="case" proved="true" arg1="(x = n)">
-   <goal name="calcu_semi&#39;vc.14.0" expl="true case (precondition)" proved="true">
-   <proof prover="1"><result status="valid" time="0.219425" steps="41202"/></proof>
-   </goal>
-   <goal name="calcu_semi&#39;vc.14.1" expl="false case (precondition)" proved="true">
-   <proof prover="0"><result status="valid" time="0.062490" steps="54"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="calcu_semi&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.317675" steps="1651"/></proof>
-  <transf name="split_vc" proved="true" >
-   <goal name="calcu_semi&#39;vc.15.0" expl="precondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.335792" steps="1651"/></proof>
-   </goal>
-   <goal name="calcu_semi&#39;vc.15.1" expl="precondition">
-   <proof prover="0"><result status="valid" time="0.425587" steps="684"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="calcu_semi&#39;vc.16" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.154170" steps="610"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.17" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.414433" steps="2420"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.18" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.519528" steps="70305"/></proof>
-  </goal>
-  <goal name="calcu_semi&#39;vc.19" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="17.493525" steps="80615"/></proof>
-  <proof prover="1"><result status="valid" time="0.710921" steps="77731"/></proof>
-  </goal>
- </transf>
- </goal>
-</theory>
-<theory name="LengauerTarjan">
- <goal name="dfs&#39;vc" expl="VC for dfs">
+<theory name="CalcuSemi">
+ <goal name="calcu_semi&#39;vc" expl="VC for calcu_semi">
  <transf name="split_vc" >
-  <goal name="dfs&#39;vc.0" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.024691" steps="22"/></proof>
+  <goal name="calcu_semi&#39;vc.0" expl="precondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="dfs&#39;vc.1" expl="variant decrease">
-  <proof prover="0"><result status="valid" time="0.036411" steps="40"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.2" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.026112" steps="34"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.3" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.019841" steps="30"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.4" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.024936" steps="30"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.5" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.046444" steps="165"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.6" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.036913" steps="50"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.7" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.032983" steps="46"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.8" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.033114" steps="32"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.9" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.059953" steps="192"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.10" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.438119" steps="1027"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.11" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.722119" steps="1510"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.12" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.232956" steps="658"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.13" expl="assertion">
-  <proof prover="0"><result status="valid" time="1.566650" steps="4119"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.14" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.067534" steps="170"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.15" expl="assertion">
-  <transf name="inline_goal" >
-   <goal name="dfs&#39;vc.15.0" expl="assertion">
-   <transf name="split_vc" >
-    <goal name="dfs&#39;vc.15.0.0" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.037013" steps="46"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.1" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.906041" steps="3454"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.2" expl="assertion">
-    <proof prover="0"><result status="valid" time="3.756427" steps="9903"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.3" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.258682" steps="902"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.4" expl="assertion">
-    <proof prover="1"><result status="valid" time="59.261627" steps="1196001"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.5" expl="assertion">
-    <proof prover="0"><result status="valid" time="4.425576" steps="10758"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.6" expl="assertion">
-    <transf name="case" arg1="(i = sn -1)">
-     <goal name="dfs&#39;vc.15.0.6.0" expl="true case (assertion)">
-     <proof prover="0"><result status="valid" time="2.084388" steps="4571"/></proof>
-     </goal>
-     <goal name="dfs&#39;vc.15.0.6.1" expl="false case (assertion)">
-     <transf name="assert" arg1="(exists x:vertex, p:vertex. mapsto x (i, p) dfsnum_parent)">
-      <goal name="dfs&#39;vc.15.0.6.1.0" expl="asserted formula">
-      <transf name="unfold" arg1="wf_dfsnum_parent" arg2="in" arg3="Requires7">
-       <goal name="dfs&#39;vc.15.0.6.1.0.0" expl="asserted formula">
-       <transf name="destruct_rec" arg1="Requires7">
-        <goal name="dfs&#39;vc.15.0.6.1.0.0.0" expl="asserted formula">
-        <transf name="eliminate_let" >
-         <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0" expl="asserted formula">
-         <transf name="destruct_rec" arg1="Requires7">
-          <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0.0" expl="asserted formula">
-          <transf name="apply" arg1="Requires8">
-           <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0.0.0" expl="apply premises">
-           <proof prover="0"><result status="valid" time="0.054873" steps="198"/></proof>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
+  <goal name="calcu_semi&#39;vc.1" expl="assertion">
+  <transf name="unfold" arg1="super_wf_dfsnum_parent" arg2="in" arg3="H3">
+   <goal name="calcu_semi&#39;vc.1.0" expl="assertion">
+   <transf name="unfold" arg1="wf_dfsnum_parent" arg2="in" arg3="H3">
+    <goal name="calcu_semi&#39;vc.1.0.0" expl="assertion">
+    <transf name="destruct_rec" arg1="H3">
+     <goal name="calcu_semi&#39;vc.1.0.0.0" expl="assertion">
+     <transf name="eliminate_let" >
+      <goal name="calcu_semi&#39;vc.1.0.0.0.0" expl="assertion">
+      <transf name="destruct_rec" arg1="H5">
+       <goal name="calcu_semi&#39;vc.1.0.0.0.0.0" expl="assertion">
+       <transf name="instantiate" arg1="H6" arg2="i">
+        <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0" expl="assertion">
+        <transf name="destruct_rec" arg1="Hinst">
+         <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0.0" expl="destruct premise">
+         <proof prover="0"><undone/></proof>
+         </goal>
+         <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0.1" expl="assertion">
+         <proof prover="2"><undone/></proof>
          </goal>
         </transf>
         </goal>
@@ -4563,270 +4584,92 @@
        </goal>
       </transf>
       </goal>
-      <goal name="dfs&#39;vc.15.0.6.1.1" expl="false case (assertion)">
-      <proof prover="0"><result status="valid" time="0.060838" steps="193"/></proof>
-      </goal>
      </transf>
      </goal>
     </transf>
     </goal>
-    <goal name="dfs&#39;vc.15.0.7" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.384991" steps="1571"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.8" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.645448" steps="1618"/></proof>
-    </goal>
    </transf>
    </goal>
   </transf>
   </goal>
-  <goal name="dfs&#39;vc.16" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.152799" steps="568"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.17" expl="variant decrease">
-  <proof prover="0"><result status="valid" time="0.104161" steps="328"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.18" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.064651" steps="66"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.19" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.044192" steps="60"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.20" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.029911" steps="38"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.21" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.593824" steps="1647"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.22" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.066295" steps="62"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.23" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.041155" steps="58"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.24" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.093724" steps="60"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.25" expl="precondition">
-  <transf name="case" arg1="(w = z)">
-   <goal name="dfs&#39;vc.25.0" expl="true case (precondition)">
-   <proof prover="0"><result status="valid" time="45.479395" steps="139505"/></proof>
-   </goal>
-   <goal name="dfs&#39;vc.25.1" expl="false case (precondition)">
-   <proof prover="0"><result status="valid" time="192.719642" steps="715311"/></proof>
-   <transf name="assert" arg1="(mapsto v (iv, pv) dfsnum_parent /\ mapsto w (iw, pw) dfsnum_parent)">
-    <goal name="dfs&#39;vc.25.1.0" expl="asserted formula">
-    <proof prover="0"><result status="valid" time="0.279673" steps="1291"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.25.1.1" expl="false case (precondition)">
-    <proof prover="0"><result status="valid" time="1.647828" steps="2783"/></proof>
-    </goal>
-   </transf>
+  <goal name="calcu_semi&#39;vc.2" expl="assertion">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
+  <transf name="split_vc" >
+   <goal name="calcu_semi&#39;vc.2.0" expl="assertion">
+   <proof prover="1"><undone/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="dfs&#39;vc.26" expl="precondition">
-  <transf name="case" arg1="(b = z)">
-   <goal name="dfs&#39;vc.26.0" expl="true case (precondition)">
-   <proof prover="0"><result status="valid" time="0.690747" steps="1771"/></proof>
+  <goal name="calcu_semi&#39;vc.3" expl="assertion">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.4" expl="precondition">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.5" expl="precondition">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.6" expl="precondition">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.7" expl="precondition">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.8" expl="precondition">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.9" expl="precondition">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.10" expl="precondition">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.11" expl="assertion">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.12" expl="variant decrease">
+  <proof prover="0"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.13" expl="precondition">
+  <proof prover="1"><undone/></proof>
+  </goal>
+  <goal name="calcu_semi&#39;vc.14" expl="precondition">
+  <proof prover="0"><undone/></proof>
+  <transf name="case" arg1="(x = n)">
+   <goal name="calcu_semi&#39;vc.14.0" expl="true case (precondition)">
+   <proof prover="1"><undone/></proof>
    </goal>
-   <goal name="dfs&#39;vc.26.1" expl="false case (precondition)">
-   <transf name="assert" arg1="(mapsto b (ib, pb) dfsnum_parent /\ mapsto a (ia, pa) dfsnum_parent )">
-    <goal name="dfs&#39;vc.26.1.0" expl="asserted formula">
-    <proof prover="0"><result status="valid" time="0.865135" steps="2059"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.26.1.1" expl="false case (precondition)">
-    <proof prover="0"><result status="valid" time="25.740909" steps="67591"/></proof>
-    </goal>
-   </transf>
+   <goal name="calcu_semi&#39;vc.14.1" expl="false case (precondition)">
+   <proof prover="0"><undone/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="dfs&#39;vc.27" expl="precondition">
-  <transf name="case" arg1="(c = z)">
-   <goal name="dfs&#39;vc.27.0" expl="true case (precondition)">
-   <proof prover="0"><result status="valid" time="2.875153" steps="5338"/></proof>
-   </goal>
-   <goal name="dfs&#39;vc.27.1" expl="false case (precondition)">
-   <transf name="assert" arg1="(mapsto c (ic, pc) dfsnum_parent /\ mapsto a (ia, pa) dfsnum_parent /\ mapsto b (ib, pb) dfsnum_parent)">
-    <goal name="dfs&#39;vc.27.1.0" expl="asserted formula">
-    <proof prover="0"><result status="valid" time="0.870886" steps="2513"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.27.1.1" expl="false case (precondition)">
-    <transf name="assert" arg1="((--+-&gt;) dfsnum_parent a lac c)">
-     <goal name="dfs&#39;vc.27.1.1.0" expl="asserted formula">
-     <proof prover="2"><result status="valid" time="31.677108"/></proof>
-     </goal>
-     <goal name="dfs&#39;vc.27.1.1.1" expl="false case (precondition)">
-     <proof prover="0"><result status="valid" time="24.845262" steps="41720"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
+  <goal name="calcu_semi&#39;vc.15" expl="precondition">
+  <proof prover="0"><undone/></proof>
+  <transf name="split_vc" >
+   <goal name="calcu_semi&#39;vc.15.0" expl="precondition">
+   <proof prover="0"><undone/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="dfs&#39;vc.28" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.324397" steps="833"/></proof>
+  <goal name="calcu_semi&#39;vc.16" expl="precondition">
+  <proof prover="0"><undone/></proof>
   </goal>
-  <goal name="dfs&#39;vc.29" expl="variant decrease">
-  <proof prover="0"><result status="valid" time="0.196492" steps="359"/></proof>
+  <goal name="calcu_semi&#39;vc.17" expl="postcondition">
+  <proof prover="0"><undone/></proof>
   </goal>
-  <goal name="dfs&#39;vc.30" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.031148" steps="46"/></proof>
+  <goal name="calcu_semi&#39;vc.18" expl="postcondition">
+  <proof prover="1"><undone/></proof>
   </goal>
-  <goal name="dfs&#39;vc.31" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.249220" steps="783"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.32" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.045522" steps="56"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.33" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.564055" steps="1375"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.34" expl="precondition">
-  <proof prover="1"><result status="valid" time="12.221440" steps="290665"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.35" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.077290" steps="65"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.36" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.192941" steps="588"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.37" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.459044" steps="837"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.38" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.738541" steps="1751"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.39" expl="precondition">
-  <proof prover="0"><result status="valid" time="1.395686" steps="2698"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.40" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.300152" steps="981"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.41" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.113015" steps="355"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.42" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.269943" steps="807"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.43" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.706757" steps="1604"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.44" expl="postcondition">
-  <proof prover="0"><result status="valid" time="4.567381" steps="10874"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.45" expl="postcondition">
-  <proof prover="0"><result status="valid" time="4.959851" steps="10620"/></proof>
+  <goal name="calcu_semi&#39;vc.19" expl="postcondition">
+  <proof prover="0"><undone/></proof>
+  <proof prover="1"><undone/></proof>
   </goal>
  </transf>
- </goal>
- <goal name="dfsnum_parent&#39;vc" expl="VC for dfsnum_parent">
- <transf name="split_goal_full" >
-  <goal name="dfsnum_parent&#39;vc.0" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.028050" steps="14"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.1" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.039781" steps="14"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.2" expl="precondition">
-  <transf name="introduce_premises" >
-   <goal name="dfsnum_parent&#39;vc.2.0" expl="precondition">
-   <transf name="inline_goal" >
-    <goal name="dfsnum_parent&#39;vc.2.0.0" expl="precondition">
-    <transf name="split_goal_full" >
-     <goal name="dfsnum_parent&#39;vc.2.0.0.0" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.052700" steps="168"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.1" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.074529" steps="236"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.2" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.077052" steps="214"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.3" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.066983" steps="215"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.4" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.067862" steps="191"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.5" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.077529" steps="249"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.6" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="3.143152" steps="15450"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.7" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.075265" steps="242"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.8" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.083980" steps="299"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.3" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.073342" steps="213"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.4" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.050402" steps="32"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.5" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.036195" steps="28"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.6" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.054366" steps="96"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.7" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.205217" steps="363"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.8" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.262405" steps="583"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.9" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.451867" steps="971"/></proof>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_a">
- <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="722997"/></proof>
- </goal>
- <goal name="dfsnum_property_b">
- <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="361618"/></proof>
- </goal>
- <goal name="dfsnum_property_e">
- <transf name="introduce_premises" >
-  <goal name="dfsnum_property_e.0">
-  <transf name="case" arg1="(x = root)">
-   <goal name="dfsnum_property_e.0.0" expl="true case">
-   <transf name="subst_all" >
-    <goal name="dfsnum_property_e.0.0.0" expl="true case">
-    <proof prover="0"><result status="valid" time="12.208888" steps="44864"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="dfsnum_property_e.0.1" expl="false case">
-   <proof prover="0"><result status="valid" time="8.509211" steps="21751"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_c">
- </goal>
- <goal name="dfsnum_property_g">
- </goal>
- <goal name="semi_dominator_less_equal_than_parent">
- </goal>
- <goal name="dfsnum_property_d">
- <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="849214"/></proof>
- <proof prover="1" obsolete="true"><result status="timeout" time="120.000000" steps="3199292"/></proof>
- </goal>
- <goal name="dfsnum_property_h">
  </goal>
 </theory>
 <theory name="Graph">
@@ -5605,6 +5448,372 @@
   </transf>
   </goal>
  </transf>
+ </goal>
+</theory>
+<theory name="LengauerTarjan">
+ <goal name="dfs&#39;vc" expl="VC for dfs">
+ <transf name="split_vc" >
+  <goal name="dfs&#39;vc.0" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.024691" steps="22"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.1" expl="variant decrease">
+  <proof prover="0"><result status="valid" time="0.036411" steps="40"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.2" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.026112" steps="34"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.3" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.019841" steps="30"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.4" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.024936" steps="30"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.5" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.046444" steps="165"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.6" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.036913" steps="50"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.7" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.032983" steps="46"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.8" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.033114" steps="32"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.9" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.059953" steps="192"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.10" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.438119" steps="1027"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.11" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.722119" steps="1510"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.12" expl="assertion">
+  <proof prover="0"><result status="valid" time="0.232956" steps="658"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.13" expl="assertion">
+  <proof prover="0"><result status="valid" time="1.566650" steps="4119"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.14" expl="assertion">
+  <proof prover="0"><result status="valid" time="0.067534" steps="170"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.15" expl="assertion">
+  <transf name="inline_goal" >
+   <goal name="dfs&#39;vc.15.0" expl="assertion">
+   <transf name="split_vc" >
+    <goal name="dfs&#39;vc.15.0.0" expl="assertion">
+    <proof prover="0"><result status="valid" time="0.037013" steps="46"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.1" expl="assertion">
+    <proof prover="0"><result status="valid" time="0.906041" steps="3454"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.2" expl="assertion">
+    <proof prover="0"><result status="valid" time="3.756427" steps="9903"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.3" expl="assertion">
+    <proof prover="0"><result status="valid" time="0.258682" steps="902"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.4" expl="assertion">
+    <proof prover="1"><result status="valid" time="59.261627" steps="1196001"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.5" expl="assertion">
+    <proof prover="0"><result status="valid" time="4.425576" steps="10758"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.6" expl="assertion">
+    <transf name="case" arg1="(i = sn -1)">
+     <goal name="dfs&#39;vc.15.0.6.0" expl="true case (assertion)">
+     <proof prover="0"><result status="valid" time="2.084388" steps="4571"/></proof>
+     </goal>
+     <goal name="dfs&#39;vc.15.0.6.1" expl="false case (assertion)">
+     <transf name="assert" arg1="(exists x:vertex, p:vertex. mapsto x (i, p) dfsnum_parent)">
+      <goal name="dfs&#39;vc.15.0.6.1.0" expl="asserted formula">
+      <transf name="unfold" arg1="wf_dfsnum_parent" arg2="in" arg3="Requires7">
+       <goal name="dfs&#39;vc.15.0.6.1.0.0" expl="asserted formula">
+       <transf name="destruct_rec" arg1="Requires7">
+        <goal name="dfs&#39;vc.15.0.6.1.0.0.0" expl="asserted formula">
+        <transf name="eliminate_let" >
+         <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0" expl="asserted formula">
+         <transf name="destruct_rec" arg1="Requires7">
+          <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0.0" expl="asserted formula">
+          <transf name="apply" arg1="Requires8">
+           <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0.0.0" expl="apply premises">
+           <proof prover="0"><result status="valid" time="0.054873" steps="198"/></proof>
+           </goal>
+          </transf>
+          </goal>
+         </transf>
+         </goal>
+        </transf>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="dfs&#39;vc.15.0.6.1.1" expl="false case (assertion)">
+      <proof prover="0"><result status="valid" time="0.060838" steps="193"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.7" expl="assertion">
+    <proof prover="0"><result status="valid" time="0.384991" steps="1571"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.15.0.8" expl="assertion">
+    <proof prover="0"><result status="valid" time="0.645448" steps="1618"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="dfs&#39;vc.16" expl="assertion">
+  <proof prover="0"><result status="valid" time="0.152799" steps="568"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.17" expl="variant decrease">
+  <proof prover="0"><result status="valid" time="0.104161" steps="328"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.18" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.064651" steps="66"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.19" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.044192" steps="60"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.20" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.029911" steps="38"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.21" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.593824" steps="1647"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.22" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.066295" steps="62"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.23" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.041155" steps="58"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.24" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.093724" steps="60"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.25" expl="precondition">
+  <transf name="case" arg1="(w = z)">
+   <goal name="dfs&#39;vc.25.0" expl="true case (precondition)">
+   <proof prover="0"><result status="valid" time="45.479395" steps="139505"/></proof>
+   </goal>
+   <goal name="dfs&#39;vc.25.1" expl="false case (precondition)">
+   <proof prover="0"><result status="valid" time="192.719642" steps="715311"/></proof>
+   <transf name="assert" arg1="(mapsto v (iv, pv) dfsnum_parent /\ mapsto w (iw, pw) dfsnum_parent)">
+    <goal name="dfs&#39;vc.25.1.0" expl="asserted formula">
+    <proof prover="0"><result status="valid" time="0.279673" steps="1291"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.25.1.1" expl="false case (precondition)">
+    <proof prover="0"><result status="valid" time="1.647828" steps="2783"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="dfs&#39;vc.26" expl="precondition">
+  <transf name="case" arg1="(b = z)">
+   <goal name="dfs&#39;vc.26.0" expl="true case (precondition)">
+   <proof prover="0"><result status="valid" time="0.690747" steps="1771"/></proof>
+   </goal>
+   <goal name="dfs&#39;vc.26.1" expl="false case (precondition)">
+   <transf name="assert" arg1="(mapsto b (ib, pb) dfsnum_parent /\ mapsto a (ia, pa) dfsnum_parent )">
+    <goal name="dfs&#39;vc.26.1.0" expl="asserted formula">
+    <proof prover="0"><result status="valid" time="0.865135" steps="2059"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.26.1.1" expl="false case (precondition)">
+    <proof prover="0"><result status="valid" time="25.740909" steps="67591"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="dfs&#39;vc.27" expl="precondition">
+  <transf name="case" arg1="(c = z)">
+   <goal name="dfs&#39;vc.27.0" expl="true case (precondition)">
+   <proof prover="0"><result status="valid" time="2.875153" steps="5338"/></proof>
+   </goal>
+   <goal name="dfs&#39;vc.27.1" expl="false case (precondition)">
+   <transf name="assert" arg1="(mapsto c (ic, pc) dfsnum_parent /\ mapsto a (ia, pa) dfsnum_parent /\ mapsto b (ib, pb) dfsnum_parent)">
+    <goal name="dfs&#39;vc.27.1.0" expl="asserted formula">
+    <proof prover="0"><result status="valid" time="0.870886" steps="2513"/></proof>
+    </goal>
+    <goal name="dfs&#39;vc.27.1.1" expl="false case (precondition)">
+    <transf name="assert" arg1="((--+-&gt;) dfsnum_parent a lac c)">
+     <goal name="dfs&#39;vc.27.1.1.0" expl="asserted formula">
+     <proof prover="2"><result status="valid" time="31.677108"/></proof>
+     </goal>
+     <goal name="dfs&#39;vc.27.1.1.1" expl="false case (precondition)">
+     <proof prover="0"><result status="valid" time="24.845262" steps="41720"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="dfs&#39;vc.28" expl="assertion">
+  <proof prover="0"><result status="valid" time="0.324397" steps="833"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.29" expl="variant decrease">
+  <proof prover="0"><result status="valid" time="0.196492" steps="359"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.30" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.031148" steps="46"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.31" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.249220" steps="783"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.32" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.045522" steps="56"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.33" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.564055" steps="1375"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.34" expl="precondition">
+  <proof prover="1"><result status="valid" time="12.221440" steps="290665"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.35" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.077290" steps="65"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.36" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.192941" steps="588"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.37" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.459044" steps="837"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.38" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.738541" steps="1751"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.39" expl="precondition">
+  <proof prover="0"><result status="valid" time="1.395686" steps="2698"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.40" expl="postcondition">
+  <proof prover="0"><result status="valid" time="0.300152" steps="981"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.41" expl="postcondition">
+  <proof prover="0"><result status="valid" time="0.113015" steps="355"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.42" expl="postcondition">
+  <proof prover="0"><result status="valid" time="0.269943" steps="807"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.43" expl="postcondition">
+  <proof prover="0"><result status="valid" time="0.706757" steps="1604"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.44" expl="postcondition">
+  <proof prover="0"><result status="valid" time="4.567381" steps="10874"/></proof>
+  </goal>
+  <goal name="dfs&#39;vc.45" expl="postcondition">
+  <proof prover="0"><result status="valid" time="4.959851" steps="10620"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="dfsnum_parent&#39;vc" expl="VC for dfsnum_parent">
+ <transf name="split_goal_full" >
+  <goal name="dfsnum_parent&#39;vc.0" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.028050" steps="14"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.1" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.039781" steps="14"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.2" expl="precondition">
+  <transf name="introduce_premises" >
+   <goal name="dfsnum_parent&#39;vc.2.0" expl="precondition">
+   <transf name="inline_goal" >
+    <goal name="dfsnum_parent&#39;vc.2.0.0" expl="precondition">
+    <transf name="split_goal_full" >
+     <goal name="dfsnum_parent&#39;vc.2.0.0.0" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.052700" steps="168"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.1" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.074529" steps="236"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.2" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.077052" steps="214"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.3" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.066983" steps="215"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.4" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.067862" steps="191"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.5" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.077529" steps="249"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.6" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="3.143152" steps="15450"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.7" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.075265" steps="242"/></proof>
+     </goal>
+     <goal name="dfsnum_parent&#39;vc.2.0.0.8" expl="VC for dfsnum_parent">
+     <proof prover="0"><result status="valid" time="0.083980" steps="299"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.3" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.073342" steps="213"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.4" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.050402" steps="32"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.5" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.036195" steps="28"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.6" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.054366" steps="96"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.7" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.205217" steps="363"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.8" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.262405" steps="583"/></proof>
+  </goal>
+  <goal name="dfsnum_parent&#39;vc.9" expl="precondition">
+  <proof prover="0"><result status="valid" time="0.451867" steps="971"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="dfsnum_property_a">
+ <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="722997"/></proof>
+ </goal>
+ <goal name="dfsnum_property_b">
+ <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="361618"/></proof>
+ </goal>
+ <goal name="dfsnum_property_e">
+ <transf name="introduce_premises" >
+  <goal name="dfsnum_property_e.0">
+  <transf name="case" arg1="(x = root)">
+   <goal name="dfsnum_property_e.0.0" expl="true case">
+   <transf name="subst_all" >
+    <goal name="dfsnum_property_e.0.0.0" expl="true case">
+    <proof prover="0"><result status="valid" time="12.208888" steps="44864"/></proof>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="dfsnum_property_e.0.1" expl="false case">
+   <proof prover="0"><result status="valid" time="8.509211" steps="21751"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="dfsnum_property_c">
+ </goal>
+ <goal name="dfsnum_property_g">
+ </goal>
+ <goal name="semi_dominator_less_equal_than_parent">
+ </goal>
+ <goal name="dfsnum_property_d">
+ <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="849214"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="120.000000" steps="3199292"/></proof>
+ </goal>
+ <goal name="dfsnum_property_h">
  </goal>
 </theory>
 </file>

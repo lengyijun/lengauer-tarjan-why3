@@ -1387,7 +1387,6 @@ module Jiting
                                                    (ghost w : vertex)
                                                    (prev_res : vertex) : vertex =
     requires{wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
-    requires{edge v w}
     requires{match l with None -> u = v | Some l -> (--+->) dfsnum_parent u l v end}
     requires{exists iu pu iw pw. mapsto u (iu, pu) dfsnum_parent /\ mapsto w (iw, pw) dfsnum_parent /\ iu > iw}
     requires{forall x. x <> u -> 
