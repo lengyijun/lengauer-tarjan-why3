@@ -1441,6 +1441,19 @@ module Jiting
                        dfsnum semi_x >= dfsnum prev_res
            }
     requires{forall x semi_x. mapsto x semi_x semi_mp -> (+>) dfsnum_parent semi_x x}
+    requires{forall x. mem x dfsnum_parent ->                                                                                                                                   
+               let (ix, _) = find x dfsnum_parent in                                                                                                                           
+               let (iw, _) = find w dfsnum_parent in                                                                                                                          
+               ix > iw ->                                                                                                                                                    
+               mem x semi_mp                                                                                                                                                
+            }
+    requires{exists x.
+              (--*->) dfsnum_parent x v         /\
+              mem x dfsnum_parent               /\
+              (+>) dfsnum_parent prev_res x     /\
+              let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+              dfsnum x > dfsnum w             
+           }
     ensures{forall x. (--*->) dfsnum_parent u x   -> 
                       (--*->) dfsnum_parent   x v ->  
                       let semi_x = find x semi_mp in
@@ -1454,6 +1467,13 @@ module Jiting
               dfsnum x > dfsnum w             ->
               let semi_x = find x semi_mp in
               dfsnum semi_x >= dfsnum result
+           }
+    ensures{exists x.
+              (--*->) dfsnum_parent x v       /\
+              mem x dfsnum_parent             /\
+              (+>) dfsnum_parent result x     /\
+              let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+              dfsnum x > dfsnum w             
            }
     variant{1 + size dfsnum_parent - match l with None -> 0 | Some l -> length l + 1 end}
 
