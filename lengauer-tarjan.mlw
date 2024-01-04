@@ -1448,11 +1448,9 @@ module Jiting
     ensures{forall x.
               (--*->) dfsnum_parent x v       ->
               mem x dfsnum_parent             ->
-              let (ix, _) = find x dfsnum_parent in
-              let (iw, _) = find w dfsnum_parent in
-              ix > iw                         ->
-              let semi_x = find x semi_mp in
               let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+              dfsnum x > dfsnum w             ->
+              let semi_x = find x semi_mp in
               dfsnum semi_x >= dfsnum result
            }
     variant{1 + size dfsnum_parent - match l with None -> 0 | Some l -> length l + 1 end}
