@@ -1234,7 +1234,7 @@ module Cucu
 
 end
 
-module LengauerTarjan
+module DFS 
   use list.List
   use list.Mem as L
   use list.Append
@@ -1324,49 +1324,6 @@ module LengauerTarjan
           let dfsnum_parent'' = dfs z (if eq_vertex current_parent root then grey else grey ++ Cons current_parent Nil ) (succs z) dfsnum_parent' in
           assert {dfsnum_parent'' >> dfsnum_parent};
           dfs current_parent grey roots' dfsnum_parent'' 
-
-
-  let ghost constant dfsnum_parent : fmap vertex (int, vertex) = dfs root Nil (succs root) (add root (0, root) empty)
-
-  val constant dfsnum (x : vertex) : int 
-    requires{mem x dfsnum_parent}
-    ensures { result =  let (i, _) = find x dfsnum_parent in i}
- 
- (*
-  lemma dfsnum_property_h : forall v w iv iw pv pw. 
-                                   edge v w
-                                -> mapsto v (iv, pv) dfsnum_parent
-                                -> mapsto w (iw, pw) dfsnum_parent
-                                -> iv < iw 
-                                -> exists l. (--+->) dfsnum_parent v l w
-
-  lemma dfsnum_property_j : forall a c lac ia pa ic pc.              
-                              (--+->) dfsnum_parent a lac c              
-                           -> mapsto a (ia, pa) dfsnum_parent
-                           -> mapsto c (ic, pc) dfsnum_parent
-                           -> forall b ib pb.                      
-                              mapsto b (ib, pb) dfsnum_parent
-                           -> ia < ib < ic                         
-                           -> exists lab. (--+->) dfsnum_parent a lab b  
- *)
-
-  lemma dfsnum_property_a : wf_dfsnum_parent dfsnum_parent
-  lemma dfsnum_property_b : super_wf_dfsnum_parent dfsnum_parent
-
-  lemma dfsnum_property_e : 
-    forall x. mem x dfsnum_parent -> forall y. edge x y -> mem y dfsnum_parent
-
- (* path on the spanning tree *)
-  predicate (-+->) (x : vertex) (l : list vertex) (y : vertex) = (--+->) dfsnum_parent x l y
-
-  predicate (-*->) (x y : vertex) = x = y \/ exists l. (-+->) x l y
-
-  lemma dfsnum_property_c : 
-    forall x. mem x dfsnum_parent <-> (x = root \/ exists l. (-+->) root l x)
-
-
-  lemma dfsnum_property_g : 
-    forall x. mem x dfsnum_parent <-> (x = root \/ exists l. path root l x)
 
 end
 
@@ -1617,4 +1574,16 @@ module CalcuSemi
   else
     calcu_semi dfsnum_parent (i - 1) new_semi_mp
 end
+
+(*
+module LengauerTarjan
+  use DFS 
+  use CalcuSemi
+
+  let ghost lengauer_tarjan() : fmap vertex vertex =
+    assert{forall x idom_x. mapsto x idom_x result -> idom_x ~> x}
+    let dfsnum_parent = dfs root Nil (succs root) empty in
+    let semi_mp = calcu_semi dfsnum_parent (size dfsnum_parent - 1) empty in
+end
+*)
 
