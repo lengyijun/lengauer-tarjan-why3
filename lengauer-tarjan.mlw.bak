@@ -1140,6 +1140,25 @@ module Theorem4Base
   use dominator.Graph
   use DfsnumParent
   use SemiDominate
+
+  (* v is candidate of semi(w), in practise *)
+  predicate t4 (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
+      mem v dfsnum_parent /\
+      mem w dfsnum_parent /\
+      let dfsnum x = let (ix, _) = find x dfsnum_parent in ix in
+      (edge v w /\ dfsnum v < dfsnum w) \/
+      (exists u v1. (+>) dfsnum_parent v u /\ dfsnum u > dfsnum w /\ edge v1 w /\ (--*->) dfsnum_parent u v1)
+end
+
+module Theorem4_B
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use SemiDominate
   use Theorem2A
   use dominator.IdomPropertyA
   use JustSpecialPath
@@ -1147,13 +1166,7 @@ module Theorem4Base
   use Lemma5
   use Cutoff
   use CutoffB
-
-  predicate t4 (dfsnum_parent : fmap vertex (int, vertex)) (v w : vertex) = 
-      mem v dfsnum_parent /\
-      mem w dfsnum_parent /\
-      let dfsnum x = let (ix, _) = find x dfsnum_parent in ix in
-      (edge v w /\ dfsnum v < dfsnum w) \/
-      (exists u v1. (+>) dfsnum_parent v u /\ dfsnum u > dfsnum w /\ edge v1 w /\ (--*->) dfsnum_parent u v1)
+  use Theorem4Base
 
   lemma theorem4_a : 
     forall dfsnum_parent w x semi_w.
@@ -1184,7 +1197,8 @@ module Theorem4
   use dominator.Graph
   use DfsnumParent
   use SemiDominate
-  use Theorem4Base
+  use Theorem4_B
+  use export Theorem4Base
 
   lemma theorem4 : 
     forall dfsnum_parent w x.
@@ -1357,6 +1371,7 @@ module LengauerTarjan
 end
 
 module RevertMap
+  use set.SetApp
   use list.List
   use list.Mem as L
   use list.Append
@@ -1366,28 +1381,28 @@ module RevertMap
   use dominator.Graph
   use DfsnumParent
   use DfsnumParentMustOnTree
-  use set.SetApp
+  use fmap.Fmap as Fm
 
   let rec lemma revert_map (dfsnum_parent : fmap vertex (int, vertex)) : fmap int vertex
       requires{
-      forall x y. x <> y -> 
-                  mem x dfsnum_parent -> 
-                  mem y dfsnum_parent -> 
-                  let (a, _) = find x dfsnum_parent in 
-                  let (b, _) = find y dfsnum_parent in 
-                  a <> b
+          forall x y. x <> y -> 
+            mem x dfsnum_parent -> 
+            mem y dfsnum_parent -> 
+            let (a, _) = find x dfsnum_parent in 
+            let (b, _) = find y dfsnum_parent in 
+            a <> b
       }
-      ensures{forall x ix. mapsto x ix result <-> exists px. mapsto x (ix, px) dfsnum_parent}
+      ensures{forall x ix. mapsto ix x result <-> exists px. mapsto x (ix, px) dfsnum_parent}
       variant{size dfsnum_parent}
   =
-    if is_empty dfsnum_parent then
-      empty
+    if Fm.is_empty dfsnum_parent then
+      Fm.empty
     else
-      let x = choose dfsnum_parent.domain in 
-      let (ix, px) = find x dfsnum_parent in
-      let dfsnum_parent' = remove x dfsnum_parent in
+      let x = pick dfsnum_parent.domain in 
+      let (ix, _) = find x dfsnum_parent in
+      let dfsnum_parent' = Fm.remove x dfsnum_parent in
       let smaller_res = revert_map dfsnum_parent' in
-      add ix x smaller_res
+      Fm.add ix x smaller_res
 
 end
 
@@ -1409,9 +1424,9 @@ module Jiting
   let rec ghost constant ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
                                                    (semi_mp : fmap vertex vertex) 
                                                    (u : vertex) 
+                                                   (ghost l : option (list vertex))
                                                    (ghost v : vertex)
                                                    (ghost w : vertex)
-                                                   (ghost l : option (list vertex))
                                                    (prev_res : vertex) : vertex =
     requires{wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
     requires{edge v w}
@@ -1430,14 +1445,15 @@ module Jiting
                       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
                       dfsnum semi_x >= dfsnum result
            }
-    ensures{forall x ix px iw pw. 
-                      (--*->) dfsnum_parent x v       ->
-                      mapsto x (ix, px) dfsnum_parent ->
-                      mapsto w (iw, pw) dfsnum_parent ->
-                      ix > iw                         ->
-                      let semi_x = find x semi_mp in
-                      let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-                      dfsnum semi_x >= dfsnum result
+    ensures{forall x.
+              (--*->) dfsnum_parent x v       ->
+              mem x dfsnum_parent             ->
+              let (ix, _) = find x dfsnum_parent in
+              let (iw, _) = find w dfsnum_parent in
+              ix > iw                         ->
+              let semi_x = find x semi_mp in
+              let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+              dfsnum semi_x >= dfsnum result
            }
     variant{1 + size dfsnum_parent - match l with None -> 0 | Some l -> length l + 1 end}
 
@@ -1453,8 +1469,101 @@ module Jiting
                     | None   -> Some Nil
                     | Some l -> Some (Cons u l)
                   end in
-      ancestor_with_lowest_semi dfsnum_parent semi_mp pu v w new_l new_res
+      ancestor_with_lowest_semi dfsnum_parent semi_mp pu new_l v w new_res
     else 
       new_res
 
+  use set.Fset as SS
+  use SemiDominate
+  use Theorem4
+
+  let rec ghost constant preds_with_lowest_dfsnum  (dfsnum_parent : fmap vertex (int, vertex)) 
+                                                   (semi_mp : fmap vertex vertex) 
+                                                   (n : vertex) 
+                                                   (preds : SV.set )
+                                                   (curr_s : vertex) : (s : vertex) =
+    requires{super_wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
+    requires{mem n dfsnum_parent /\ n <> root}
+    requires{forall x. SV.mem x preds -> edge x n}
+    requires{let (i_n, _) = find n dfsnum_parent in forall x ix px. i_n <  ix < size dfsnum_parent -> mapsto x (ix, px) dfsnum_parent -> mem x semi_mp}
+    requires{forall x. edge x n -> 
+                       not SV.mem x preds -> 
+                       mem x dfsnum_parent ->
+                       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                       if dfsnum x < dfsnum n then 
+                         dfsnum x >= dfsnum curr_s
+                       else forall u. dfsnum u > dfsnum n ->
+                                      (--*->) dfsnum_parent u x ->
+                                      let semi_u = find u semi_mp in
+                                      dfsnum semi_u >= dfsnum curr_s
+            }
+    requires{t4 dfsnum_parent curr_s n}
+    ensures{forall x. edge x n -> 
+                      mem x dfsnum_parent ->
+                      let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                      if dfsnum x < dfsnum n then 
+                        dfsnum x >= dfsnum s
+                      else forall u. dfsnum u > dfsnum n ->
+                                     (--*->) dfsnum_parent u x ->
+                                     let semi_u = find u semi_mp in
+                                     dfsnum semi_u >= dfsnum s
+            }
+    requires{t4 dfsnum_parent s n}
+    ensures{ (+>) dfsnum_parent s n }
+    variant{SV.cardinal preds}
+    if SV.is_empty preds then
+      curr_s
+    else
+      let v = SV.choose preds in 
+      let preds' = SV.remove v preds in
+      if mem v dfsnum_parent then
+        let (iv, _) = find v dfsnum_parent in 
+        let (i_n, _) = find n dfsnum_parent in
+        let semi_v = find v semi_mp in
+        let s' = if iv <= i_n then v else ancestor_with_lowest_semi dfsnum_parent semi_mp v None v n semi_v in
+        assert{t4 dfsnum_parent s' n};
+        let (i_s', _) = find s'      dfsnum_parent in
+        let (i_s, _)  = find curr_s  dfsnum_parent in
+        let new_s = if i_s' < i_s then s' else curr_s in
+        preds_with_lowest_dfsnum dfsnum_parent semi_mp n preds' new_s 
+      else
+        preds_with_lowest_dfsnum dfsnum_parent semi_mp n preds' curr_s
+
 end
+
+(*
+module CalcuSemi
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use DfsnumParentSimplelist
+  use DfsnumParentUnique
+  use Cucu
+  use DfsnumParentMutualParent
+
+  use Jiting
+  use RevertMap
+
+  let rec ghost constant calcu_semi (dfsnum_parent : fmap vertex (int, vertex)) 
+                                    (i : int)
+                                    (u : vertex) 
+                                    (ghost v : vertex)
+                                    (ghost w : vertex)
+                                    (ghost l : option (list vertex))
+                                    (prev_semi_mp: fmap vertex vertex) : (semi_mp: fmap vertex vertex) =
+  if i <= 0 then
+    prev_res
+  else 
+    let vertex_mp = revert_map dfsnum_parent in 
+    let n = find i vertex_mp in 
+    let (_, p) = find n dfsnum_parent in 
+
+
+end
+*)
+

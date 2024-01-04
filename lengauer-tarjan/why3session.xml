@@ -4003,12 +4003,6 @@
        </goal>
       </transf>
       </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.17.0.1.0.2" expl="destruct premise">
-      <proof prover="0"><result status="valid" time="0.048475" steps="62"/></proof>
-      </goal>
-      <goal name="ancestor_with_lowest_semi&#39;vc.17.0.1.0.0" expl="destruct premise">
-      <proof prover="0"><result status="valid" time="0.030297" steps="62"/></proof>
-      </goal>
      </transf>
      </goal>
     </transf>
@@ -4220,8 +4214,8 @@
            <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.1" expl="apply premises (false case)" proved="true">
            <transf name="assert" proved="true" arg1="(exists l1 l2. (--+-&gt;) dfsnum_parent pu (l1 ++ Cons x l2) u)">
             <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.1.0" expl="asserted formula" proved="true">
-            <proof prover="0"><undone/></proof>
-            <proof prover="1"><undone/></proof>
+            <proof prover="0"><result status="failure" time="0.000000"/></proof>
+            <proof prover="1"><result status="failure" time="0.000000"/></proof>
             <proof prover="2"><result status="valid" time="0.637727"/></proof>
             </goal>
             <goal name="ancestor_with_lowest_semi&#39;vc.52.0.0.0.4.0.3.1.1.1.1" expl="apply premises (false case)" proved="true">
@@ -4259,6 +4253,195 @@
   </goal>
   <goal name="ancestor_with_lowest_semi&#39;vc.53" expl="postcondition" proved="true">
   <proof prover="1"><result status="valid" time="0.415298" steps="39191"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="preds_with_lowest_dfsnum&#39;vc" expl="VC for preds_with_lowest_dfsnum" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="preds_with_lowest_dfsnum&#39;vc.0" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.093014" steps="39715"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.1" expl="variant decrease" proved="true">
+  <proof prover="1"><result status="valid" time="0.210467" steps="45331"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.2" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.131744" steps="40528"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.3" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.101153" steps="40541"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.4" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.097459" steps="66"/></proof>
+  <proof prover="1"><result status="valid" time="0.234156" steps="46026"/></proof>
+  <proof prover="2"><result status="valid" time="9.488615"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.5" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.147637" steps="41551"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.6" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.225692" steps="870"/></proof>
+  <proof prover="1"><result status="valid" time="0.190169" steps="46316"/></proof>
+  <proof prover="2"><result status="valid" time="9.604718"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.7" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.393196" steps="59148"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.8" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.095788" steps="41066"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.9" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.259201" steps="45647"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.10" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.155472" steps="41563"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.11" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.118537" steps="40567"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.12" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="3.908221" steps="233573"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.13" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.391952" steps="60913"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.14" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.245699" steps="41163"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.15" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.274188" steps="46608"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.16" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.489863" steps="57651"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.17" expl="assertion" proved="true">
+  <proof prover="1"><result status="valid" time="0.563087" steps="64219"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.18" expl="variant decrease" proved="true">
+  <proof prover="1"><result status="valid" time="0.286960" steps="48023"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.19" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.090487" steps="40995"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.20" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.207133" steps="41008"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.21" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.291806" steps="49180"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.22" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.144498" steps="42140"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.23" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.246631" steps="49263"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.24" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.267018" steps="53564"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.25" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.146228" steps="42359"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.26" expl="variant decrease" proved="true">
+  <proof prover="1"><result status="valid" time="0.213668" steps="44177"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.27" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.133875" steps="40496"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.28" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.129762" steps="40509"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.29" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.262382" steps="44527"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.30" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.146532" steps="41517"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.31" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.245655" steps="45648"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.32" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.314407" steps="47270"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.33" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.149152" steps="41034"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.34" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="7.179693" steps="319172"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.35" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.154958" steps="43131"/></proof>
+  </goal>
+  <goal name="preds_with_lowest_dfsnum&#39;vc.36" expl="postcondition" proved="true">
+  <transf name="apply" proved="true" arg1="theorem4">
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.0" expl="apply premises" proved="true">
+   <proof prover="1"><result status="valid" time="0.098385" steps="42532"/></proof>
+   </goal>
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.1" expl="apply premises" proved="true">
+   <proof prover="1"><result status="valid" time="0.103287" steps="42532"/></proof>
+   </goal>
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.2" expl="apply premises" proved="true">
+   <proof prover="1"><result status="valid" time="0.100796" steps="42530"/></proof>
+   </goal>
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.3" expl="apply premises" proved="true">
+   <proof prover="1"><result status="valid" time="0.100829" steps="42532"/></proof>
+   </goal>
+   <goal name="preds_with_lowest_dfsnum&#39;vc.36.4" expl="apply premises" proved="true">
+   <transf name="inline_goal" proved="true" >
+    <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0" expl="apply premises" proved="true">
+    <transf name="introduce_premises" proved="true" >
+     <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0" expl="apply premises" proved="true">
+     <transf name="destruct_rec" proved="true" arg1="H">
+      <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.0" expl="apply premises" proved="true">
+      <proof prover="2"><result status="valid" time="9.358890"/></proof>
+      </goal>
+      <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1" expl="apply premises" proved="true">
+      <transf name="instantiate" proved="true" arg1="Ensures1" arg2="v1">
+       <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0" expl="apply premises" proved="true">
+       <transf name="destruct_rec" proved="true" arg1="Hinst">
+        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.0" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.102449" steps="42642"/></proof>
+        </goal>
+        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.1" expl="destruct premise" proved="true">
+        <proof prover="1"><result status="valid" time="0.315436" steps="51708"/></proof>
+        </goal>
+        <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2" expl="apply premises" proved="true">
+        <transf name="eliminate_let" proved="true" >
+         <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0" expl="apply premises" proved="true">
+         <transf name="destruct_rec" proved="true" arg1="Hinst">
+          <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.0" expl="apply premises" proved="true">
+          <proof prover="1"><result status="valid" time="0.886423" steps="83247"/></proof>
+          </goal>
+          <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1" expl="apply premises" proved="true">
+          <transf name="instantiate" proved="true" arg1="Hinst" arg2="u">
+           <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0" expl="apply premises" proved="true">
+           <transf name="destruct_rec" proved="true" arg1="Hinst">
+            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.0" expl="destruct premise" proved="true">
+            <proof prover="1"><result status="valid" time="0.390001" steps="64448"/></proof>
+            </goal>
+            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.1" expl="destruct premise" proved="true">
+            <proof prover="1"><result status="valid" time="0.115966" steps="46792"/></proof>
+            </goal>
+            <goal name="preds_with_lowest_dfsnum&#39;vc.36.4.0.0.1.0.2.0.1.0.2" expl="apply premises" proved="true">
+            <proof prover="1"><result status="valid" time="4.102742" steps="170873"/></proof>
+            </goal>
+           </transf>
+           </goal>
+          </transf>
+          </goal>
+         </transf>
+         </goal>
+        </transf>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
  </transf>
  </goal>

@@ -1493,4 +1493,105 @@ module Jiting
     else 
       new_res
 
+  use set.Fset as SS
+  use Theorem4
+
+  let rec ghost constant preds_with_lowest_dfsnum  (dfsnum_parent : fmap vertex (int, vertex)) 
+                                                   (semi_mp : fmap vertex vertex) 
+                                                   (n : vertex) 
+                                                   (preds : SV.set )
+                                                   (curr_s : vertex) : (s : vertex) =
+    requires{super_wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
+    requires{mem n dfsnum_parent /\ n <> root}
+    requires{forall x. SV.mem x preds -> edge x n}
+    requires{forall x semi_x. mapsto x semi_x semi_mp -> (+>) dfsnum_parent semi_x x}
+    requires{forall x. mem x dfsnum_parent ->  
+               let (ix, _) = find x dfsnum_parent in 
+               let (i_n, _) = find n dfsnum_parent in
+               ix > i_n -> 
+               mem x semi_mp 
+            }
+    requires{forall x. edge x n -> 
+                       not SV.mem x preds -> 
+                       mem x dfsnum_parent ->
+                       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                       if dfsnum x < dfsnum n then 
+                         dfsnum x >= dfsnum curr_s
+                       else forall u. dfsnum u > dfsnum n ->
+                                      (--*->) dfsnum_parent u x ->
+                                      let semi_u = find u semi_mp in
+                                      dfsnum semi_u >= dfsnum curr_s
+            }
+    requires{t4 dfsnum_parent curr_s n}
+    ensures{forall x. edge x n -> 
+                      mem x dfsnum_parent ->
+                      let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+                      if dfsnum x < dfsnum n then 
+                        dfsnum x >= dfsnum s
+                      else forall u. dfsnum u > dfsnum n ->
+                                     (--*->) dfsnum_parent u x ->
+                                     let semi_u = find u semi_mp in
+                                     dfsnum semi_u >= dfsnum s
+            }
+    ensures{t4 dfsnum_parent s n}
+    ensures{ (+>) dfsnum_parent s n }
+    variant{SV.cardinal preds}
+    if SV.is_empty preds then
+      curr_s
+    else
+      let v = SV.choose preds in 
+      let preds' = SV.remove v preds in
+      if mem v dfsnum_parent then
+        let (iv, _) = find v dfsnum_parent in 
+        let (i_n, _) = find n dfsnum_parent in
+        let semi_v = find v semi_mp in
+        if iv = i_n then
+          preds_with_lowest_dfsnum dfsnum_parent semi_mp n preds' curr_s
+        else 
+          let s' = if iv < i_n then v else ancestor_with_lowest_semi dfsnum_parent semi_mp v None v n semi_v in
+          assert{t4 dfsnum_parent s' n};
+          let (i_s', _) = find s'      dfsnum_parent in
+          let (i_s, _)  = find curr_s  dfsnum_parent in
+          let new_s = if i_s' < i_s then s' else curr_s in
+          preds_with_lowest_dfsnum dfsnum_parent semi_mp n preds' new_s 
+      else
+        preds_with_lowest_dfsnum dfsnum_parent semi_mp n preds' curr_s
+
 end
+
+(*
+module CalcuSemi
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use DfsnumParentSimplelist
+  use DfsnumParentUnique
+  use Cucu
+  use DfsnumParentMutualParent
+
+  use Jiting
+  use RevertMap
+
+  let rec ghost constant calcu_semi (dfsnum_parent : fmap vertex (int, vertex)) 
+                                    (i : int)
+                                    (u : vertex) 
+                                    (ghost v : vertex)
+                                    (ghost w : vertex)
+                                    (ghost l : option (list vertex))
+                                    (prev_semi_mp: fmap vertex vertex) : (semi_mp: fmap vertex vertex) =
+  if i <= 0 then
+    prev_res
+  else 
+    let vertex_mp = revert_map dfsnum_parent in 
+    let n = find i vertex_mp in 
+    let (_, p) = find n dfsnum_parent in 
+
+
+end
+*)
+
