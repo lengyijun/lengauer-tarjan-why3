@@ -1420,6 +1420,7 @@ module Jiting
   use DfsnumParentUnique
   use Cucu
   use DfsnumParentMutualParent
+  use SemiDominate
 
   let rec ghost constant ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
                                                    (semi_mp : fmap vertex vertex) 
@@ -1439,6 +1440,7 @@ module Jiting
                        let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
                        dfsnum semi_x >= dfsnum prev_res
            }
+    requires{forall x semi_x. mapsto x semi_x semi_mp -> (+>) dfsnum_parent semi_x x}
     ensures{forall x. (--*->) dfsnum_parent u x   -> 
                       (--*->) dfsnum_parent   x v ->  
                       let semi_x = find x semi_mp in
