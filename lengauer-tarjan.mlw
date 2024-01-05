@@ -1385,7 +1385,8 @@ module Jiting
                                                    (ghost l : option (list vertex))
                                                    (ghost v : vertex)
                                                    (ghost w : vertex)
-                                                   (prev_res : vertex) : vertex =
+                                                   (prev_res : vertex) (prev_semi_res : vertex) 
+                                                   : (res : vertex, semi_res : vertex) =
     requires{wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
     requires{match l with None -> u = v | Some l -> (--+->) dfsnum_parent u l v end}
     requires{exists iu pu iw pw. mapsto u (iu, pu) dfsnum_parent /\ mapsto w (iw, pw) dfsnum_parent /\ iu > iw}
@@ -1394,7 +1395,7 @@ module Jiting
                        (--*->) dfsnum_parent   x v ->  
                        let semi_x = find x semi_mp in
                        let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-                       dfsnum semi_x >= dfsnum prev_res
+                       dfsnum semi_x >= dfsnum prev_semi_res
            }
     requires{forall x semi_x. mapsto x semi_x semi_mp -> (+>) dfsnum_parent semi_x x}
     requires{forall x. mem x dfsnum_parent ->                                                                                                                                   
@@ -1403,18 +1404,11 @@ module Jiting
                ix > iw ->                                                                                                                                                    
                mem x semi_mp                                                                                                                                                
             }
-    requires{exists x.
-              (--*->) dfsnum_parent x v         /\
-              mem x dfsnum_parent               /\
-              (+>) dfsnum_parent prev_res x     /\
-              let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-              dfsnum x > dfsnum w             
-           }
     ensures{forall x. (--*->) dfsnum_parent u x   -> 
                       (--*->) dfsnum_parent   x v ->  
                       let semi_x = find x semi_mp in
                       let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-                      dfsnum semi_x >= dfsnum result
+                      dfsnum semi_x >= dfsnum semi_res
            }
     ensures{forall x.
               (--*->) dfsnum_parent x v       ->
@@ -1422,21 +1416,26 @@ module Jiting
               let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
               dfsnum x > dfsnum w             ->
               let semi_x = find x semi_mp in
-              dfsnum semi_x >= dfsnum result
+              dfsnum semi_x >= dfsnum semi_res
            }
-    ensures{exists x.
-              (--*->) dfsnum_parent x v       /\
-              mem x dfsnum_parent             /\
-              (+>) dfsnum_parent result x     /\
+    requires{ (--*->) dfsnum_parent prev_res v       /\
+              mem prev_res dfsnum_parent             /\
+              (+>) dfsnum_parent prev_semi_res prev_res     /\
               let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
-              dfsnum x > dfsnum w             
+              dfsnum prev_res > dfsnum w             
+           }
+    ensures{ (--*->) dfsnum_parent res v       /\
+              mem res dfsnum_parent             /\
+              (+>) dfsnum_parent semi_res res     /\
+              let dfsnum a = let (ia, _) = find a dfsnum_parent in ia in
+              dfsnum res > dfsnum w             
            }
     variant{1 + size dfsnum_parent - match l with None -> 0 | Some l -> length l + 1 end}
 
     let semi_u = find u semi_mp in
     let (i_semi_u, _) = find semi_u dfsnum_parent in
-    let (i_prev_res, _) = find prev_res dfsnum_parent in
-    let new_res = if i_semi_u < i_prev_res then semi_u else prev_res in
+    let (i_prev_res, _) = find prev_semi_res dfsnum_parent in
+    let (new_res, new_semi_res) = if i_semi_u < i_prev_res then (u, semi_u) else (prev_res, prev_semi_res) in
     let (  _, pu) = find  u dfsnum_parent in
     let (ipu,  _) = find pu dfsnum_parent in
     let ( iw,  _) = find  w dfsnum_parent in
@@ -1445,9 +1444,9 @@ module Jiting
                     | None   -> Some Nil
                     | Some l -> Some (Cons u l)
                   end in
-      ancestor_with_lowest_semi dfsnum_parent semi_mp pu new_l v w new_res
+      ancestor_with_lowest_semi dfsnum_parent semi_mp pu new_l v w new_res new_semi_res
     else 
-      new_res
+      (new_res, new_semi_res)
 
   use set.Fset as SS
   use Theorem4
@@ -1504,7 +1503,7 @@ module Jiting
         if iv = i_n then
           preds_with_lowest_dfsnum dfsnum_parent semi_mp n preds' curr_s
         else 
-          let s' = if iv < i_n then v else ancestor_with_lowest_semi dfsnum_parent semi_mp v None v n semi_v in
+          let s' = if iv < i_n then v else let (_, z) = ancestor_with_lowest_semi dfsnum_parent semi_mp v None v n v semi_v in z in
           assert{t4 dfsnum_parent s' n};
           let (i_s', _) = find s'      dfsnum_parent in
           let (i_s, _)  = find curr_s  dfsnum_parent in
