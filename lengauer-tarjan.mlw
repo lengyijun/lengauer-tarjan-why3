@@ -1573,6 +1573,75 @@ module CalcuSemi
     calcu_semi dfsnum_parent (i - 1) new_semi_mp
 end
 
+module CalcuIdom
+  use option.Option
+  use list.List
+  use list.Mem as L
+  use list.Append
+  use list.Length
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
+  use DfsnumParentMustOnTree
+  use DfsnumParentSimplelist
+  use DfsnumParentUnique
+  use Cucu
+  use DfsnumParentMutualParent
+
+  use Jiting
+  use RevertMap
+  use SemiDominate
+
+  let rec ghost constant calcu_idom (dfsnum_parent : fmap vertex (int, vertex)) 
+                                    (semi_mp: fmap vertex vertex) 
+                                    (i : int)
+                                    (prev_idom_mp: fmap vertex vertex)
+                                    : (idom_mp: fmap vertex vertex) =
+  requires{super_wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
+  requires{0 < i < size dfsnum_parent}
+  requires{forall x semi_x. mapsto x semi_x semi_mp -> (+>) dfsnum_parent semi_x x}
+  requires{forall x. mem x dfsnum_parent -> x <> root -> mem x semi_mp}
+  requires{forall x idom_x. mapsto x idom_x prev_idom_mp -> idom_x ~> x}
+  ensures{ forall x idom_x. mapsto x idom_x idom_mp      -> idom_x ~> x}
+  requires{forall x. mem x dfsnum_parent ->  
+             let (ix, _) = find x dfsnum_parent in 
+             if ix < i then
+               mem x prev_idom_mp 
+             else 
+               not mem x prev_idom_mp
+          }
+  ensures{forall x y. mapsto x y prev_idom_mp -> mapsto x y idom_mp}
+  ensures{forall x. mem x dfsnum_parent ->
+                    x <> root  ->
+                    mem x idom_mp 
+          }
+  variant{size dfsnum_parent - i}
+  let vertex_mp = revert_map dfsnum_parent in 
+  let n = find i vertex_mp in 
+  assert{mapsto i n vertex_mp};
+  assert{exists p. mapsto n (i, p) dfsnum_parent};
+  assert{not mem n prev_idom_mp};
+  let semi_n = find n semi_mp in
+  let (y, _) = ancestor_with_lowest_semi dfsnum_parent semi_mp n None n semi_n n semi_n in
+  let semi_y = find y semi_mp in 
+  let semi_n = find n semi_mp in 
+  let (i_semi_y, _) = find semi_y dfsnum_parent in
+  let (i_semi_n, _) = find semi_n dfsnum_parent in
+  let idom_n = if i_semi_y = i_semi_n then semi_n else find y prev_idom_mp in
+  let new_idom_mp = add n idom_n prev_idom_mp in
+  assert{forall x. mem x dfsnum_parent ->
+             let (ix, _) = find x dfsnum_parent in 
+             if ix >= i then
+               mem x new_idom_mp 
+             else 
+               not mem x new_idom_mp
+         };
+  if i + 1 = size dfsnum_parent then
+    new_idom_mp
+  else
+    calcu_idom dfsnum_parent semi_mp (i + 1) new_idom_mp
+end
+
 (*
 module LengauerTarjan
   use DFS 
