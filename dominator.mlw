@@ -84,12 +84,12 @@ module Graph
 
   axiom preds_def: forall v:vertex. forall u:vertex.
    edge u v <-> SV.mem u (preds v)
+  
+  function succs vertex: SV.set
 
-  (** direct successors *)
-  val constant succs (u : vertex): SV.set
-    ensures {SE.subset result vertices}
-    ensures { forall v:vertex. edge u v <-> SV.mem v result }
-
+  axiom succs_def: forall v:vertex. forall u:vertex.
+   edge v u <-> SV.mem u (succs v)
+  
 (*
   lemma path_in_vertices:
     forall v1 v2: vertex, l: list vertex.
