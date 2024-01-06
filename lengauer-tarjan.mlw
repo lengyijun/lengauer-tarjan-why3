@@ -1591,6 +1591,8 @@ module CalcuIdom
   use Jiting
   use RevertMap
   use SemiDominate
+  use Corollary1
+  use dominator.IdomExists
 
   let rec ghost constant calcu_idom (dfsnum_parent : fmap vertex (int, vertex)) 
                                     (semi_mp: fmap vertex vertex) 
@@ -1604,6 +1606,7 @@ module CalcuIdom
   requires{forall x idom_x. mapsto x idom_x prev_idom_mp -> idom_x ~> x}
   ensures{ forall x idom_x. mapsto x idom_x idom_mp      -> idom_x ~> x}
   requires{forall x. mem x dfsnum_parent ->  
+             x <> root ->
              let (ix, _) = find x dfsnum_parent in 
              if ix < i then
                mem x prev_idom_mp 
@@ -1627,11 +1630,20 @@ module CalcuIdom
   let semi_n = find n semi_mp in 
   let (i_semi_y, _) = find semi_y dfsnum_parent in
   let (i_semi_n, _) = find semi_n dfsnum_parent in
-  let idom_n = if i_semi_y = i_semi_n then semi_n else find y prev_idom_mp in
+  let idom_n = if i_semi_y = i_semi_n then semi_n else if mem y prev_idom_mp then 
+    find y prev_idom_mp 
+  else 
+    begin
+      assert{y = root};
+      root 
+    end
+  in
+  assert{idom_n ~> n};
   let new_idom_mp = add n idom_n prev_idom_mp in
   assert{forall x. mem x dfsnum_parent ->
+             x <> root ->
              let (ix, _) = find x dfsnum_parent in 
-             if ix >= i then
+             if ix <= i then
                mem x new_idom_mp 
              else 
                not mem x new_idom_mp
