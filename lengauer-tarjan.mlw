@@ -1124,7 +1124,7 @@ module Corollary1
       (+>) dfsnum_parent semi_w w ->
       (+>) dfsnum_parent semi_u u ->
       idom_u ~> u ->
-      (exists l. (--+->) dfsnum_parent semi_w l u /\ (--*->) dfsnum_parent u w) ->
+      ((exists l. (--+->) dfsnum_parent semi_w l u) /\ (--*->) dfsnum_parent u w) ->
       let dfsnum x = let (ix, _) = find x dfsnum_parent in ix in
         (forall x. (exists l. (--+->) dfsnum_parent semi_w l x) /\ (--*->) dfsnum_parent x w -> forall semi_x. (+>) dfsnum_parent semi_x x -> dfsnum semi_u <= dfsnum semi_x) ->
       if semi_w = semi_u then semi_w ~> w else idom_u ~> w
