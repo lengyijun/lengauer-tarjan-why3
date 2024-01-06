@@ -5,8 +5,6 @@
 <prover id="0" name="Alt-Ergo" version="2.5.2" timelimit="120" steplimit="0" memlimit="10000"/>
 <prover id="1" name="CVC5" version="1.0.8" timelimit="120" steplimit="0" memlimit="10000"/>
 <prover id="2" name="Eprover" version="2.0" timelimit="120" steplimit="0" memlimit="10000"/>
-<prover id="3" name="CVC4" version="1.8" timelimit="100" steplimit="0" memlimit="10000"/>
-<prover id="4" name="Z3" version="4.12.2" timelimit="100" steplimit="0" memlimit="10000"/>
 <prover id="5" name="Alt-Ergo" version="2.5.2" alternative="BV" timelimit="120" steplimit="0" memlimit="10000"/>
 <file format="whyml" proved="true">
 <path name=".."/><path name="lengauer-tarjan.mlw"/>
@@ -4911,99 +4909,115 @@
  </transf>
  </goal>
 </theory>
-<theory name="LengauerTarjan">
- <goal name="dfs&#39;vc" expl="VC for dfs">
- <transf name="split_vc" >
-  <goal name="dfs&#39;vc.0" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.024691" steps="22"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.1" expl="variant decrease">
-  <proof prover="0"><result status="valid" time="0.036411" steps="40"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.2" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.026112" steps="34"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.3" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.019841" steps="30"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.4" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.024936" steps="30"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.5" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.046444" steps="165"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.6" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.036913" steps="50"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.7" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.032983" steps="46"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.8" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.033114" steps="32"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.9" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.059953" steps="192"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.10" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.438119" steps="1027"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.11" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.722119" steps="1510"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.12" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.232956" steps="658"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.13" expl="assertion">
-  <proof prover="0"><result status="valid" time="1.566650" steps="4119"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.14" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.067534" steps="170"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.15" expl="assertion">
-  <transf name="inline_goal" >
-   <goal name="dfs&#39;vc.15.0" expl="assertion">
-   <transf name="split_vc" >
-    <goal name="dfs&#39;vc.15.0.0" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.037013" steps="46"/></proof>
+<theory name="LengauerTarjan" proved="true">
+ <goal name="lengauer_tarjan&#39;vc" expl="VC for lengauer_tarjan" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="lengauer_tarjan&#39;vc.0" expl="assertion" proved="true">
+  <transf name="inline_goal" proved="true" >
+   <goal name="lengauer_tarjan&#39;vc.0.0" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="lengauer_tarjan&#39;vc.0.0.0" expl="assertion" proved="true">
+    <proof prover="1"><result status="valid" time="9.498950" steps="317632"/></proof>
     </goal>
-    <goal name="dfs&#39;vc.15.0.1" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.906041" steps="3454"/></proof>
+    <goal name="lengauer_tarjan&#39;vc.0.0.1" expl="assertion" proved="true">
+    <proof prover="1"><result status="valid" time="2.196520" steps="132981"/></proof>
     </goal>
-    <goal name="dfs&#39;vc.15.0.2" expl="assertion">
-    <proof prover="0"><result status="valid" time="3.756427" steps="9903"/></proof>
+    <goal name="lengauer_tarjan&#39;vc.0.0.2" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.391052" steps="1034"/></proof>
     </goal>
-    <goal name="dfs&#39;vc.15.0.3" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.258682" steps="902"/></proof>
+    <goal name="lengauer_tarjan&#39;vc.0.0.3" expl="assertion" proved="true">
+    <proof prover="1"><result status="valid" time="0.335096" steps="64373"/></proof>
     </goal>
-    <goal name="dfs&#39;vc.15.0.4" expl="assertion">
-    <proof prover="1"><result status="valid" time="59.261627" steps="1196001"/></proof>
+    <goal name="lengauer_tarjan&#39;vc.0.0.4" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.176292" steps="550"/></proof>
     </goal>
-    <goal name="dfs&#39;vc.15.0.5" expl="assertion">
-    <proof prover="0"><result status="valid" time="4.425576" steps="10758"/></proof>
+    <goal name="lengauer_tarjan&#39;vc.0.0.5" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.530365" steps="1554"/></proof>
     </goal>
-    <goal name="dfs&#39;vc.15.0.6" expl="assertion">
-    <transf name="case" arg1="(i = sn -1)">
-     <goal name="dfs&#39;vc.15.0.6.0" expl="true case (assertion)">
-     <proof prover="0"><result status="valid" time="2.084388" steps="4571"/></proof>
+    <goal name="lengauer_tarjan&#39;vc.0.0.6" expl="assertion" proved="true">
+    <transf name="exists" proved="true" arg1="root">
+     <goal name="lengauer_tarjan&#39;vc.0.0.6.0" proved="true">
+     <proof prover="0"><result status="valid" time="0.173557" steps="765"/></proof>
      </goal>
-     <goal name="dfs&#39;vc.15.0.6.1" expl="false case (assertion)">
-     <transf name="assert" arg1="(exists x:vertex, p:vertex. mapsto x (i, p) dfsnum_parent)">
-      <goal name="dfs&#39;vc.15.0.6.1.0" expl="asserted formula">
-      <transf name="unfold" arg1="wf_dfsnum_parent" arg2="in" arg3="Requires7">
-       <goal name="dfs&#39;vc.15.0.6.1.0.0" expl="asserted formula">
-       <transf name="destruct_rec" arg1="Requires7">
-        <goal name="dfs&#39;vc.15.0.6.1.0.0.0" expl="asserted formula">
-        <transf name="eliminate_let" >
-         <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0" expl="asserted formula">
-         <transf name="destruct_rec" arg1="Requires7">
-          <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0.0" expl="asserted formula">
-          <transf name="apply" arg1="Requires8">
-           <goal name="dfs&#39;vc.15.0.6.1.0.0.0.0.0.0" expl="apply premises">
-           <proof prover="0"><result status="valid" time="0.054873" steps="198"/></proof>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
+    </transf>
+    </goal>
+    <goal name="lengauer_tarjan&#39;vc.0.0.7" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.217186" steps="833"/></proof>
+    </goal>
+    <goal name="lengauer_tarjan&#39;vc.0.0.8" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.433184" steps="1476"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.1" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.139171" steps="56228"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.2" expl="precondition" proved="true">
+  <transf name="inline_goal" proved="true" >
+   <goal name="lengauer_tarjan&#39;vc.2.0" expl="precondition" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="lengauer_tarjan&#39;vc.2.0.0" expl="precondition" proved="true">
+    <proof prover="1"><result status="valid" time="0.143520" steps="56227"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.3" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.138070" steps="56234"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.4" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.408101" steps="72466"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.5" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.216124" steps="59691"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.6" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.301822" steps="59691"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.7" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.307065" steps="63071"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.8" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.804536" steps="95674"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.9" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.425911" steps="70876"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.10" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.411815" steps="73906"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.11" expl="assertion" proved="true">
+  <proof prover="0"><result status="valid" time="4.231779" steps="18710"/></proof>
+  <proof prover="1"><result status="valid" time="0.307632" steps="61963"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.12" expl="assertion" proved="true">
+  <transf name="inline_goal" proved="true" >
+   <goal name="lengauer_tarjan&#39;vc.12.0" expl="assertion" proved="true">
+   <transf name="introduce_premises" proved="true" >
+    <goal name="lengauer_tarjan&#39;vc.12.0.0" expl="assertion" proved="true">
+    <transf name="case" proved="true" arg1="(y = root )">
+     <goal name="lengauer_tarjan&#39;vc.12.0.0.0" expl="true case (assertion)" proved="true">
+     <proof prover="0"><result status="valid" time="0.156505" steps="584"/></proof>
+     </goal>
+     <goal name="lengauer_tarjan&#39;vc.12.0.0.1" expl="false case (assertion)" proved="true">
+     <transf name="assert" proved="true" arg1="(forall n. forall y p. path root p y -&gt; length p = n -&gt; y &lt;&gt; root -&gt; mem y dfsnum_parent)">
+      <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0" expl="asserted formula" proved="true">
+      <transf name="intros_n" proved="true" arg1="1">
+       <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0" expl="asserted formula" proved="true">
+       <transf name="induction" proved="true" arg1="n">
+        <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.0" expl="base case (asserted formula)" proved="true">
+        <proof prover="0"><result status="valid" time="0.124422" steps="296"/></proof>
+        </goal>
+        <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.1" expl="recursive case (asserted formula)" proved="true">
+        <transf name="induction_pr" proved="true" >
+         <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.1.0" proved="true">
+         <proof prover="1"><result status="valid" time="0.182802" steps="58870"/></proof>
+         </goal>
+         <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.1.1" proved="true">
+         <proof prover="1"><result status="valid" time="0.387067" steps="78659"/></proof>
          </goal>
         </transf>
         </goal>
@@ -5011,459 +5025,8 @@
        </goal>
       </transf>
       </goal>
-      <goal name="dfs&#39;vc.15.0.6.1.1" expl="false case (assertion)">
-      <proof prover="0"><result status="valid" time="0.060838" steps="193"/></proof>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.7" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.384991" steps="1571"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.15.0.8" expl="assertion">
-    <proof prover="0"><result status="valid" time="0.645448" steps="1618"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfs&#39;vc.16" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.152799" steps="568"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.17" expl="variant decrease">
-  <proof prover="0"><result status="valid" time="0.104161" steps="328"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.18" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.064651" steps="66"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.19" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.044192" steps="60"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.20" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.029911" steps="38"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.21" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.593824" steps="1647"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.22" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.066295" steps="62"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.23" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.041155" steps="58"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.24" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.093724" steps="60"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.25" expl="precondition">
-  <transf name="case" arg1="(w = z)">
-   <goal name="dfs&#39;vc.25.0" expl="true case (precondition)">
-   <proof prover="0"><result status="valid" time="45.479395" steps="139505"/></proof>
-   </goal>
-   <goal name="dfs&#39;vc.25.1" expl="false case (precondition)">
-   <proof prover="0"><result status="valid" time="192.719642" steps="715311"/></proof>
-   <transf name="assert" arg1="(mapsto v (iv, pv) dfsnum_parent /\ mapsto w (iw, pw) dfsnum_parent)">
-    <goal name="dfs&#39;vc.25.1.0" expl="asserted formula">
-    <proof prover="0"><result status="valid" time="0.279673" steps="1291"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.25.1.1" expl="false case (precondition)">
-    <proof prover="0"><result status="valid" time="1.647828" steps="2783"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfs&#39;vc.26" expl="precondition">
-  <transf name="case" arg1="(b = z)">
-   <goal name="dfs&#39;vc.26.0" expl="true case (precondition)">
-   <proof prover="0"><result status="valid" time="0.690747" steps="1771"/></proof>
-   </goal>
-   <goal name="dfs&#39;vc.26.1" expl="false case (precondition)">
-   <transf name="assert" arg1="(mapsto b (ib, pb) dfsnum_parent /\ mapsto a (ia, pa) dfsnum_parent )">
-    <goal name="dfs&#39;vc.26.1.0" expl="asserted formula">
-    <proof prover="0"><result status="valid" time="0.865135" steps="2059"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.26.1.1" expl="false case (precondition)">
-    <proof prover="0"><result status="valid" time="25.740909" steps="67591"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfs&#39;vc.27" expl="precondition">
-  <transf name="case" arg1="(c = z)">
-   <goal name="dfs&#39;vc.27.0" expl="true case (precondition)">
-   <proof prover="0"><result status="valid" time="2.875153" steps="5338"/></proof>
-   </goal>
-   <goal name="dfs&#39;vc.27.1" expl="false case (precondition)">
-   <transf name="assert" arg1="(mapsto c (ic, pc) dfsnum_parent /\ mapsto a (ia, pa) dfsnum_parent /\ mapsto b (ib, pb) dfsnum_parent)">
-    <goal name="dfs&#39;vc.27.1.0" expl="asserted formula">
-    <proof prover="0"><result status="valid" time="0.870886" steps="2513"/></proof>
-    </goal>
-    <goal name="dfs&#39;vc.27.1.1" expl="false case (precondition)">
-    <transf name="assert" arg1="((--+-&gt;) dfsnum_parent a lac c)">
-     <goal name="dfs&#39;vc.27.1.1.0" expl="asserted formula">
-     <proof prover="2"><result status="valid" time="31.677108"/></proof>
-     </goal>
-     <goal name="dfs&#39;vc.27.1.1.1" expl="false case (precondition)">
-     <proof prover="0"><result status="valid" time="24.845262" steps="41720"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfs&#39;vc.28" expl="assertion">
-  <proof prover="0"><result status="valid" time="0.324397" steps="833"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.29" expl="variant decrease">
-  <proof prover="0"><result status="valid" time="0.196492" steps="359"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.30" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.031148" steps="46"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.31" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.249220" steps="783"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.32" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.045522" steps="56"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.33" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.564055" steps="1375"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.34" expl="precondition">
-  <proof prover="1"><result status="valid" time="12.221440" steps="290665"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.35" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.077290" steps="65"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.36" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.192941" steps="588"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.37" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.459044" steps="837"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.38" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.738541" steps="1751"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.39" expl="precondition">
-  <proof prover="0"><result status="valid" time="1.395686" steps="2698"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.40" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.300152" steps="981"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.41" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.113015" steps="355"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.42" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.269943" steps="807"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.43" expl="postcondition">
-  <proof prover="0"><result status="valid" time="0.706757" steps="1604"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.44" expl="postcondition">
-  <proof prover="0"><result status="valid" time="4.567381" steps="10874"/></proof>
-  </goal>
-  <goal name="dfs&#39;vc.45" expl="postcondition">
-  <proof prover="0"><result status="valid" time="4.959851" steps="10620"/></proof>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_parent&#39;vc" expl="VC for dfsnum_parent">
- <transf name="split_goal_full" >
-  <goal name="dfsnum_parent&#39;vc.0" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.028050" steps="14"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.1" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.039781" steps="14"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.2" expl="precondition">
-  <transf name="introduce_premises" >
-   <goal name="dfsnum_parent&#39;vc.2.0" expl="precondition">
-   <transf name="inline_goal" >
-    <goal name="dfsnum_parent&#39;vc.2.0.0" expl="precondition">
-    <transf name="split_goal_full" >
-     <goal name="dfsnum_parent&#39;vc.2.0.0.0" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.052700" steps="168"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.1" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.074529" steps="236"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.2" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.077052" steps="214"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.3" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.066983" steps="215"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.4" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.067862" steps="191"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.5" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.077529" steps="249"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.6" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="3.143152" steps="15450"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.7" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.075265" steps="242"/></proof>
-     </goal>
-     <goal name="dfsnum_parent&#39;vc.2.0.0.8" expl="VC for dfsnum_parent">
-     <proof prover="0"><result status="valid" time="0.083980" steps="299"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.3" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.073342" steps="213"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.4" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.050402" steps="32"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.5" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.036195" steps="28"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.6" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.054366" steps="96"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.7" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.205217" steps="363"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.8" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.262405" steps="583"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.9" expl="precondition">
-  <proof prover="0"><result status="valid" time="0.451867" steps="971"/></proof>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_a">
- <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="722997"/></proof>
- </goal>
- <goal name="dfsnum_property_b">
- <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="361618"/></proof>
- </goal>
- <goal name="dfsnum_property_e">
- <transf name="introduce_premises" >
-  <goal name="dfsnum_property_e.0">
-  <transf name="case" arg1="(x = root)">
-   <goal name="dfsnum_property_e.0.0" expl="true case">
-   <transf name="subst_all" >
-    <goal name="dfsnum_property_e.0.0.0" expl="true case">
-    <proof prover="0"><result status="valid" time="12.208888" steps="44864"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="dfsnum_property_e.0.1" expl="false case">
-   <proof prover="0"><result status="valid" time="8.509211" steps="21751"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_c">
- </goal>
- <goal name="dfsnum_property_g">
- </goal>
- <goal name="semi_dominator_less_equal_than_parent">
- </goal>
- <goal name="dfsnum_property_d">
- <proof prover="0" obsolete="true"><result status="timeout" time="120.000000" steps="849214"/></proof>
- <proof prover="1" obsolete="true"><result status="timeout" time="120.000000" steps="3199292"/></proof>
- </goal>
- <goal name="dfsnum_property_h">
- </goal>
-</theory>
-<theory name="Graph">
- <goal name="dfsnum_parent&#39;vc" expl="VC for dfsnum_parent">
- <transf name="split_goal_full" >
-  <goal name="dfsnum_parent&#39;vc.0" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.050894" steps="16"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.1" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.137870" steps="16"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.2" expl="precondition">
-  <transf name="inline_goal" >
-   <goal name="dfsnum_parent&#39;vc.2.0" expl="precondition">
-   <transf name="split_goal_full" >
-    <goal name="dfsnum_parent&#39;vc.2.0.0" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.059974" steps="137"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.1" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.091463" steps="238"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.2" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.073331" steps="235"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.3" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.080904" steps="198"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.4" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.084584" steps="189"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.5" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.080374" steps="284"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.6" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.579266" steps="4866"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.7" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.076530" steps="238"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.8" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.086494" steps="271"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.9" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.056557" steps="28"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.10" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.091107" steps="34"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.11" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.085048" steps="34"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.12" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.056197" steps="30"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.13" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.043499" steps="34"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.14" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.052670" steps="42"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.15" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.053726" steps="34"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.16" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.078667" steps="32"/></proof>
-    </goal>
-    <goal name="dfsnum_parent&#39;vc.2.0.17" expl="VC for dfsnum_parent">
-    <proof prover="0"><result status="valid" time="0.049935" steps="32"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.3" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.195920" steps="235"/></proof>
-  <proof prover="1" timelimit="100"><result status="valid" time="0.380176" steps="50924"/></proof>
-  <proof prover="4"><result status="valid" time="0.113848" steps="305730"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.4" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.072869" steps="30"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.5" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.057307" steps="32"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.6" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.047008" steps="16"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.7" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.059732" steps="40"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.8" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.092685" steps="213"/></proof>
-  <proof prover="1" timelimit="100"><result status="valid" time="0.228878" steps="42568"/></proof>
-  <proof prover="4"><result status="valid" time="0.117486" steps="278344"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.9" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.043569" steps="16"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.10" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.143044" steps="421"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.11" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.149798" steps="495"/></proof>
-  </goal>
-  <goal name="dfsnum_parent&#39;vc.12" expl="precondition">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.342047" steps="1182"/></proof>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_h">
- <proof prover="0" timelimit="100"><result status="valid" time="21.633466" steps="73216"/></proof>
- </goal>
- <goal name="dfsnum_property_j">
- <proof prover="0" timelimit="100"><result status="valid" time="23.220247" steps="65926"/></proof>
- </goal>
- <goal name="dfsnum_property_a">
- <proof prover="0" timelimit="100"><result status="valid" time="29.942839" steps="102596"/></proof>
- </goal>
- <goal name="dfsnum_property_e">
- <proof prover="0" timelimit="100"><result status="valid" time="48.939301" steps="195464"/></proof>
- </goal>
- <goal name="dfsnum_property_d">
- <transf name="induction_pr" >
-  <goal name="dfsnum_property_d.0">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.221401" steps="206"/></proof>
-  <proof prover="1" timelimit="100"><result status="valid" time="0.251331" steps="42411"/></proof>
-  </goal>
-  <goal name="dfsnum_property_d.1">
-  <proof prover="0" timelimit="100"><result status="valid" time="0.138992" steps="123"/></proof>
-  <proof prover="1" timelimit="100"><result status="valid" time="0.371778" steps="42763"/></proof>
-  <proof prover="3"><result status="valid" time="0.522067" steps="57586"/></proof>
-  <transf name="introduce_premises" >
-   <goal name="dfsnum_property_d.1.0">
-   <proof prover="0" timelimit="100"><result status="valid" time="0.163815" steps="139"/></proof>
-   <proof prover="1" timelimit="100"><result status="valid" time="0.350560" steps="46947"/></proof>
-   <proof prover="3"><result status="valid" time="0.445897" steps="61884"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_c">
- <proof prover="0" timelimit="100"><result status="valid" time="0.284833" steps="850"/></proof>
- </goal>
- <goal name="dfsnum_property_g">
- <proof prover="0" timelimit="100"><result status="valid" time="0.248636" steps="411"/></proof>
- </goal>
- <goal name="lemma2_helper_a">
- <proof prover="0" timelimit="100"><result status="valid" time="0.503775" steps="1041"/></proof>
- </goal>
- <goal name="lemma2_helper_b">
- <proof prover="0" timelimit="100"><result status="valid" time="6.537653" steps="17443"/></proof>
- </goal>
- <goal name="lemma2">
- <proof prover="0" timelimit="100"><result status="valid" time="0.199834" steps="647"/></proof>
- </goal>
- <goal name="InductionLemma1Helper.base">
- <transf name="inline_goal" >
-  <goal name="base.0">
-  <transf name="introduce_premises" >
-   <goal name="base.0.0">
-   <transf name="exists" arg1="(Nil : list vertex)">
-    <goal name="base.0.0.0">
-    <transf name="exists" arg1="l">
-     <goal name="base.0.0.0.0">
-     <transf name="exists" arg1="a">
-      <goal name="base.0.0.0.0.0">
-      <transf name="exists" arg1="ia">
-       <goal name="base.0.0.0.0.0.0">
-       <transf name="exists" arg1="pa">
-        <goal name="base.0.0.0.0.0.0.0">
-        <transf name="split_goal_full" >
-         <goal name="base.0.0.0.0.0.0.0.0">
-         <proof prover="0" timelimit="100"><result status="valid" time="0.059994" steps="41"/></proof>
-         </goal>
-         <goal name="base.0.0.0.0.0.0.0.1">
-         <proof prover="0" timelimit="100"><result status="valid" time="0.051059" steps="26"/></proof>
-         </goal>
-         <goal name="base.0.0.0.0.0.0.0.2">
-         <proof prover="0" timelimit="100"><result status="valid" time="0.055423" steps="26"/></proof>
-         </goal>
-         <goal name="base.0.0.0.0.0.0.0.3">
-         <proof prover="0" timelimit="100"><result status="valid" time="0.090979" steps="160"/></proof>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
+      <goal name="lengauer_tarjan&#39;vc.12.0.0.1.1" expl="false case (assertion)" proved="true">
+      <proof prover="1"><result status="valid" time="0.192636" steps="58901"/></proof>
       </goal>
      </transf>
      </goal>
@@ -5473,584 +5036,42 @@
    </goal>
   </transf>
   </goal>
- </transf>
- </goal>
- <goal name="InductionLemma1Helper.induction_step">
- <transf name="introduce_premises" >
-  <goal name="induction_step.0">
-  <transf name="inline_goal" >
-   <goal name="induction_step.0.0">
-   <transf name="introduce_premises" >
-    <goal name="induction_step.0.0.0">
-    <transf name="assert" arg1="(exists l5 d . l = l5 ++ Cons d Nil)">
-     <goal name="induction_step.0.0.0.0" expl="asserted formula">
-     <proof prover="1" timelimit="100"><result status="valid" time="0.787325" steps="69126"/></proof>
-     </goal>
-     <goal name="induction_step.0.0.0.1">
-     <transf name="destruct_rec" arg1="h">
-      <goal name="induction_step.0.0.0.1.0">
-      <transf name="assert" arg1="(exists id pd. mapsto d (id , pd) dfsnum_parent)">
-       <goal name="induction_step.0.0.0.1.0.0" expl="asserted formula">
-       <proof prover="0" timelimit="100"><result status="valid" time="26.582014" steps="89581"/></proof>
-       <proof prover="1" timelimit="100"><result status="valid" time="1.633184" steps="99392"/></proof>
-       </goal>
-       <goal name="induction_step.0.0.0.1.0.1">
-       <transf name="destruct_rec" arg1="h">
-        <goal name="induction_step.0.0.0.1.0.1.0">
-        <transf name="assert" arg1="(id &lt; t \/ id &gt;= t)">
-         <goal name="induction_step.0.0.0.1.0.1.0.0" expl="asserted formula">
-         <proof prover="0" timelimit="100"><result status="valid" time="0.058681" steps="36"/></proof>
-         </goal>
-         <goal name="induction_step.0.0.0.1.0.1.0.1">
-         <transf name="destruct" arg1="h">
-          <goal name="induction_step.0.0.0.1.0.1.0.1.0">
-          <proof prover="0" timelimit="100"><result status="valid" time="0.511588" steps="900"/></proof>
-          </goal>
-          <goal name="induction_step.0.0.0.1.0.1.0.1.1">
-          <transf name="unfold" arg1="p_lemma1_helper" arg2="in" arg3="H4">
-           <goal name="induction_step.0.0.0.1.0.1.0.1.1.0">
-           <transf name="instantiate" arg1="H4" arg2="l5, a, ia, pa, t">
-            <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0">
-            <transf name="assert" arg1="((exists l1:list vertex, l2:list vertex, b:vertex, ib:int, pb1:vertex. Cons a l5 = (l1 ++ Cons b l2) /\ mapsto b (ib, pb1) dfsnum_parent /\ ib &lt; t /\ (forall x:vertex, ix:int, px:vertex. mem2 x l2 -&gt; mapsto x (ix, px) dfsnum_parent -&gt; ix &gt;= t)))">
-             <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.0" expl="asserted formula">
-             <proof prover="0" timelimit="100"><result status="valid" time="0.549568" steps="1348"/></proof>
-             </goal>
-             <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1">
-             <transf name="destruct_rec" arg1="h">
-              <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1.0">
-              <transf name="subst_all" >
-               <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1.0.0">
-               <transf name="exists" arg1="l1">
-                <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1.0.0.0">
-                <transf name="exists" arg1="(l2 ++ Cons d Nil)">
-                 <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1.0.0.0.0">
-                 <transf name="exists" arg1="b">
-                  <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1.0.0.0.0.0">
-                  <transf name="exists" arg1="ib">
-                   <goal name="induction_step.0.0.0.1.0.1.0.1.1.0.0.1.0.0.0.0.0.0">
-                   <proof prover="0" timelimit="100"><result status="valid" time="5.770778" steps="19465"/></proof>
-                   </goal>
-                  </transf>
-                  </goal>
-                 </transf>
-                 </goal>
-                </transf>
-                </goal>
-               </transf>
-               </goal>
-              </transf>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-           </transf>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.13" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.144488" steps="57677"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="lemma1_helper">
- <transf name="introduce_premises" >
-  <goal name="lemma1_helper.0">
-  <transf name="assert" arg1="(p_lemma1_helper (length l))">
-   <goal name="lemma1_helper.0.0" expl="asserted formula">
-   <proof prover="0" timelimit="100"><result status="valid" time="0.071338" steps="43"/></proof>
-   </goal>
-   <goal name="lemma1_helper.0.1">
-   <transf name="unfold" arg1="p_lemma1_helper" arg2="in" arg3="h">
-    <goal name="lemma1_helper.0.1.0">
-    <transf name="instantiate" arg1="h" arg2="l, a, ia, pa">
-     <goal name="lemma1_helper.0.1.0.0">
-     <transf name="apply" arg1="Hinst">
-      <goal name="lemma1_helper.0.1.0.0.0" expl="apply premises">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.057008" steps="26"/></proof>
-      </goal>
-      <goal name="lemma1_helper.0.1.0.0.1" expl="apply premises">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.080267" steps="42"/></proof>
-      </goal>
-      <goal name="lemma1_helper.0.1.0.0.2" expl="apply premises">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.070656" steps="26"/></proof>
-      </goal>
-      <goal name="lemma1_helper.0.1.0.0.3" expl="apply premises">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.064685" steps="26"/></proof>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.14" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.350412" steps="67096"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="lemma1_helper_b">
- <transf name="introduce_premises" >
-  <goal name="lemma1_helper_b.0">
-  <transf name="assert" arg1="(v = root \/ exists l2. path root l2 v)">
-   <goal name="lemma1_helper_b.0.0" expl="asserted formula">
-   <proof prover="0" timelimit="100"><result status="valid" time="0.526992" steps="794"/></proof>
-   </goal>
-   <goal name="lemma1_helper_b.0.1">
-   <transf name="assert" arg1="(exists l3. path v l3 x)">
-    <goal name="lemma1_helper_b.0.1.0" expl="asserted formula">
-    <proof prover="0" timelimit="100"><result status="valid" time="0.334138" steps="348"/></proof>
-    </goal>
-    <goal name="lemma1_helper_b.0.1.1">
-    <proof prover="1" timelimit="100"><result status="valid" time="47.786523" steps="1074880"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.15" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.427910" steps="68551"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="InductionK.base">
- <proof prover="0" timelimit="100"><result status="valid" time="0.394867" steps="590"/></proof>
- </goal>
- <goal name="InductionK.induction_step">
- <transf name="introduce_premises" >
-  <goal name="induction_step.0">
-  <transf name="inline_goal" >
-   <goal name="induction_step.0.0">
-   <transf name="introduce_premises" >
-    <goal name="induction_step.0.0.0">
-    <transf name="assert" arg1="(exists u l1 . path v l1 u /\ edge u w /\ l1 ++ Cons u Nil = l)">
-     <goal name="induction_step.0.0.0.0" expl="asserted formula">
-     <proof prover="0" timelimit="100"><result status="valid" time="0.301801" steps="335"/></proof>
-     </goal>
-     <goal name="induction_step.0.0.0.1">
-     <transf name="destruct_rec" arg1="h">
-      <goal name="induction_step.0.0.0.1.0">
-      <transf name="case" arg1="(v = u)">
-       <goal name="induction_step.0.0.0.1.0.0" expl="true case">
-       <proof prover="0" timelimit="100"><result status="valid" time="0.232896" steps="205"/></proof>
-       </goal>
-       <goal name="induction_step.0.0.0.1.0.1" expl="false case">
-       <transf name="unfold" arg1="p_dfsnum_property_k" arg2="in" arg3="H6">
-        <goal name="induction_step.0.0.0.1.0.1.0" expl="false case">
-        <transf name="assert" arg1="(exists iu pu. mapsto u (iu, pu) dfsnum_parent)">
-         <goal name="induction_step.0.0.0.1.0.1.0.0" expl="asserted formula">
-         <proof prover="1" timelimit="100"><result status="valid" time="7.086635" steps="251698"/></proof>
-         </goal>
-         <goal name="induction_step.0.0.0.1.0.1.0.1" expl="false case">
-         <transf name="destruct_rec" arg1="h">
-          <goal name="induction_step.0.0.0.1.0.1.0.1.0" expl="false case">
-          <transf name="assert" arg1="(exists p. (--+-&gt;) dfsnum_parent v p u)">
-           <goal name="induction_step.0.0.0.1.0.1.0.1.0.0" expl="asserted formula">
-           <proof prover="0" timelimit="100"><result status="valid" time="7.178775" steps="16521"/></proof>
-           </goal>
-           <goal name="induction_step.0.0.0.1.0.1.0.1.0.1" expl="false case">
-           <transf name="assert" arg1="(iw = iu \/ iw &gt; iu \/ iw &lt; iu)">
-            <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.0" expl="asserted formula">
-            <proof prover="0" timelimit="100"><result status="valid" time="0.060090" steps="50"/></proof>
-            </goal>
-            <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.1" expl="false case">
-            <transf name="destruct_rec" arg1="h">
-             <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.1.0" expl="false case">
-             <proof prover="0" timelimit="100"><result status="valid" time="5.356777" steps="13657"/></proof>
-             </goal>
-             <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.1.1" expl="false case">
-             <transf name="assert" arg1="(exists p. (--+-&gt;) dfsnum_parent u p w)">
-              <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.1.1.0" expl="asserted formula">
-              <proof prover="0" timelimit="100"><result status="valid" time="0.288176" steps="220"/></proof>
-              </goal>
-              <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.1.1.1" expl="false case">
-              <proof prover="1" timelimit="100"><result status="valid" time="9.129439" steps="295847"/></proof>
-              </goal>
-             </transf>
-             </goal>
-             <goal name="induction_step.0.0.0.1.0.1.0.1.0.1.1.2" expl="false case">
-             <proof prover="0" timelimit="100"><result status="valid" time="0.974794" steps="1557"/></proof>
-             </goal>
-            </transf>
-            </goal>
-           </transf>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.16" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="1.469460" steps="129012"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="dfsnum_property_k">
- <transf name="introduce_premises" >
-  <goal name="dfsnum_property_k.0">
-  <transf name="assert" arg1="(p_dfsnum_property_k (length l))">
-   <goal name="dfsnum_property_k.0.0" expl="asserted formula">
-   <proof prover="0" timelimit="100"><result status="valid" time="0.081781" steps="50"/></proof>
-   </goal>
-   <goal name="dfsnum_property_k.0.1">
-   <proof prover="0" timelimit="100"><result status="valid" time="0.566190" steps="1104"/></proof>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.17" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.152517" steps="57943"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="InductionLemma1.base">
- <transf name="inline_goal" >
-  <goal name="base.0">
-  <transf name="introduce_premises" >
-   <goal name="base.0.0">
-   <transf name="assert" arg1="(edge  v w)">
-    <goal name="base.0.0.0" expl="asserted formula">
-    <proof prover="0" timelimit="100"><result status="valid" time="0.197641" steps="164"/></proof>
-    </goal>
-    <goal name="base.0.0.1">
-    <transf name="exists" arg1="v">
-     <goal name="base.0.0.1.0">
-     <transf name="split_goal_full" >
-      <goal name="base.0.0.1.0.0">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.175808" steps="52"/></proof>
-      </goal>
-      <goal name="base.0.0.1.0.1">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.073091" steps="49"/></proof>
-      </goal>
-      <goal name="base.0.0.1.0.2">
-      <proof prover="0" timelimit="100"><result status="valid" time="0.245351" steps="166"/></proof>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.18" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.394945" steps="67565"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="InductionLemma1.induction_step">
- <transf name="introduce_premises" >
-  <goal name="induction_step.0">
-  <transf name="inline_goal" >
-   <goal name="induction_step.0.0">
-   <transf name="introduce_premises" >
-    <goal name="induction_step.0.0.0">
-    <transf name="assert" arg1="(forall x. mem2 x p -&gt; mem x dfsnum_parent)">
-     <goal name="induction_step.0.0.0.0" expl="asserted formula">
-     <proof prover="0" timelimit="100"><result status="valid" time="0.374801" steps="450"/></proof>
-     </goal>
-     <goal name="induction_step.0.0.0.1">
-     <transf name="instantiate" arg1="lemma1_helper" arg2="p, v, iv, pv, iw">
-      <goal name="induction_step.0.0.0.1.0">
-      <transf name="assert" arg1="((exists l1:list vertex, l2:list vertex, b:vertex, ib:int, pb1:vertex. Cons v p = (l1 ++ Cons b l2) /\ mapsto b (ib, pb1) dfsnum_parent /\ ib &lt; iw /\ (forall x:vertex, ix:int, px:vertex. mem2 x l2 -&gt; mapsto x (ix, px) dfsnum_parent -&gt; ix &gt;= iw)))">
-       <goal name="induction_step.0.0.0.1.0.0" expl="asserted formula">
-       <proof prover="0" timelimit="100"><result status="valid" time="0.407944" steps="496"/></proof>
-       </goal>
-       <goal name="induction_step.0.0.0.1.0.1">
-       <transf name="destruct_rec" arg1="h">
-        <goal name="induction_step.0.0.0.1.0.1.0">
-        <transf name="assert" arg1="(path b l2 w)">
-         <goal name="induction_step.0.0.0.1.0.1.0.0" expl="asserted formula">
-         <transf name="destruct_term" arg1="l1">
-          <goal name="induction_step.0.0.0.1.0.1.0.0.0" expl="asserted formula">
-          <proof prover="0" timelimit="100"><result status="valid" time="0.544479" steps="745"/></proof>
-          </goal>
-          <goal name="induction_step.0.0.0.1.0.1.0.0.1" expl="asserted formula">
-          <proof prover="0" timelimit="100"><result status="valid" time="0.194543" steps="78"/></proof>
-          </goal>
-         </transf>
-         </goal>
-         <goal name="induction_step.0.0.0.1.0.1.0.1">
-         <transf name="assert" arg1="(exists l. (--+-&gt;) dfsnum_parent b l w)">
-          <goal name="induction_step.0.0.0.1.0.1.0.1.0" expl="asserted formula">
-          <proof prover="0" timelimit="100"><result status="valid" time="1.074294" steps="2184"/></proof>
-          </goal>
-          <goal name="induction_step.0.0.0.1.0.1.0.1.1">
-          <transf name="assert" arg1="((iv = ib) \/ (iv &lt; ib) \/ (iv &gt; ib))">
-           <goal name="induction_step.0.0.0.1.0.1.0.1.1.0" expl="asserted formula">
-           <proof prover="0" timelimit="100"><result status="valid" time="0.067167" steps="52"/></proof>
-           </goal>
-           <goal name="induction_step.0.0.0.1.0.1.0.1.1.1">
-           <transf name="destruct_rec" arg1="h">
-            <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.0">
-            <transf name="assert" arg1="(b = v)">
-             <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.0.0" expl="asserted formula">
-             <proof prover="0" timelimit="100"><result status="valid" time="14.303736" steps="35900"/></proof>
-             </goal>
-             <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.0.1">
-             <transf name="subst" arg1="b">
-              <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.0.1.0">
-              <transf name="exists" arg1="v">
-               <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.0.1.0.0">
-               <proof prover="0" timelimit="100"><result status="valid" time="0.188435" steps="453"/></proof>
-               </goal>
-              </transf>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-            <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1">
-            <transf name="unfold" arg1="p_lemma1" arg2="in" arg3="H5">
-             <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0">
-             <transf name="instantiate" arg1="H5" arg2="v, b, iv, ib, pv, pb1">
-              <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0">
-              <transf name="destruct_term" arg1="l1">
-               <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0">
-               <transf name="assert" arg1="(path v x b)">
-                <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.0" expl="asserted formula">
-                <proof prover="0" timelimit="100"><result status="valid" time="0.671312" steps="905"/></proof>
-                </goal>
-                <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1">
-                <transf name="assert" arg1="(exists x2:vertex. mem2 x2 (Cons v x) /\ x2 -*-&gt; v /\ x2 -*-&gt; b)">
-                 <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.0" expl="asserted formula">
-                 <proof prover="0" timelimit="100"><result status="valid" time="0.816560" steps="1133"/></proof>
-                 </goal>
-                 <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1">
-                 <transf name="destruct_rec" arg1="h">
-                  <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0">
-                  <transf name="exists" arg1="x2">
-                   <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0">
-                   <transf name="split_goal_full" >
-                    <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.0">
-                    <proof prover="0" timelimit="100"><result status="valid" time="0.257374" steps="339"/></proof>
-                    </goal>
-                    <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.1">
-                    <proof prover="0" timelimit="100"><result status="valid" time="0.061055" steps="64"/></proof>
-                    </goal>
-                    <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2">
-                    <transf name="assert" arg1="(exists l. (--+-&gt;) dfsnum_parent b l w)">
-                     <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.0" expl="asserted formula">
-                     <proof prover="0" timelimit="100"><result status="valid" time="0.212159" steps="81"/></proof>
-                     </goal>
-                     <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.1">
-                     <transf name="unfold" arg1="(-*-&gt;)" arg2="in" arg3="h1">
-                      <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.1.0">
-                      <transf name="destruct_rec" arg1="h1">
-                       <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.1.0.0">
-                       <proof prover="0" timelimit="100"><result status="valid" time="0.300439" steps="319"/></proof>
-                       </goal>
-                       <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.1.0.1">
-                       <transf name="destruct_rec" arg1="h">
-                        <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.1.0.1.0">
-                        <transf name="instantiate" arg1="concat_lemma" arg2="dfsnum_parent, x2, l1, b, l, w">
-                         <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.0.1.1.0.0.2.1.0.1.0.0">
-                         <proof prover="0" timelimit="100"><result status="valid" time="0.320597" steps="345"/></proof>
-                         </goal>
-                        </transf>
-                        </goal>
-                       </transf>
-                       </goal>
-                      </transf>
-                      </goal>
-                     </transf>
-                     </goal>
-                    </transf>
-                    </goal>
-                   </transf>
-                   </goal>
-                  </transf>
-                  </goal>
-                 </transf>
-                 </goal>
-                </transf>
-                </goal>
-               </transf>
-               </goal>
-               <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.1.0.0.1">
-               <proof prover="0" timelimit="100"><result status="valid" time="0.086541" steps="87"/></proof>
-               </goal>
-              </transf>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-            <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.2">
-            <transf name="exists" arg1="b">
-             <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.2.0">
-             <proof prover="0" timelimit="100"><result status="valid" time="2.511009" steps="3697"/></proof>
-             <transf name="split_goal_full" >
-              <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.2.0.0">
-              <proof prover="0" timelimit="100"><result status="valid" time="0.301636" steps="248"/></proof>
-              </goal>
-              <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.2.0.1">
-              <proof prover="0" timelimit="100"><result status="valid" time="3.408814" steps="7626"/></proof>
-              </goal>
-              <goal name="induction_step.0.0.0.1.0.1.0.1.1.1.2.0.2">
-              <proof prover="0" timelimit="100"><result status="valid" time="0.287204" steps="230"/></proof>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-           </transf>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.19" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.212995" steps="59114"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="lemma1">
- <transf name="introduce_premises" >
-  <goal name="lemma1.0">
-  <transf name="assert" arg1="(p_lemma1 (length p))">
-   <goal name="lemma1.0.0" expl="asserted formula">
-   <proof prover="0" timelimit="100"><result status="valid" time="0.183661" steps="52"/></proof>
-   </goal>
-   <goal name="lemma1.0.1">
-   <proof prover="0" timelimit="100"><result status="valid" time="2.488189" steps="3252"/></proof>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.20" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.226067" steps="59182"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="parent_is_candidate_of_semi_dominator">
- <proof prover="0" timelimit="100"><result status="valid" time="2.384784" steps="2841"/></proof>
- </goal>
- <goal name="semi_dominator_less_equal_than_parent">
- <proof prover="0" timelimit="100"><result status="valid" time="0.263513" steps="134"/></proof>
- </goal>
- <goal name="semi_dominator_less_than_self">
- <proof prover="0" timelimit="100"><result status="valid" time="0.718223" steps="1185"/></proof>
- </goal>
- <goal name="lemma3">
- <transf name="introduce_premises" >
-  <goal name="lemma3.0">
-  <transf name="assert" arg1="(exists p:list vertex. path semi_w p w /\ (forall x:vertex. mem2 x p -&gt; dfsnum x &gt; dfsnum semi_w))">
-   <goal name="lemma3.0.0" expl="asserted formula">
-   <proof prover="0" timelimit="100"><result status="valid" time="5.897350" steps="13244"/></proof>
-   </goal>
-   <goal name="lemma3.0.1">
-   <transf name="destruct_rec" arg1="h">
-    <goal name="lemma3.0.1.0">
-    <transf name="assert" arg1="(exists iw pw. mapsto w (iw, pw) dfsnum_parent)">
-     <goal name="lemma3.0.1.0.0" expl="asserted formula">
-     <proof prover="0" timelimit="100"><result status="valid" time="16.478321" steps="58368"/></proof>
-     </goal>
-     <goal name="lemma3.0.1.0.1">
-     <transf name="destruct_rec" arg1="h">
-      <goal name="lemma3.0.1.0.1.0">
-      <transf name="assert" arg1="(exists i_semi_w p_semi_w. mapsto semi_w (i_semi_w, p_semi_w) dfsnum_parent)">
-       <goal name="lemma3.0.1.0.1.0.0" expl="asserted formula">
-       <proof prover="1"><result status="valid" time="0.333003" steps="60952"/></proof>
-       </goal>
-       <goal name="lemma3.0.1.0.1.0.1">
-       <transf name="destruct_rec" arg1="h">
-        <goal name="lemma3.0.1.0.1.0.1.0">
-        <transf name="instantiate" arg1="lemma1" arg2="semi_w, w, i_semi_w, iw, p_semi_w, pw">
-         <goal name="lemma3.0.1.0.1.0.1.0.0">
-         <transf name="assert" arg1="(forall p3:list vertex. path semi_w p3 w -&gt; (exists x:vertex. mem2 x (Cons semi_w p3) /\ x -*-&gt; semi_w /\ x -*-&gt; w))">
-          <goal name="lemma3.0.1.0.1.0.1.0.0.0" expl="asserted formula">
-          <proof prover="0" timelimit="100"><result status="valid" time="0.883575" steps="1750"/></proof>
-          </goal>
-          <goal name="lemma3.0.1.0.1.0.1.0.0.1">
-          <transf name="instantiate" arg1="h" arg2="p">
-           <goal name="lemma3.0.1.0.1.0.1.0.0.1.0">
-           <transf name="assert" arg1="((exists x:vertex. mem2 x (Cons semi_w p) /\ x -*-&gt; semi_w /\ x -*-&gt; w))">
-            <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.0" expl="asserted formula">
-            <proof prover="0" timelimit="100"><result status="valid" time="0.214813" steps="57"/></proof>
-            </goal>
-            <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.1">
-            <transf name="destruct_rec" arg1="h">
-             <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.1.0">
-             <transf name="assert" arg1="(x = semi_w \/ mem2 x p)">
-              <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.1.0.0" expl="asserted formula">
-              <proof prover="0" timelimit="100"><result status="valid" time="0.207474" steps="64"/></proof>
-              </goal>
-              <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.1.0.1">
-              <transf name="destruct_rec" arg1="h">
-               <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.1.0.1.0">
-               <proof prover="0" timelimit="100"><result status="valid" time="0.744192" steps="1280"/></proof>
-               </goal>
-               <goal name="lemma3.0.1.0.1.0.1.0.0.1.0.1.0.1.1">
-               <proof prover="0" timelimit="100"><result status="valid" time="16.734644" steps="56061"/></proof>
-               </goal>
-              </transf>
-              </goal>
-             </transf>
-             </goal>
-            </transf>
-            </goal>
-           </transf>
-           </goal>
-          </transf>
-          </goal>
-         </transf>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.21" expl="precondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.421907" steps="70081"/></proof>
   </goal>
- </transf>
- </goal>
- <goal name="unnamed_e">
- <proof prover="0"><result status="valid" time="7.140530" steps="24651"/></proof>
- </goal>
- <goal name="InductionPathIsSimpleList.base">
- <proof prover="0"><result status="valid" time="2.311683" steps="6712"/></proof>
- </goal>
- <goal name="InductionPathIsSimpleList.induction_step">
- <proof prover="1"><result status="valid" time="13.123758" steps="2049724"/></proof>
- </goal>
- <goal name="unnamed_d">
- <transf name="introduce_premises" >
-  <goal name="unnamed_d.0">
-  <transf name="assert" arg1="(p_path_is_simplelist (length l))">
-   <goal name="unnamed_d.0.0" expl="asserted formula">
-   <proof prover="0"><result status="valid" time="0.193345" steps="48"/></proof>
-   </goal>
-   <goal name="unnamed_d.0.1">
-   <proof prover="0"><result status="valid" time="0.350809" steps="406"/></proof>
-   </goal>
-  </transf>
+  <goal name="lengauer_tarjan&#39;vc.22" expl="precondition" proved="true">
+  <proof prover="0"><result status="valid" time="2.663174" steps="13246"/></proof>
+  <proof prover="1"><result status="valid" time="1.929432" steps="157760"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.23" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="0.459208" steps="70162"/></proof>
+  </goal>
+  <goal name="lengauer_tarjan&#39;vc.24" expl="postcondition" proved="true">
+  <proof prover="1"><result status="valid" time="1.044763" steps="107215"/></proof>
   </goal>
  </transf>
  </goal>

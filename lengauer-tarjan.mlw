@@ -1654,15 +1654,28 @@ module CalcuIdom
     calcu_idom dfsnum_parent semi_mp (i + 1) new_idom_mp
 end
 
-(*
 module LengauerTarjan
+  use list.List
+  use int.Int
+  use dominator.Graph
+  use DfsnumParent
   use DFS 
   use CalcuSemi
+  use CalcuIdom
 
   let ghost lengauer_tarjan() : fmap vertex vertex =
-    assert{forall x idom_x. mapsto x idom_x result -> idom_x ~> x}
-    let dfsnum_parent = dfs root Nil (succs root) empty in
-    let semi_mp = calcu_semi dfsnum_parent (size dfsnum_parent - 1) empty in
+    ensures{forall x idom_x. mapsto x idom_x result -> idom_x ~> x}
+    ensures{forall x. x <> root -> (exists p. path root p x) -> mem x result}
+    let origin_dfsnum_parent = (add root (0, root) empty) in
+    assert{wf_dfsnum_parent origin_dfsnum_parent};
+    let dfsnum_parent = dfs root Nil (succs root) origin_dfsnum_parent in
+    assert{super_wf_dfsnum_parent dfsnum_parent};
+    assert{all_reachable dfsnum_parent};
+    let sn = size dfsnum_parent in
+    if sn = 1 then
+      empty
+    else
+      let semi_mp = calcu_semi dfsnum_parent (sn - 1) empty in
+      calcu_idom dfsnum_parent semi_mp 1 empty
 end
-*)
 
