@@ -1363,7 +1363,7 @@ module RevertMap
 
 end
 
-module Jiting
+module AncestorWithLowestSemi
   use option.Option
   use list.List
   use list.Mem as L
@@ -1528,7 +1528,7 @@ module CalcuSemi
   use Cucu
   use DfsnumParentMutualParent
 
-  use Jiting
+  use AncestorWithLowestSemi
   use RevertMap
   use SemiDominate
 
@@ -1588,7 +1588,7 @@ module CalcuIdom
   use Cucu
   use DfsnumParentMutualParent
 
-  use Jiting
+  use AncestorWithLowestSemi
   use RevertMap
   use SemiDominate
   use Corollary1
