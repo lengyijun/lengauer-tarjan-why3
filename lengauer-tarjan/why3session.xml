@@ -4278,127 +4278,127 @@
  <goal name="preds_with_lowest_dfsnum&#39;vc" expl="VC for preds_with_lowest_dfsnum" proved="true">
  <transf name="split_vc" proved="true" >
   <goal name="preds_with_lowest_dfsnum&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.093014" steps="39867"/></proof>
+  <proof prover="1"><result status="valid" time="0.093014" steps="34639"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.1" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.221312" steps="45483"/></proof>
+  <proof prover="1"><result status="valid" time="0.221312" steps="39665"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.131744" steps="40680"/></proof>
+  <proof prover="1"><result status="valid" time="0.131744" steps="35452"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.101153" steps="40693"/></proof>
+  <proof prover="1"><result status="valid" time="0.101153" steps="35465"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.4" expl="precondition" proved="true">
   <proof prover="0"><result status="valid" time="0.097459" steps="67"/></proof>
-  <proof prover="1"><result status="valid" time="0.219896" steps="46180"/></proof>
-  <proof prover="2"><result status="valid" time="9.253742"/></proof>
+  <proof prover="1"><result status="valid" time="0.219896" steps="40142"/></proof>
+  <proof prover="2"><result status="valid" time="0.265138"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.275999" steps="41703"/></proof>
+  <proof prover="1"><result status="valid" time="0.138298" steps="36457"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.220882" steps="871"/></proof>
-  <proof prover="1"><result status="valid" time="0.391266" steps="46468"/></proof>
-  <proof prover="2"><result status="valid" time="9.465915"/></proof>
+  <proof prover="0"><result status="valid" time="0.220882" steps="713"/></proof>
+  <proof prover="1"><result status="valid" time="0.218406" steps="40375"/></proof>
+  <proof prover="2"><result status="valid" time="0.384277"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.364933" steps="59322"/></proof>
+  <proof prover="1"><result status="valid" time="0.313566" steps="52230"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.095788" steps="41218"/></proof>
+  <proof prover="1"><result status="valid" time="0.095788" steps="35990"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.232479" steps="45799"/></proof>
+  <proof prover="1"><result status="valid" time="0.232479" steps="39981"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.100404" steps="40713"/></proof>
+  <proof prover="1"><result status="valid" time="0.100404" steps="35485"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.11" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.173470" steps="746"/></proof>
+  <proof prover="0"><result status="valid" time="0.173470" steps="637"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.12" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.368810" steps="59899"/></proof>
+  <proof prover="1"><result status="valid" time="0.368810" steps="53375"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.271740" steps="41308"/></proof>
+  <proof prover="1"><result status="valid" time="0.129618" steps="36228"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.14" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.380830" steps="46687"/></proof>
+  <proof prover="1"><result status="valid" time="0.214008" steps="40760"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.289723" steps="47242"/></proof>
+  <proof prover="1"><result status="valid" time="0.289723" steps="41359"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.16" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.553556" steps="64769"/></proof>
+  <proof prover="1"><result status="valid" time="0.553556" steps="58876"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.17" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.357048" steps="48366"/></proof>
+  <proof prover="1"><result status="valid" time="0.217815" steps="41795"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.18" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.129933" steps="41199"/></proof>
+  <proof prover="1"><result status="valid" time="0.129933" steps="35998"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.19" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.090487" steps="41212"/></proof>
+  <proof prover="1"><result status="valid" time="0.090487" steps="36011"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.20" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.249981" steps="49524"/></proof>
+  <proof prover="1"><result status="valid" time="0.249981" steps="42514"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.21" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.291806" steps="42306"/></proof>
+  <proof prover="1"><result status="valid" time="0.131017" steps="37066"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.22" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.436866" steps="49598"/></proof>
+  <proof prover="1"><result status="valid" time="0.229865" steps="42735"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.23" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.313566" steps="54049"/></proof>
+  <proof prover="1"><result status="valid" time="0.364933" steps="46945"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.24" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.263547" steps="42507"/></proof>
+  <proof prover="1"><result status="valid" time="0.263547" steps="37285"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.25" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.219006" steps="44329"/></proof>
+  <proof prover="1"><result status="valid" time="0.219006" steps="39083"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.26" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.213668" steps="40648"/></proof>
+  <proof prover="1"><result status="valid" time="0.084460" steps="35420"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.27" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.133875" steps="40661"/></proof>
+  <proof prover="1"><result status="valid" time="0.133875" steps="35433"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.28" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.260355" steps="44681"/></proof>
+  <proof prover="1"><result status="valid" time="0.260355" steps="39435"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.29" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.262382" steps="41669"/></proof>
+  <proof prover="1"><result status="valid" time="0.120910" steps="36423"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.30" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.275722" steps="45800"/></proof>
+  <proof prover="1"><result status="valid" time="0.275722" steps="39982"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.31" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.392952" steps="47424"/></proof>
+  <proof prover="1"><result status="valid" time="0.229110" steps="42178"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.32" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.165899" steps="41186"/></proof>
+  <proof prover="1"><result status="valid" time="0.165899" steps="35958"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.33" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="60.001681" steps="1251998"/></proof>
+  <proof prover="1"><result status="valid" time="60.001681" steps="1273636"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.34" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.283655" steps="43335"/></proof>
+  <proof prover="1"><result status="valid" time="0.133342" steps="38098"/></proof>
   </goal>
   <goal name="preds_with_lowest_dfsnum&#39;vc.35" expl="postcondition" proved="true">
   <transf name="apply" proved="true" arg1="theorem4">
    <goal name="preds_with_lowest_dfsnum&#39;vc.35.0" expl="apply premises" proved="true">
-   <proof prover="1"><result status="valid" time="0.201836" steps="42736"/></proof>
+   <proof prover="1"><result status="valid" time="0.201836" steps="37519"/></proof>
    </goal>
    <goal name="preds_with_lowest_dfsnum&#39;vc.35.1" expl="apply premises" proved="true">
-   <proof prover="1"><result status="valid" time="0.192044" steps="42736"/></proof>
+   <proof prover="1"><result status="valid" time="0.192044" steps="37519"/></proof>
    </goal>
    <goal name="preds_with_lowest_dfsnum&#39;vc.35.2" expl="apply premises" proved="true">
-   <proof prover="1"><result status="valid" time="0.177819" steps="42734"/></proof>
+   <proof prover="1"><result status="valid" time="0.177819" steps="37517"/></proof>
    </goal>
    <goal name="preds_with_lowest_dfsnum&#39;vc.35.3" expl="apply premises" proved="true">
-   <proof prover="1"><result status="valid" time="0.205878" steps="42736"/></proof>
+   <proof prover="1"><result status="valid" time="0.205878" steps="37519"/></proof>
    </goal>
    <goal name="preds_with_lowest_dfsnum&#39;vc.35.4" expl="apply premises" proved="true">
    <transf name="inline_goal" proved="true" >
@@ -4407,37 +4407,37 @@
      <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0" expl="apply premises" proved="true">
      <transf name="destruct_rec" proved="true" arg1="H">
       <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.0" expl="apply premises" proved="true">
-      <proof prover="2"><result status="valid" time="7.841238"/></proof>
+      <proof prover="2"><result status="valid" time="0.339537"/></proof>
       </goal>
       <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1" expl="apply premises" proved="true">
       <transf name="instantiate" proved="true" arg1="Ensures1" arg2="v1">
        <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0" expl="apply premises" proved="true">
        <transf name="destruct_rec" proved="true" arg1="Hinst">
         <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.0" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.183859" steps="42846"/></proof>
+        <proof prover="1"><result status="valid" time="0.131382" steps="37629"/></proof>
         </goal>
         <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.1" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.294745" steps="52511"/></proof>
+        <proof prover="1"><result status="valid" time="0.250728" steps="46628"/></proof>
         </goal>
         <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2" expl="apply premises" proved="true">
         <transf name="eliminate_let" proved="true" >
          <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0" expl="apply premises" proved="true">
          <transf name="destruct_rec" proved="true" arg1="Hinst">
           <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0.0" expl="apply premises" proved="true">
-          <proof prover="1"><result status="valid" time="0.888800" steps="85903"/></proof>
+          <proof prover="1"><result status="valid" time="0.677791" steps="79636"/></proof>
           </goal>
           <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0.1" expl="apply premises" proved="true">
           <transf name="instantiate" proved="true" arg1="Hinst" arg2="u">
            <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0.1.0" expl="apply premises" proved="true">
            <transf name="destruct_rec" proved="true" arg1="Hinst">
             <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0.1.0.0" expl="destruct premise" proved="true">
-            <proof prover="1"><result status="valid" time="0.358604" steps="65541"/></proof>
+            <proof prover="1"><result status="valid" time="0.315174" steps="56408"/></proof>
             </goal>
             <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0.1.0.1" expl="destruct premise" proved="true">
-            <proof prover="1"><result status="valid" time="0.210001" steps="46996"/></proof>
+            <proof prover="1"><result status="valid" time="0.100908" steps="41051"/></proof>
             </goal>
             <goal name="preds_with_lowest_dfsnum&#39;vc.35.4.0.0.1.0.2.0.1.0.2" expl="apply premises" proved="true">
-            <proof prover="1"><result status="valid" time="5.827920" steps="217766"/></proof>
+            <proof prover="1"><result status="valid" time="3.527472" steps="192133"/></proof>
             </goal>
            </transf>
            </goal>
@@ -4466,7 +4466,7 @@
  <goal name="calcu_semi&#39;vc" expl="VC for calcu_semi" proved="true">
  <transf name="split_vc" proved="true" >
   <goal name="calcu_semi&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.336856" steps="51421"/></proof>
+  <proof prover="1"><result status="valid" time="0.336856" steps="40917"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.1" expl="assertion" proved="true">
   <transf name="unfold" proved="true" arg1="super_wf_dfsnum_parent" arg2="in" arg3="H3">
@@ -4486,7 +4486,7 @@
          <proof prover="0"><result status="valid" time="0.061672" steps="40"/></proof>
          </goal>
          <goal name="calcu_semi&#39;vc.1.0.0.0.0.0.0.1" expl="assertion" proved="true">
-         <proof prover="2"><result status="valid" time="19.125802"/></proof>
+         <proof prover="2"><result status="valid" time="0.395238"/></proof>
          </goal>
         </transf>
         </goal>
@@ -4503,54 +4503,54 @@
   </transf>
   </goal>
   <goal name="calcu_semi&#39;vc.2" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="0.226211" steps="288"/></proof>
-  <proof prover="1"><result status="valid" time="0.376954" steps="44281"/></proof>
+  <proof prover="0"><result status="valid" time="0.226211" steps="258"/></proof>
+  <proof prover="1"><result status="valid" time="0.225403" steps="35255"/></proof>
   <transf name="split_vc" proved="true" >
    <goal name="calcu_semi&#39;vc.2.0" expl="assertion" proved="true">
-   <proof prover="1"><result status="valid" time="0.260600" steps="44281"/></proof>
+   <proof prover="1"><result status="valid" time="0.260600" steps="35255"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="calcu_semi&#39;vc.3" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.216276" steps="44241"/></proof>
+  <proof prover="1"><result status="valid" time="0.216276" steps="35200"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.165848" steps="39965"/></proof>
+  <proof prover="1"><result status="valid" time="0.165848" steps="31639"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.176987" steps="501"/></proof>
-  <proof prover="1"><result status="valid" time="0.254539" steps="45287"/></proof>
+  <proof prover="0"><result status="valid" time="0.176987" steps="432"/></proof>
+  <proof prover="1"><result status="valid" time="0.254539" steps="36036"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.159381" steps="43076"/></proof>
+  <proof prover="1"><result status="valid" time="0.159381" steps="34749"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.239250" steps="43109"/></proof>
+  <proof prover="1"><result status="valid" time="0.239250" steps="34782"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.223515" steps="316"/></proof>
-  <proof prover="1"><result status="valid" time="0.236563" steps="47754"/></proof>
+  <proof prover="0"><result status="valid" time="0.084528" steps="197"/></proof>
+  <proof prover="1"><result status="valid" time="0.236563" steps="38197"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.246953" steps="43607"/></proof>
+  <proof prover="1"><result status="valid" time="0.246953" steps="36022"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.353093" steps="52810"/></proof>
+  <proof prover="1"><result status="valid" time="0.353093" steps="44690"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.11" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="3.860703" steps="14868"/></proof>
+  <proof prover="0"><result status="valid" time="1.066048" steps="4277"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.12" expl="variant decrease" proved="true">
   <proof prover="0"><result status="valid" time="0.056188" steps="52"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.139336" steps="40542"/></proof>
+  <proof prover="1"><result status="valid" time="0.139336" steps="32940"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.14" expl="precondition" proved="true">
   <proof prover="0"><result status="valid" time="0.059615" steps="52"/></proof>
   <transf name="case" proved="true" arg1="(x = n)">
    <goal name="calcu_semi&#39;vc.14.0" expl="true case (precondition)" proved="true">
-   <proof prover="1"><result status="valid" time="0.219425" steps="41352"/></proof>
+   <proof prover="1"><result status="valid" time="0.219425" steps="33586"/></proof>
    </goal>
    <goal name="calcu_semi&#39;vc.14.1" expl="false case (precondition)" proved="true">
    <proof prover="0"><result status="valid" time="0.062490" steps="54"/></proof>
@@ -4558,25 +4558,25 @@
   </transf>
   </goal>
   <goal name="calcu_semi&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.477868" steps="1651"/></proof>
+  <proof prover="0"><result status="valid" time="0.232822" steps="1079"/></proof>
   <transf name="split_vc" proved="true" >
    <goal name="calcu_semi&#39;vc.15.0" expl="precondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.334018" steps="1651"/></proof>
+   <proof prover="0"><result status="valid" time="0.334018" steps="1079"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="calcu_semi&#39;vc.16" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.306667" steps="610"/></proof>
+  <proof prover="0"><result status="valid" time="0.119338" steps="546"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.17" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.633686" steps="2420"/></proof>
+  <proof prover="0"><result status="valid" time="0.366490" steps="2308"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.18" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.775911" steps="70455"/></proof>
+  <proof prover="1"><result status="valid" time="0.551414" steps="61307"/></proof>
   </goal>
   <goal name="calcu_semi&#39;vc.19" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="18.415507" steps="80589"/></proof>
-  <proof prover="1"><result status="valid" time="0.733579" steps="77881"/></proof>
+  <proof prover="0"><result status="valid" time="4.783154" steps="17056"/></proof>
+  <proof prover="1"><result status="valid" time="0.733579" steps="68453"/></proof>
   </goal>
  </transf>
  </goal>
@@ -4585,22 +4585,33 @@
  <goal name="calcu_idom&#39;vc" expl="VC for calcu_idom" proved="true">
  <transf name="split_goal_full" proved="true" >
   <goal name="calcu_idom&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.367810" steps="53707"/></proof>
+  <proof prover="1"><result status="valid" time="0.367810" steps="43233"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.1" expl="assertion" proved="true">
-  <proof prover="2"><result status="valid" time="106.771209"/></proof>
+  <transf name="introduce_premises" proved="true" >
+   <goal name="calcu_idom&#39;vc.1.0" expl="assertion" proved="true">
+   <transf name="assert" proved="true" arg1="(mem i vertex_mp)">
+    <goal name="calcu_idom&#39;vc.1.0.0" expl="asserted formula" proved="true">
+    <proof prover="2"><result status="valid" time="75.441532"/></proof>
+    </goal>
+    <goal name="calcu_idom&#39;vc.1.0.1" expl="assertion" proved="true">
+    <proof prover="1"><result status="valid" time="0.166372" steps="36088"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
   <goal name="calcu_idom&#39;vc.2" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.201937" steps="44733"/></proof>
+  <proof prover="1"><result status="valid" time="0.201937" steps="36382"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.3" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.322577" steps="51289"/></proof>
+  <proof prover="1"><result status="valid" time="0.322577" steps="42323"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.220164" steps="45226"/></proof>
+  <proof prover="1"><result status="valid" time="0.220164" steps="36875"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.169739" steps="48122"/></proof>
+  <proof prover="1"><result status="valid" time="0.169739" steps="37913"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.6" expl="precondition" proved="true">
   <transf name="introduce_premises" proved="true" >
@@ -4611,11 +4622,11 @@
      <goal name="calcu_idom&#39;vc.6.0.0.0" proved="true">
      <transf name="assert" proved="true" arg1="(exists i_semi_n p_semi_n. mapsto semi_n (i_semi_n, p_semi_n) dfsnum_parent)">
       <goal name="calcu_idom&#39;vc.6.0.0.0.0" expl="asserted formula" proved="true">
-      <proof prover="1"><result status="valid" time="42.528906" steps="639559"/></proof>
+      <proof prover="1"><result status="valid" time="23.102429" steps="423147"/></proof>
       </goal>
       <goal name="calcu_idom&#39;vc.6.0.0.0.1" proved="true">
-      <proof prover="0"><result status="valid" time="0.991635" steps="3755"/></proof>
-      <proof prover="1"><result status="valid" time="13.749617" steps="484571"/></proof>
+      <proof prover="0"><result status="valid" time="0.991635" steps="2973"/></proof>
+      <proof prover="1"><result status="valid" time="8.335099" steps="353699"/></proof>
       </goal>
      </transf>
      </goal>
@@ -4626,57 +4637,56 @@
   </transf>
   </goal>
   <goal name="calcu_idom&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.582363" steps="79986"/></proof>
+  <proof prover="1"><result status="valid" time="0.582363" steps="69915"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.156663" steps="43439"/></proof>
+  <proof prover="1"><result status="valid" time="0.156663" steps="35824"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.336308" steps="57194"/></proof>
+  <proof prover="1"><result status="valid" time="0.336308" steps="48079"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.233782" steps="48309"/></proof>
+  <proof prover="1"><result status="valid" time="0.233782" steps="40694"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.11" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.655121" steps="82710"/></proof>
+  <proof prover="1"><result status="valid" time="0.655121" steps="71422"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.12" expl="assertion" proved="true">
   <transf name="introduce_premises" proved="true" >
    <goal name="calcu_idom&#39;vc.12.0" expl="assertion" proved="true">
-   <transf name="assert" proved="true" arg1="(exists idom_y. idom_y ~&gt; x5)">
+   <transf name="assert" proved="true" arg1="(exists idom_y. idom_y ~&gt; o3)">
     <goal name="calcu_idom&#39;vc.12.0.0" expl="asserted formula" proved="true">
-    <proof prover="1"><result status="valid" time="62.389083" steps="812694"/></proof>
-    <proof prover="2"><result status="valid" time="79.155671"/></proof>
+    <proof prover="2"><result status="valid" time="0.462804"/></proof>
     </goal>
     <goal name="calcu_idom&#39;vc.12.0.1" expl="assertion" proved="true">
     <transf name="destruct_rec" proved="true" arg1="h">
      <goal name="calcu_idom&#39;vc.12.0.1.0" expl="assertion" proved="true">
-     <transf name="instantiate" proved="true" arg1="corollary1" arg2="dfsnum_parent, n, semi_n, x5, semi_y, idom_y">
+     <transf name="instantiate" proved="true" arg1="corollary1" arg2="dfsnum_parent, n, semi_n, o3, semi_y, idom_y">
       <goal name="calcu_idom&#39;vc.12.0.1.0.0" expl="assertion" proved="true">
       <transf name="destruct_rec" proved="true" arg1="Hinst">
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.0" expl="destruct premise" proved="true">
-       <proof prover="1"><result status="valid" time="0.103859" steps="41717"/></proof>
+       <proof prover="1"><result status="valid" time="0.090065" steps="34172"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.1" expl="destruct premise" proved="true">
-       <proof prover="1"><result status="valid" time="0.101459" steps="41717"/></proof>
+       <proof prover="1"><result status="valid" time="0.082355" steps="34172"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.2" expl="destruct premise" proved="true">
-       <proof prover="1"><result status="valid" time="0.289079" steps="50728"/></proof>
+       <proof prover="1"><result status="valid" time="0.247982" steps="41525"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.3" expl="destruct premise" proved="true">
-       <proof prover="1"><result status="valid" time="0.304647" steps="49776"/></proof>
+       <proof prover="1"><result status="valid" time="0.234620" steps="40721"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.4" expl="destruct premise" proved="true">
-       <proof prover="1"><result status="valid" time="0.271045" steps="48987"/></proof>
+       <proof prover="1"><result status="valid" time="0.220471" steps="39962"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.5" expl="destruct premise" proved="true">
-       <proof prover="1"><result status="valid" time="0.139429" steps="41717"/></proof>
+       <proof prover="1"><result status="valid" time="0.093012" steps="34172"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.6" expl="destruct premise" proved="true">
-       <proof prover="0"><result status="valid" time="19.138391" steps="50963"/></proof>
+       <proof prover="0"><result status="valid" time="4.762222" steps="16299"/></proof>
        </goal>
        <goal name="calcu_idom&#39;vc.12.0.1.0.0.7" expl="assertion" proved="true">
-       <proof prover="1"><result status="valid" time="14.747077" steps="333610"/></proof>
+       <proof prover="1"><result status="valid" time="23.655628" steps="923566"/></proof>
        </goal>
       </transf>
       </goal>
@@ -4689,96 +4699,85 @@
   </transf>
   </goal>
   <goal name="calcu_idom&#39;vc.13" expl="assertion" proved="true">
-  <transf name="introduce_premises" proved="true" >
-   <goal name="calcu_idom&#39;vc.13.0" expl="assertion" proved="true">
-   <transf name="split_vc" proved="true" >
-    <goal name="calcu_idom&#39;vc.13.0.0" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="6.492795" steps="25637"/></proof>
-    </goal>
-    <goal name="calcu_idom&#39;vc.13.0.1" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="0.324932" steps="1510"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <proof prover="0"><result status="valid" time="55.786682" steps="201120"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.14" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.140747" steps="44164"/></proof>
+  <proof prover="1"><result status="valid" time="0.251045" steps="36693"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.285592" steps="44107"/></proof>
+  <proof prover="1"><result status="valid" time="0.249247" steps="36636"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.16" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.275224" steps="44290"/></proof>
+  <proof prover="1"><result status="valid" time="0.229926" steps="36746"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.17" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.161005" steps="44745"/></proof>
+  <proof prover="1"><result status="valid" time="0.242727" steps="37197"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.18" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.187001" steps="44861"/></proof>
+  <proof prover="1"><result status="valid" time="0.245499" steps="37313"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.19" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.548291" steps="3084"/></proof>
+  <proof prover="0"><result status="valid" time="0.347572" steps="1753"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.20" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.722990" steps="3738"/></proof>
+  <proof prover="1"><result status="valid" time="0.263322" steps="42533"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.21" expl="assertion" proved="true">
   <transf name="introduce_premises" proved="true" >
    <goal name="calcu_idom&#39;vc.21.0" expl="assertion" proved="true">
-   <transf name="instantiate" proved="true" arg1="corollary1" arg2="dfsnum_parent, n, semi_n, x5, semi_y, idom_n">
+   <transf name="instantiate" proved="true" arg1="corollary1" arg2="dfsnum_parent, n, semi_n, o3, semi_y, idom_n">
     <goal name="calcu_idom&#39;vc.21.0.0" expl="assertion" proved="true">
     <transf name="destruct_rec" proved="true" arg1="Hinst">
      <goal name="calcu_idom&#39;vc.21.0.0.0" expl="destruct premise" proved="true">
-     <proof prover="1"><result status="valid" time="0.092472" steps="41719"/></proof>
+     <proof prover="1"><result status="valid" time="0.078937" steps="34174"/></proof>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.1" expl="destruct premise" proved="true">
-     <proof prover="1"><result status="valid" time="0.139114" steps="41719"/></proof>
+     <proof prover="1"><result status="valid" time="0.085421" steps="34174"/></proof>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.2" expl="destruct premise" proved="true">
-     <proof prover="1"><result status="valid" time="0.455872" steps="50614"/></proof>
+     <proof prover="1"><result status="valid" time="0.272958" steps="41349"/></proof>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.3" expl="destruct premise" proved="true">
-     <proof prover="1"><result status="valid" time="0.466081" steps="49539"/></proof>
+     <proof prover="1"><result status="valid" time="0.237759" steps="40794"/></proof>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.4" expl="destruct premise" proved="true">
-     <proof prover="1"><result status="valid" time="0.701964" steps="59551"/></proof>
+     <proof prover="1"><result status="valid" time="0.216225" steps="40492"/></proof>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.5" expl="destruct premise" proved="true">
-     <proof prover="1"><result status="valid" time="0.430973" steps="48337"/></proof>
+     <proof prover="1"><result status="valid" time="0.294390" steps="39337"/></proof>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.6" expl="destruct premise" proved="true">
      <transf name="split_vc" proved="true" >
       <goal name="calcu_idom&#39;vc.21.0.0.6.0" expl="destruct premise" proved="true">
-      <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, semi_n, x5, n">
+      <transf name="instantiate" proved="true" arg1="mutual_parent" arg2="dfsnum_parent, semi_n, o1, n">
        <goal name="calcu_idom&#39;vc.21.0.0.6.0.0" expl="destruct premise" proved="true">
        <transf name="destruct_rec" proved="true" arg1="Hinst">
         <goal name="calcu_idom&#39;vc.21.0.0.6.0.0.0" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.242207" steps="47799"/></proof>
+        <proof prover="1"><result status="valid" time="0.277273" steps="39104"/></proof>
         </goal>
         <goal name="calcu_idom&#39;vc.21.0.0.6.0.0.1" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="7.205055" steps="266131"/></proof>
+        <proof prover="1"><result status="valid" time="4.014341" steps="210294"/></proof>
         </goal>
         <goal name="calcu_idom&#39;vc.21.0.0.6.0.0.2" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.158268" steps="42441"/></proof>
+        <proof prover="1"><result status="valid" time="0.124998" steps="34174"/></proof>
         </goal>
         <goal name="calcu_idom&#39;vc.21.0.0.6.0.0.3" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.255121" steps="48318"/></proof>
+        <proof prover="1"><result status="valid" time="0.257787" steps="39314"/></proof>
         </goal>
         <goal name="calcu_idom&#39;vc.21.0.0.6.0.0.4" expl="destruct premise" proved="true">
-        <proof prover="1"><result status="valid" time="0.413927" steps="61569"/></proof>
+        <proof prover="1"><result status="valid" time="0.329469" steps="49935"/></proof>
         </goal>
        </transf>
        </goal>
       </transf>
       </goal>
       <goal name="calcu_idom&#39;vc.21.0.0.6.1" expl="destruct premise" proved="true">
-      <proof prover="1"><result status="valid" time="0.275290" steps="42441"/></proof>
+      <proof prover="0"><result status="valid" time="0.056061" steps="62"/></proof>
       </goal>
      </transf>
      </goal>
      <goal name="calcu_idom&#39;vc.21.0.0.7" expl="assertion" proved="true">
-     <proof prover="1"><result status="valid" time="3.750035" steps="166301"/></proof>
+     <proof prover="1"><result status="valid" time="1.611436" steps="144412"/></proof>
      </goal>
     </transf>
     </goal>
@@ -4791,120 +4790,130 @@
    <goal name="calcu_idom&#39;vc.22.0" expl="assertion" proved="true">
    <transf name="split_vc" proved="true" >
     <goal name="calcu_idom&#39;vc.22.0.0" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="8.742994" steps="36535"/></proof>
+    <proof prover="0"><result status="valid" time="3.782220" steps="10460"/></proof>
     </goal>
     <goal name="calcu_idom&#39;vc.22.0.1" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="0.319662" steps="1338"/></proof>
+    <proof prover="0"><result status="valid" time="0.319662" steps="848"/></proof>
     </goal>
    </transf>
    </goal>
   </transf>
   </goal>
   <goal name="calcu_idom&#39;vc.23" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.281297" steps="44386"/></proof>
+  <proof prover="1"><result status="valid" time="0.281297" steps="36883"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.24" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.192372" steps="44326"/></proof>
+  <proof prover="1"><result status="valid" time="0.192372" steps="36823"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.25" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.223469" steps="44551"/></proof>
+  <proof prover="1"><result status="valid" time="0.223469" steps="36973"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.26" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.185193" steps="45017"/></proof>
+  <proof prover="1"><result status="valid" time="0.185193" steps="37438"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.27" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.254557" steps="45059"/></proof>
+  <proof prover="1"><result status="valid" time="0.254557" steps="37482"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.28" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.642542" steps="3052"/></proof>
+  <proof prover="0"><result status="valid" time="0.372266" steps="1735"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.29" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.720791" steps="3680"/></proof>
+  <proof prover="0"><result status="valid" time="0.416440" steps="2047"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.30" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.394697" steps="50398"/></proof>
+  <proof prover="1"><result status="valid" time="0.252352" steps="41464"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.31" expl="assertion" proved="true">
-  <proof prover="1"><result status="valid" time="0.283522" steps="52306"/></proof>
+  <transf name="introduce_premises" proved="true" >
+   <goal name="calcu_idom&#39;vc.31.0" expl="assertion" proved="true">
+   <transf name="split_vc" proved="true" >
+    <goal name="calcu_idom&#39;vc.31.0.0" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.197827" steps="260"/></proof>
+    </goal>
+    <goal name="calcu_idom&#39;vc.31.0.1" expl="assertion" proved="true">
+    <proof prover="0"><result status="valid" time="0.182175" steps="260"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
   </goal>
   <goal name="calcu_idom&#39;vc.32" expl="variant decrease" proved="true">
-  <proof prover="1"><result status="valid" time="0.251045" steps="44442"/></proof>
+  <proof prover="1"><result status="valid" time="0.140747" steps="36972"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.33" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.249247" steps="44382"/></proof>
+  <proof prover="1"><result status="valid" time="0.285592" steps="36912"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.34" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.229926" steps="44607"/></proof>
+  <proof prover="1"><result status="valid" time="0.275224" steps="37062"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.35" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.242727" steps="45073"/></proof>
+  <proof prover="1"><result status="valid" time="0.161005" steps="37527"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.36" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.245499" steps="45193"/></proof>
+  <proof prover="1"><result status="valid" time="0.187001" steps="37571"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.37" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.285768" steps="51720"/></proof>
+  <proof prover="0"><result status="valid" time="0.206173" steps="316"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.38" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.263322" steps="51673"/></proof>
+  <proof prover="0"><result status="valid" time="0.230018" steps="401"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.39" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.572675" steps="3141"/></proof>
+  <proof prover="0"><result status="valid" time="0.371964" steps="1749"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.40" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.700540" steps="3317"/></proof>
+  <proof prover="1"><result status="valid" time="0.415690" steps="57386"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.41" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.200076" steps="111687"/></proof>
+  <proof prover="1"><result status="valid" time="1.517523" steps="100335"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.42" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.256139" steps="45184"/></proof>
+  <proof prover="1"><result status="valid" time="0.178746" steps="37609"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.43" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="1.229786" steps="4866"/></proof>
-  <proof prover="1"><result status="valid" time="1.303617" steps="106164"/></proof>
-  <proof prover="2"><result status="valid" time="14.491117"/></proof>
+  <proof prover="1"><result status="valid" time="1.469181" steps="96598"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.44" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.242918" steps="45435"/></proof>
+  <proof prover="1"><result status="valid" time="0.203673" steps="37866"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.45" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.620447" steps="3106"/></proof>
+  <proof prover="0"><result status="valid" time="0.396760" steps="1729"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.46" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.692707" steps="3275"/></proof>
+  <proof prover="0"><result status="valid" time="0.482372" steps="1946"/></proof>
+  <proof prover="1"><result status="valid" time="0.507858" steps="59236"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.47" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.161503" steps="112833"/></proof>
+  <proof prover="1"><result status="valid" time="1.393974" steps="102364"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.48" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.257851" steps="45610"/></proof>
+  <proof prover="0"><result status="valid" time="0.148758" steps="107"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.49" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="1.814563" steps="8271"/></proof>
-  <proof prover="1"><result status="valid" time="1.439613" steps="106315"/></proof>
-  <proof prover="2"><result status="valid" time="14.929754"/></proof>
+  <proof prover="0"><result status="valid" time="1.114743" steps="2354"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.50" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.270650" steps="45875"/></proof>
+  <proof prover="1"><result status="valid" time="0.246094" steps="38231"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.51" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.410002" steps="51923"/></proof>
+  <proof prover="1"><result status="valid" time="0.392007" steps="42872"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.52" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.413976" steps="51926"/></proof>
+  <proof prover="0"><result status="valid" time="0.203811" steps="312"/></proof>
+  <proof prover="1"><result status="valid" time="0.380989" steps="42879"/></proof>
+  <proof prover="2"><result status="valid" time="0.325643"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.53" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.400266" steps="52398"/></proof>
+  <proof prover="1"><result status="valid" time="0.242918" steps="43358"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.54" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.277319" steps="45530"/></proof>
+  <proof prover="0"><result status="valid" time="0.138795" steps="109"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.55" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.415690" steps="51846"/></proof>
+  <proof prover="0"><result status="valid" time="0.199325" steps="312"/></proof>
   </goal>
   <goal name="calcu_idom&#39;vc.56" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.265295" steps="45793"/></proof>
+  <proof prover="1"><result status="valid" time="0.237962" steps="38206"/></proof>
   </goal>
  </transf>
  </goal>
@@ -4917,22 +4926,22 @@
    <goal name="lengauer_tarjan&#39;vc.0.0" expl="assertion" proved="true">
    <transf name="split_vc" proved="true" >
     <goal name="lengauer_tarjan&#39;vc.0.0.0" expl="assertion" proved="true">
-    <proof prover="1"><result status="valid" time="9.498950" steps="317632"/></proof>
+    <proof prover="1"><result status="valid" time="9.498950" steps="282118"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.1" expl="assertion" proved="true">
-    <proof prover="1"><result status="valid" time="2.196520" steps="132981"/></proof>
+    <proof prover="1"><result status="valid" time="1.771568" steps="104197"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.2" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="0.391052" steps="1034"/></proof>
+    <proof prover="0"><result status="valid" time="0.391052" steps="974"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.3" expl="assertion" proved="true">
-    <proof prover="1"><result status="valid" time="0.335096" steps="64373"/></proof>
+    <proof prover="1"><result status="valid" time="0.335096" steps="43674"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.4" expl="assertion" proved="true">
     <proof prover="0"><result status="valid" time="0.176292" steps="550"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.5" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="0.530365" steps="1554"/></proof>
+    <proof prover="0"><result status="valid" time="0.371508" steps="1209"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.6" expl="assertion" proved="true">
     <transf name="exists" proved="true" arg1="root">
@@ -4942,56 +4951,56 @@
     </transf>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.7" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="0.217186" steps="833"/></proof>
+    <proof prover="0"><result status="valid" time="0.217186" steps="773"/></proof>
     </goal>
     <goal name="lengauer_tarjan&#39;vc.0.0.8" expl="assertion" proved="true">
-    <proof prover="0"><result status="valid" time="0.433184" steps="1476"/></proof>
+    <proof prover="0"><result status="valid" time="0.433184" steps="1262"/></proof>
     </goal>
    </transf>
    </goal>
   </transf>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.139171" steps="56228"/></proof>
+  <proof prover="1"><result status="valid" time="0.139171" steps="35618"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.2" expl="precondition" proved="true">
   <transf name="inline_goal" proved="true" >
    <goal name="lengauer_tarjan&#39;vc.2.0" expl="precondition" proved="true">
    <transf name="split_vc" proved="true" >
     <goal name="lengauer_tarjan&#39;vc.2.0.0" expl="precondition" proved="true">
-    <proof prover="1"><result status="valid" time="0.143520" steps="56227"/></proof>
+    <proof prover="1"><result status="valid" time="0.143520" steps="35617"/></proof>
     </goal>
    </transf>
    </goal>
   </transf>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.138070" steps="56234"/></proof>
+  <proof prover="1"><result status="valid" time="0.138070" steps="35624"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.408101" steps="72466"/></proof>
+  <proof prover="1"><result status="valid" time="0.408101" steps="51593"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.216124" steps="59691"/></proof>
+  <proof prover="1"><result status="valid" time="0.216124" steps="39418"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.301822" steps="59691"/></proof>
+  <proof prover="1"><result status="valid" time="0.301822" steps="39418"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.307065" steps="63071"/></proof>
+  <proof prover="1"><result status="valid" time="0.307065" steps="42798"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.804536" steps="95674"/></proof>
+  <proof prover="1"><result status="valid" time="1.099449" steps="73059"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.425911" steps="70876"/></proof>
+  <proof prover="1"><result status="valid" time="0.425911" steps="51101"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.411815" steps="73906"/></proof>
+  <proof prover="1"><result status="valid" time="0.589215" steps="54131"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.11" expl="assertion" proved="true">
-  <proof prover="0"><result status="valid" time="4.231779" steps="18710"/></proof>
-  <proof prover="1"><result status="valid" time="0.307632" steps="61963"/></proof>
+  <proof prover="0"><result status="valid" time="4.231779" steps="8312"/></proof>
+  <proof prover="1"><result status="valid" time="0.307632" steps="42828"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.12" expl="assertion" proved="true">
   <transf name="inline_goal" proved="true" >
@@ -5000,7 +5009,7 @@
     <goal name="lengauer_tarjan&#39;vc.12.0.0" expl="assertion" proved="true">
     <transf name="case" proved="true" arg1="(y = root )">
      <goal name="lengauer_tarjan&#39;vc.12.0.0.0" expl="true case (assertion)" proved="true">
-     <proof prover="0"><result status="valid" time="0.156505" steps="584"/></proof>
+     <proof prover="0"><result status="valid" time="0.156505" steps="526"/></proof>
      </goal>
      <goal name="lengauer_tarjan&#39;vc.12.0.0.1" expl="false case (assertion)" proved="true">
      <transf name="assert" proved="true" arg1="(forall n. forall y p. path root p y -&gt; length p = n -&gt; y &lt;&gt; root -&gt; mem y dfsnum_parent)">
@@ -5009,15 +5018,15 @@
        <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0" expl="asserted formula" proved="true">
        <transf name="induction" proved="true" arg1="n">
         <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.0" expl="base case (asserted formula)" proved="true">
-        <proof prover="0"><result status="valid" time="0.124422" steps="296"/></proof>
+        <proof prover="0"><result status="valid" time="0.124422" steps="285"/></proof>
         </goal>
         <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.1" expl="recursive case (asserted formula)" proved="true">
         <transf name="induction_pr" proved="true" >
          <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.1.0" proved="true">
-         <proof prover="1"><result status="valid" time="0.182802" steps="58870"/></proof>
+         <proof prover="1"><result status="valid" time="0.182802" steps="39729"/></proof>
          </goal>
          <goal name="lengauer_tarjan&#39;vc.12.0.0.1.0.0.1.1" proved="true">
-         <proof prover="1"><result status="valid" time="0.387067" steps="78659"/></proof>
+         <proof prover="1"><result status="valid" time="0.596130" steps="58250"/></proof>
          </goal>
         </transf>
         </goal>
@@ -5026,7 +5035,7 @@
       </transf>
       </goal>
       <goal name="lengauer_tarjan&#39;vc.12.0.0.1.1" expl="false case (assertion)" proved="true">
-      <proof prover="1"><result status="valid" time="0.192636" steps="58901"/></proof>
+      <proof prover="1"><result status="valid" time="0.192636" steps="39757"/></proof>
       </goal>
      </transf>
      </goal>
@@ -5037,41 +5046,41 @@
   </transf>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.13" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.144488" steps="57677"/></proof>
+  <proof prover="1"><result status="valid" time="0.144488" steps="38567"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.14" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.350412" steps="67096"/></proof>
+  <proof prover="1"><result status="valid" time="0.350412" steps="47948"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.15" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.427910" steps="68551"/></proof>
+  <proof prover="1"><result status="valid" time="0.427910" steps="49711"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.16" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.469460" steps="129012"/></proof>
+  <proof prover="1"><result status="valid" time="1.903764" steps="105129"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.17" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.152517" steps="57943"/></proof>
+  <proof prover="1"><result status="valid" time="0.152517" steps="39217"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.18" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.394945" steps="67565"/></proof>
+  <proof prover="1"><result status="valid" time="0.394945" steps="48792"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.19" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.212995" steps="59114"/></proof>
+  <proof prover="1"><result status="valid" time="0.212995" steps="40337"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.20" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.226067" steps="59182"/></proof>
+  <proof prover="1"><result status="valid" time="0.226067" steps="40397"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.21" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.421907" steps="70081"/></proof>
+  <proof prover="1"><result status="valid" time="0.421907" steps="51124"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.22" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="2.663174" steps="13246"/></proof>
-  <proof prover="1"><result status="valid" time="1.929432" steps="157760"/></proof>
+  <proof prover="0"><result status="valid" time="0.957256" steps="2542"/></proof>
+  <proof prover="1"><result status="valid" time="1.929432" steps="130750"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.23" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.459208" steps="70162"/></proof>
+  <proof prover="1"><result status="valid" time="0.459208" steps="51337"/></proof>
   </goal>
   <goal name="lengauer_tarjan&#39;vc.24" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="1.044763" steps="107215"/></proof>
+  <proof prover="1"><result status="valid" time="1.595374" steps="87218"/></proof>
   </goal>
  </transf>
  </goal>

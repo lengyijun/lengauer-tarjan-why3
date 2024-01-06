@@ -1247,7 +1247,7 @@ module DFS
   use DfsnumParentPathSmall2Large
   use DfsnumParentMustOnTree
 
-  let rec ghost constant dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) : fmap vertex (int, vertex)= 
+  let rec ghost dfs (current_parent : vertex) (ghost grey : list vertex) (roots : SV.set) (dfsnum_parent : fmap vertex (int, vertex)) : fmap vertex (int, vertex)= 
     requires{current_parent = root -> grey = Nil}
     requires{current_parent = root \/ (--+->) dfsnum_parent root grey current_parent}
     requires{wf_dfsnum_parent dfsnum_parent}
@@ -1379,7 +1379,7 @@ module Jiting
   use DfsnumParentMutualParent
   use SemiDominate
 
-  let rec ghost constant ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
+  let rec ghost ancestor_with_lowest_semi (dfsnum_parent : fmap vertex (int, vertex)) 
                                                    (semi_mp : fmap vertex vertex) 
                                                    (u : vertex) 
                                                    (ghost l : option (list vertex))
@@ -1451,7 +1451,7 @@ module Jiting
   use set.Fset as SS
   use Theorem4
 
-  let rec ghost constant preds_with_lowest_dfsnum  (dfsnum_parent : fmap vertex (int, vertex)) 
+  let rec ghost preds_with_lowest_dfsnum  (dfsnum_parent : fmap vertex (int, vertex)) 
                                                    (semi_mp : fmap vertex vertex) 
                                                    (n : vertex) 
                                                    (preds : SV.set )
@@ -1532,7 +1532,7 @@ module CalcuSemi
   use RevertMap
   use SemiDominate
 
-  let rec ghost constant calcu_semi (dfsnum_parent : fmap vertex (int, vertex)) 
+  let rec ghost calcu_semi (dfsnum_parent : fmap vertex (int, vertex)) 
                                     (i : int)
                                     (prev_semi_mp: fmap vertex vertex) : (semi_mp: fmap vertex vertex) =
   requires{super_wf_dfsnum_parent dfsnum_parent /\ all_reachable dfsnum_parent}
@@ -1594,7 +1594,7 @@ module CalcuIdom
   use Corollary1
   use dominator.IdomExists
 
-  let rec ghost constant calcu_idom (dfsnum_parent : fmap vertex (int, vertex)) 
+  let rec ghost calcu_idom (dfsnum_parent : fmap vertex (int, vertex)) 
                                     (semi_mp: fmap vertex vertex) 
                                     (i : int)
                                     (prev_idom_mp: fmap vertex vertex)
